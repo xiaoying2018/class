@@ -28,6 +28,7 @@ $(function() {
                 galleryTop.controller.control = galleryThumbs;
                 galleryThumbs.controller.control = galleryTop;
             }, 1000)
+            $(".s_nav li").eq(2).addClass('active');
         }
     })
 

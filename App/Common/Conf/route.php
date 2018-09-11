@@ -46,6 +46,7 @@ return [
         'zhibo'                       =>  'Zhiboke/View/index',     //课程
         'xiaonei'                     =>  'Xiaoneike/View/index',     //课程
         'baolu'                     =>  'Baoluke/View/index',     //课程
+        'result'                     =>  'Result/View/index',     //课程
 
 
         'case'                      =>  'Cases/View/index',      // 主页 案例

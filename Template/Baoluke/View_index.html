@@ -50,11 +50,11 @@
                         <li class="active" @click="condit('sort_by_people_num','')">最新发布</li>
                         <li @click="condit('sort_by_people_num',1)">最多报名</li>
                     </ul>
-                    <a href="">更多课程></a>
+                    <!-- <a href="">更多课程></a> -->
                 </div>
                 <ul class="ullist" data-sr="enter top hustle 50px over 1s">
                     <li class="li" v-for="n in lists">
-                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                        <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                             <div class="imgDv">
                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
                                 <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>

@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
                     <li><a href="/zhibo" >直播课</a></li>
                     <li><a href="/xiaonei" >校内考</a></li>
                     <li><a href="/baolu" >保录班</a></li>
-                    <li><a href="DownLoadCenter" >资料中心</a></li>
+                    <li><a href="/DownLoadCenter" >资料中心</a></li>
                 </ul>
                 <div class="btng" style="top: 28px;">
                     <div v-show="!flag" class="btnngropu">
@@ -89,12 +89,13 @@ var _hmt = _hmt || [];
                     <a href="/mall" class="logo" style="margin-top: -5px;"><img src="../../Public/Mall/img/logo.svg" style="width: 142px"></a>
                     <div class="searchPart">
                         <div>
-                            <input type="text" name="">
-                            <select class="select2">
-                                <option>课程</option>
-                                <option>资料</option>
+                            <input type="text" name="" v-model="inputval" @keyup.13="ready()" id="ssinput">
+                            <select class="select2" id="searchOp">
+                                <option value="0">班级</option>
+                                <option value="1">课程</option>
+                                <option value="2">资料</option>
                             </select>
-                            <span class="searchBtn"><img src="../../Public/Common/search.png"></span>
+                            <span class="searchBtn" @click="ready()"><img src="../../Public/Common/search.png"></span>
                         </div>
                     </div>
                     <div class="btng" style="top: 28px;">
@@ -157,9 +158,21 @@ var _hmt = _hmt || [];
             data: {
             	flag:false,
             	info:{},
-                cityList: {}
+                cityList: {},
+                inputval:""
             },
             methods: {
+                ready: function(){
+                    if ($("#searchOp").val() == '0') {
+                        window.location.href = '/Result?type=banji&keywords='+encodeURI(this.inputval)
+                    }
+                    if ($("#searchOp").val() == '1') {
+                        window.location.href = '/Result?type=course&keywords='+encodeURI(this.inputval)
+                    }
+                    if ($("#searchOp").val() == '2') {
+                        window.location.href = '/DownLoadCenter?keywords='+encodeURI(this.inputval)
+                    }
+                },
                 getInfo: function() {
                 	var _this = this;
                 	$.ajax({

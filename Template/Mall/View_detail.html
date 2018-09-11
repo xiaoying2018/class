@@ -28,7 +28,8 @@
 	    <div class="topinfo">
 	        <div class="container clearfix">
 	            <div class="imgDv">
-	                <img :src="'http://crm.xiaoying.net/'+detail.pic" alt="">
+	                <img v-if="detail.pic != null && detail.pic != '' && detail.pic != 0" :src="'http://crm.xiaoying.net/'+detail.pic" alt="">
+                    <img v-else src="../../Public/Common/img/class/class.jpg" alt="">
 	            </div>
 	            <div class="r_info">
 	                <p class="name">{{detail.name}}</p>
@@ -40,12 +41,12 @@
 	                    <span class="s_title">课时：</span>
 	                    <span class="s_price">共{{detail.section_num}}课时</span>
 	                </div>
-	                <div class="s_line">
+	                <div class="s_line" v-if="detail.start_time">
 	                    <span class="s_title">课程开始时间：</span>
 	                    <span class="s_price">{{detail.start_time}}</span>
 	                </div>
 	                <div class="groupDv">
-	                    <a href="/user/#/login?a=register">立即购买</a>
+	                    <a href="javascript:;" onclick="_MEIQIA('showPanel')">在线咨询</a>
 	                    <a href="/user/#/login?a=register"><img src="../../Public/Mall/img/play.png" alt="" class="play">试听</a>
 	                </div>
 	            </div>
@@ -55,53 +56,46 @@
             <div class="left l_part">
                 <div class="tabDv">
                     <ul class="tabHeader clearfix">
-                        <li class="active" data-flag="tab1">课程安排</li>
-                        <li data-flag="tab2">课程表</li>
+                        <li class="active" data-flag="tab1">课程详情</li>
+                        <li data-flag="tab2" v-if="detail.sections && detail.sections.length > 0">课程表</li>
                     </ul>
-                    <div class="tabcontent tab1 active" v-html="detail.detail">
-                    	
-
+                    <div class="tabcontent tab1 active" v-html="detail.detail"></div>
+                    <div class="tabcontent tab2" v-if="detail.sections && detail.sections.length > 0">
+                        <h3 class="s_s_title">课程表</h3>
+                        <ul class="curriculum-ul course1">
+                            <li class="js-show" v-for="n in detail.sections">
+                                <img src="../../Public/Mall/img/play_b.png" alt="" class="play">
+                                <div class="jm-fl">
+                                    <p>{{n.cate}}. {{n.name}}</p>
+                                    <p>时长：{{n.duration}}分钟</p>
+                                </div>
+                                <img src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
             <div class="right r_part">
 			    <div class="clearfix">
 			        <h3 class="left">推荐课程</h3>
-			        <span class="change right" ><img src="__PUBLIC__/Open/images/change.png" alt="">换一换</span>
+			        <span class="change right" @click="huanyihuan()"><img src="__PUBLIC__/Open/images/change.png" alt="">换一换</span>
 			    </div>
 			    <ul class="listUl">
-			        <li class="li">
-                        <a href="/mall/detail?id=1" style="display: block;">
+			        <li class="li" v-for="n in tuijian">
+                        <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                             <div class="imgDv">
-                                <img src="../../Public/Mall/img/classpic.jpg" alt="">
+                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
                             </div>
                             <div class="inner">
-                                <h4 title="n.name">N1全程班</h4>
-                                <p>开始时间：暂时未定 | 24课时
-                                    <br />Boku老师</p>
+                                <h4 :title="n.name">{{n.name}}</h4>
+                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                    <br />{{n.teacher_name | filtername}}</p>
                                 <div class="detailinfo clearfix">
                                     <div class="price">
                                         立即报名
                                     </div>
-                                    <div class="enroll">186人报名</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="li">
-                        <a href="/mall/detail?id=1" style="display: block;">
-                            <div class="imgDv">
-                                <img src="../../Public/Mall/img/classpic.jpg" alt="">
-                            </div>
-                            <div class="inner">
-                                <h4 title="n.name">N1全程班</h4>
-                                <p>开始时间：暂时未定 | 24课时
-                                    <br />Boku老师</p>
-                                <div class="detailinfo clearfix">
-                                    <div class="price">
-                                        立即报名
-                                    </div>
-                                    <div class="enroll">186人报名</div>
+                                    <div class="enroll">{{n.people_num}}人报名</div>
                                 </div>
                             </div>
                         </a>
@@ -110,11 +104,13 @@
 			</div>
         </div>
     </div>
+    <div class="xy_cover" id="video_part">
+    </div>
     <include file="./Template/Common/View_footer.html" />
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.js"></script>
     <script src="../../Public/Mall/js/scrollReveal.min.js"></script>
-    <script src="__PUBLIC__/Mall/js/detail.js"></script>
+    <script src="__PUBLIC__/Mall/js/class_detail.js"></script>
 </body>
 
 </html>

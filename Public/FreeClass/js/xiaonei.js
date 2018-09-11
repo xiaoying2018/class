@@ -3,7 +3,8 @@ $(function() {
     var xiaonei = new Vue({
         el: '#xiaonei',
         data: {
-            lists:[]
+            lists:[],
+            request:{}
         },
         filters: {
             filtertime: function(val){
@@ -35,11 +36,16 @@ $(function() {
             }
         },
         methods: {
+            condit: function(key,val){
+                this.request[key] = val;
+                this.getdata();
+            },  
             getdata: function(){
                 var _this = this;
                 $.ajax({
                     url:"/api/xiaoneikaocourse",
-                    methods:"post",
+                    type:"post",
+                    data:_this.request,
                     success:function(_res){
                         if (_res.result) {
                             _this.lists = _res.data.open_course
@@ -51,6 +57,9 @@ $(function() {
         mounted: function() {
             this.getdata();
             $(".s_nav li").eq(5).addClass('active');
+            $(".topcondit li,.paixu li").click(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+            })
         }
     })
 });

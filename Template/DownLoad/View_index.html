@@ -37,8 +37,8 @@
         <div class="container s_result clearfix">
             <div class="left">全部资料&nbsp;&nbsp;共筛选到<span class="num">{{count}}</span>条资料</div>
             <div class="right">
-                <input type="text" placeholder="请输入资料关键词">
-                <div class="searchIcon">
+                <input type="text" placeholder="请输入资料关键词" @keyup.13="condit('name','')" v-model="name_input">
+                <div class="searchIcon" @click="condit('name','')">
                     <img src="../../Public/DownLoad/img/search_icon.png" alt="" class="">
                 </div>
             </div>
@@ -89,7 +89,6 @@
     <include file="./Template/Common/View_footer.html" />
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
     <script src="__PUBLIC__/Open/js/jqPaginator/jqPaginator.min.js"></script>
-    <script src="__PUBLIC__/plugin/download/download.js"></script>
     <script src="__PUBLIC__/DownLoad/js/index.js"></script>
 </body>
 
