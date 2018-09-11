@@ -17,7 +17,7 @@ $(function() {
                 { "name": "早稻田EDU学校", "imgUrl": "jz1" },
                 { "name": "千驮谷日本语学校", "imgUrl": "jz2" }
             ],
-            baolu:[],
+            qianyue:[],
             gongkai:[],
             liukao:[],
             xiushi:[]
@@ -82,17 +82,54 @@ $(function() {
                     url: "/api/mall",
                     success: function(res) {
                         if (res.result) {
-                            _this.baolu = res.data.banji.baolu;
+                            _this.qianyue = res.data.banji.baolu;
                             _this.gongkai = res.data.banji.gongkai;
                             _this.liukao = res.data.banji.liukao;
                             _this.xiushi = res.data.banji.xiushi;
 
-                            console.log("xxx",res.data.banji.baolu);
+                            _this.$nextTick(function(){
+                                var swiper = new Swiper('.swiper-container', {
+                                    // pagination: {
+                                    //     el: '.swiper-pagination',
+                                    //     clickable :true,
+                                    // },
+                                    loop: true,
+                                    autoplay:{
+                                        delay: 3000,
+                                        disableOnInteraction: false,
+                                    },
+                                });
+                                var swiperxiushi = new Swiper('.swiper-container-xiushi');
+                                var swiperqianyue = new Swiper('.swiper-container-qianyue');
+                                var swiperliukao = new Swiper('.swiper-container-liukao');
+                                var swipergongkai = new Swiper('.swiper-container-gongkai');
+                                
+
+                                $('.js-change').on('click',function(){
+                                    var index = $(this).data('num')
+                                    $(this).addClass('active');
+                                    $(this).siblings('.js-change').removeClass('active');
+                                    if ($(this).parents('.modular').hasClass('xiushi-wapper')) {
+                                        swiperxiushi.slideTo(index, 300, false)
+                                    }
+                                    if ($(this).parents('.modular').hasClass('qianyue-wapper')) {
+                                        swiperqianyue.slideTo(index, 300, false)
+                                    }
+                                    if ($(this).parents('.modular').hasClass('liukao-wapper')) {
+                                        swiperliukao.slideTo(index, 300, false)
+                                    }
+                                    if ($(this).parents('.modular').hasClass('gongkai-wapper')) {
+                                        swipergongkai.slideTo(index, 300, false)
+                                    }
+                                })
+                            })
                         }
                     }
                 })
             },
             initevent: function() {
+
+
                 var swiper = new Swiper('#swiper-honor', {
                     autoplayDisableOnInteraction: false,
                     paginationClickable: true,

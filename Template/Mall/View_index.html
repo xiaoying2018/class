@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
     <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
-    <link href="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.css" rel="stylesheet">
+    <link href="__PUBLIC__/plugin/swiper4/swiper.min.css" rel="stylesheet">
     <link rel="stylesheet" href="__PUBLIC__/Mall/css/index.css">
     <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
     <script src="http://crm.xiaoying.net/Public/js/xiaoying_form.js"></script>
@@ -29,8 +29,8 @@
             <div class="bannerSlider">
                 <div class="container clearfix">
                     <div class="animationpart">
-                        <img src="../../Public/Mall/img/banner_a.png" alt="" class="banner_a">
-                        <img src="../../Public/Mall/img/banner_plane.png" alt="" class="banner_plane">
+                        <img src="__PUBLIC__/Mall/img/banner_a.png" alt="" class="banner_a">
+                        <img src="__PUBLIC__/Mall/img/banner_plane.png" alt="" class="banner_plane">
                     </div>
                     <div class="xiaoying-index-top-right formpart">
                         <p class="p-title">免费试听课</p>
@@ -53,22 +53,22 @@
                         </div>
                         <ul class="s-tool-part" onclick="_MEIQIA('showPanel')">
                             <li>
-                                <img src="../../Public/Mall/img/ba_1.jpg" alt=""> 日语测评
+                                <img src="__PUBLIC__/Mall/img/ba_1.jpg" alt=""> 日语测评
                             </li>
                             <li>
-                                <img src="../../Public/Mall/img/ba_2.jpg" alt=""> 口语评测
+                                <img src="__PUBLIC__/Mall/img/ba_2.jpg" alt=""> 口语评测
                             </li>
                             <li>
-                                <img src="../../Public/Mall/img/ba_3.jpg" alt=""> GPA计算器
+                                <img src="__PUBLIC__/Mall/img/ba_3.jpg" alt=""> GPA计算器
                             </li>
                             <li>
-                                <img src="../../Public/Mall/img/ba_4.jpg" alt=""> 选课系统
+                                <img src="__PUBLIC__/Mall/img/ba_4.jpg" alt=""> 选课系统
                             </li>
                             <li>
-                                <img src="../../Public/Mall/img/ba_5.jpg" alt=""> 微信公众号
+                                <img src="__PUBLIC__/Mall/img/ba_5.jpg" alt=""> 微信公众号
                             </li>
                             <li>
-                                <img src="../../Public/Mall/img/ba_6.jpg" alt=""> 大学排名
+                                <img src="__PUBLIC__/Mall/img/ba_6.jpg" alt=""> 大学排名
                             </li>
                         </ul>
                     </div>
@@ -90,22 +90,22 @@
                 <div class="main_content">
                     <h3>专属教学团队</h3>
                     <h4>小莺具备近百名专业教学研究团队，针对留学日语，日本大学考试面试进行深入研究提供专业课程</h4>
-                    <img src="../../Public/Mall/img/a_1.jpg" alt="">
+                    <img src="__PUBLIC__/Mall/img/a_1.jpg" alt="">
                 </div>
                 <div class="main_content">
                     <h3>严选日本外教</h3>
                     <h4>从不妥协成本，坚持选择认真负责，具备丰富教学经验的日本本土外教</h4>
-                    <img src="../../Public/Mall/img/a_2.jpg" alt="">
+                    <img src="__PUBLIC__/Mall/img/a_2.jpg" alt="">
                 </div>
                 <div class="main_content">
                     <h3>自主研发教材</h3>
                     <h4>历经十年开发，形成一套融合留学日语，日语外教口语能力的一套完善教学体系</h4>
-                    <img src="../../Public/Mall/img/a_3.jpg" alt="">
+                    <img src="__PUBLIC__/Mall/img/a_3.jpg" alt="">
                 </div>
                 <div class="main_content">
                     <h3>签约保证承诺</h3>
                     <h4>签约保证，未能达到效果，持续辅导，提高能力 </h4>
-                    <img src="../../Public/Mall/img/a_4.jpg" alt="">
+                    <img src="__PUBLIC__/Mall/img/a_4.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -115,93 +115,253 @@
                 <p class="b_t">热门课程</p>
             </div>
             <div class="container">
-                <div class="s_title">
-                    <img src="../../Public/Mall/img/s_xiushi.png" alt="">修士考试课程
-                    <ul class="paixu">
-                        <li class="active">最新发布</li>
-                        <li>最多报名</li>
-                    </ul>
+                <div class="modular xiushi-wapper">
+                    <div class="s_title">
+                        <img src="__PUBLIC__/Mall/img/s_xiushi.png" alt="">修士考试课程
+                        <ul class="paixu">
+                            <li class="active js-change" data-num="0">最新发布</li>
+                            <li class="js-change" data-num="1">最多报名</li>
+                        </ul>
+                    </div>
+                    <div class="swiper-container-xiushi home_index_swiper_container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist">
+                                    <li class="li" v-for="n in xiushi.by_new">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist">
+                                    <li class="li" v-for="n in xiushi.by_people">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
-                    <li class="li" v-for="n in xiushi">
-                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
-                            <div class="imgDv">
-                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
-                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
-                            </div>
-                            <div class="inner">
-                                <h4 :title="n.name">{{n.name}}</h4>
-                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
-                                    <br />{{n.teacher_name | filtername}}</p>
-                                <div class="detailinfo clearfix">
-                                    <div class="price">
-                                        立即报名
-                                    </div>
-                                    <div class="enroll">186人报名</div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
                 
-                <div class="s_title">
-                    <img src="../../Public/Mall/img/s_xiaonei.png" alt="">签约保送课程
-                    <ul class="paixu">
-                        <li class="active">最新发布</li>
-                        <li>最多报名</li>
-                    </ul>
+                
+                <div class="modular qianyue-wapper">
+                    <div class="s_title">
+                        <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">签约保送课程
+                        <ul class="paixu">
+                            <li class="active js-change" data-num="0">最新发布</li>
+                            <li class="js-change" data-num="1">最多报名</li>
+                        </ul>
+                    </div>
+                    <div class="swiper-container-qianyue home_index_swiper_container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in qianyue.by_new">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in qianyue.by_people">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
-                    <li class="li" v-for="n in baolu">
-                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
-                            <div class="imgDv">
-                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
-                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+
+
+                <div class="modular liukao-wapper">
+                    <div class="s_title">
+                        <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">留考校内考课程
+                        <ul class="paixu">
+                            <li class="active js-change" data-num="0">最新发布</li>
+                            <li class="js-change" data-num="1">最多报名</li>
+                        </ul>
+                    </div>
+                    <div class="swiper-container-liukao home_index_swiper_container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in liukao.by_new">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="inner">
-                                <h4 :title="n.name">{{n.name}}</h4>
-                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
-                                    <br />{{n.teacher_name | filtername}}</p>
-                                <div class="detailinfo clearfix">
-                                    <div class="price">
-                                        立即报名
-                                    </div>
-                                    <div class="enroll">186人报名</div>
-                                </div>
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in liukao.by_people">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="s_title">
-                    <img src="../../Public/Mall/img/s_xiaonei.png" alt="">留考校内考课程
-                    <ul class="paixu">
-                        <li class="active">最新发布</li>
-                        <li>最多报名</li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
-                    <li class="li" v-for="n in liukao">
-                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
-                            <div class="imgDv">
-                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
-                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+
+
+
+                <div class="modular gongkai-wapper">
+                    <div class="s_title">
+                        <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">热门公开课
+                        <ul class="paixu">
+                            <li class="active js-change" data-num="0">最新发布</li>
+                            <li class="js-change" data-num="1">最多报名</li>
+                        </ul>
+                    </div>
+                    <div class="swiper-container-gongkai home_index_swiper_container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in gongkai.by_new">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="inner">
-                                <h4 :title="n.name">{{n.name}}</h4>
-                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
-                                    <br />{{n.teacher_name | filtername}}</p>
-                                <div class="detailinfo clearfix">
-                                    <div class="price">
-                                        立即报名
-                                    </div>
-                                    <div class="enroll">186人报名</div>
-                                </div>
+                            <div class="swiper-slide swiper-no-swiping">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                                    <li class="li" v-for="n in gongkai.by_people">
+                                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                            <div class="imgDv">
+                                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+                                            </div>
+                                            <div class="inner">
+                                                <h4 :title="n.name">{{n.name}}</h4>
+                                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                                    <br />{{n.teacher_name | filtername}}</p>
+                                                <div class="detailinfo clearfix">
+                                                    <div class="price">
+                                                        立即报名
+                                                    </div>
+                                                    <div class="enroll">{{n.people_num}}人报名</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                        </a>
-                    </li>
-                </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 
                 <div class="s_title">
-                    <img src="../../Public/Mall/img/s_open.png" alt="">热门公开课
+                    <img src="__PUBLIC__/Mall/img/s_open.png" alt="">热门公开课
                     <ul class="paixu">
                         <li class="active">最新发布</li>
                         <li>最多报名</li>
@@ -212,7 +372,7 @@
                         <a :href="'/mall/detail?id='+n.id" style="display: block;">
                             <div class="imgDv">
                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
-                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+                                <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
                             </div>
                             <div class="inner">
                                 <h4 :title="n.name">{{n.name}}</h4>
@@ -227,7 +387,7 @@
                             </div>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <div class="free container">
@@ -261,11 +421,11 @@
                 </ul>
                 <a href="" class="right">查看详情</a>
             </div>
-            <img src="../../Public/Mall/img/three_step.jpg" alt="" class="three_step" data-sr="enter left, fade 0">
+            <img src="__PUBLIC__/Mall/img/three_step.jpg" alt="" class="three_step" data-sr="enter left, fade 0">
             <div class="dada-experience-item" style="bottom: 110px; left: 50px;" data-sr="enter top hustle 50px over 1s">
                 <div class="innerDv">
                     <div class="js-dada-experience-item">
-                        <img src="../../Public/Mall/img/pic_before_class@1x.png" alt="">
+                        <img src="__PUBLIC__/Mall/img/pic_before_class@1x.png" alt="">
                         <div class="inner">
                             <span>课前</span>
                             <p>预习视频
@@ -281,7 +441,7 @@
             <div class="dada-experience-item" style="bottom: 290px;left: 470px;" data-sr="enter top hustle 50px over 1s">
                 <div class="innerDv">
                     <div class="js-dada-experience-item">
-                        <img src="../../Public/Mall/img/pic_in_class@1x.png" alt="">
+                        <img src="__PUBLIC__/Mall/img/pic_in_class@1x.png" alt="">
                         <div class="inner">
                             <span>课中</span>
                             <p>小班授课
@@ -297,7 +457,7 @@
             <div class="dada-experience-item" style="bottom: 110px;left: 860px;" data-sr="enter top hustle 50px over 1s">
                 <div class="innerDv">
                     <div class="js-dada-experience-item">
-                        <img src="../../Public/Mall/img/pic_after_class@1x.png" alt="">
+                        <img src="__PUBLIC__/Mall/img/pic_after_class@1x.png" alt="">
                         <div class="inner">
                             <span>课后</span>
                             <p>讲师点评
@@ -347,7 +507,7 @@
                         <ul class="swiper-wrapper">
                             <li class="swiper-slide" v-for="n in shouquanData">
                                 <div class="dada-honor-wrapper">
-                                    <img :src="'../../Public/Mall/img/shouquan/'+n.imgUrl+'.jpg'" alt="">
+                                    <img :src="'__PUBLIC__/Mall/img/shouquan/'+n.imgUrl+'.jpg'" alt="">
                                     <p>{{n.name}}</p>
                                 </div>
                             </li>
@@ -359,28 +519,28 @@
                         <h4>媒体报道</h4>
                         <div class="dada-honor-list">
                             <div>
-                                <img src="../../Public/Mall/img/meiti/fenghuang.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/fenghuang.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/jinritoutiao.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/jinritoutiao.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/souhu.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/souhu.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/wangyi.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/wangyi.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/36kr.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/36kr.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/yy.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/yy.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/sina.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/sina.jpg" alt="">
                             </div>
                             <div>
-                                <img src="../../Public/Mall/img/meiti/hujiang.jpg" alt="">
+                                <img src="__PUBLIC__/Mall/img/meiti/hujiang.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -390,8 +550,8 @@
     </div>
     <include file="./Template/Common/View_footer.html" />
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
-    <script src="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.js"></script>
-    <script src="../../Public/Mall/js/scrollReveal.min.js"></script>
+    <script src="__PUBLIC__/plugin/swiper4/swiper.min.js"></script>
+    <script src="__PUBLIC__/Mall/js/scrollReveal.min.js"></script>
     <script src="__PUBLIC__/Mall/js/index.js"></script>
 </body>
 
