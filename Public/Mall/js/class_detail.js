@@ -32,8 +32,9 @@ $(function() {
         methods: {
             sscroll:function(){
                 $("body, html").animate({
-                    scrollTop: $(".l_part").height()
+                    scrollTop: $(".tabDv").offset().top-140
                 }, 600)
+                $("[data-flag='tab2']").click();
             },
             huanyihuan: function(){
                 this.tuijian = getRandomArrayElements(this.temp, 2);
