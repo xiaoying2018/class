@@ -10,6 +10,38 @@ use Think\Controller;
 
 class IndexController extends Controller
 {
+    // 整站模糊搜索
+    public function searchAll()
+    {
+        $type = I('post.type');
+
+        $search_name = I('post.name');
+
+        if (!$type || !$search_name) $this->ajaxReturn(['result'=>false,'msg'=>'缺少关键参数','_par'=>['type'=>$type,'search_name'=>$search_name]]);
+
+        switch ($type)
+        {
+            case 'mate':// 如果搜索资料
+                $i_think_type = '资料搜索';
+                $model = new DocModel();
+                $res = $model->searchByName($search_name);
+                break;
+            case 'banji':// 如果搜索班级
+                $i_think_type = '班级搜索';
+                $model = new SectionCateModel();
+                $res = $model->searchBanjiByName($search_name);
+                break;
+            default:// 默认搜索课程
+                $i_think_type = '课程搜索';
+                $model = new SectionCateModel();
+                $res = $model->searchCourseByName($search_name);
+                break;
+        }
+
+        $this->ajaxReturn(['result'=>true,'data'=>$res,'i_think_type'=>$i_think_type,'_par'=>['type'=>$type,'search_name'=>$search_name]]);
+
+    }
+
     // mall 所有班级/课程 列表页数据 (目前是首页)
     public function search()
     {

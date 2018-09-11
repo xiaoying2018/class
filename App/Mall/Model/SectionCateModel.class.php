@@ -19,6 +19,96 @@ class SectionCateModel extends EModel
 {
     protected $tableName = 'course_section_cate';
 
+    public function searchBanjiByName($search_name)
+    {
+        // 获取首页展示的所有班
+        $all_banji = M('Course')->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->select();
+
+        // 获取班级下的课程数和课时数
+        if ($all_banji)
+        {
+            foreach ($all_banji as $banji_k => $banji_v)
+            {
+                // 预留为0 便于前端识别
+                $all_banji[$banji_k]['start_time'] = 0;
+                $all_banji[$banji_k]['teacher_name'] = 0;
+                // 获取班级下的课程
+                $all_banji[$banji_k]['show_course'] = [];
+                // 班级下的课程ids
+                $_course_ids = M('banji_kecheng')->field('section_cate_id')->where(['course_id'=>['eq',$banji_v['id']]])->select();
+                if ($_course_ids)
+                {
+                    // 二维转一维
+                    $course_ids = array_map(function ($v){
+                        return $v['section_cate_id'];
+                    },$_course_ids);
+
+                    // 班级下的课程数
+                    $all_banji[$banji_k]['course_num'] = count($course_ids);
+                    // 班级下所有课程的总课时数
+                    if ($course_ids)
+                    {
+                        // 获取班级下的课程
+                        $show_course = $this->where(['id' => ['in', $course_ids],'status'=>['eq',1]])->limit(8)->select();
+                        // 获取课程下的课时数
+                        if ($show_course) {
+                            foreach ($show_course as $k => $v) {
+                                $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
+                            }
+                        }
+                        $all_banji[$banji_k]['show_course'] = $show_course;
+                        $all_banji[$banji_k]['section_num'] = M('course_section')->where(['course_id'=>['in',$course_ids]])->count();
+                    }else{
+                        $all_banji[$banji_k]['section_num'] = 0;
+                    }
+                }
+
+                // 班级下的班期信息 和 老师信息
+                $banji_banci = (new PeriodModel())->field('id,headmaster_id')->where(['course_id'=>['eq',$banji_v['id']]])->select();// 班期信息
+                if ($banji_banci)
+                {
+                    // 班主任ids
+                    $banzhuren_ids = array_map(function ($v){
+                        return $v['headmaster_id'];
+                    },$banji_banci);
+                    // 班次 ids
+                    $banci_ids = array_map(function ($v){
+                        return $v['id'];
+                    },$banji_banci);
+                    if ($banci_ids)
+                    {
+                        $new_paike = (new ScheduleModel())->where(['period_id'=>['in',$banci_ids]])->order('start_time')->find()?:[];// 班次内最早的排课
+                        $all_banji[$banji_k]['start_time'] = $new_paike['start_time']?:0;// 班次开始时间
+                        $_teacher_id = $new_paike['teacher_id']?:0;// 班次开始时间
+                        if ($_teacher_id)
+                        {
+                            // 老师名字
+                            $all_banji[$banji_k]['teacher_name'] = (new TeacherModel())->where(['role_id'=>['eq',$_teacher_id]])->find()['full_name']?:0;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return $all_banji;
+    }
+
+    public function searchCourseByName($search_name)
+    {
+        // 获取公开课课程
+        $show_course = $this->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->select();
+        // 获取课程下的课时数
+        if ($show_course) {
+            foreach ($show_course as $k => $v) {
+                $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
+            }
+            return $show_course;
+        }
+
+        return [];
+    }
+
     // 班级/课程详情页 获取推荐班级,每次获取两条  (随机)
     public function getTuijianBanji()
     {

@@ -36,6 +36,7 @@ return [
         'api/mate'               =>  'Mall/Index/getDocList', // 资料
         'api/matecate'          =>  'Mall/Index/getDocCate', // 资料分类
         'api/tuijian_banji'          =>  'Mall/Index/tuijianBanji', // 推荐班级
+        'api/search_all'          =>  'Mall/Index/searchAll', // 整站搜索
 
         'teacher'                     =>  'teacher/View/index',     //课程
         'Lessonintor'                     =>  'Lessonintor/View/index',     //课程

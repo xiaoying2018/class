@@ -18,6 +18,32 @@ class DocModel extends Model
 
     protected $tableName = 'mate';
 
+    public function searchByName($search_name)
+    {
+        // 根据名称搜索
+        $where['name'] = ['like','%'.$search_name.'%'];
+
+        // 查询资料数据
+        $count = $this->where($where)->count();
+        $mates = $this->where($where)->select()?:[];
+
+        // 如果资料为空
+        if (!$mates) return [];
+
+        // 获取资料下的文档
+        foreach ($mates as $mate_k => $mate_v)
+        {
+            $doc_files_model = new DocFileModel();
+            $mates[$mate_k]['files'] = $doc_files_model->where(['ral_id'=>['eq',$mate_v['id']]])->select()?:[];// todo
+        }
+
+        return [
+            'count' => $count,// 总条数
+            'mates' => $mates,// 资料列表
+        ];
+
+    }
+
     public function getMates()
     {
         $condition = I('post.');
@@ -25,6 +51,12 @@ class DocModel extends Model
         // 分页
         $limit_num = $condition['limit_num']?:10;// 每页显示条数
         $start = $condition['page']?(($condition['page']-1)*$limit_num):0;// 查询起始值
+        
+        // 如果按名称查询
+        if ($condition['name'])
+        {
+            $where['name'] = ['like','%'.$condition['name'].'%'];
+        }
 
         // 如果按分类查询
         if ($condition['category'])
@@ -99,7 +131,7 @@ class DocModel extends Model
         // 如果资料为空
         if (!$mates) return [];
 
-        // 如果资料数据为空,获取资料下的文档
+        // 获取资料下的文档
         foreach ($mates as $mate_k => $mate_v)
         {
             $doc_files_model = new DocFileModel();
