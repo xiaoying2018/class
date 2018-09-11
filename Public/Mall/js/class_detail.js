@@ -30,6 +30,11 @@ $(function() {
             }
         },
         methods: {
+            sscroll:function(){
+                $("body, html").animate({
+                    scrollTop: $(".l_part").height()
+                }, 600)
+            },
             huanyihuan: function(){
                 this.tuijian = getRandomArrayElements(this.temp, 2);
             },

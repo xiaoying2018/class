@@ -48,8 +48,14 @@ $(function() {
                     type:"post",
                     data:_this.request,
                     success:function(_res){
+                        var type = _this.request.type;
                         if (_res.result) {
-                            _this.lists = _res.data
+                            if (type == 'banji') {
+                                _this.lists = _res.data.banji
+                            }
+                            else{
+                            _this.lists = _res.data.courses
+                            }
                         }
                     }
                 })
