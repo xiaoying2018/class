@@ -53,15 +53,22 @@
                         <td>下载</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="lists.length > 0">
                     <tr v-for="n in lists">
                         <td>{{n.name}}</td>
                         <td>{{n.name}}</td>
                         <td>{{n.limitdown}}</td>
                         <td>
-                            <a href="javascript:;" :data-file="'http://doc.eggelite.com/'+n.files[0].path"  v-if="n.files.length > 0" title="下载" class="btn_dw">下载</a>
+                            <span v-if="n.files.length > 0" class="dw_group">
+                                <a v-for="item in n.files" href="javascript:;" :data-file="'http://doc.eggelite.com/'+item.path"  title="下载" class="btn_dw">下载</a>
+                            </span>
                             <a href="javascript:;" v-else>暂无资源</a>
                         </td>
+                    </tr>
+                </tbody>
+                <tbody v-else>
+                    <tr>
+                        <td colspan="4">暂无数据</td>
                     </tr>
                 </tbody>
             </table>
