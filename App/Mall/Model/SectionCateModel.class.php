@@ -101,7 +101,7 @@ class SectionCateModel extends EModel
 
             }
         }
-        
+
         return [
             'count' => $count,// 总条数
             'page_count' => $page_count,// 总页数
@@ -680,6 +680,7 @@ class SectionCateModel extends EModel
         // 获取课程下的课时数
         if ($show_course) {
             foreach ($show_course as $k => $v) {
+                $show_course[$k]['sections'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
                 $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
             }
         }
@@ -717,6 +718,7 @@ class SectionCateModel extends EModel
         // 获取课程下的课时数
         if ($show_course) {
             foreach ($show_course as $k => $v) {
+                $show_course[$k]['sections'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
                 $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
             }
         }
@@ -755,6 +757,7 @@ class SectionCateModel extends EModel
         // 获取课程下的课时数
         if ($show_course) {
             foreach ($show_course as $k => $v) {
+                $show_course[$k]['sections'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
                 $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
             }
         }
