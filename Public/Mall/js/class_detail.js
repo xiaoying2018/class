@@ -76,7 +76,7 @@ $(function() {
                         alert('没有视频')
                     }else{
                         n = 'http://'+n;
-                        var _html = '<div class="inner"><img src="../../public/common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
+                        var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
                         $("#video_part").html(_html);
                         $("#video_part").show();
                     }
