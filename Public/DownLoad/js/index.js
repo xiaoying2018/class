@@ -9,14 +9,20 @@ $(function() {
             requset: {
                 limit_num: 10,
                 page: 1,
-                category: ''
-            }
+                category: '',
+                name:''
+            },
+            name_input:""
         },
         filters: {},
         methods: {
             condit: function(key, val) {
                 this.requset.page = 1
-                this.requset[key] = val;
+                if (key == 'name') {
+                    this.requset[key] = this.name_input;
+                }else{
+                    this.requset[key] = val;
+                }
                 this.getdata();
             },
             getcate: function() {
@@ -44,7 +50,7 @@ $(function() {
                             _this.lists = [];
                             _this.count = 0;
 
-                            if (res.data.mates.length > 0) {
+                            if (res.data.mates && res.data.mates.length > 0) {
                                 $("#jqPaginator").show();
                                 _this.lists = res.data.mates;
                                 _this.count = parseInt(res.data.count);
@@ -74,24 +80,43 @@ $(function() {
             downloadfile: function(n) {}
         },
         mounted: function() {
+            if (getQueryString('keywords')) {
+                this.name_input = getQueryString('keywords','need')
+                this.condit('name',getQueryString('keywords','need'))
+            }
             this.getcate();
             this.getdata();
             $(document).on('click', '.listDv .item', function() {
                 $(".listDv .item").removeClass("active");
                 $(this).addClass("active");
             })
+            $(".s_nav li").eq(7).addClass('active');
 
         }
     })
 
     $(document).on('click', '.btn_dw', function() {
-        var _path = $(this).attr("data-file");
-        console.log("xxx", _path);
-        downloadFile(_path);
+        if (utily.getStore('xy_nickname')) {
+            var _path = $(this).attr("data-file");
+            downloadFile(_path);
+        }else{
+            utily.setStore('xy_logined_href',location.href)
+            window.location.href = '/user/#/login?a=login';
+        }
     })
 
 
 
+    function getQueryString(name, needdecoed) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var lh = window.location.search;
+        if (needdecoed) {
+            lh = decodeURI(window.location.search)
+        }
+        var r = lh.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
 
     window.downloadFile = function(sUrl) {
         //iOS devices do not support downloading. We have to inform user about this.

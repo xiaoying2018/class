@@ -1,10 +1,11 @@
 $(function() {
 
-    var freeclasss = new Vue({
-        el: '#freeclasss',
+    var result = new Vue({
+        el: '#result',
         data: {
-            lists:[],
-            request:{}
+            lists :[],
+            request:{},
+            type:""
         },
         filters: {
             filtertime: function(val){
@@ -43,23 +44,36 @@ $(function() {
             getdata: function(){
                 var _this = this;
                 $.ajax({
-                    url:"/api/opencourse",
+                    url:"/api/search_all",
                     type:"post",
                     data:_this.request,
                     success:function(_res){
                         if (_res.result) {
-                            _this.lists = _res.data.open_course
+                            _this.lists = _res.data
                         }
                     }
                 })
             }
         },
         mounted: function() {
+            this.request['type'] = getQueryString('type','need')
+            this.request['name'] = getQueryString('keywords','need')
+            window.setTimeout(function(){
+                $("#ssinput").val(getQueryString('keywords','need'))
+            },500)
             this.getdata();
-            $(".s_nav li").eq(3).addClass('active');
-            $(".topcondit li,.paixu li").click(function(){
-                $(this).addClass("active").siblings().removeClass("active");
-            })
+            $(".navGroup").addClass("scrollDown");
         }
     })
+
+    function getQueryString(name, needdecoed) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var lh = window.location.search;
+        if (needdecoed) {
+            lh = decodeURI(window.location.search)
+        }
+        var r = lh.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
 });

@@ -43,10 +43,10 @@
                 <div class="s_title">
                     <img src="../../Public/Mall/img/s_xiushi.png" alt="">直播课
                     <ul class="paixu">
-                        <li class="active">最新发布</li>
-                        <li>最多报名</li>
+                        <li class="active" @click="condit('sort_by_people_num','')">最新发布</li>
+                        <li @click="condit('sort_by_people_num',1)">最多报名</li>
                     </ul>
-                    <a href="">更多课程></a>
+                    <!-- <a href="">更多课程></a> -->
                 </div>
                 <ul class="ullist" data-sr="enter top hustle 50px over 1s">
                     <li class="li" v-for="n in lists">

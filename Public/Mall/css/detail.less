@@ -1,4 +1,10 @@
 @import url("../../Common/css/function.less");
+.s_s_title{
+    margin-bottom: 24px;
+    font-size: 24px;
+    color: #020202;
+    font-weight: 600;
+}
 
 .topinfo {
     height: 468px;
@@ -97,6 +103,9 @@
                     &:nth-child(2n) {
                         margin-left: -2px;
                     }
+                    &:hover{
+                        cursor: pointer;
+                    }
                 }
             }
             .tabcontent {
@@ -108,11 +117,46 @@
                 top: -2px;
                 position: relative;
                 line-height: 32px;
-                img {
-                    width: 100% !important
+                &.tab1{
+                    img {
+                        width: 100% !important
+                    }
                 }
                 &.active {
                     display: block;
+                }
+                .curriculum-ul {
+                    padding-bottom: 89px;
+                    .js-show {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        border-top: 1px solid #E5E5E5;
+                        cursor: pointer;
+                        padding: 23px 0;
+                        position: relative;
+                        .play{
+                            width: 40px;
+                            margin-right: 24px;
+                        }
+                        .jm-fl{
+                            float: left;
+                            p:nth-of-type(1) {
+                                font-size: 16px;
+                                color: #020202;
+                                font-weight: 600;
+                            }
+                            p:nth-of-type(2) {
+                                font-size: 14px;
+                                color: #808080;
+                            }
+                        }
+                        .playback{
+                            width: 60px;
+                            position: absolute;
+                            right: 71px;
+                        }
+                    }
                 }
             }
         }
@@ -244,5 +288,40 @@
                 }
             }
         }
+    }
+}
+#video_part{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index:999;
+    display: none;
+    .inner{
+        width: 60%;
+        height: 40%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background: #000;
+    }
+    .coverBg{
+        background-color: rgba(0,0,0,0.3);
+        width: 100%;
+        height: 100%;
+    }
+    video{
+
+    }
+    .close{
+        position: absolute;
+        right: -10px;
+        top: -10px;
+        z-index: 10;
+        cursor: pointer;
     }
 }

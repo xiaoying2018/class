@@ -32,22 +32,13 @@
                 </p>
             </div>
             <div class="container">
-                <div class="container s_result clearfix">
-                    <div class="left">全部资料&nbsp;&nbsp;共筛选到<span class="num">10</span>条资料</div>
-                    <div class="right">
-                        <input type="text" placeholder="请输入资料关键词">
-                        <div class="searchIcon">
-                            <img src="../../Public/DownLoad/img/search_icon.png" alt="" class="">
-                        </div>
-                    </div>
-                </div>
                 <div class="s_title">
                     <img src="../../Public/Mall/img/s_xiushi.png" alt="">校内考
                     <ul class="paixu">
-                        <li class="active">最新发布</li>
-                        <li>最多报名</li>
+                        <li class="active" @click="condit('sort_by_people_num','')">最新发布</li>
+                        <li @click="condit('sort_by_people_num',1)">最多报名</li>
                     </ul>
-                    <a href="">更多课程></a>
+                    <!-- <a href="">更多课程></a> -->
                 </div>
                 <ul class="ullist" data-sr="enter top hustle 50px over 1s">
                     <li class="li" v-for="n in lists">

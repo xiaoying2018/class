@@ -88,7 +88,7 @@ $(function() {
                             _this.xiushi = res.data.banji.xiushi;
 
                             _this.$nextTick(function(){
-                                var swiper = new Swiper('.swiper-container', {
+                                var swiper = new Swiper('.home_index_swiper_container .swiper-container', {
                                     // pagination: {
                                     //     el: '.swiper-pagination',
                                     //     clickable :true,
@@ -200,6 +200,7 @@ $(function() {
             this.initevent();
             this.getCaseData();
             this.getClassData();
+            $(".s_nav li").eq(0).addClass('active');
         }
     })
     // api/mall
