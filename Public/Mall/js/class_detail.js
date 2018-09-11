@@ -69,14 +69,20 @@ $(function() {
                 })
             },
             play: function(n){
-                if (n == null) {
-                    $("#video_part").hide();
-                    alert('没有视频')
+                if (utily.getStore('xy_nickname')) {
+                    var _path = $(this).attr("data-file");
+                    if (n == null) {
+                        $("#video_part").hide();
+                        alert('没有视频')
+                    }else{
+                        n = 'http://'+n;
+                        var _html = '<div class="inner"><img src="../../public/common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
+                        $("#video_part").html(_html);
+                        $("#video_part").show();
+                    }
                 }else{
-                    n = 'http://'+n;
-                    var _html = '<div class="inner"><img src="../../public/common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
-                    $("#video_part").html(_html);
-                    $("#video_part").show();
+                    utily.setStore('xy_logined_href',location.href)
+                    window.location.href = '/user/#/login?a=login';
                 }
             }
         },
