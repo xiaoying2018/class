@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>课表</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/course_hour.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id="course_hour">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>{{data.course_name}}</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<div class="course_list">
+				<div class="list_tab">
+					<span class="active_tab">未学习（{{arry.unfinished.length}}）</span>
+					<span>已学习<i class="green">（{{arry.finished.length}}）</i></span>
+				</div>
+				<div class="list">
+					<div>
+						<div class="course_item">
+							<p class="list_title"><i class="fa fa-lock fa-lg green"></i>{{data.course_name}}</p>
+							<ul>
+								<li class="item_content" v-for="item in arry.unfinished">
+									<p class="item_text">
+										<i class="fa fa-video-camera left"></i>{{item.section_name}}----{{item.title}} <i class="_right fa fa-angle-down fa-lg"></i></p>
+									<div class="course_but">
+										<ul>
+											<li>{{item.start_time}} - {{item.end_time}} (时长{{item.duration}}分钟)</li>
+										</ul>
+										<div>
+											<a href="javascript:;" onclick="prompt();">预习课件</a>
+											<a href="javascript:;" onclick="prompt();">背单词</a>
+											<a href="javascript:;" onclick="prompt();">做练习</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div>
+						<div class="course_item">
+							<p class="list_title"><i class="fa fa-unlock-alt fa-lg green"></i>{{data.course_name}}</p>
+							<ul>
+								<li class="item_content" v-for="item in arry.finished">
+									<p class="item_text" style="color:#999999">
+										<i class="fa fa-video-camera left"></i>
+										<span class="finished_title">{{item.section_name}}--{{item.title}}</span> 
+										<span class="signin_status" v-if="item.signin_status =='1'">已签到</span>
+										<span class="signin_status" v-else-if="item.signin_status =='-7'">请假</span>
+										<span class="signin_status" v-else>未签到</span> <i class="_right fa fa-angle-down fa-lg"></i></p>
+									<div class="course_but">
+										<ul>
+											<li>{{item.start_time}} - {{item.end_time}} (时长{{item.duration}}分钟)</li>
+											<!--<li>2018-03-22 周四 19：30 — 20：30</li>-->
+										</ul>
+										<div>
+											<a href="javascript:;" onclick="prompt();">预习课件</a>
+											<a href="javascript:;" onclick="prompt();">背单词</a>
+											<a href="javascript:;" onclick="prompt();">做练习</a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var course = new Vue({
+			el: "#course_hour",
+			data: {
+				data: {},
+				arry: {
+					finished: {},
+					unfinished: {}
+				}
+			},
+			methods: {
+				get_data: function() {
+					var _id = getQueryString("id");
+					var _self = this;
+					var finished = [];
+					var unfinished = [];
+					var arry = [];
+					$.ajax({
+						type: "post",
+						url: "/api/student/info",
+						success: function(res) {
+							if(res.result == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+							
+							for(var i = 0; i < res.period.length; i++) {
+								if(res.period[i].period_id == _id) {
+									_self.data = res.period[i]
+								}
+							}
+
+							$.each(res.schedule, function(k, v) {
+								$.each(v, function(j, m) {
+									arry.push(m)
+								});
+							});
+							$.each(arry, function(x, y) {
+								if(y.status == "-1") {
+									finished.push(y)
+								} else if(y.status == "1") {
+									unfinished.push(y)
+								}
+							})
+							_self.arry.finished = finished;
+							_self.arry.unfinished = unfinished;
+						}
+							}
+					});
+				}
+			},
+			updated() {
+				$(".item_content").click(function() {
+					course_hour.drop_down.open_click(
+						$(this),
+						"fa-angle-up",
+						"course_but_open",
+						"course_but",
+						"_right",
+						"fa-angle-down"
+					)
+				})
+				$(".list_tab>span").click(function() {
+					course_hour.tab_switch($(this), "active_tab", $(".list_tab>span"), $(".list>div"))
+				})
+			}
+		})
+
+		course.get_data()
+
+		function getQueryString(name, needdecoed) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var lh = window.location.search;
+			if(needdecoed) {
+				lh = decodeURI(window.location.search)
+			}
+			var r = lh.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return "";
+		}
+
+		var course_hour = {
+			drop_down: {
+				open_click: function(a, b, c, d, e, f) {
+					var g = a.find("._right")
+					if(!g.hasClass(b)) {
+						this._recovery(c, d)
+						this._hide(e, b, f, g)
+						this.open_animate(d, c, a)
+					} else {
+						this._show(g, b, f)
+						this.close_animate(a, c, d)
+					}
+				},
+				_show: function(a, h, i) {
+					a.removeClass(h).addClass(i);
+				},
+				_hide: function(o, p, q, r) {
+					$("." + o).removeClass(p).addClass(q);
+					r.removeClass(q).addClass(p)
+				},
+				open_animate: function(d, c, x) {
+					$("." + d).css({
+						"height": "auto"
+					})
+					x.find("." + d).addClass(c)
+					var _height = $("." + c).height() + "px"
+					$("." + d).css({
+						"height": "0"
+					})
+					$("." + c).animate({
+						height: _height
+					}, 200)
+				},
+				close_animate: function(x, c, l) {
+					x.find("." + c).animate({
+						height: 0,
+						display: "none"
+					}, 200, function() {
+						x.find("." + l).removeClass(c)
+					})
+				},
+				_recovery: function(c, d) {
+					$("." + c).height("0")
+					$("." + d).removeClass(c)
+				}
+			},
+			tab_switch: function(a, b, c, d) {
+				if(!a.hasClass(b)) {
+					c.removeClass(b);
+					a.addClass(b);
+					d.hide();
+					d.eq(a.index()).fadeIn("fast")
+				}
+
+			}
+		}
+		
+		function prompt(){
+			alert("作业系统正在开发中,敬请期待...")
+		}
+	</script>
+
+</html>

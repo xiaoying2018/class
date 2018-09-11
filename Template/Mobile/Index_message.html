@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>站内信息</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/message_list.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id ="message">
+		<header class="header">
+			<div>
+				<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+				<span>站内信息</span>
+				<a href="javascript:void(0)"></a>
+			</div>
+		</header>
+		<ul>
+			<li class="message_list" v-for="item in data" :data_id="item.id">
+				<a href="javascript:void(0)">
+					<div class="list_img"><img src="/Public/Mobile/img/logo.png" /><i v-show="item.status=='0'"></i></div>
+					<div class="message_content">
+						<p class="list_title"><span>{{item.title}}</span><span>{{item.create_at}}</span></p>
+						<p class="list_text">{{item.message}}</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var message = new Vue({
+			el:"#message",
+			data:{
+				data:{
+					
+				}
+			},
+			methods:{
+				get_data:function(){
+					var _self = this;
+					$.ajax({
+						type:"post",
+						data:{
+							data:{
+								
+							}
+						},
+						url:"/api/letter/list",
+						success:function(data){
+							_self.data = data.lists
+						}
+					});
+				}
+			},
+			updated() {
+			$(".message_list").click(function(){
+				if(!$(this).find("i").is(":hidden")){
+					$.ajax({
+						type:"post",
+						dataType:"json",
+						data:{
+							id:$(this).attr("data_id")
+						},
+						url:"/api/letter/read",
+						success:function(data){
+						}
+					})
+				}
+				window.location.href = "/m/message/details?id="+$(this).attr("data_id")
+			})
+			
+				
+			}
+			
+		})
+		
+		message.get_data()
+	</script>
+
+</html>

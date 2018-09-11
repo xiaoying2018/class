@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/index.css?v=201808311421">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Open/js/jqPaginator/jqPaginator.min.js"></script>
+    <script src="__PUBLIC__/Open/js/index.js"></script>
+</head>
+
+<body data-nav="open">
+    <include file="./Template/Open/View_header.html"/>
+    <div class="header marginTop">
+        <img src="__PUBLIC__/Open/images/bg.jpg" alt="">
+        <!-- <div class="container">
+            <img src="__PUBLIC__/Open/images/title.png" alt="" class="title">
+            <img src="__PUBLIC__/Open/images/women.png" alt="" class="women">
+        </div> -->
+    </div>
+    <div id="openclass" class="main">
+        <div class="choosePart">
+            <div class="clearfix mainC container">
+                <div class="left stitle">直播类型：</div>
+                <ul class="chooseUl a left">
+                    <li class="item active" @click="choose('livecate','')">全部</li>
+                    <li class="item" @click="choose('livecate',n.id)" v-for="(n,index) in cate['livecate']" :data-val="n.cate_name">{{n.cate_name}}</li>
+                </ul>
+            </div>
+            <div class="clearfix mainC container">
+                <div class="left stitle">直播内容：</div>
+                <ul class="chooseUl b left">
+                    <li class="item active" @click="choose('livecontent','')">全部</li>
+                    <li class="item" @click="choose('livecontent',n.id)" v-for="(n,index) in cate['livecontent']" :data-val="n.cate_name">{{n.cate_name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container contentPart clearfix">
+            <!-- <ul class="classUl">
+                <li class="classItem" v-for="n in classdata">
+                    <a :href="'/open/detail?id='+n.id" class="block_a">
+                        <img src="__PUBLIC__/Open/images/play.png" class="play" />
+                        <img :src="crm_domain+n.t_img_url" alt="" class="img">
+                    </a>
+                    <div class="inner">
+                        <p class="name" :title="n.names">{{n.names}}</p>
+                        <p class="line" :title="n.start_time">
+                            <span class="title">时间:</span>{{n.start_time}}
+                        </p>
+                        <p class="line" :title="n.teacher">
+                            <span class="title">讲师:</span>{{n.teacher}}
+                        </p>
+                        <p class="line" :title="n.timelength">
+                            <span class="title">时长:</span>{{n.timelength}}
+                        </p>
+                    </div>
+                    <section class="bottomFont">
+                        <div class="style_view-num">学习人数 {{n.studynum}}</div>
+                        <a :href="'/open/detail?id='+n.id" class="style_view-readmore">查看详情</a>
+                    </section>
+                </li>
+            </ul> -->
+            <div class="leftPart">
+                <ul class="listUk">
+                    <li class="listItem clearfix" v-for="n in classdata">
+                        <div class="imgDv">
+                            <a :href="'/open/detail?id='+n.id" class="block_a" target="_blank">
+                                <img :src="crm_domain+n.t_img_url" class="iom">
+                            </a>
+                            <i class="iconSee" @click="goOpenClassDetail(n)"></i>
+                        </div>
+                        <div class="leftFontMain">
+                            <a :href="'/open/detail?id='+n.id" class="block_a classTitle" target="_blank">{{n.names}}</a>
+                            <p class="classtime">时间：{{n.start_time}}</p>
+                            <div class="clearfix" style="margin-bottom:10px;">
+                                <p class="teacher left">讲师：{{n.teacher}}</p>
+                            </div>
+                            <div class="clearfix">
+                                <table class="info left">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                <font>{{n.timelength}}</font>
+                                            </td>
+                                            <td class="noborder">
+                                                <span>{{n.studynum}}</span>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>时长</td>
+                                            <td class="noborder">学习人数</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="gotoClassDv">
+                                    <a class="gotoClass" :href="'/open/detail?id='+n.id" target="_blank">查看详情</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="pageNav" id="jqPaginator"></div>
+            </div>
+            <include file="./Template/Open/View_commond.html"/>
+        </div>
+    </div>
+    <include file="./Template/Common/View_footer.html"/>
+</body>
+
+</html>

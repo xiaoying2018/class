@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>编辑资料</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/set.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/webuploader.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/animate.css" />
+	</head>
+
+	<body>
+		<div id="setting">
+
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x">
+						</i>
+					</a>
+					<span>编辑资料</span>
+					<a href="#"></a>
+				</div>
+
+			</header>
+			<div class="title_name">
+				<div id="uploader" class="wu-example">
+
+					<span>
+						<img   v-if="data.info.profile.headpic" :src="['/'+data.info.profile.headpic]"/>
+						<img class="header_img" v-else src="/Public/Mobile/img/head_img.png"  />
+						
+						<span v-if="data.info.profile.nickname == '网站注册用户'">{{data.info.code}}</span>
+					<span v-else-if="!data.info.profile.nickname">{{data.info.code}}</span>
+					<span v-else>{{data.info.profile.nickname}}</span>
+					</span>
+					<a href="javascript:void(0)" class="fa fa-pencil-square-o fa-lg" id="picker"></a>
+					<!--<div id="uploader" class="wu-example">
+						<div id="thelist" class="uploader-list"></div>
+						<div class="btns">
+							<div id="picker">选择文件</div>
+							<button id="ctlBtn" class="btn btn-default">开始上传</button>
+						</div>
+					</div>-->
+
+				</div>
+
+			</div>
+			<div class="set_content">
+				<ul class="content">
+					<li class="_title">基本信息</li>
+					<li><span>学号</span><input type="text" readonly="readonly" v-model="data.info.code" /></li>
+					<li v-if="data.info.realname == '网站注册用户'"><span>真实姓名</span><input type="text" id="realname" value="" /></li>
+					<li v-else><span>真实姓名</span><input type="text" id="realname" v-model="data.info.realname" /></li>
+					<li v-if="data.info.profile.nickname == '网站注册用户'"><span>昵称</span><input class="focus" type="text" id="nickname" value="" /></li>
+					<li v-else><span>昵称</span><input class="focus" type="text" id="nickname" v-model="data.info.profile.nickname" /></li>
+					<!--					<li><span>手机号</span><input class="focus" type="text" id="bind_mobile" v-model="data.info.bind_mobile" /></li>-->
+					<li><span>联系地址</span><input class="focus" type="text" id="address" v-model="data.info.profile.address" /></li>
+					<li><span>性别</span>
+						<select name="" id="sex" class="focus" v-model="data.info.profile.sex">
+							<option value="0">男</option>
+							<option value="1">女</option>
+						</select>
+					</li>
+					<li class="_sub"><button class="con_cancel">取消</button><button id="cont_sub">保存</button></li>
+				</ul>
+				<div class="email">
+					<p><span>绑定邮箱</span><input class="focus" type="email" id="_email" v-model="data.info.email" /> <button class="email_sub">绑定</button></p>
+				</div>
+
+				<div class="security">
+					<p class="_title">账户安全 </p>
+					<ul>
+						<li>
+							<p class="set_item item_phone"><i class="fa fa-mobile fa-2x"></i><span>绑定手机</span> <i class="fa fa-angle-down fa-lg"></i></p>
+							<ul class="security_item set_phone">
+								<li>
+									<span>手机</span>
+									<span class="_phones">
+									<span class="_sel1" id="interCode1">{{"+"+data.info.pre}}</span>
+									<input type="hidden" name="" id="_tel" v-model="data.info.profile.bind_mobile" />
+									<input class="focus" id="_phones1" v-model="data.info.mobile" />
+									</span>
+								</li>
+								<li><span>验证码</span><input class="focus" type="text" id="ph_code1" /> <button class="get_code1">获取验证码</button></li>
+
+								<li class="_sub"><button class="sec_cancel1">取消</button><button id="sec_sub1">保存</button></li>
+							</ul>
+						</li>
+						<li>
+							<p class="set_item item_pass"><i class="fa fa-key fa-lg"></i>密码修改 <i class="fa fa-angle-down fa-lg"></i></p>
+							<ul class="security_item set_pass">
+								<li>
+									<span>手机</span>
+									<span class="_phones">
+										<span class="_sel2" id="interCode2">{{"+"+data.info.pre}}</span> 
+										<input class="focus" id="_phones2" v-model="data.info.mobile" readonly="readonly" />
+									</span>
+								</li>
+								<li><span>验证码</span><input class="focus" type="text" id="ph_code2" /> <button class="get_code2">获取验证码</button></li>
+								<li><span>新密码</span><input class="focus" id="newpassword" type="password" /></li>
+								<li><span>确认密码</span><input class="focus" id="confirmPass" type="password" /></li>
+								<li class="_sub"><button class="sec_cancel2">取消</button><button id="sec_sub2">保存</button></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="out">
+					<a href="javascript:;">退出登录</a>
+				</div>
+			</div>
+			<div class="email_fixed">
+				<div>
+					<img src="/Public/Mobile/img/layer_close.png" />
+					<p><i class="fa fa-check-circle"></i>提示</p>
+					<a href="javascript:;">
+						邮件发送成功，<i>请立即前往您的邮箱激活 </i><br /> 激活成功后，可使用邮箱登录！
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="fixed_sel">
+			<div class="animated zoomIn">
+				<ul>
+					<p>如没有您所处的国家和地区，请联系我们的客服人员</p>
+					<li value="中国大陆 +86">中国大陆 +86</li>
+					<li value="中国香港  +852">中国香港 +852</li>
+					<li value="中国澳门 +853">中国澳门 +853</li>
+					<li value="中国台湾 +886">中国台湾 +886</li>
+					<li value="日本 +81">日本 +81</li>
+					<li value="韩国 +82">韩国 +82</li>
+					<li value="美国 +1">美国/加拿大 +1</li>
+					<li value="英国 +44">英国 +44</li>
+					<li value="法国 +33">法国 +33</li>
+					<li value="德国 +49">德国 +49</li>
+					<li value="意大利 +39">意大利 +39</li>
+					<li value="俄罗斯 +7">俄罗斯 +7</li>
+					<li value="西班牙 +34">西班牙 +34</li>
+					<li value="葡萄牙 +351">葡萄牙 +351</li>
+					<li value="澳大利亚 +61">澳大利亚 +61</li>
+					<li value="新西兰 +64">新西兰 +64</li>
+					<li value="新加坡 +65">新加坡 +65</li>
+					<li value="马来西亚 +60">马来西亚 +60</li>
+					<li value="瑞典 +46">瑞典 +46</li>
+				</ul>
+				<span class="_close"><img src="/Public/Mobile/img/layer_close.png"/></span>
+			</div>
+
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/webuploader.js"></script>
+	<script src="/Public/Mobile/js/jquery.cookie.js"></script>
+	<script>
+		var setting = new Vue({
+			el: "#setting",
+			data: {
+				data: {
+
+				}
+			},
+			methods: {
+				get_set: function() {
+					var _self = this
+					$.ajax({
+						type: "post",
+						url: "/api/student/info",
+						success: function(res) {
+							if(res.result == false) {
+								alert(res.msg)
+								window.location.href = "/m/login"
+							} else {
+								_self.data = res
+							}
+						}
+					});
+				},
+				con_cancel: function(a) {
+					a.fadeOut("fast")
+					$(".content input , .content select").blur();
+				},
+				con_sub: function(a) {
+					a.fadeOut("fast")
+					$(".content input , .content select").blur();
+					$.ajax({
+						type: "post",
+						url: "/api/profile/setting",
+						dataType: "json",
+						data: {
+							nickname: $("#nickname").val(),
+							//							bind_mobile: $("#bind_mobile").val(),
+							address: $("#address").val(),
+							sex: $("#sex").val(),
+						},
+						success: function(res) {
+
+						}
+					});
+				},
+				sec_cancel: function(a) {
+					a.animate({
+						height: 0
+					}, 200, function() {
+						a.hide()
+					})
+				},
+				sec_sub: function(a) {
+					a.animate({
+						height: 0
+					}, 200, function() {
+						a.hide()
+					})
+					if($("#_phones2").val() == "") {
+						alert("手机号格式不对！")
+					} else if($("#ph_code2").val() == "") {
+						alert("验证码不能为空！")
+					} else if($("#newpassword").val() == "" || $("#confirmPass").val() == "" || $("#confirmPass").val() == "") {
+						alert("密码格式不对！")
+					} else if($("#newpassword").val() != $("#confirmPass").val()) {
+						alert("两次密码输入不一致！")
+					} else {
+						$.ajax({
+							type: "post",
+							url: "/api/reset",
+							dataType: "json",
+							data: {
+								newtel: $("#_phones2").val(),
+								mescode: $("#ph_code2").val(),
+								newpasswd: $("#confirmPass").val(),
+								pre: $("#interCode2").text().split("+")[1],
+								changeway:"2"
+							},
+							success: function(res) {
+								if(res.status){
+									alert(res.message)
+								}else{
+									alert(res.message)
+								}
+							}
+
+						});
+					}
+
+				},
+				sec_sub_phone: function(a) {
+					a.animate({
+						height: 0
+					}, 200, function() {
+						a.hide()
+					})
+					if($("#_phones1").val() == "") {
+						alert("手机号格式不对！")
+					} else if($("#ph_code1").val() == "") {
+						alert("验证码不能为空！")
+					} else {
+						$.ajax({
+							type: "post",
+							url: "/api/changephonebycode",
+							dataType: "json",
+							data: {
+								tel:$("#_tel").val(),
+								newtel: $("#_phones1").val(),
+								mescode: $("#ph_code1").val(),
+								pre: $("#interCode1").text().split("+")[1]
+							},
+							success: function(res) {
+								if(res.status){
+									alert(res.message)
+								}else{
+									alert(res.message)
+								}
+							}
+
+						});
+					}
+
+				},
+				_animate: function(a) {
+					if(a.is(":hidden")) {
+						a.height("auto");
+						var _height = a.height() + "px";
+						a.height(0);
+						a.show()
+						a.animate({
+							height: _height
+						}, 200)
+					} else {
+						a.animate({
+							height: 0
+						}, 200, function() {
+							a.hide()
+						})
+
+					}
+				}
+			},
+			mounted() {
+				//取消个人信息设置
+				$(document).on('click', '.con_cancel', function() {
+					setting.con_cancel($(".content ._sub"))
+				})
+				//保存个人信息设置
+				$(document).on('click', '#cont_sub', function() {
+					setting.con_sub($(".content ._sub"))
+				})
+				//展开账号设置
+				$(document).on('click', ".security ._title", function() {
+					setting._animate($(".security>ul"))
+				})
+
+				//展开更改手机
+				$(document).on('click', ".security .item_phone", function() {
+					$(".security>ul").height("auto")
+					setting._animate($(".set_phone"))
+				})
+				//取消手机更改
+				$(document).on('click', ".sec_cancel1", function() {
+					setting.sec_cancel($(".set_phone"))
+				})
+				//保存手机更改
+				$(document).on('click', '#sec_sub1', function() {
+					setting.sec_sub_phone($(".set_phone"))
+				})
+
+				//展开密码修改
+				$(document).on('click', ".security .item_pass", function() {
+					$(".security>ul").height("auto")
+					setting._animate($(".set_pass"))
+				})
+				//取消密码修改
+				$(document).on('click', ".sec_cancel2", function() {
+					setting.sec_cancel($(".set_pass"))
+				})
+				//保存密码修改
+				$(document).on('click', '#sec_sub2', function() {
+					setting.sec_sub($(".set_pass"))
+				})
+
+				$(document).on('focus', '.content input , .content select', function() {
+					if($(".content ._sub").is(":hidden")) {
+						$(".content ._sub").fadeIn("fast")
+					}
+					$(this).css({
+						"color": "#333333"
+					})
+				}).blur(function() {
+					$(this).css({
+						"color": "#999999"
+					})
+				})
+				$(document).on('click', '.email', function() {
+					$("#_email").focus()
+					if($(".email_sub").is(":hidden")) {
+						$(".email_sub").fadeIn("fast")
+					}
+				})
+
+				$(document).on("click", ".email_sub", function() {
+					if($("#_email").val() != "") {
+						$.ajax({
+							type: "post",
+							dataType: "json",
+							data: {
+								email: $("#_email").val()
+							},
+							url: "/api/bindmail",
+							success: function(res) {
+								if(res.result) {
+									$(".email_fixed").fadeIn("fast")
+								} else {
+									alert("绑定失败")
+								}
+							}
+						});
+					} else {
+						alert("")
+					}
+
+				})
+
+				$(document).on("click", ".email_fixed", function() {
+					$(this).fadeOut("fast")
+				})
+				$(document).on('click', '.out', function() {
+					$.ajax({
+						type: "post",
+						url: "/api/logout",
+						success: function(data) {
+							forget()
+							window.location.href = "/m/login"
+						}
+					});
+				})
+
+				$(document).on("click", ".get_code1", function() {
+					get_code($("#_phones1"), "/api/sendallmessagecode ",$("#interCode1"), $(this))
+				})
+				$(document).on("click", ".get_code2", function() {
+					get_code($("#_phones2"), "/api/sendallmessagecode ",$("#interCode2"), $(this))
+				})
+
+			},
+			updated() {
+				//图片上传
+				uploader()
+
+				$(document).on("click", "._sel1", function() {
+					$(".fixed_sel").addClass("fixed_show");
+					$(".fixed_sel>div").addClass("zoomIn")
+				})
+
+				$(".fixed_sel").click(function() {
+					$(this).fadeOut("fast")
+					$(".fixed_sel>div").removeClass("zoomIn")
+					$(".fixed_sel").removeClass("fixed_show")
+				})
+
+				$(".fixed_sel li").click(function() {
+					$("._sel1").text("+" + $(this).text().split("+")[1])
+					$(".fixed_sel>div").removeClass("zoomIn")
+					$(".fixed_sel").removeClass("fixed_show")
+				})
+				
+				$("#_phones3").val($("#_phones1").val())
+			}
+
+		})
+
+		setting.get_set()
+
+		function uploader() {
+
+			// 初始化Web Uploader
+			var uploader = WebUploader.create({
+				// 选完文件后，是否自动上传。
+				auto: true,
+
+				// swf文件路径
+				swf: '/Public/Mobile/js/Uploader.swf',
+
+				// 文件接收服务端。
+				server: "/api/upload/headpic",
+
+				// 选择文件的按钮。可选。
+				// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				pick: {
+					id: "#picker",
+					multiple: false,
+				},
+				fileNumLimit: 1,
+				// 只允许选择图片文件。
+				accept: {
+					title: 'Images',
+					extensions: 'gif,jpg,jpeg,bmp,png',
+					mimeTypes: 'image/*'
+				},
+				duplicate: true,
+			});
+			uploader.on('uploadSuccess', function(file) {
+				setting.get_set()
+			});
+		}
+
+		function forget() {
+			$.cookie("rmbUser", "false", {
+				expire: -1
+			});
+			$.cookie("username", "", {
+				expires: -1
+			});
+			$.cookie("password", "", {
+				expires: -1
+			});
+		}
+
+		function get_code(a, b,d,c) {
+			if(a.val() != "") {
+				$.ajax({
+					type: "post",
+					url: b,
+					dataType: "json",
+					data: {
+						tel: a.val(),
+						pre:d.text().split("+")[1]
+					},
+					success: function(res) {
+						if(res.status) {
+							var num = 120;
+							c.attr('disabled', "true")
+							c.css({
+								"background": "#dbdbdb"
+							})
+							var timer = setInterval(function() {
+								num--;
+								if(num == -1) {
+									clearInterval(timer)
+									c.removeAttr("disabled")
+									c.css({
+										"background": "#FBD92E"
+									})
+									c.text("获取验证码");
+								} else {
+									c.text(num + "s");
+								}
+
+							}, 1000)
+						} else {
+							alert(res.message)
+						}
+					}
+
+				});
+			} else {
+				alert("手机格式不正确！")
+			}
+
+		}
+	</script>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/thanks.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body data-secnav="thanks" data-nav="case">
+    <include file="./Template/Open/View_header.html"/>
+    <include file="./Template/Cases/View_banner.html"/>
+    <div id="caseThanks" class="case">
+        <div class="container">
+            <ul class="list_Ul clearfix"></ul>
+        </div>
+        <ul id="caseLi" style="display: none;">
+            <li class="item_li" v-for="n in data">
+                <div class="imgDV" v-if="n.avatar != '0'" :data-large="'http://crm.xiaoying.net'+n.file">
+                    <div class="mainner">
+                        <img :src="'http://crm.xiaoying.net/'+n.mini_img" class="s_faceImg">
+                        <img src="" alt="" class="loadImg">
+                    </div>
+                    <div class="cover">
+                        <img src="__PUBLIC__/Case/img/see.png" class="see">
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="m_info">
+                        <p class="name">{{n.name}}</p>
+                        <p class="d_font">{{n.one}}</p>
+                    </div>
+                    <p class="hr"></p>
+                    <p class="des">{{n.content}}</p>
+                </div>
+            </li>
+        </ul>
+        <include file="./Template/Common/View_loading.html"/>
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/plugin/masonry.pkgd.min.js"></script>
+    <script src="__PUBLIC__/plugin/imagesloaded.pkgd.js"></script>
+    <script src="__PUBLIC__/Case/js/thanks.js?v=201807241450"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>小莺公开课</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/View_mdetail.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id="_detail">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>课程详情</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<div class="video_box">
+				<img v-if ="info.t_img_url" :src="data.crm_domain+info.t_img_url">
+				<img v-else src="/Public/Mobile/img/pic_img.png" />
+				<a v-if="info.playback_addr =='NEED_AUTH'" href="/m/login" class="menban"><img src="/Public/Mobile/img/menban.png" /></a>
+				<a v-else :href="info.playback_addr" class="menban"><img src="/Public/Mobile/img/menban.png" /></a>
+				<p class="video_title">{{info.names}}</p>
+			</div>
+			<div class="detail_text">
+				<p class="de_time">时间: {{info.start_time}}</p>
+				<p class="de_teacher">讲师: {{info.teacher}}</p>
+				<p class="de_number"><span>时长: {{info.timelength}}分钟</span><span>学习人数: {{info.studynum}}</span></p>
+			</div>
+			<div class="de_content">
+				<div class="de_tab">
+					<span class="active_tab">课程简介<i></i></span>
+					<span>上课方式<i></i></span>
+					<span>讲师介绍<i></i></span>
+				</div>
+				<div class="content_text">
+					<div v-html="info.content">
+						<div>{{info.content}}</div>
+					</div>
+					<div>{{info.classway}}</div>
+					<div>{{info.teacherdes}}</div>
+				</div>
+			</div>
+			<div class="footer">
+				<a href="javascript:;" onclick="_MEIQIA('showPanel')">在线咨询</a>
+				<a v-if="info.playback_addr =='NEED_AUTH'" href="/m/login">查看回放</a>
+				<a v-else :href="info.playback_addr">查看回放</a>
+			</div>
+			<input type="hidden" id="playback_addr" v-model="info.playback_addr" value=""/>
+		</div>
+		
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var _detail = new Vue({
+			el: "#_detail",
+			data: {
+				data: {},
+				info: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					var _id = getQueryString("id")
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						data: {
+							id: _id
+						},
+						url: "/api/open/detail",
+						success: function(res) {
+							_self.data = res
+							if(res.info.t_img_url != null &&  res.info.t_img_url.toString()[0] =="."){
+								res.info.t_img_url = res.info.t_img_url.toString().substring(1)
+							}
+							_self.info = res.info
+							console.log(res)
+						}
+					});
+				},
+				get_snumIncre:function(){
+					if($("#playback_addr").val() != "NEED_AUTH"){
+						var _id = getQueryString("id")
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						data: {
+							id: _id
+						},
+						url: "/api/open/snumIncre",
+						success: function(res) {
+						
+						}
+					});
+					}
+				}
+				
+			},
+			updated() {
+				$(".de_tab>span").click(function() {
+					if(!$(this).hasClass("active_tab")) {
+						$(".de_tab>span").removeClass("active_tab")
+						$(this).addClass("active_tab")
+						$(".content_text>div").hide()
+						$(".content_text>div").eq($(this).index()).fadeIn("fast")
+					}
+				})
+			}
+		})
+
+		_detail.get_data()
+		_detail.get_snumIncre()
+		function getQueryString(name, needdecoed) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var lh = window.location.search;
+			if(needdecoed) {
+				lh = decodeURI(window.location.search)
+			}
+			var r = lh.substr(1).match(reg);
+			if(r != null) return unescape(r[2]);
+			return "";
+		}
+		
+				//客服
+		(function(m, ei, q, i, a, j, s) {
+			m[i] = m[i] || function() {
+				(m[i].a = m[i].a || []).push(arguments)
+			};
+			j = ei.createElement(q),
+				s = ei.getElementsByTagName(q)[0];
+			j.async = true;
+			j.charset = 'UTF-8';
+			j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+			s.parentNode.insertBefore(j, s);
+		})(window, document, 'script', '_MEIQIA');
+		_MEIQIA('entId', 14353);
+		_MEIQIA('withoutBtn');
+	</script>
+
+</html>

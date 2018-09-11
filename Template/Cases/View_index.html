@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/index.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+</head>
+<body data-nav="case">
+    <include file="./Template/Open/View_header.html"/>
+    <div class="case_head marginTop">
+        <div class="case_head_con">
+            <img src="__PUBLIC__/Case/img/banner.png" class="banner">
+            <h4>案例中心</h4>
+            <p>TOP30名校录取人数遥遥领先</p>
+            <ul class="caseBlockUl container clearfix">
+                <li class="active">
+                    <a href="/case">
+                        <div class="statusDv">
+                            <div class="normalStatusDv">
+                                <div><img src="__PUBLIC__/Case/img/success_case_icon.png"></div>
+                                <p>成功案例</p>
+                            </div>
+                            <div class="lightStatusDv">
+                                <p>成功案例</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/case/thanks">
+                        <div class="statusDv">
+                            <div class="normalStatusDv">
+                                <div><img src="__PUBLIC__/Case/img/public_praise_icon.png"></div>
+                                <p>口碑墙</p>
+                            </div>
+                            <div class="lightStatusDv">
+                                <p>口碑墙</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="/case/admission">
+                        <div class="statusDv">
+                            <div class="normalStatusDv">
+                                <div><img src="__PUBLIC__/Case/img/case_data_icon.png"></div>
+                                <p>案例数据</p>
+                            </div>
+                            <div class="lightStatusDv">
+                                <p>案例数据</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="caseIndex" class="case">
+        <div class="container">
+            <div class="caseTitlePart">
+                <h4>成功案例<span></span></h4>
+                <h5>SUCCESSFUL CASES</h5>
+            </div>
+            <div class="choosePart">
+                <ul class="c_ul">
+                    <li :class="index == 0 ? 'active':''" v-for="(n,index) in choose" @click="tabChoose(n,event)" v-html="n.name"></li>
+                </ul>
+                <ul class="in_ul" v-show="s_choose.type">
+                    <li v-for="(n,index) in s_choose.type" v-html="n.name" @click="search(n,event)" :data-type="s_choose.name"></li>
+                </ul>
+            </div>
+        </div>
+        <ul class="list_Ul clearfix"> </ul>
+        <ul class="model_list clearfix " id="model_list" style="display: none;">
+            <li class="item_li" v-for="n in lists" >
+                <a :href="'/case/detail?id='+n.id" target="_blank">
+                    <img :src="n.head_file_path" class="faceImg">
+                    <!-- <img :src="'http://crm.xiaoying.net/'+n.head_file_path" class="faceImg"> -->
+                    <h3 v-html="n.names"></h3>
+                    <span><img src="__PUBLIC__/Case/img/case_school.png">{{n.receive_college}}</span>
+                    <h2>{{n.remark}}
+                        <img src="__PUBLIC__/Case/img/left_quote.png">
+                        <img src="__PUBLIC__/Case/img/right_quote.png">
+                    </h2>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <include file="./Template/Common/View_loading.html"/>
+    <include file="./Template/Common/View_footer.html"/>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/plugin/masonry.pkgd.min.js"></script>
+    <!-- <script src="__PUBLIC__/plugin/imagesloaded.pkgd.js"></script> -->
+    <script src="__PUBLIC__/Case/js/index.js"></script>
+</body>
+
+</html>

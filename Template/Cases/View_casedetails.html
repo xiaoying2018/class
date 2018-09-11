@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/casedetails.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+
+</head>
+
+<body data-nav="case">
+	<include file="./Template/Open/View_header.html"/>
+	<div id="casedetails">
+		<div class="headerGroup marginTop">
+	    	<div class="container">
+	    		<h3 class="title">SUCCESSFUL CASES 成功案例</h3>
+	    		<div class="buttonGroup">
+	    			<div class="choosePart">
+		                <ul class="c_ul">
+		                    <li :class="index == 0 ? 'active':''" v-for="(n,index) in choose" @click="tabChoose(n,event)" v-html="n.name"></li>
+		                </ul>
+		                <ul class="in_ul" v-show="s_choose.type">
+		                    <li v-for="(n,index) in s_choose.type" v-html="n.name" @click="search(n,event)" :data-type="s_choose.name"></li>
+		                </ul>
+		            </div>
+	    		</div>
+	    	</div>
+	    	<div class="greyLine"></div>
+	    </div>
+	    <div class="casedetailsGroup">
+	    	<div class="container clearfix" >
+	    		<div class="leftGroup">
+	    			<div class="studentInfoPart">
+	    				<div class="studentInfo">
+	    					<div>
+	    						<div>
+	    							<img :src="'http://crm.xiaoying.net/'+caseInfo.head_file_path" class="faceImg">
+	    						</div>
+	    						<div>
+	    							<ul class="studentInfoList">
+	    								<li>
+							                <span>学生姓名：<b>{{caseInfo.names}}</b></span>
+							                <span>日语水平：{{caseInfo.japan_language?caseInfo.japan_language:"暂无"}}</span>
+							                <!-- <span>申请结果：<b>成功</b></span> -->
+							                <span>入学时间：{{caseInfo.receive_year?caseInfo.receive_year:"暂无"}}</span>
+							            </li>
+							            <li>
+							                <span>学历：<b>{{caseInfo.education?caseInfo.education:"暂无"}}</b></span>
+							                <span>申请学校：<b>{{caseInfo.receive_college}}</b>
+							                </span>
+							            </li>
+							            <li>
+							                <span>国内毕业院校：{{caseInfo.undergraduate_college}}</span>
+							            </li>
+	    							</ul>
+	    						</div>
+	    					</div>
+	    				</div>
+	    			</div>
+					<!-- <div class="line"></div> -->
+
+	    			<div class="studentWordsPart">{{caseInfo.remark?caseInfo.remark:"暂无"}}</div>
+	    			<div class="line"></div>
+	    			<div class="teacherInfoPart">
+	    				<div class="teacherInfo">
+	    					<div><img src="http://xiaoying.net/files/user/2017/06-06/235619308d4e946883.png"></div>
+	    					<div>
+	    						<p>{{caseInfo.from_p}}</p>
+					            <p title="语言学校相关的各方面以及日本生活相关内容">擅长领域：<span>语言学校相关的各方面以及日本生活相关内容</span></p>
+					            <p class="sp" title="国内本科日语专业，在日本学的商学科。">专业背景：<span>国内本科日语专业，在日本学的商学科。国内本科日语专业，在日本学的商学科。国内本科日语专业，在日本学的商学科。国内本科日语专业，在日本学的商学科。国内本科日语专业，在日本学的商学科。国内本科日语专业，在日本学的商学科。</span></p>
+					            <p>
+                                <a href="javascript:;">联系顾问老师</a>
+                            </p>
+	    					</div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div class="rightGroup">
+	    			<include file="./Template/Common/hotActivities.html"/>
+					<div class="similarCasePart">
+						<h3 class="title">SIMILAR CASE 相似案例</h3>
+						<ul class="similarCaseList">
+							<li>
+								<a href="javascript:;" class="clearfix">
+									<div class="imgContainerDv">
+										<img class="careimg" src="http://showimage2.jpwind.com/2017-11-1/0.5970100916456431朱宇飞.jpg" >
+									</div>
+									<div class="font">
+										<h4>感谢小莺帮我完成留学...</h4>
+										<p class="content">首先我觉得小莺的宣传做的很好，经常在微博上看到，也有全首先我觉得小莺的宣传做的很好，经常在微博上看到，也有全</p>
+									</div>
+								</a> 
+							</li>
+						</ul>
+					</div>
+	    		</div>
+	    	</div>
+	    </div>
+	</div>
+    <include file="./Template/Common/View_footer.html"/>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Case/js/casedetails.js"></script>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>我的班级</title>
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/my_course.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+		
+	</head>
+
+	<body>
+		<div id="course">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>我的班级</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<ul class="my_course">
+
+				<li v-for="item in data">
+					<div class="course_content">
+						<div class="details">
+							<img class="course_img" :src="item.course_pic" />
+							<div>
+								<p class="course_title">{{item.course_name}}</p>
+								<p class="course_text"><span><i class="fa fa-clock-o"></i>上课时间：</span>{{item.start_day}}-{{item.end_day}}</p>
+								<p class="course_text"><span><i class="fa fa-weixin"></i>班主任老师：</span>{{item.headmaster}}</p>
+
+							</div>
+						</div>
+						<div class="synopsis">
+							<p class="course_text"><span><i class="fa fa-th"></i>课程简介：</span>{{item.course_detail}}</p>
+
+						</div>
+					</div>
+					<div class="progress">
+						<div class="progress_">
+							<p class="progress_bar"><i></i></p>
+							<span class="progress_num">{{parseInt((item.finished/item.section_total)*100)}}%</span>
+						</div>
+						<div class="course_but">
+							<!--['http://192.168.0.152/crm/'+item.file]-->
+							<a :href="['/m/course/hour?id='+item.period_id]" class="course_see">查看课节</a>
+							<a :href="['/m/course/hour?id='+item.period_id]" class="course_">进入教室</a>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var course = new Vue({
+			el: "#course",
+			data: {
+				data: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					var arry = [];
+					var finished = [];
+					var unfinished = [];
+					$.ajax({
+						type: "post",
+						url: "/api/student/info",
+						success: function(res) {
+							if(res.result == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+							_self.data = res.period
+							}
+						}
+					});
+				}
+			},
+			updated() {
+				for(var i = 0; i < $(".my_course>li").length; i++) {
+					var str = $(".my_course>li").eq(i).find(".progress_num").text();
+					$(".my_course>li").eq(i).find(".progress_bar>i").css({
+						"width": str
+					});
+
+				}
+			}
+
+		})
+
+		course.get_data()
+	</script>
+
+</html>

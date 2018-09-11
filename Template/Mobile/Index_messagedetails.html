@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>消息详情</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/message_details.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id="messagedetails">
+		<header class="header">
+			<div>
+				<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+				<span>消息详情</span>
+				<a href="javascript:void(0)"></a>
+			</div>
+
+		</header>
+		<div class="message">
+			<p class="message_title"><span>{{data.title}}</span><span>{{data.create_at}}</span></p>
+			<div class="message_text">{{data.message}}</div>
+		</div>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var message = new Vue({
+			el: "#messagedetails",
+			data: {
+				data: {
+
+				}
+			},
+			methods: {
+				get_data: function() {
+					var _id = getQueryString("id")
+					var _self = this;
+					$.ajax({
+						type: "post",
+						data: {
+							data: {
+
+							}
+						},
+						url: "/api/letter/list",
+						success: function(res) {
+							for (var i = 0; i < res.lists.length; i++) {
+								if(res.lists[i].id == _id){
+									var datas = res.lists[i]
+									_self.data = datas
+								}
+							}
+						}
+					});
+				}
+			}
+		})
+
+		message.get_data()
+		
+		
+function getQueryString(name, needdecoed) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var lh = window.location.search;
+    if (needdecoed) {
+        lh = decodeURI(window.location.search)
+    }
+    var r = lh.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+	</script>
+
+</html>

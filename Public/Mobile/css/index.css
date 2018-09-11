@@ -1,0 +1,284 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+i,
+a,
+li {
+  font-style: normal;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 10rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+  font-family: "微软雅黑";
+  background: white;
+}
+
+.header {
+  width: 100%;
+  background: #23c25f;
+}
+
+.header > div {
+  width: 92%;
+  margin: 0 auto;
+  height: 1.093333rem;
+  padding: 0.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header > div > a {
+  color: white;
+  font-size: 0.386667rem;
+}
+
+.header > div > a > i {
+  color: white;
+  padding-right: 0.5rem;
+}
+
+.header > div > span {
+  font-size: 0.48rem;
+  color: white;
+}
+
+.title_name {
+  width: 100%;
+  border-bottom: 0.16rem solid #ededed;
+  padding: 0.466667rem 0;
+}
+
+.title_name > div {
+  width: 92%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.title_name > div > span > img {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.title_name > div > span > span {
+  font-size: 0.373333rem;
+  margin-left: 0.533333rem;
+}
+
+.title_name > div > a {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #999999;
+}
+
+.class_hour {
+  width: 100%;
+  border-bottom: 0.16rem solid #ededed;
+  position: relative;
+}
+
+.class_hour > div {
+  width: 92%;
+  margin: 0 auto;
+}
+
+.class_hour > div > p {
+  padding: 0.533333rem 0;
+  font-size: 0.48rem;
+}
+
+.class_hour > div > p > i {
+  color: #23c25f;
+  margin-right: 0.266667rem;
+  vertical-align: middle;
+}
+
+.class_hour > div > ul > li:nth-last-of-type(1) {
+  border: none;
+}
+
+.class_hour > div .open_but {
+  padding: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.class_hour > div .open_but i {
+  color: #999999;
+}
+
+.class_hour .class_list {
+  width: 100%;
+}
+.class_hour .class_list >ul{
+	max-height: 6rem;
+	overflow-y: auto;
+}
+.class_hour .class_item {
+  width: 92%;
+  margin: 0 auto;
+
+  border-bottom: 0.026667rem solid #dbdbdb;
+}
+
+.class_hour .class_item .class_title {
+  font-size: 0.4rem;
+  margin: 0.4rem 0 0.2rem 0;
+  line-height: 2em;
+
+/*  color: #34495e;*/
+}
+
+.class_hour .class_item .class_content {
+  overflow: hidden;
+  line-height: 0.6rem;
+    padding-bottom: 0.3rem;
+}
+
+.class_hour .class_item .class_content .video {
+  color: #23c25f;
+  vertical-align: middle;
+  margin-right: 0.306667rem;
+}
+
+.class_hour .class_item .class_content .class_text {
+	width: 90%;
+  display: inline-block;
+  font-size: 0.35rem;
+  color: #999999;
+}
+.class_hour .class_item .class_content .class_text>i{
+	float: right;
+}
+.class_hour .class_item .class_content .class_but {
+  display: inline-block;
+  width: 1.6rem;
+  height: 0.666667rem;
+  line-height: 0.666667rem;
+  text-align: center;
+  font-size: 0.28rem;
+  color: #23C25F;
+  border: 0.026667rem solid #23c25f;
+  border-radius: 0.333333rem;
+  padding: 0 0.133333rem;
+  float: right;
+}
+
+.conter_list {
+  width: 100%;
+}
+
+.conter_list > li {
+  border-bottom: 0.16rem solid #ededed;
+  padding: 0.533333rem 0;
+}
+
+.conter_list > li > a {
+  width: 92%;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  font-size: 0.48rem;
+  color: #000000;
+}
+
+.conter_list > li > a > i {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.conter_list > li > a > span {
+  margin-left: 0.7rem;
+}
+
+.conter_list > li > a ._right {
+  right: 0;
+}
+
+.conter_list > li > a ._book {
+  color: #23c25f;
+  margin-right: 0.266667rem;
+}
+
+.conter_list > li > a .pink {
+  color: #8e44f1;
+}
+
+.conter_list > li > a .blue {
+  color: #5299f5;
+}
+
+.conter_list > li > a .yellow {
+  color: #f2c928;
+}
+
+.conter_list > li > a .red {
+  color: #ff3d55;
+}
+
+.conter_list > li > a .green {
+  color: #92df37;
+}
+
+.conter_list > li:nth-last-of-type(1) {
+  border: none;
+}
+
+.footer {
+  width: 92%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  padding: 0.4rem 0;
+}
+
+.footer > a {
+  color: #000000;
+  font-size: 0.386667rem;
+  text-align: center;
+}
+
+.footer > a > i {
+  display: block;
+  margin-bottom: 0.293333rem;
+}
+
+.footer > a .fa-paste {
+  color: #2ca8f0;
+}
+
+.footer > a .fa-file-text-o {
+  color: #21dad5;
+}
+
+.footer > a .fa-calculator {
+  color: #76d728;
+}
+
+/*# sourceMappingURL=index.css.map */

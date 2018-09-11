@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/admission.css">
+
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+
+
+</head>
+
+<body data-secnav="admission" data-nav="case">
+    <include file="./Template/Open/View_header.html"/>
+    <include file="./Template/Cases/View_banner.html"/>
+
+
+    <div class="case">
+        <!-- <div class="searchPart1 container">
+            <ul class="c_ul">
+                <li :class="index == 0 ? 'active':''" v-for="(n,index) in choose" @click="tabChoose(n,event)" v-html="n.name"></li>
+            </ul>
+            <ul class="in_ul" v-show="s_choose.item">
+                <li v-for="(n,index) in s_choose.item" v-html="n.name" @click="search(n,$event)" :data-type="s_choose.name"></li>
+            </ul>
+           
+        </div> -->
+        <!-- <div class="searchPart container">
+            <div class="inputDv">
+                <i class="searchicon"></i>
+                <input type="text" placeholder="按录取大学名称搜索" class="input">
+                <span>搜索</span>
+            </div>
+            <div class="clearfix line" v-for="n in choose">
+                <span class="contitle left">{{n.name}}:</span>
+                <ul class="chooseul left">
+                    <li class="conli" v-for="(i,index) in n.item" :class="i.classname"  @click="addtag(i,$event)">{{i.name}}</li>
+                </ul>
+            </div>
+            <div class="clearfix haschoose" v-if="haschoose.length > 0">
+                <span class="contitle left">已选分类:</span>
+                <ul class="chooseul left">
+                    <li class="item" v-for="n in haschoose" @click="deltag($event)">{{n.name}}</li>
+                </ul>
+            </div>
+        </div> -->
+        <div class="container main clearfix">
+            <div class="left tableDv" id="caseAdmission">
+                <div class="searchPart1">
+                    <ul class="c_ul">
+                        <li :class="index == 0 ? 'active':''" v-for="(n,index) in choose" @click="tabChoose(n,event)" v-html="n.name"></li>
+                    </ul>
+                    <ul class="in_ul" v-show="s_choose.item">
+                        <li v-for="(n,index) in s_choose.item" v-html="n.name" @click="search(n,$event)" :data-type="s_choose.name"></li>
+                    </ul>
+                   
+                </div>
+                <ul class="list_head clearfix">
+                    <li>学生</li>
+                    <li>毕业院校</li>
+                    <li>GPA</li>
+                    <li>托福-托业</li>
+                    <li>录取大学</li>
+                    <li>录取专业</li>
+                </ul>
+                <ul class="list_body"></ul>
+                <ul class="list_body_m" style="display: none;">
+                    <li class="list_item" v-for="n in lists">
+                        <span>{{n.name}}</span>
+                        <span>{{n.from_univ}}</span>
+                        <span>{{n.gpa}}</span>
+                        <span>{{n.score_en}}</span>
+                        <span>{{n.univ}}</span>
+                        <span>{{n.from_zhuan}}</span>
+                    </li>
+                </ul>
+                <div class="pageBox"></div>
+            </div>
+            <div class="right chartDv">
+                <include file="./Template/Common/hotActivities.html"/>
+                <include file="./Template/Common/rightAsideChart.html"/>
+            </div>
+
+        </div>
+    </div>
+    <include file="./Template/Common/View_loading.html"/>
+    <include file="./Template/Common/View_footer.html"/>
+    
+    <script src="__PUBLIC__/plugin/jquery.pagination.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/plugin/masonry.pkgd.min.js"></script>
+    <script src="__PUBLIC__/Case/js/admission.js"></script>
+
+</body>
+
+</html>

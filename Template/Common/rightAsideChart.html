@@ -1,0 +1,152 @@
+<link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/broadside.css">
+
+<div class="search_result" style="background:transparent">
+    <div class="row">
+        <div class="result_right">
+            <!-- svg矢量图形 -->
+            <div class="result_canvas" style="background:#fff">
+
+
+                <div id="main" style="width: 335px;height:325px;margin-left:-25px;"></div>                                  
+
+                <ul class="school_name side_school_name">
+                    
+                </ul>
+                
+                <a href="javascript:;" class="btn_measurement">测试以上学校录取率</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="__PUBLIC__/plugin/echarts.js"></script>
+<script type="text/javascript">
+        // 获取数据
+    function getSchoolCaseData(){
+        var SchoolCaseData = '';
+        $.ajax({
+            async: false,
+            url:'http://www.xiaoying.net/casecountlist',
+            dataType:'json',
+            type:'get',
+            success:function(res)
+            {
+                var html = '';
+                SchoolCaseData = res;
+        // 拼接数据
+                $.each(res,function(k,item){
+                    var c = (k < 3) ? 'colors' : '';
+
+                    html += "<li class='clearfix'>";
+                    html += "   <p class='name_left'>";
+                    html += "       <span class='"+c+"'>"+(parseInt(k)+1)+"</span>"+item.name;
+                    html += "   </p>";
+                    html += "   <p class='name_right'>";
+                    html += "       <span>"+item.value+"</span>个录取";
+                    html += "   </p>";
+                    html += "</li>";
+                })
+        // 将数据填充到页面上
+                $('.side_school_name').html(html);
+            }
+        })
+
+    // 返回学校的结果集  {value: "133", name: "早稻田大学"}
+        return SchoolCaseData;
+    }
+
+
+     // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        tooltip: {
+            trigger: 'item'
+        },
+        series: [{
+            name: '学校录取信息',
+            type: 'pie',
+            radius: ['45%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    formatter: "{b} : {c}" ,
+                    textStyle: {
+                        fontSize: '18',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: true
+                }
+            },
+            data: getSchoolCaseData()
+        },
+        {
+            name: 'radial gradient',
+            type: 'pie',
+            radius: '70%',
+            avoidLabelOverlap: false,
+            itemStyle: {
+                normal: {
+                    color: {
+                        type: 'radial',
+                        x: 0.5,
+                        y: 0.5,
+                        r: 0.5,
+                        colorStops: [{
+                            offset: 0,
+                            color: 'rgba(255,255,255,0)'
+                        }, {
+                            offset: 0.55,
+                            color: 'rgba(255,255,255,0.5)'
+                        }, {
+                            offset: 0.65,
+                            color: 'rgba(255,255,255,0.5)'
+                        }, {
+                            offset: 0.95,
+                            color: 'rgba(255,255,255,0)'
+                        }],
+                        globalCoord: false
+                    }
+                }
+            },
+            silent: true,
+            z: 999,
+        }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    //高亮图形 指定默认选中的
+    myChart.dispatchAction({
+        type: 'highlight',   //高亮显示配置
+        name:'早稻田大学'      //要显示的
+    });
+    function eachdata(pieData){
+        var optionData = option.series[0].data;
+        for(var i=0;i<optionData.length;i++){
+            optionData[i]["name"]==pieData.data["name"]?
+                myChart.dispatchAction({
+                    type: 'highlight',
+                    name:optionData[i]["name"]
+                }):myChart.dispatchAction({
+                    type: 'downplay',
+                    name:optionData[i]["name"]
+                });
+        }
+    }
+    myChart.on("mouseover",function(pieData){      //形参表示鼠标移进扇形的信息
+        eachdata(pieData);
+    });
+    myChart.on("mouseout",function(pieData){
+        eachdata(pieData);
+    });
+    </script>

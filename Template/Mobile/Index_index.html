@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/flatpickr.min.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+	<style>
+		.arrowUp,
+		.arrowDown {
+			display: none;
+		}
+		
+		.numInputWrapper {
+			display: inline-block;
+		}
+		
+		.flatpickr-wrapper {
+			width: 100% !important;
+			height: 3rem;
+			overflow: hidden;
+		}
+		
+		.numInputWrapper>input {
+			outline: none;
+			border: none;
+			width: 1rem;
+			font-size: 0.4rem;
+		}
+		
+		.flatpickr-calendar {
+			width: 100%;
+			border: none;
+		}
+		
+		.flatpickr-calendar.inline,
+		.flatpickr-months,
+		.flatpickr-innerContainer,
+		.flatpickr-rContainer {
+			max-width: 100%;
+			outline: none;
+		}
+		
+		.flatpickr-month {
+			max-width: 50%;
+			margin: 0 auto;
+		}
+		
+		.dayContainer {
+			text-align: start;
+		}
+		
+		.flatpickr-weekday {
+			width: 1rem !important;
+			height: 0.75rem !important;
+			margin: 0 0.214rem !important;
+			font-size: 0.4rem !important;
+		}
+		.cur-month{
+			font-size: 0.4rem;
+		}
+		
+		.flatpickr-months {
+			margin-bottom: 0.3rem;
+			height: 0.75rem;
+		}
+		
+		.flatpickr-weekdays {
+			margin-bottom: 0.1rem;
+		}
+		
+		.flatpickr-day {
+			width: 1rem;
+			margin: 0 0.214rem;
+			height: 1rem;
+			line-height: 1rem;
+			border-radius: 50%;
+			margin-bottom: 0.06rem;
+			outline: none;
+			font-size: 0.4rem;
+		}
+		
+		.flatpickr-day.today {
+			border: none;
+			position: relative;
+		}
+		
+		.flatpickr-day.today:before {
+			content: "";
+			display: inline-block;
+			width: 0.3em;
+			height: 0.3em;
+			background: #ff3d55;
+			position: absolute;
+			left: 50%;
+			bottom: 0.1rem;
+			border-radius: 50%;
+			transform: translateX(-50%);
+		}
+		
+		.flatpickr-calendar.arrowTop:before {
+			display: none;
+		}
+		
+		.flatpickr-next-month svg,
+		.flatpickr-prev-month svg {
+			padding: 0 0.4rem;
+		}
+		
+		.busy {
+			background: #23c25f;
+			color: white;
+		}
+	</style>
+
+	<body>
+		<div id="_index">
+			<header class="header">
+				<div>
+					<a href="javascript:;"onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>个人中心</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<div class="title_name">
+				<div>
+					<span v-if="data.info.profile.headpic"><img :src="['/'+data.info.profile.headpic]"/> 
+						<span v-if="data.info.profile.nickname == '网站注册用户'">{{data.info.code}}</span>
+						<span v-else > {{data.info.profile.nickname}}</span>
+					</span>
+					<span v-else ><img  src="/Public/Mobile/img/head_img.png" />
+						<span v-if="data.info.profile.nickname == '网站注册用户'">{{data.info.code}}</span>
+						<span v-else-if="!data.info.profile.nickname">{{data.info.code}}</span>
+						<span v-else > {{data.info.profile.nickname}}</span>
+					</span>
+					<a href="/m/set" class="fa fa-pencil-square-o fa-lg"></a>
+				</div>
+			</div>
+			<div class="class_hour">
+				<div>
+					<p><i class="fa fa-list-alt"></i>我的课表</p>
+				</div>
+				<input id="schedule" style="display: none;">
+				<div class="class_list">
+					<p class="open_but"><i class="fa fa-angle-down"></i></p>
+					<ul>
+						<li class="class_item" v-for="item in course" :data_time="item.start_time[0]">
+							<p class="class_title">{{item.start_time[0]}} | {{item.period_name}}</p>
+							<div class="class_content">
+								<i class="fa fa-video-camera video"></i>
+								<p class="class_text">{{item.section_name}}&nbsp;&nbsp;&nbsp;&nbsp;<i>{{item.start_time[1]}}-{{item.end_time[1]}}</i></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<ul class="conter_list">
+				<li>
+					<a href="/m/course"><i class="fa fa-book _book pink"></i><span>我的班级</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+				<li>
+					<a href="/m/apply"><i class="fa fa-street-view _book blue"></i><span>我的申请</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+				<li>
+					<a href="/m/seo"><i class="fa fa-bank _book red"></i><span>COE申请</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+				<li>
+					<a href="/m/visa"><i class="fa fa-id-card-o _book yellow"></i><span>签证办理</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+
+				<li>
+					<a href="/m/material"><i class="fa fa-file-text-o _book green"></i><span>我的材料</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+				<li>
+					<a href="/m/message"><i class="fa fa-inbox _book pink"></i><span>站内信</span><i class="fa fa-angle-right _right"></i></a>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/flatpickr.js"></script>
+	<script>
+		var _index = new Vue({
+			el: "#_index",
+			data: {
+				data: {},
+				course: {},
+				hour: {},
+				info: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					var arry = [];
+					var course = [];
+					var hour = [];
+					$.ajax({
+						type: "post",
+						url: "/api/student/info",
+						success: function(res) {
+							if(res.result == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+									_self.data = res;
+							$.each(res.schedule, function(k, v) {
+								hour.push(k)
+								_self.hour = hour;
+								$.each(v, function(j, m) {
+									arry.push(m)
+
+								});
+							});
+							$.each(arry, function(x, y) {
+								if(y.status == "1") {
+									y.end_time = y.end_time.split(" ");
+									y.start_time = y.start_time.split(" ")
+									course.push(y)
+									_self.course = course;
+								}
+							})
+							}
+						
+						}
+					});
+				}
+			},
+			updated() {
+
+				flatpickr("#schedule", {
+					inline: true,
+					static: true,
+					ariaDateFormat: "Y.m.d"
+				});
+				$(".open_but").click(function() {
+					if($(this).find("i").hasClass("fa-angle-down")) {
+						$(".flatpickr-wrapper").animate({
+							height: "8.42rem"
+						})
+						$(this).find("i").removeClass("fa-angle-down")
+						$(this).find("i").addClass("fa-angle-up")
+					} else {
+						$(".flatpickr-wrapper").animate({
+							height: "3rem"
+						})
+						$(this).find("i").removeClass("fa-angle-up")
+						$(this).find("i").addClass("fa-angle-down")
+					}
+
+				})
+				add_hour()
+				$(".flatpickr-next-month,.flatpickr-prev-month").click(function() {
+					add_hour()
+					_animate()
+				})
+				_animate()
+			}
+
+		})
+		_index.get_data()
+
+		function _animate() {
+			$(".class_item").eq(0).find(".class_title").css({
+					"color": "red"
+				})
+			
+			$(".flatpickr-day").click(function() {
+				$(".class_item").find(".class_title").css({
+					"color": "#333333"
+				})
+				var _height = $(".class_item").height()
+				var _time = $(this).attr("aria-label").replace(/\./g, "-")
+				for(var i = 0; i < $(".class_item").length; i++) {
+					if($(".class_item").eq(i).attr("data_time") == _time) {
+						$(".class_item").eq(i).find(".class_title").css({
+							"color": "red"
+						})
+						$(".class_list>ul").animate({
+							scrollTop:(i*_height)
+						}, 300)
+					}
+				}
+			})
+		}
+
+		function add_hour() {
+			for(var i = 0; i < $(".flatpickr-day").length; i++) {
+				$.each(_index.hour, function(k, v) {
+					if($(".flatpickr-day").eq(i).attr("aria-label") === v) {
+						$(".flatpickr-day").eq(i).addClass("busy")
+					}
+				});
+			}
+			$(".today").prevAll().removeClass("busy")
+		}
+	</script>
+
+</html>

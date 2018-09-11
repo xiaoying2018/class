@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>校内考-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/FreeClass/css/index.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+    <include file="./Template/Common/View_header_class.html" />
+    <div id="xiaonei">
+        <div class="banner marginTop">
+            <img src="../../Public/Common/img/banner/xiaonei_banner.jpg" alt="">
+        </div>
+        <div class="classpart">
+            <div class="titleDv" data-sr="enter top hustle 50px over 1s">
+                <p>
+                    热门校内考
+                </p>
+            </div>
+            <div class="container">
+                <div class="container s_result clearfix">
+                    <div class="left">全部资料&nbsp;&nbsp;共筛选到<span class="num">10</span>条资料</div>
+                    <div class="right">
+                        <input type="text" placeholder="请输入资料关键词">
+                        <div class="searchIcon">
+                            <img src="../../Public/DownLoad/img/search_icon.png" alt="" class="">
+                        </div>
+                    </div>
+                </div>
+                <div class="s_title">
+                    <img src="../../Public/Mall/img/s_xiushi.png" alt="">校内考
+                    <ul class="paixu">
+                        <li class="active">最新发布</li>
+                        <li>最多报名</li>
+                    </ul>
+                    <a href="">更多课程></a>
+                </div>
+                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                    <li class="li" v-for="n in lists">
+                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                            <div class="imgDv">
+                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+                            </div>
+                            <div class="inner">
+                                <h4 :title="n.name">{{n.name}}</h4>
+                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                    <br />{{n.teacher_name | filtername}}</p>
+                                <div class="detailinfo clearfix">
+                                    <div class="price">
+                                        立即报名
+                                    </div>
+                                    <div class="enroll">186人报名</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_footer.html" />
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/FreeClass/js/xiaonei.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>小莺公开课</title>
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<!-- flexible.js 建议做内联处理，请勿移动位置 -->
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<link rel="icon" href="__PUBLIC__/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/View_mindex.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/swiper.min.css" />
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id="_class">
+			<div class="header">
+				<a href="#">
+					<img class="logo" src="/Public/Mobile/img/logo2.png" />
+				</a>
+				<div v-if="profile.result" class="profile">
+					<a  href="/m/user" class="headpic">
+					<img v-if="pro_profile.profile.headpic" :src="pro_profile.profile.headpic"/>
+					<img v-else src="/Public/Mobile/img/head_img.png" />
+					</a>
+					<a href="javascript:;" class="h_out">退出</a>
+				</div>
+				<div  v-else>
+					<a href="/m/login">登录</a><i>|</i>
+					<a href="/m/register">注册</a>
+				</div>
+				
+
+			</div>
+			<div class="banner">
+				<img src="/Public/Mobile/img/asd.jpg" />
+			</div>
+			<div class="content">
+				<div  class="tab_box">
+				<div class="con_tab">
+					<span v-for=" tab in init.livecate" :data_id="tab.id">{{tab.cate_name}} <i></i></span>
+				</div>
+				</div>
+				<div class="_swiper">
+					<div class="_shadow">
+						<div class="swi">直播内容：</div>
+						<div class="swiper-container6 ">
+							<div class="swiper-wrapper condition">
+								<div class="swiper-slide" v-for="tab in init.livecontent" :data_id="tab.id">{{tab.cate_name}}</div>
+
+							</div>
+						</div>
+						<i></i>
+					</div>
+
+					<ul class="class_list">
+						<li v-for="item in data.lists">
+							<a :href="['/m/open/detail?id='+item.id]">
+								<p class="item_img">
+									<img v-if="item.t_img_url" :src="[data.crm_domain+item.t_img_url]" />
+									<img v-else src="/Public/Mobile/img/pic_img.png" />
+								</p>
+								<p class="item_title">{{item.names}}</p>
+								<p class="item_time">时间: {{item.start_time}}</p>
+								<p class="item_teacher">讲师: {{item.teacher}}</p>
+								<p class="item_deta"><span>{{item.timelength}}分钟</span><span>{{item.studynum}}人</span></p>
+							</a>
+						</li>
+					</ul>
+					
+				</div>
+				<div class="spinner"><i class="fa fa-spinner fa-pulse"></i>加载更多...</div>
+			</div>
+		</div>
+		<div class="footer">
+			<p>
+				<a href="tel:4000-150-170">热线电话：4000-150-170</a><br />小莺教育科技有限公司 苏ICP备17069390号</p>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/swiper.min.js"></script>
+	<script src="/Public/Mobile/js/jquery.cookie.js"></script>
+	<script>
+		var _page = 1;
+		var num = 1;
+		var _class = new Vue({
+			el: "#_class",
+			data: {
+				data: {},
+				init: {},
+				profile:{},
+				pro_profile:{}
+			},
+			methods: {
+				get_data: function(a, b, c) {
+					var _self = this;
+					$.ajax({
+						type: "post",
+						dataType: "json",
+						data: {
+							livecate: a,
+							livecontent: b,
+							page: c,
+							init: 1,
+							limit:6
+						},
+						url: "/api/open",
+						success: function(res) {
+							if(res.lists.length<6){
+								$(".spinner").text("没有更多了...")
+							}else{
+								
+								$(".spinner").fadeOut("fast")
+								$(".spinner").html('<i class="fa fa-spinner fa-pulse"></i>加载更多...')
+							}
+							for (var i = 0; i < res.lists.length; i++) {
+								if(res.lists[i].t_img_url != null && res.lists[i].t_img_url.toString()[0] =="."){
+									res.lists[i].t_img_url = res.lists[i].t_img_url.toString().substring(1)
+								}
+							}
+							_self.data = res;
+							_self.init = res._init
+						}
+					});
+			
+				},
+				get_profile:function(){
+					var _self_p = this;
+					$.ajax({
+						type:"post",
+						url:"/api/profile",
+						success:function(res){
+							_self_p.profile = res
+							if(res.info.profile.headpic != null && res.info.profile.headpic.toString()[0] =="."){
+								res.info.profile.headpic = res.info.profile.headpic.toString().substring(1)
+							}
+							_self_p.pro_profile = res.info
+						}
+					});
+				}
+				
+			},
+			mounted() {
+				$(document).on("click", ".con_tab>span", function() {
+					 num = 1
+					if(!$(this).hasClass("active_tab")) {
+						$(".con_tab>span").removeClass();
+						$(this).addClass("active_tab")
+
+					} else {
+						$(this).removeClass("active_tab")
+					}
+					var arry = [];
+					for(var i = 0; i < $(".active_condition").length; i++) {
+						arry.push($(".active_condition").eq(i).attr("data_id"))
+					}
+					_class.get_data($(".active_tab").attr("data_id"), arry, _page)
+				})
+
+				$(document).on("click", ".condition .swiper-slide", function() {
+					 num = 1
+					if(!$(this).hasClass("active_condition")) {
+						$(this).addClass("active_condition")
+					} else {
+						$(this).removeClass("active_condition")
+					}
+					var arry = [];
+					for(var i = 0; i < $(".active_condition").length; i++) {
+						arry.push($(".active_condition").eq(i).attr("data_id"))
+					}
+					_class.get_data($(".active_tab").attr("data_id"), arry, _page)
+				})
+				
+				$(document).on('click', '.h_out', function() {
+					$.ajax({
+						type: "post",
+						url: "/api/logout",
+						success: function(data) {
+							if(data.result){
+							forget()
+							window.location.href = "/m/login"	
+							}
+							
+						}
+					});
+				})
+			},
+
+			updated() {
+				$(window).scroll(function() {　　
+					var scrollTop = $(this).scrollTop();　　
+					var scrollHeight = $(document).height();　　
+					var windowHeight = $(this).height();　　
+					if(scrollTop + windowHeight == scrollHeight) {
+
+						if($(".class_list>li").length >= 6 * (num++)) {
+							
+							var _arry = [];
+							for(var i = 0; i < $(".active_condition").length; i++) {
+								_arry.push($(".active_condition").eq(i).attr("data_id"))
+							}
+							$(".spinner").show()
+							var timer = setTimeout(function(){
+									$.ajax({
+								type: "post",
+								dataType: "json",
+								data: {
+									livecate: $(".active_tab").attr("data_id"),
+									livecontent: _arry,
+									page: num,
+									init: 1,
+									limit:6
+								},
+								url: "/api/open",
+								success: function(res) {
+									if(res.result) {
+										if(res.lists.length<6){
+											$(".spinner").text("没有更多了...")
+										}else{
+											$(".spinner").fadeOut("fast")
+										}
+										
+										
+										for(var i = 0; i < res.lists.length; i++) {
+											if(res.lists[i].t_img_url != null && res.lists[i].t_img_url.toString()[0] =="."){
+												res.lists[i].t_img_url = res.lists[i].t_img_url.toString().substring(1)
+											}
+										_class.data.lists.push(res.lists[i])
+										}
+									}
+								}
+							});
+							},500)
+						
+						}　　
+
+					}
+				});
+				function tab_width(){
+					var _width = 0;
+					for (var i = 0; i < $(".con_tab>span").length; i++) {
+						_width +=  $(".con_tab>span").eq(i).width()+16
+					}
+					$(".con_tab").width(_width)
+					if($(".con_tab>span").length<=3){
+						$(".con_tab>span").css({
+							"float":"none",
+						})
+					}
+					
+				}
+				
+				tab_width()
+			},
+
+		})
+		_class.get_data("", "", _page)
+		_class.get_profile()
+		
+		function forget() {
+			$.cookie("rmbUser", "false", {
+				expire: -1
+			});
+			$.cookie("username", "", {
+				expires: -1
+			});
+			$.cookie("password", "", {
+				expires: -1
+			});
+		}
+		
+	</script>
+
+</html>

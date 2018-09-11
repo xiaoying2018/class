@@ -1,0 +1,67 @@
+@import url("../../Common/css/function.less");
+
+.hotActivitiesPart {
+	background-color: #fff;
+	overflow: hidden;
+    .border-radius(5px);
+    padding: 3.7% 5.65%;
+    // padding: 24px 28px;
+    margin-bottom: 30px;
+    .title {
+	    font-size: 18px;
+	    font-weight: 600;
+	    color: #474d58;
+	    padding-top: 30px;
+	    padding-bottom: 33px;
+	}
+	.hotActivitiesDv {
+		position: relative;
+
+		.arrow-left,
+		.arrow-right {
+			position:absolute;
+			top: 40%;
+			width: 40px;
+			height: 40px;
+			.transform(translateY(-50%));
+			z-index: 2;
+		}
+		.arrow-left {
+			left: 0;
+			background: url("../../Case/img/arrow_left.png") no-repeat 0 0;			
+			background-size: 40px auto;
+
+		}
+		.arrow-right {
+			right: 0;
+			background: url("../../Case/img/arrow_right.png") no-repeat 0 0;
+			background-size: 40px auto;
+
+		}
+		.swiper-container {
+			height: auto!important;
+			.swiper-wrapper {
+				height: auto!important;
+				.swiper-slide {
+					height: auto!important;
+					width: 100%;
+					a {
+						display: block;
+						img {
+							width: 100%!important;
+							height: 224px!important;
+						}
+						.fontNotice {
+							font-size: 14px;
+							color: #9f9f9f;
+							padding-top: 12px;
+							text-align: center;
+							line-height: 28px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}

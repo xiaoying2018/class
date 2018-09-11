@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>登录</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/sign_in.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+	</head>
+
+	<body>
+		<div class="banner">
+			<img src="/Public/Mobile/img/blogo.png" />
+		</div>
+		<div class="log_tab">
+			<span class="active_tab">账号登录 <i></i></span>
+			<span>短信登录 <i></i></span>
+		</div>
+		<div class="sign_in_form">
+			<div class="active_form">
+				<p><i class="fa fa-user-o fa-lg"></i><input id="username" type="text" placeholder="请输入手机号码/邮箱/学号" /></p>
+				<p class="pass"><i class="_key"><img src="/Public/Mobile/img/password.png"/></i><input type="password" id="password" placeholder="请输入密码" /></p>
+				<span class="remember"><i><img src="/Public/Mobile/img/k.png"/></i>记住密码</span>
+			</div>
+			<div>
+				<p class="tishi"></p>
+				<p><i class="fa fa-user-o fa-lg"></i><input id="username2" type="text" placeholder="请输入手机号码" /></p>
+				<p class="pass">
+					<i class="fa fa-sort-numeric-asc fa-lg"></i>
+					<input type="text" id="code2" placeholder="请输入验证码" />
+					<button class="log_code">获取验证码</botton>
+				</p>
+			</div>
+
+		</div>
+		<div class="sign_in_but">
+			登录
+		</div>
+
+		<div class="sign_up_but">
+			还没有账号？
+			<a href="/m/register">注册</a>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/jquery.cookie.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			function isWeiXin() {
+				var ua = window.navigator.userAgent.toLowerCase();
+				if(ua.match(/MicroMessenger/i) == 'micromessenger') {
+					return true;
+				} else {
+					if($.cookie("rmbUser") == "true") {
+						$(".remember>i").removeClass("fa-square-o")
+						$(".remember>i").addClass("fa-check-square-o");
+						$("#username").val($.cookie("username"));
+						$("#password").remove();
+						$(".pass").append("<input id='password' type='password'placeholder='请输入您的密码' class='txt2'/>");
+						$("#password").val($.cookie("password"));
+
+						$.ajax({
+							type: "post",
+							data: {
+								username: $("#username").val(),
+								password: $("#password").val()
+							},
+							url: "/api/login",
+							success: function(data) {
+								window.location.href = "/m/open"
+							}
+
+						});
+						return false;
+					}
+				}
+
+			}
+			isWeiXin()
+
+			$(".sign_in_form>div input").focus(function() {
+				$(".sign_in_form>div>p").removeClass("active_focus")
+				$(this).parent().addClass("active_focus")
+			}).blur(function() {
+				$(".sign_in_form>div>p").removeClass("active_focus")
+				$(this).parent().addClass("active_focus")
+				
+			})
+		});
+
+		$(".remember").click(function() {
+			if(!$(this).find("i").hasClass("check")) {
+				$(this).find("i").addClass("check")
+				$(".check>img").attr("src","/Public/Mobile/img/che.png")
+				remember()
+			} else {
+				$(this).find("i").removeClass("check")
+				$(this).find("i>img").attr("src","/Public/Mobile/img/k.png")
+				forget()
+			}
+
+		})
+
+		$(".sign_in_but").click(function() {
+			if($(".sign_in_form>div").eq(0).hasClass("active_form")) {
+				$.ajax({
+					type: "post",
+					data: {
+						username: $("#username").val(),
+						password: $("#password").val()
+					},
+					dataType:"json",
+					url: "/api/login",
+					success: function(data) {
+						if(data.result) {
+							window.location.href = "/m"
+						} else {
+							forget()
+							alert(data.msg)
+							$(".remember>i>img").attr("src","/Public/Mobile/img/k.png")
+						}
+					}
+				});
+			} else {
+				$.ajax({
+					type: "post",
+					data: {
+						tel: $("#username2").val(),
+						mescode: $("#code2").val()
+					},
+					dataType:"json",
+					url: "/api/loginbytel",
+					success: function(data) {
+						if(data.status) {
+							window.location.href = "/m"
+							// alert(data.msg)
+						} else {
+							forget()
+							// alert(data.msg)
+							$(".tishi").text(data.message)
+						}
+					}
+				})
+			}
+
+		})
+
+		function remember() {
+			var username = $("#username").val();
+			var password = $("#password").val();
+			$.cookie("rmbUser", "true", {
+				expires: 30
+			});
+			$.cookie("username", username, {
+				expires: 30
+			});
+			$.cookie("password", password, {
+				expires: 30
+			});
+		}
+
+		function forget() {
+			$.cookie("rmbUser", "false", {
+				expire: -1
+			});
+			$.cookie("username", "", {
+				expires: -1
+			});
+			$.cookie("password", "", {
+				expires: -1
+			});
+		}
+
+		$(".log_tab>span").click(function() {
+			if(!$(this).hasClass("active_tab")) {
+				$(".log_tab>span").removeClass()
+				$(".sign_in_form >div").hide()
+				$(this).addClass("active_tab")
+				$(".sign_in_form >div").removeClass()
+				$(".sign_in_form >div").eq($(this).index()).fadeIn("fast")
+				$(".sign_in_form >div").eq($(this).index()).addClass("active_form")
+			}
+		})
+		
+		$(".log_code").click(function(){
+			if($("#username2").val()!="" && $("#username2").val().length == 11){
+				$.ajax({
+					type:"post",
+					data:{
+						tel:$("#username2").val()
+					},
+					dataType:"json",
+					url:"/api/sendmessagecode",
+					success:function(res){
+						if(res.status){
+							alert(res.message)
+					var num = 120;
+                    $(".log_code").attr('disabled', "true")
+                    $(".log_code").css({
+                        "background": "#dbdbdb"
+                    })
+					var timer = setInterval(function () {
+                        num--;
+                        if (num == -1) {
+                            clearInterval(timer)
+                            $(".log_code").removeAttr("disabled")
+                            $(".log_code").css({
+                                "background": "#FBD92E"
+                            })
+                            $(".log_code").text("获取验证码");
+                        } else {
+                            $(".log_code").text(num + "s");
+                        }
+
+                    }, 1000)
+						}else{
+							alert(res.message)
+						}
+					}
+				})
+			}else{
+				alert("手机格式不正确！")
+			}
+
+		})
+	</script>
+
+</html>

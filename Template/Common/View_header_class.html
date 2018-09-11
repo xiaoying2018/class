@@ -1,0 +1,300 @@
+<link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+<link href="../../Public/plugin/select2/css/select2.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="__PUBLIC__/Common/css/class_header.css?v=1234">
+<script src="../../Public/plugin/select2/js/select2.min.js"></script>
+<script src="__PUBLIC__/main.js"></script>
+<script type='text/javascript'>
+(function(m, ei, q, i, a, j, s) {
+    m[i] = m[i] || function() {
+        (m[i].a = m[i].a || []).push(arguments)
+    };
+    j = ei.createElement(q),
+        s = ei.getElementsByTagName(q)[0];
+    j.async = true;
+    j.charset = 'UTF-8';
+    j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+    s.parentNode.insertBefore(j, s);
+})(window, document, 'script', '_MEIQIA');
+_MEIQIA('entId', 14353);
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?adb97d2c5a835681418c7b2bab31618a";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<style>
+    .btnngropu a{
+        background-color: #ffd900;
+        color: #000;
+        padding: 5px 16px;
+        background-color: #fff;
+        border-radius: 15px;
+    }
+    .btnngropu a:hover{
+        background-color: #ffd900;
+    }
+    .dd_img{
+            margin-left: -11px;
+    vertical-align: sub;
+    margin-right: 5px;
+    }
+</style>
+<div id="xy_header">
+	<div class="btnGroup" style="background-color: #585858;">
+		<div class="container">
+			<div class="areaDv">
+                <div class="areaBtn" style="color: #fff;">
+                    <div style="display: inline-block;" id="tiyan"><span class="areaIcon"  style="background-image: url('../../Public/Mall/img/telicon.png'); background-size: contain;"></span>全国体验中心 </div>
+                    <div style="display: inline-block;" id="guojia"><span class="areaIcon"  style="background-image: url('../../Public/Mall/img/global.png'); background-size: contain; margin-left: 10px;  margin-top: 1px;"></span>选择留学国家 </div>
+                </div>
+            </div>
+			<div class="loginPart" style="color: #fff; font-size: 14px; line-height: 40px;">
+				<img src="../../Public/Mall/img/tel_icon.png" alt="" style="vertical-align: middle;margin-right: 7px;">全国咨询热线：4000150170
+			</div>
+		</div>
+	</div>
+	<div class="navGroup">
+        <div class="head_effect">
+
+            <div class="searchGroup container copy">
+                <a href="/mall" class="logo" style="margin-top: 15px;"><img src="../../Public/Mall/img/logo.svg" style="width: 142px"></a>
+                <ul class="s_nav  clearfix" style="padding-right: 210px;">
+                    <li><a href="/mall" >首页</a></li>
+                    <li><a href="/Lessonintor" >课程体系</a></li>
+                    <li><a href="/teacher" >师资团队</a></li>
+                    <li><a href="/FreeClass" >公开课</a></li>
+                    <li><a href="/zhibo" >直播课</a></li>
+                    <li><a href="/xiaonei" >校内考</a></li>
+                    <li><a href="/baolu" >保录班</a></li>
+                    <li><a href="DownLoadCenter" >资料中心</a></li>
+                </ul>
+                <div class="btng" style="top: 28px;">
+                    <div v-show="!flag" class="btnngropu">
+                        <a href="/user/#/login?a=login" @click="setHref()">登录</a>
+                        <a href="/user/#/login?a=register" style=" background-color: #ffd900" @click="setHref()">注册</a>
+                    </div>
+                    <div :class="flag?'show':''" class="exitPart">
+                        <a class="username" href="/user/#/index" v-html="info.nickname"></a>
+                        <a href="javascript:;" class="signOut" @click="logout()">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;退出</a>
+                    </div>
+                </div>
+            </div>
+            <div class="searchGroup container t_main">
+                <div class="clearfix">
+                    <a href="/mall" class="logo" style="margin-top: -5px;"><img src="../../Public/Mall/img/logo.svg" style="width: 142px"></a>
+                    <div class="searchPart">
+                        <div>
+                            <input type="text" name="">
+                            <select class="select2">
+                                <option>课程</option>
+                                <option>资料</option>
+                            </select>
+                            <span class="searchBtn"><img src="../../Public/Common/search.png"></span>
+                        </div>
+                    </div>
+                    <div class="btng" style="top: 28px;">
+                        <div v-show="!flag" class="btnngropu">
+                            <a href="/user/#/login?a=login" @click="setHref()">登录</a>
+                            <a href="/user/#/login?a=register" style=" background-color: #ffd900" @click="setHref()">注册</a>
+                        </div>
+                        <div :class="flag?'show':''" class="exitPart">
+                            <a class="username" href="/user/#/index" v-html="info.nickname"></a>
+                            <a href="javascript:;" class="signOut" @click="logout()">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;退出</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+    <!-- 选择地区 -->
+    <div class="areaPart" id="a">
+        <div class="areaHeader clearfix">
+            <h3>选择城市：</h3>
+            <div class="closeImg">×</div>
+        </div>
+        <ul class="cityList clearfix">
+            <li>
+                <a class="backindex" href="http://xiaoying.net/" ><span data-hover="全国主站">全国主站</span></a>
+            </li>
+            <li v-for="n in cityList">
+                <a v-bind:href="n.link"  ><span v-bind:data-hover="n.name">{{n.name}}</span></a>
+            </li>
+        </ul>
+    </div>
+    <!-- 选择国家 -->
+    <div class="areaPart" id="b">
+        <div class="areaHeader clearfix">
+            <h3>选择城市：</h3>
+            <div class="closeImg">×</div>
+        </div>
+        <ul class="cityList clearfix">
+            <li>
+                <a href="javascript:;" ><span data-hover="日本"><img class="dd_img" src="../../Public/Mall/img/jp.png" alt="">日本</span></a>
+            </li>
+            <li>
+                <a href="javascript:;" ><span data-hover="韩国"><img class="dd_img" src="../../Public/Mall/img/kr.png" alt="">韩国</span></a>
+            </li>
+            <li>
+                <a href="javascript:;" ><span data-hover="新加坡"><img class="dd_img" src="../../Public/Mall/img/sin.png" alt="">新加坡</span></a>
+            </li>
+        </ul>
+    </div>
+    <div class="overlay_city"></div>
+
+</div>
+<script src="__PUBLIC__/tool.js"></script>
+<script type="text/javascript">
+
+    $(function() {
+        
+        var xy_header = new Vue({
+            el: '#xy_header',
+            data: {
+            	flag:false,
+            	info:{},
+                cityList: {}
+            },
+            methods: {
+                getInfo: function() {
+                	var _this = this;
+                	$.ajax({
+                        url:"/api/profile",
+                        type:"POST",
+                        datatype:"json",
+                        success:function(res){
+                        	if (res.result) {
+                    			_this.flag = true;
+                        		_this.info = res.info.profile;
+                                var _name = res.info.code
+                                if (res.info.profile.nickname != "" && res.info.profile.nickname != '网站注册用户') {
+                                    _name = res.info.profile.nickname
+                                }
+                                utily.setStore('xy_nickname',_name);
+                                _this.info.nickname = _name;
+                                var _headpic = res.info.profile.headpic;
+                                if (_headpic.length > 0) {
+                                    var _s = _headpic.substr(1,_headpic.length);
+                                    res.info.profile.headpic = _s
+                                    utily.setStore('xy_headpic',_s)
+                                }else{
+                                    utily.setStore('xy_headpic','')
+                                }
+
+                        	}
+                        	else if (!res.result || res.msg == '请先登录') {
+                    			_this.flag = false;
+                        	}
+                        }
+                	});
+                    
+                },
+                logout:function(){
+                	var _this = this;
+                	$.ajax({
+                        url:"/api/logout",
+                        type:"POST",
+                        datatype:"json",
+                        success:function(res){
+                        	if (res.result) {
+        						_this.flag = false;
+                        		utily.logout('refresh');
+                        	}
+                        }
+                	});
+                },
+                setHref:function(){
+                    utily.setStore('xy_logined_href',location.href)
+                },
+                getArea:function () {
+                    var _this = this;
+                    var settings = {
+                        "async": true,
+                        "crossDomain": true,
+                        "dataType":"json",
+                        "url": "http://cd.xiaoying.net/search_city",
+                        "method": "GET"
+                    }
+
+                    $.ajax(settings).done(function(res) {
+                        if (res && res.code == 200) {
+                            if (res.data.length > 0) {
+                                var _str = "";
+                                _this.cityList = res.data;
+                            }
+                        }
+                    });
+                },
+                change: function(){
+                    $(".navGroup").addClass("scrollDown");
+                    $(".searchPart input").focus();
+                }
+            },
+            mounted:function() {
+            	if (utily.getStore('xy_nickname') && utily.getStore('xy_headpic') != '') {
+            		this.info.nickname = utily.getStore('xy_nickname')
+            		this.info.headpic = utily.getStore('xy_headpic')
+        			this.flag = true;
+            	}else{
+                	// this.getInfo();
+            	}
+                    this.getInfo();
+
+                $('.select2').select2({
+                    width:'80px',
+    				minimumResultsForSearch: -1
+                    // closeOnSelect: false
+    		    });
+
+                this.getArea();
+
+                //点击城市
+                $(".areaBtn #tiyan").click(function(){
+                    $(".overlay_city").fadeIn();
+                    $("#a.areaPart").addClass("in");
+                });
+
+                $(".areaBtn #guojia").click(function(){
+                    $(".overlay_city").fadeIn();
+                    $("#b.areaPart").addClass("in");
+                }); 
+                $(".closeImg").click(function(){
+                    $(".overlay_city").hide();
+                    $(".areaPart").removeClass("in");
+                });
+
+                $('body [data-nav="'+ $('body').attr('data-nav')+'"]').addClass('active').siblings().removeClass('active');
+
+                function scroll( fn ) {  
+                    var beforeScrollTop = document.documentElement.scrollTop || document.body.scrollTop,  
+                        fn = fn || function() {};  
+                    window.addEventListener("scroll", function() {  
+                        var afterScrollTop = document.documentElement.scrollTop || document.body.scrollTop,  
+                            delta = afterScrollTop - beforeScrollTop;  
+                        if( delta === 0 ) return false;  
+                        fn( delta > 0 ? "down" : "up" );  
+                        beforeScrollTop = afterScrollTop;  
+                    }, false);  
+                }
+
+                scroll(function(direction) {
+                    var _temp = document.documentElement.scrollTop || document.body.scrollTop;
+                    if (direction == 'down' ) {
+                        if (_temp >= 130) {
+                            if (!$(".navGroup").hasClass("scrollDown")) {
+                                $(".navGroup").addClass("scrollDown");
+                            }
+                        }
+                    }else{
+                            $(".navGroup").removeClass("scrollDown");
+                    }
+                })
+                
+            }
+        });
+    })
+</script>

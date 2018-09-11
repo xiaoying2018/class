@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+i,
+a,
+li {
+  font-style: normal;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 10rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+  cursor: pointer;
+    background: white;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.header {
+  width: 100%;
+  background: #23c25f;
+}
+
+.header > div {
+  width: 92%;
+  margin: 0 auto;
+  height: 1.093333rem;
+  padding: 0.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header > div > a {
+  padding-right: 0.5rem;
+  color: white;
+  font-size: 0.386667rem;
+}
+
+.header > div > a > i {
+  color: white;
+}
+
+.header > div > div {
+  width: 4.533333rem;
+  margin-left: 0.5rem;
+  font-size: 0.48rem;
+  color: white;
+}
+
+.header > div > div > span {
+  display: inline-block;
+  margin-right: 0.533333rem;
+  position: relative;
+}
+
+.header > div > div > span > i {
+  display: none;
+  width: 0.64rem;
+  height: 0.08rem;
+  background: white;
+  border-radius: 2.666667rem;
+  position: absolute;
+  bottom: -0.133333rem;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.header > div > div > span:nth-of-type(2) {
+  margin-right: 0;
+}
+
+.header > div > div .active_but > i {
+  display: inline-block !important;
+}
+
+.material_list {
+  width: 9.2rem;
+  margin: 0 auto;
+  padding: 0.533333rem 0;
+  border-bottom: 0.026667rem solid #efefef;
+}
+
+.material_list .material_title {
+  border-left: 0.053333rem solid #46C37B;
+  margin-bottom: 0.266667rem;
+  position: relative;
+}
+
+.material_list .material_title > span:nth-of-type(1) {
+  display: inline-block;
+  padding-left: 0.266667rem;
+  font-size: 0.426667rem;
+  color: #333333;
+  width: 6.666667rem;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.material_list .material_title > span:nth-of-type(2) {
+  font-size: 0.373333rem;
+  color: #46C37B;
+  float: right;
+}
+
+.material_list .material_title .download {
+  font-size: 0.373333rem;
+  color: #46C37B;
+  float: right;
+  padding: 0.2rem 0.266667rem;
+  border: 0.026667rem solid #46C37B;
+  border-radius: 0.106667rem;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: #46C37B;
+}
+
+.material_list .material_text {
+  font-size: 0.426667rem;
+  color: #999999;
+}
+
+.material_item {
+  display: none;
+}
+
+.delete_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.delete_box > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 7.2rem;
+  height: 3.36rem;
+  background: #FFFFFF;
+  border-radius: 0.16rem;
+}
+
+.delete_box > div > p:nth-of-type(1) {
+  font-size: 0.426667rem;
+  color: #000000;
+  text-align: center;
+  line-height: 0.586667rem;
+  margin-top: 0.426667rem;
+  margin-bottom: 0.266667rem;
+}
+
+.delete_box > div > p:nth-of-type(2) {
+  font-size: 0.373333rem;
+  color: #666666;
+  line-height: 0.48rem;
+  text-align: center;
+  margin-bottom: 0.426667rem;
+}
+
+.delete_box > div .confirm_but {
+  border-top: 0.026667rem solid rgba(0, 0, 80, 0.15);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.delete_box > div .confirm_but > span {
+  display: inline-block;
+  font-size: 0.426667rem;
+  line-height: 0.586667rem;
+  width: 3.573333rem;
+  height: 1.146667rem;
+  line-height: 1.146667rem;
+  text-align: center;
+}
+
+.delete_box > div .confirm_but > span:nth-of-type(1) {
+  border-right: 0.026667rem solid rgba(0, 0, 80, 0.15);
+  color: #999999;
+}
+/*# sourceMappingURL=material.css.map */

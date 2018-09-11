@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>我的申请</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/apply.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/webuploader.css" />
+	</head>
+
+	<body>
+		<div id="apply">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>我的申请</span>
+					<a href="javascript:void(0)"></a>
+				</div>
+
+			</header>
+			<ul v-for="(project,key) in datas.data">
+				<li class="apply_list">
+					<p>
+						<span class="_list_title">{{project.project_name}}</span>
+						<span v-if="project.status =='未提交'" class="apply_state fail">{{project.status}}</span>
+						<span v-else-if="project.status =='初审中'" class="apply_state applying">{{project.status}}</span>
+						<span v-else-if="project.status =='初审失败'" class="apply_state fail">{{project.status}}</span>
+						<span v-else-if="project.status =='邮寄中'" class="apply_state applying">{{project.status}}</span>
+						<span v-else-if="project.status =='邮寄异常'" class="apply_state fail">{{project.status}}</span>
+						<span v-else class="apply_state success">{{project.status}}</span>
+
+					</p>
+					<div class="apply_details">
+						<p>
+							<span>申请日期:</span>
+							<span>{{project.create_time}}</span>
+						</p>
+						<p>
+							<span>通过日期:</span>
+							<span>{{project.offer_time}}</span>
+						</p>
+					</div>
+					<div class="apply_but">
+						<span class="apply_check" :data_num="key">查看所需材料</span>
+						<div class="apply_sub">
+							<div class="uploader" class="wu-example">
+								<!--用来存放文件信息-->
+								<div class="btns">
+									<div :create_time ="project.create_time" :cate_id="project.cate_id" :program_id = "project.id" :student_id = "project.student_id"class="picker">提交材料</div>
+								</div>
+							</div>
+						</div>
+						<!--<span class="apply_sub">提交材料</span>-->
+					</div>
+				</li>
+			</ul>
+			<div class="required_materials">
+				<div v-for="project in datas.data">
+					<p>
+						<span class="back">返回</span>
+						<span class="">请提交所需材料</span>
+						<span></span>
+					</p>
+					<ul>
+						<li v-for="material in project.materials">{{material.name}}</li>
+
+					</ul>
+					<div class="check_but">
+						<a href="material.html">查看样本</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="apply_uploader-list">
+			<div class="list_item">
+				<div id="thelist" class="uploader-list"></div>
+				<div class="uploader_but">确认</div>
+			</div>
+			<input id = "program_id" type="hidden" value="" />
+			<input id = "cate_id" type="hidden" value="" />
+			<input id="student_id" type="hidden" value="" />
+			<input id="create_time" type="hidden" value="" />
+			<input id="files" type="hidden" value="" />
+		</div>
+
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/webuploader.js"></script>
+	<script>
+		var files = [];
+		
+		
+		//返回
+		$("body").on("click", ".back", function() {
+			$(".required_materials").fadeOut("fast")
+		})
+		//查看
+		$("body").on("click", ".apply_check", function() {
+			$(".required_materials>div").hide();
+			$(".required_materials>div").eq($(this).attr("data_num")).show();
+			$(".required_materials").fadeIn("fast")
+
+		})
+		//点击空白
+		$("body").on("click", ".required_materials", function() {
+			$(this).fadeOut("fast")
+
+		})
+		$("body").on("click", ".required_materials >div", function(event) {
+			event.stopPropagation()
+		})
+		$(".uploader_but").click(function() {
+			$(".apply_uploader-list").fadeOut("fast")
+			$("#thelist").html("")
+		})
+
+		var apply = new Vue({
+			el: "#apply",
+			data: {
+				datas: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					$.ajax({
+						type: "post",
+						url: "/api/myapply",
+						dataType: "json",
+						data: {
+							s_id: "",
+							tag: 1,
+						},
+
+						success: function(res) {
+							if(res.status == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+							//							_self.datas = res
+							for(var i = 0; i < res.data.length; i++) {
+								res.data[i].create_time = _self._time(res.data[i].create_time)
+								res.data[i].offer_time = _self._time(res.data[i].offer_time)
+							}
+							_self.datas = res
+							}
+						}
+					});
+
+				},
+				_time: function(unixTime) {
+					var time = new Date(unixTime * 1000);
+					var ymdhis = "";
+					ymdhis += time.getUTCFullYear() + "-";
+
+					if(time.getUTCMonth() + 1 < 10) {
+						ymdhis += ("0" + (time.getUTCMonth() + 1)) + "-"
+					} else {
+						ymdhis += (time.getUTCMonth() + 1) + "-";
+					}
+
+					ymdhis += time.getUTCDate();
+					return ymdhis;
+				},
+
+			},
+			updated() {
+				$(".picker").click(function(){
+					files = []
+					$("#cate_id").val($(this).attr("cate_id"))
+					$("#program_id").val($(this).attr("program_id"))
+					$("#student_id").val($(this).attr("student_id"))
+				})
+				uploader()
+				
+			}
+		})
+		apply.get_data()
+
+		function uploader() {
+			
+			// 初始化Web Uploader
+			var uploader = WebUploader.create({
+				// 选完文件后，是否自动上传。
+				auto: true,
+
+				// swf文件路径
+				swf: 'js/Uploader.swf',
+
+				// 文件接收服务端。
+				server: "http://crm.xiaoying.net/index.php/api/stuupload",
+
+				// 选择文件的按钮。可选。
+				// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				pick: '.picker',
+
+				// 只允许选择图片文件。
+				//			accept: {
+				//				title: 'Images',
+				//				extensions: 'gif,jpg,jpeg,bmp,png',
+				//				mimeTypes: 'image/*'
+				//			}
+				duplicate:true 
+			});
+
+			uploader.on('fileQueued', function(file) {
+				var $li = $(
+						'<div id="' + file.id + '" class="file-item thumbnail">' +
+						'<img>' +
+						'<div class="info">' + file.name + '</div>' +
+						'</div>'
+					),
+					$img = $li.find('img');
+
+				// $list为容器jQuery实例
+				$("#thelist").append($li);
+
+				// 创建缩略图
+				// 如果为非图片文件，可以不用调用此方法。
+				// thumbnailWidth x thumbnailHeight 为 100 x 100
+				//			uploader.makeThumb(file, function(error, src) {
+				//				if(error) {
+				//					$img.replaceWith('<span>不能预览</span>');
+				//					return;
+				//				}
+				//
+				//				$img.attr('src', src);
+				//			}, 100, 100);
+			});
+
+			// 文件上传过程中创建进度条实时显示。
+			uploader.on('uploadProgress', function(file, percentage) {
+				var $li = $('#' + file.id),
+					$percent = $li.find('.progress span');
+
+				// 避免重复创建
+				if(!$percent.length) {
+					$percent = $('<p class="progress"><span></span></p>')
+						.appendTo($li)
+						.find('span');
+				}
+
+				$percent.css('width', percentage * 100 + '%');
+			});
+
+			// 文件上传成功，给item添加成功class, 用样式标记上传成功。
+			uploader.on('uploadSuccess', function(file) {
+				$(".apply_uploader-list").fadeIn("fast")
+				$('#' + file.id).addClass('upload-state-done');
+				$('#' + file.id).append(
+					"<div>上传完成</div>"
+				)
+			});
+
+			// 文件上传失败，显示上传出错。
+			uploader.on('uploadError', function(file) {
+				var $li = $('#' + file.id),
+					$error = $li.find('div.error');
+
+				// 避免重复创建
+				if(!$error.length) {
+					$error = $('<div class="error"></div>').appendTo($li);
+				}
+
+				$error.text('上传失败');
+			});
+
+			// 完成上传完了，成功或者失败，先删除进度条。
+			uploader.on('uploadComplete', function(file) {
+				//			$('#' + file.id).find('.progress').remove();
+			});
+			
+			uploader.on('uploadSuccess', function (file, response) {
+   					 var imgurl = response._raw; //上传图片的路径
+   					 var _url =JSON.parse(imgurl).data;
+
+   					 files.push(_url)
+   					 
+
+			})
+		}
+		$(".uploader_but").click(function(){
+			$.ajax({
+				type:"post",
+				url:"/api/stuaddmaterials",
+				dataType: "json",
+				data:{
+					files:files,
+					cate_id:$("#cate_id").val(),
+					program_id:$("#program_id").val(),
+					student_id:$("#student_id").val()
+				},
+				success:function(){
+				}
+			});
+		})
+	</script>
+
+</html>

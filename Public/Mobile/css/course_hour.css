@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+i,
+a,
+li {
+  font-style: normal;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 10rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+  background: white;
+}
+
+.header {
+  width: 100%;
+  background: #23c25f;
+}
+
+.header > div {
+  width: 92%;
+  margin: 0 auto;
+  height: 1.093333rem;
+  padding: 0.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header > div .fa-question-circle-o {
+  font-size: 2em !important;
+}
+
+.header > div > a {
+  color: white;
+  font-size: 0.386667rem;
+}
+
+.header > div > a > i {
+  color: white;
+  padding-right: 0.5rem;
+}
+
+.header > div > span {
+  margin-left: 0.5rem;
+  font-size: 0.48rem;
+  color: white;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 4rem;
+}
+
+.green {
+  color: #23c25f;
+}
+
+.course_list {
+  width: 100%;
+}
+
+.course_list .list_tab {
+  border-bottom: 0.16rem solid #ededed;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.course_list .list_tab > span {
+  float: left;
+  width: 50%;
+  height: 1.293333rem;
+  line-height: 1.293333rem;
+  border-bottom: 0.04rem solid white;
+  display: inline-block;
+  text-align: center;
+  color: #999999;
+  cursor: pointer;
+}
+
+.course_list .list_tab .active_tab {
+  border-color: #23c25f !important;
+  color: #000000 !important;
+}
+
+.course_list .list > div {
+  display: none;
+}
+
+.course_list .list > div:nth-of-type(1) {
+  display: block;
+}
+
+.course_list .course_item {
+  width: 100%;
+  border-bottom: 0.16rem solid #ededed;
+}
+
+.course_list .course_item > ul {
+  width: 92%;
+  margin: 0 auto;
+}
+
+.course_list .course_item > ul > li:nth-last-of-type(1) {
+  border: none;
+}
+
+.course_list .course_item .list_title {
+  width: 92%;
+  margin: 0 auto;
+  font-size: 0.4rem;
+  font-weight: bold;
+  padding: 0.426667rem 0;
+  border-bottom: 0.026667rem solid #EEEEEE;
+}
+
+.course_list .course_item .list_title > i {
+  margin-right: 0.333333rem;
+}
+
+.course_list .course_item .item_text {
+  font-size: 0.4rem;
+  padding-top: 0.413333rem;
+}
+
+.course_list .course_item .item_text .left {
+  margin-right: 0.173333rem;
+  color: #DBDBDB;
+  vertical-align: text-bottom;
+}
+
+.course_list .course_item .item_text ._right {
+  float: right;
+  color: #999999;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+
+.course_list .course_item .course_but {
+  display: none;
+  height: 0;
+  cursor: pointer;
+}
+
+.course_list .course_item .course_but > div {
+  margin-top: 0.4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.course_list .course_item .course_but > div > a {
+  display: inline-block;
+  width: 2rem;
+  height: 0.666667rem;
+  text-align: center;
+  line-height: 0.666667rem;
+  border: 0.026667rem solid #23C25F;
+  border-radius: 0.04rem;
+  color: #23C25F;
+}
+
+.course_list .course_item .course_but > ul {
+  margin-left: 0.533333rem;
+  margin-top: 0.2rem;
+}
+
+.course_list .course_item .course_but > ul > li {
+  color: #999999;
+  margin-bottom: 0.2rem;
+}
+
+.course_list .course_item .course_but_open {
+  display: block;
+}
+
+.course_list .item_content {
+  border-bottom: 0.026667rem solid #EEEEEE;
+  padding-bottom: 0.466667rem;
+  cursor: pointer;
+}
+.finished_title{
+	display: inline-block;
+	width: 6rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	vertical-align: middle;
+}
+.signin_status{
+	    background-color: rgba(64,158,255,.1);
+    padding: 0 0.26rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    font-size: 0.32rem;
+    color: #409eff;
+    border-radius: 0.1rem;
+    box-sizing: border-box;
+    border: 0.026rem solid rgba(64,158,255,.2);
+    white-space: nowrap;
+}
+/*# sourceMappingURL=course_hour.css.map */

@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+i,
+a,
+li {
+  font-style: normal;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  width: 10rem;
+  margin: 0 auto;
+  overflow-x: hidden;
+    background: white;
+}
+
+.header {
+  width: 100%;
+  background: #23c25f;
+}
+
+.header > div {
+  width: 92%;
+  margin: 0 auto;
+  height: 1.093333rem;
+  padding: 0.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header > div > a {
+  padding-right: 0.5rem;
+  color: white;
+  font-size: 0.386667rem;
+}
+
+.header > div > a > i {
+  color: white;
+}
+
+.header > div > span {
+  margin-left: 0.5rem;
+  font-size: 0.48rem;
+  color: white;
+}
+
+.message_list {
+  width: 9.2rem;
+  padding: 0.533333rem 0;
+  margin: 0 auto;
+  overflow: hidden;
+  border-bottom: 0.026667rem solid #efefef;
+  cursor: pointer;
+}
+
+.message_list .list_img {
+  width: 1.106667rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  position: relative;
+  float: left;
+}
+
+.message_list .list_img > i {
+  z-index: 9;
+  position: absolute;
+  top: -0.106667rem;
+  right: -0.106667rem;
+  display: inline-block;
+  width: 0.213333rem;
+  height: 0.213333rem;
+  border-radius: 50%;
+  background: #E64340;
+}
+
+.message_list .list_img > img {
+  width: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message_list .message_content {
+  float: left;
+  margin-left: 0.4rem;
+}
+
+.message_list .message_content .list_title {
+  width: 7.546667rem;
+  margin-bottom: 0.16rem;
+}
+
+.message_list .message_content .list_title > span:nth-of-type(1) {
+  width: 3.8rem;
+  display: inline-block;
+  font-size: 0.426667rem;
+  color: #333333;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.message_list .message_content .list_title > span:nth-of-type(2) {
+  font-size: 0.373333rem;
+  color: #999999;
+  float: right;
+}
+
+.message_list .message_content .list_text {
+  width: 7.546667rem;
+  font-size: 0.373333rem;
+  color: #999999;
+  white-space: nowrap;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/*# sourceMappingURL=message_list.css.map */

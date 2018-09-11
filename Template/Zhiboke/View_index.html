@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>直播课-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/FreeClass/css/index.css">
+    <link rel="stylesheet" href="__PUBLIC__/FreeClass/css/zhibo.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+    <include file="./Template/Common/View_header_class.html" />
+    <div id="zhibo" class="marginTop">
+        <div class="banner">
+            <img src="./../Public/Common/img/banner/zhibo_banner.jpg" alt="">
+            <div class="container">
+                <p class="banner_a">网络直播课</p>
+                <p class="banner_b">提升自己的专业学习能力，真正为进入大学学习<br />打好基础</p>
+                <a href="javascript:;" class="zixun" onclick="_MEIQIA('showPanel')">
+                    <img src="../../Public/Common/img/zixun.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="classpart">
+            <div class="titleDv" data-sr="enter top hustle 50px over 1s">
+                <p>
+                    热门直播课<br /><span>海量免费直播课寓教寓乐</span>
+                </p>
+            </div>
+            <div class="container">
+                <div class="s_title">
+                    <img src="../../Public/Mall/img/s_xiushi.png" alt="">直播课
+                    <ul class="paixu">
+                        <li class="active">最新发布</li>
+                        <li>最多报名</li>
+                    </ul>
+                    <a href="">更多课程></a>
+                </div>
+                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
+                    <li class="li" v-for="n in lists">
+                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                            <div class="imgDv">
+                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+                            </div>
+                            <div class="inner">
+                                <h4 :title="n.name">{{n.name}}</h4>
+                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                    <br />{{n.teacher_name | filtername}}</p>
+                                <div class="detailinfo clearfix">
+                                    <div class="price">
+                                        立即报名
+                                    </div>
+                                    <div class="enroll">186人报名</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_footer.html" />
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/FreeClass/js/zhibo.js"></script>
+</body>
+
+</html>

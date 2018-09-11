@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="__PUBLIC__/Open/css/commond.css">
+<div class="right r_part">
+    <div class="clearfix">
+        <h3 class="left">推荐课程</h3>
+        <span class="change right" @click="change()"><img src="__PUBLIC__/Open/images/change.png" alt="">换一换</span>
+    </div>
+    <ul class="listUl">
+        <li class="classItem" v-if="reco" v-for="n in reco">
+            <a :href="'/open/detail?id='+n.id" class="block_a" target="_blank">
+                <img src="__PUBLIC__/Open/images/play.png" class="play" />
+                <img :src="crm_domain+n.t_img_url" alt="" class="img">
+            </a>
+            <div class="inner">
+                <p class="name">{{n.names}}</p>
+                <p class="line">
+                    <span class="title">时间:</span>{{n.start_time}}
+                </p>
+                <p class="line">
+                    <span class="title">讲师:</span>{{n.teacher}}
+                </p>
+                <p class="line">
+                    <span class="title">时长:</span>{{n.timelength}}
+                </p>
+            </div>
+            <section class="bottomFont">
+                <div class="style_view-num">学习人数 {{n.studynum}}</div>
+                <a :href="'/open/detail?id='+n.id" class="style_view-readmore" target="_blank">查看详情</a>
+            </section>
+        </li>
+    </ul>
+</div>

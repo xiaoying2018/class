@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="__PUBLIC__/Case/stylesheet/head.css">
+<div class="case_head marginTop">
+    <div class="case_head_con">
+        <img src="__PUBLIC__/Case/img/banner.png" class="banner">
+        <h4>案例中心</h4>
+        <p>TOP30名校录取人数遥遥领先</p>
+        <ul class="caseBlockUl container clearfix">
+            <li class="active">
+                <a href="/case">
+                    <div class="statusDv">
+                        <div class="normalStatusDv">
+                            <div><img src="__PUBLIC__/Case/img/success_case_icon.png"></div>
+                            <p>成功案例</p>
+                        </div>
+                        <div class="lightStatusDv">
+                            <p>成功案例</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li data-secnav="thanks">
+                <a href="/case/thanks">
+                    <div class="statusDv">
+                        <div class="normalStatusDv">
+                            <div><img src="__PUBLIC__/Case/img/public_praise_icon.png"></div>
+                            <p>口碑墙</p>
+                        </div>
+                        <div class="lightStatusDv">
+                            <p>口碑墙</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li data-secnav="admission">
+                <a href="/case/admission">
+                    <div class="statusDv">
+                        <div class="normalStatusDv">
+                            <div><img src="__PUBLIC__/Case/img/case_data_icon.png"></div>
+                            <p>案例数据</p>
+                        </div>
+                        <div class="lightStatusDv">
+                            <p>案例数据</p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- <div class="case_head">
+	<img src="__PUBLIC__/Case/img/banner.jpg" class="banner">
+	<ul class="ul container clearfix">
+		<li class="li clearfix active">
+			<a href="/case">
+				<img src="__PUBLIC__/Case/img/papaer.png" alt="" class="img left">
+				<div class="div left">成功案例<div class="border"></div></div>
+			</a>
+		</li>
+		<li class="li clearfix">
+			<a href="/case/thanks">
+				<img src="__PUBLIC__/Case/img/stars.png" alt="" class="img left">
+				<div class="div left">口碑墙<div class="border"></div></div>
+			</a>
+		</li>
+		<li class="li clearfix">
+			<a href="/case/admission">
+				<img src="__PUBLIC__/Case/img/table.png" alt="" class="img left">
+				<div class="div left">录取数据统计<div class="border"></div></div>
+			</a>
+		</li>
+	</ul>
+</div> -->
+<!-- <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script> -->
+<script type="text/javascript">
+	$(".caseBlockUl li").each(function () {
+		if ($(this).data("secnav") == $('body').data("secnav")) {
+			$(this).addClass('active').siblings().removeClass('active');
+		}
+	})
+</script>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>材料</title>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/material.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div>
+			<header class="header">
+				<div>
+					<a href="javascript:;"onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<div class="header_but"><span class="active_but">我的材料<i></i></span><span>材料样本<i></i></span></div>
+					<a href="javascript:void(0)"></a>
+				</div>
+			</header>
+			<div id="material">
+				<ul class="material_item" style="display:block;">
+					<li v-for="material in datas" class="material_list">
+						<p class="material_title">
+							<span>{{material.name}}</span>
+							<span class="delete_but" :data_id = "material.id">删除</span>
+						</p>
+						<p class="material_text">上传时间: {{material.create_time}}</p>
+					</li>
+
+				</ul>
+			</div>
+			<div id="material_item">
+				<ul  class="material_item">
+					<li v-for="item  in item_datas" class="material_list" >
+						<p class="material_title">
+							<span>{{item.name}}</span>
+							<a :href="['http://crm.xiaoying.net/'+item.file]" class="download">下载样本</a>
+							
+						</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="delete_box">
+				<div>
+					<p>删除</p>
+					<p>确认将该材料删除？</p>
+					<div class="confirm_but">
+						<span>返回</span>
+						<span>确认</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var material = new Vue({
+			el: "#material",
+			data: {
+				datas: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					$.ajax({
+						type: "post",
+						dataType:"json",
+						data:{
+							s_id:""
+						},
+						url: "/api/mymaterials",
+						success: function(res) {
+							//							_self.datas = res
+							for(var i = 0; i < res.data.length; i++) {
+								res.data[i].create_time = _self._time(res.data[i].create_time)
+							}
+							_self.datas = res.data
+						}
+					});
+				},
+				_time: function(unixTime) {
+					var time = new Date(unixTime * 1000);
+					var ymdhis = "";
+					ymdhis += time.getUTCFullYear() + "年";
+
+					if(time.getUTCMonth() + 1 < 10) {
+						ymdhis += ("0" + (time.getUTCMonth() + 1)) + "月"
+					} else {
+						ymdhis += (time.getUTCMonth() + 1) + "日";
+					}
+
+					ymdhis += time.getUTCDate();
+					return ymdhis;
+				}
+
+			}
+		})
+		
+		var material_item = new Vue({
+			el: "#material_item",
+			data: {
+				item_datas: {}
+			},
+			methods: {
+				get_data: function() {
+					var _self = this;
+					$.ajax({
+						type: "post",
+						dataType:"json",
+						data:{
+							s_id:""
+						},
+						url: "/api/mysample",
+						success: function(res) {
+							if(res.status == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+							
+							_self.item_datas = res.data
+							}
+						}
+					});
+				},
+				
+
+			}
+		})
+		material.get_data();
+		material_item.get_data();
+		
+		$("body").on("click", ".header_but>span", function() {
+			if(!$(this).hasClass("active_but")) {
+				$(".header_but>span").removeClass("active_but");
+				$(this).addClass("active_but");
+				$(".material_item").hide()
+				$(".material_item").eq($(this).index()).fadeIn("fast")
+			}
+		})
+
+		var data_delete,_id;
+		$("body").on("click", ".delete_but", function(event) {
+			$(".delete_box").fadeIn("fast");
+			data_delete = $(this).parent().parent();
+			_id = $(this).attr("data_id")
+			event.stopPropagation()
+		})
+
+		$("body").on("click", ".confirm_but>span", function() {
+
+			if($(this).index() == 0) {
+				$(".delete_box").fadeOut("fast");
+			} else {
+				$.ajax({
+					type:"post",
+					dataType:"json",
+					data:{
+						id:_id,
+						sid:"19"
+					},
+					url:"/api/studelmaterials",
+					success:function(){
+						data_delete.remove();
+						$(".delete_box").fadeOut("fast");
+					}
+				});
+				
+				
+			}
+		})
+		$("body").on("click", ".delete_box", function() {
+			$(this).fadeOut("fast")
+		})
+		$("body").on("click", ".delete_box>div", function(event) {
+			event.stopPropagation()
+		})
+	</script>
+
+</html>

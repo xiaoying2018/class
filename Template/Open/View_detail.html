@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <title>小莺出国-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/detail.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Open/js/jqPaginator/jqPaginator.min.js"></script>
+    <script src="__PUBLIC__/Open/js/detail.js"></script>
+</head>
+
+<body data-nav="open">
+    <include file="./Template/Common/View_header.html"/>
+	<div id="openclassDetail" class="marginTop">
+	    <div class="header">
+	        <div class="container" id="topParts">
+	            <img :src="classdata.t_img_url" alt="" class="pic">
+	            <div class="info">
+	            	<h3>{{classdata.names}}</h3>
+	            	<p class="line">
+	                    <span class="title">时间:</span>{{classdata.start_time}}
+	                </p>
+	                <p class="line">
+	                    <span class="title">讲师:</span>{{classdata.teacher}}
+	                </p>
+	                <p class="line">
+	                    <span class="title">时长:</span>{{classdata.timelength}}
+	                </p>
+	                <p class="line">
+	                    <span class="title">学习人数:</span>{{classdata.studynum}}人
+	                </p>
+	                <p class="line" style="width:100%;" v-if="classdata.livecate_info">
+	                    <span class="title">直播类型:</span>{{classdata.livecate_info.cate_name}}
+	                </p>
+	                <p class="line" style="width:100%;" v-if="classdata.livecate_info">
+	                    <span class="title">直播内容:</span>
+	                    <span style="margin-right: 5px" v-for="n in classdata.livecontent_info">{{n.cate_name}}</span>
+	                </p>
+	            </div>
+	            <a target="_blank" :href="classdata.playback_addr" class="see">查看回放</a>
+	            <a target="_blank" href="javascript:void(0)" class="see chat" onclick="_MEIQIA('showPanel')">立即咨询</a>
+	        </div>
+	    </div>
+	    <div class="main">
+	    	<div class="container clearfix">
+		    	<div class="left l_part">
+		    		<div class="tabDv">
+		    			<ul class="tabHeader clearfix">
+		    				<li class="active" data-flag="tab1">课程简介</li>
+		    				<li data-flag="tab2">上课方式</li>
+		    				<li data-flag="tab3">讲师介绍</li>
+		    				<!-- <li data-flag="tab4">课程表</li> -->
+		    			</ul>
+		    			<div class="tabcontent tab1 active" v-html="classdata.content"></div>
+		    			<div class="tabcontent tab2" v-html="classdata.classway"></div>
+		    			<div class="tabcontent tab3" v-html="classdata.teacherdes"></div>
+		    		</div>
+		    	</div>
+		    	<include file="./Template/Open/View_commond.html"/>
+	    	</div>
+	    </div>
+    </div>
+    <include file="./Template/Common/View_footer.html"/>
+</body>
+
+</html>

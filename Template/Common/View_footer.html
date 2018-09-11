@@ -1,0 +1,144 @@
+<link rel="stylesheet" href="__PUBLIC__/Common/css/footer.css?v=201808271104">
+<script src="http://api.map.baidu.com/api?v=3.0&ak=pUz2rNiU7Evm31qj7G39zly7WGZZ9XAN"></script>
+<div id="footer">
+    <div class="container">
+        <ul class="cityName">
+            <li class="active" data-action="shanghai">上海</li>
+            <li data-action="nanjing">南京</li>
+            <li data-action="suzhou">苏州</li>
+            <li data-action="chengdu">成都</li>
+            <li data-action="taiyuan">太原</li>
+            <li data-action="dongjing">东京</li>
+        </ul>
+        <ul class="tabcontent">
+            <li class="shanghai active">
+                <p>
+                    地址：上海徐汇区肇嘉浜路789号均瑶国际广场29层E2<a href="javascript:void(0)" data-map="121.45506,31.204353" class="map_point"></a>
+                </p>
+            </li>
+            <li class="nanjing">
+                <p>
+                    地址：南京市鼓楼区中山路55号新华大厦49层<a href="javascript:void(0)" data-map="118.78976,32.050625" class="map_point"></a>
+                </p>
+            </li>
+            <li class="suzhou">
+                <p>
+                    地址：江苏省苏州市姑苏区干将东路和基广场5楼508<a href="javascript:void(0)" data-map="120.637692,31.314755" class="map_point"></a>
+                </p>
+            </li>
+            <li class="chengdu">
+                <p>
+                    地址：四川省成都市锦江区总府路2号时代广场A座15层1505A<a href="javascript:void(0)" data-map="104.086761,30.662032" class="map_point"></a>
+                </p>
+            </li>
+            <li class="taiyuan">
+                <p>
+                    地址：山西省太原市坞城路92号山西大学校内<a href="javascript:void(0)" data-map="112.593756,37.805857" class="map_point"></a>
+                </p>
+            </li>
+            <li class="dongjing">
+                <p>
+                    新宿校区：〒169-0074 東京都新宿区北新宿1-1-16 JSビル 2F<a href="javascript:void(0)" data-map="139.696909,35.698639" class="map_point"></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;大久保校区：169-0073 東京都新宿区百人町1-22-24朝日ビル4F-5F<a href="javascript:void(0)" data-map="139.697178,35.699727" class="map_point"></a>
+                </p>
+            </li>
+        </ul>
+        <div class="contactDv clearfix">
+            <ul class="a_ul">
+                <li>
+                    <a href="">关于我们</a>
+                </li>
+                <li>
+                    <a href="">联系我们</a>
+                </li>
+                <li>
+                    <a href="">学费支付</a>
+                </li>
+                <li>
+                    <a href="">使用条款</a>
+                </li>
+                <li>
+                    <a href="">特色项目</a>
+                </li>
+                <li>
+                    <a href="">活动中心</a>
+                </li>
+                <li>
+                    <a href="">顾问认证</a>
+                </li>    
+            </ul>
+            <div class="chatPart">
+                <img src="__PUBLIC__/Common/tel_gray.png" alt="" class="tel_gray">
+                <span>全国统一热线：400-0150-170</span>
+                <div class="wechatDv">
+                    <img src="__PUBLIC__/Common/wechatImg.png" alt="" class="wechatImg">
+                    <img src="__PUBLIC__/Common/wechat.png" alt="" class="wechat">
+                </div>
+            </div>
+        </div>
+        <div class="friend">
+            友情链接：
+            <a href="http://tgu.xiao-ying.net" target="_blank" title="日本sgu申请">日本sgu申请</a>
+            <a href="http://www.xiao-ying.net/duyan" target="_blank" title="日本读研规划">日本读研规划</a>
+            <a href="http://www.xiao-ying.net/eju" target="_blank" title="日本留学生考试">日本留学生考试</a>
+            <a href="http://www.xiao-ying.net/yuyan" target="_blank" title="日本语言学校">日本语言学校</a>
+            <a href="http://www.xiao-ying.net/plan" target="_blank" title="日本留学规划">日本留学规划</a>
+            <a href="http://www.lunwenzhai.com" target="_blank" title="鸿远论文网">鸿远论文网</a>
+            <a href="http://sh.jiaoyubao.cn/liuxue/" target="_blank" title="上海留学培训">上海留学培训</a>
+            <a href="http://www.001dg.com" target="_blank" title="汕头招聘网">汕头招聘网</a>
+            <a href="http://www.souaus.com" target="_blank" title="澳大利亚中文网">澳大利亚中文网</a>
+            <a href="http://www.megoal.org" target="_blank" title="美国留学">美国留学</a>
+            <a href="http://www.gdjhpx.com" target="_blank" title="广州全日制技能培训学校">广州全日制技能培训学校</a>
+            <a href="http://www.oyoline.com" target="_blank" title="英语培训机构排名">英语培训机构排名</a>
+            <a href="http://www.tokei.cn" target="_blank" title="培训日语">培训日语</a>
+        </div>
+    </div>
+    <p class="copyright"><a href="http://www.miitbeian.gov.cn" target="_blank">苏ICP备17069390号</a>  版权所有：小莺教育科技有限公司</p>
+</div>
+<div class="mapDv">
+    <div class="bdMap">
+    	<div id="baiduMap"></div>
+    	<img src="../../Public/Common/map/close.png" alt="" class="map_close">
+    </div>
+    <div class="cover"></div>
+</div>
+<script>
+$(function() {
+    $(".cityName li").click(function() {
+        $(this).addClass("active").siblings().removeClass("active");
+        var _name = $(this).attr("data-action");
+        $("#footer .tabcontent ." + _name + "").addClass("active").siblings().removeClass("active");
+    })
+
+    $(".map_point").click(function() {
+        $(".mapDv").show();
+        var _point = $(this).attr("data-map").split(",");
+        $("#baiduMap").show();
+        // 百度地图API功能
+        var map = new BMap.Map("baiduMap", {});
+        map.enableScrollWheelZoom(true);
+        var point = new BMap.Point(_point[0], _point[1]);
+        map.centerAndZoom(point, 50);
+        // 百度地图API功能
+        var sContent =
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>小莺出国上海校区</h4>" +
+            "<img style='display:block;margin:4px 0' id='imgDemo' src='../../Public/Common/map/shanghai.jpg' width='100%' />" +
+            "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>上海小莺出国的资深留学老师，将为您做1对1的专业留学咨询和指导，签证通过率达到100%，为您的日本升学之旅保驾护航！...</p>" +
+            "</div>";
+
+        var infoWindow = new BMap.InfoWindow(sContent); // 创建信息窗口对象
+
+
+        //创建logo
+        var pt = new BMap.Point(_point[0], _point[1]);
+        var myIcon = new BMap.Icon("../../Public/Common/mappoint.png", new BMap.Size(95, 36));
+        var marker2 = new BMap.Marker(pt, { icon: myIcon }); // 创建标注
+        map.addOverlay(marker2);
+
+    })
+
+    $(".map_close").click(function(){
+    	$(".mapDv").hide();
+    })
+})
+</script>

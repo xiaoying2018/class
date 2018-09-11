@@ -1,0 +1,97 @@
+.lefttoolbar {
+    width: 60px;
+    height: 200px;
+    position: fixed;
+    top: 30%;
+    right: 0;
+    z-index: 22;
+    .innercco {
+        position: relative;
+        font-size: 12px;
+        width: 64px;
+        height: 66px;
+        color: #666;
+        padding-top: 10px;
+        text-align: center;
+        background: #fff;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        span {
+            display: block;
+            margin-top: 5px;
+        }
+        strong {
+            font-weight: 600;
+        }
+        .pop {
+            display: none;
+            font-size: 14px;
+            position: absolute;
+            right: 72px;
+            top: 50%;
+            margin-top: -20px;
+            white-space: nowrap;
+            height: 40px;
+            line-height: 20px;
+            padding: 10px 20px;
+            color: #fff;
+            box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.1);
+            background-color: transparent;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            img {
+                width: 100px;
+                display: block;
+            }
+            &:after {
+                border-left-color: #44b549;
+                content: "";
+                position: absolute;
+                right: -14px;
+                top: 50%;
+                margin-top: -8px;
+                border: 8px solid transparent;
+            }
+            a {
+                color: #fff;
+            }
+        }
+        &.wechat {
+            .pop {
+                height: 120px;
+                background-color: #00CC5F;
+                top: -10px;
+                &:after {
+                    border-left-color: #00CC5F;
+                }
+            }
+        }
+        &.zixun {
+            .pop {
+                background-color: #fb3449;
+                &:after {
+                    border-left-color: #fb3449;
+                }
+            }
+        }
+        &.telzixun {
+            .pop {
+                background-color: #fcb137;
+                &:after {
+                    border-left-color: #fcb137;
+                }
+            }
+        }
+
+        &:hover {
+            .pop {
+                display: block;
+            }
+        }
+    }
+}
