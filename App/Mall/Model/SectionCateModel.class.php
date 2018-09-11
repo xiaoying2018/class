@@ -21,8 +21,19 @@ class SectionCateModel extends EModel
 
     public function searchBanjiByName($search_name)
     {
+        $condition = I('post.');
+        // 分页
+        $limit_num = $condition['limit_num']?:10;// 每页显示条数
+        $start = $condition['page']?(($condition['page']-1)*$limit_num):0;// 查询起始值
+
         // 获取首页展示的所有班
+        $count = M('Course')->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->count();
+        // 如果需要分页
+//        $all_banji = M('Course')->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->limit($start,$limit_num)->select();
         $all_banji = M('Course')->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->select();
+
+        // 总页数
+        $page_count = ceil($count / $limit_num);
 
         // 获取班级下的课程数和课时数
         if ($all_banji)
@@ -91,25 +102,46 @@ class SectionCateModel extends EModel
             }
         }
 
-        return $all_banji;
+
+        return [
+            'count' => $count,// 总条数
+            'page_count' => $page_count,// 总页数
+            'banji' => $all_banji,// 课程列表
+        ];
     }
 
     public function searchCourseByName($search_name)
     {
+        $condition = I('post.');
+        // 分页
+        $limit_num = $condition['limit_num']?:2;// 每页显示条数
+        $start = $condition['page']?(($condition['page']-1)*$limit_num):0;// 查询起始值
+
         // 获取公开课课程
+        $count = $this->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->count();
+        // 如果需要分页
+//        $show_course = $this->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->limit($start,$limit_num)->select();
         $show_course = $this->where(['status'=>['eq',1],'name'=>['like','%'.$search_name.'%']])->select();
+
+        // 总页数
+        $page_count = ceil($count / $limit_num);
+
         // 获取课程下的课时数
         if ($show_course) {
             foreach ($show_course as $k => $v) {
                 $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
             }
-            return $show_course;
+            return [
+                'count' => $count,// 总条数
+                'page_count' => $page_count,// 总页数
+                'courses' => $show_course,// 课程列表
+            ];
         }
 
         return [];
     }
 
-    // 班级/课程详情页 获取推荐班级,每次获取两条  (随机)
+    // 班级/课程详情页 获取推荐班级,每次获取两条(随机)
     public function getTuijianBanji()
     {
         // 获取首页展示的所有班

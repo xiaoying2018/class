@@ -18,14 +18,23 @@ class DocModel extends Model
 
     protected $tableName = 'mate';
 
+    // 十有八九不需要了 todo 确认前端是否需要此接口.
     public function searchByName($search_name)
     {
+        $condition = I('post.');
+        // 分页
+        $limit_num = $condition['limit_num']?:2;// 每页显示条数
+        $start = $condition['page']?(($condition['page']-1)*$limit_num):0;// 查询起始值
+
         // 根据名称搜索
         $where['name'] = ['like','%'.$search_name.'%'];
 
         // 查询资料数据
         $count = $this->where($where)->count();
-        $mates = $this->where($where)->select()?:[];
+        $mates = $this->where($where)->limit($start,$limit_num)->select()?:[];
+
+        // 总页数
+        $page_count = ceil($count / $limit_num);
 
         // 如果资料为空
         if (!$mates) return [];
@@ -39,6 +48,7 @@ class DocModel extends Model
 
         return [
             'count' => $count,// 总条数
+            'page_count' => $page_count,// 总页数
             'mates' => $mates,// 资料列表
         ];
 
