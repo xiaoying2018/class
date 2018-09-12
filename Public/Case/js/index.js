@@ -88,7 +88,8 @@ $(function() {
                 rows: 10,
                 c: ''
             },
-            lock: true
+            lock: true,
+            r_pic: ''
             // lotwhere: ''
         },
         methods: {
@@ -97,7 +98,6 @@ $(function() {
                 var el = event.target;
                 // this.s_choose = item.type;
                 this.s_choose = item;
-                console.log(JSON.stringify(item))
 
                 $('.in_ul li').removeClass('active');
                 $(el).addClass("active").siblings().removeClass("active");
@@ -224,12 +224,12 @@ $(function() {
                            //处理图片
                             var array = res.data.list;
                             for (var i = 0; i < res.data.list.length; i++) {
-                                if(res.data.list[i].headfile) {
-                                    array[i].head_file_path = 'http://crm.xiaoying.net/' + res.data.list[i].headfile.file_path
-
+                                if(res.data.list[i].pic) {
+                                    array[i].pic = 'http://crm.xiaoying.net/' + res.data.list[i].pic;
                                 } else {
-                                    var ramand = _this.randomNum(1,2);
-                                    array[i].head_file_path = '/Public/Case/img/ramandImg/'+ramand+'.jpg';
+                                    var ramand = _this.randomNum(1,10);
+                                    array[i].r_pic = ramand;
+                                    array[i].pic = '/Public/Case/img/ramandImg/'+array[i].r_pic+'.jpg';
                                 }
                             }
                             _this.lists = array;
@@ -256,8 +256,6 @@ $(function() {
                             })
 
 
-                           console.log(222)
-
                             _this.lock = true;
                             $("#loader").fadeOut(450);
                         } else {
@@ -266,28 +264,6 @@ $(function() {
                         }
                     }
                 })
-                // $.ajax({
-                //     url:"http://crm.xiaoying.net?m=case&a=search",
-                //     type:"POST",
-                //     data: _this.requet,
-                //     dataType:"json",
-                //     success:function(res){
-                //         if (res.status) {
-                            
-                //             _this.lists = res.data.list;
-
-                //             for (var i = 0; i < _this.lists.length; i++) {
-                //                 if(res.data.list[i].headfile) {
-                //                     _this.lists[i].head_file_path = res.data.list[i].headfile.file_path
-
-                //                 } else {
-                //                     _this.lists[i].head_file_path = '';
-                //                 }
-                //             }
-
-                //         }
-                //     }
-                // })
             },
             randomNum: function (minNum,maxNum) {
                 switch(arguments.length){ 
@@ -317,7 +293,6 @@ $(function() {
         mounted: function() {
             $("#loader").show();
             var _this = this;
-
             _this.query.c =  _this.getQueryString("cat",true);
 
             _this.query.education = _this.getQueryString("education",true)?_this.getQueryString("education",true):'';
@@ -367,11 +342,9 @@ $(function() {
                                         _this.choose[i].type = array;
 
                                          _this.$nextTick(function() {
-                                           console.log('服务项目')
-                                            console.log($('.in_ul li').text())
+                                            // console.log($('.in_ul li').text())
                                              $('.in_ul li').each(function () {
                                                 if ($(this).text() == _this.getQueryString("programcate",true)) {
-                                                    console.log('服务项目1')
                                                     $(this).addClass("active").siblings().removeClass("active");
                                                 }
                                             })
@@ -419,7 +392,7 @@ $(function() {
                 var windowHeight = $(this).height();
                 if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
                     _this.lock = false;
-                    console.log('scroll',_this.query.page);
+                    // console.log('scroll',_this.query.page);
                     _this.getData();
                 }
             });
