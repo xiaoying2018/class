@@ -88,7 +88,8 @@ $(function() {
                 rows: 10,
                 c: ''
             },
-            lock: true
+            lock: true,
+            r_pic: ''
             // lotwhere: ''
         },
         methods: {
@@ -130,9 +131,11 @@ $(function() {
                 })
             },
             search: function (item,event) {
+                console.log("2222search",JSON.stringify(item));
                 var _this = this;
                 var el = event.target;
                 
+                console.log(item.name,item.type);
                 if (item.name == '2000-2012') {
                     item.name = '2010'
                 }
@@ -224,12 +227,12 @@ $(function() {
                            //处理图片
                             var array = res.data.list;
                             for (var i = 0; i < res.data.list.length; i++) {
-                                if(res.data.list[i].headfile) {
-                                    array[i].head_file_path = 'http://crm.xiaoying.net/' + res.data.list[i].headfile.file_path
-
+                                if(res.data.list[i].pic) {
+                                    array[i].pic = 'http://crm.xiaoying.net/' + res.data.list[i].pic;
                                 } else {
-                                    var ramand = _this.randomNum(1,2);
-                                    array[i].head_file_path = '/Public/Case/img/ramandImg/'+ramand+'.jpg';
+                                    var ramand = _this.randomNum(1,10);
+                                    array[i].r_pic = ramand;
+                                    array[i].pic = '/Public/Case/img/ramandImg/'+array[i].r_pic+'.jpg';
                                 }
                             }
                             _this.lists = array;
@@ -317,7 +320,6 @@ $(function() {
         mounted: function() {
             $("#loader").show();
             var _this = this;
-
             _this.query.c =  _this.getQueryString("cat",true);
 
             _this.query.education = _this.getQueryString("education",true)?_this.getQueryString("education",true):'';

@@ -1,6 +1,6 @@
 $(function () {
 
-	var app = new Vue({
+    var app = new Vue({
         el: '#casedetails',
         data: {
             lock: true,
@@ -127,27 +127,23 @@ $(function () {
             },
             getData: function(id){
                 var _this = this;
-                console.log(_this.getQueryString("id"));
                 $.ajax({
-                    url:"http://crm.xiaoying.net?m=case&a=search",
+                    url:"http://crm.xiaoying.net?m=case&a=detail",
+                    // url:"http://crm.xiaoying.net?m=case&a=search",
                     type:"POST",
+                    data: {
+                        id: _this.getQueryString("id")
+                    },
                     dataType:"json",
                     success:function(res){
-                        if (res.status) {
-                            for (var i = 0; i < res.data.list.length; i++) {
+                        _this.caseInfo=  res;
+                        if(res.pic) {
+                            console.log(1)
+                            _this.caseInfo.pic = 'http://crm.xiaoying.net/' + res.pic;
 
-                                if(res.data.list[i].id == _this.getQueryString("id")) {
-
-                                    if(res.data.list[i].headfile) {
-                                        _this.caseInfo.head_file_path = res.data.list[i].headfile.file_path
-
-                                    } else {
-                                        _this.caseInfo.head_file_path = '';
-                                    }
-                                    _this.caseInfo= res.data.list[i];
-                                    return false;
-                                }    
-                            }
+                        } else {
+                             console.log(2)
+                            _this.caseInfo.pic = '/Public/Case/img/ramandImg/'+_this.getQueryString("r_pic")+'.jpg';
                         }
                     }
                 })
@@ -197,7 +193,7 @@ $(function () {
             
             _this.getData(_this.getQueryString("id"));
 
-        	// 多行溢出兼容IE
+            // 多行溢出兼容IE
             var body=document.getElementsByTagName("body")[0];
             if(typeof body.style.WebkitAnimation!="undefined") {
                 // alert("当前浏览器是Webkit内核！");
@@ -207,22 +203,22 @@ $(function () {
                 $('.item_li a h2').addClass('ie');
             }
             //热门活动轮播初始化
-        	var mySwiper = new Swiper('.swiper-container',{
-			    pagination: '.pagination',
-			    loop:true,
-			    // autoplay: 3000,
-			    autoplayDisableOnInteraction: false,
-			    grabCursor: true,
-			    paginationClickable: true
-			})
-		  	$('.arrow-left').on('click', function(e){
-			    e.preventDefault()
-			    mySwiper.swipePrev()
-		    });
-			$('.arrow-right').on('click', function(e){
-			    e.preventDefault()
-			    mySwiper.swipeNext()
-			});
+            var mySwiper = new Swiper('.swiper-container',{
+                pagination: '.pagination',
+                loop:true,
+                // autoplay: 3000,
+                autoplayDisableOnInteraction: false,
+                grabCursor: true,
+                paginationClickable: true
+            })
+            $('.arrow-left').on('click', function(e){
+                e.preventDefault()
+                mySwiper.swipePrev()
+            });
+            $('.arrow-right').on('click', function(e){
+                e.preventDefault()
+                mySwiper.swipeNext()
+            });
 
 
 
