@@ -197,25 +197,42 @@ $(function() {
                 var _this = this;
                 var el = event.target;
 
+                $('.in_ul li').removeClass('active');
                 $(el).addClass("active").siblings().removeClass("active");
                 _this.s_choose = item;
                 _this.query.c = $(el).text();
-                console.log(JSON.stringify(item))
 
                 if(item.name == "全部") {
                      window.location.href = "/case/admission"
                 }
+                //已选中的二级条件高亮
+                var receiveYear = _this.getQueryString("year",true) == '2010'?'2000-2012':_this.getQueryString("year",true);
+                _this.$nextTick(function() {
+                    $('.in_ul li').each(function () {
+                        if ($(this).text() == _this.getQueryString("lotwhere",true)) {
+                            $(this).addClass("active").siblings().removeClass("active");
+                        }
+                        if ($(this).text() == receiveYear) {
+                            $(this).addClass("active").siblings().removeClass("active");
+                        }
+                        if ($(this).text() == _this.getQueryString("xueli",true)) {
+                            $(this).addClass("active").siblings().removeClass("active");
+                        }
+                        if ($(this).text() == _this.getQueryString("hottag",true)) {
+                            $(this).addClass("active").siblings().removeClass("active");
+                        }
+                        if ($(this).text() == _this.getQueryString("college",true)) {
+                            $(this).addClass("active").siblings().removeClass("active");
+                        }
+                    })
+                })
 
             },
             search:function(item,el){
                 var _this = this;
                 var el = event.target;
                 
-                console.log("xxx",JSON.stringify(item));
-
-                // _this.$nextTick(function() {
-                //     $(el).addClass("active").siblings().removeClass("active");
-                // })
+               
                 if (item.name == '2000-2012') {
                     item.name = '2010'
                 }
@@ -285,7 +302,7 @@ $(function() {
                                 college  专业
                             **/
                             _this.pageCount = res.data.total;
-                            console.log(_this.pageCount);
+                            // console.log(_this.pageCount);
 
                             _this.lists = res.data.list;
                              $('.pageBox').pagination({
@@ -299,9 +316,7 @@ $(function() {
                                 activeCls: 'active',
                                 coping: true,
                                 callback: function (api) {
-                                    console.log(_this.totalCount)
-                                    console.log(api.getCurrent())
-                                    console.log(api.getPageCount())
+                                   
                                     if (_this.query.page>=2) {
                                         _this.query.page = api.getCurrent();
                                         _this.getData();
@@ -423,21 +438,7 @@ $(function() {
                 e.preventDefault()
                 mySwiper.swipeNext()
             });
-            // $('.ui-pagination-page-item').click(function () {
-            //     var info = $('.pageBox').pagination("getPage");
-            //     console.log(info)
-            // })
-
-            // $(window).scroll(function() {
-            //     var scrollTop = $(this).scrollTop();
-            //     var scrollHeight = $(document).height();
-            //     var windowHeight = $(this).height();
-            //     if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
-            //         _this.lock = false;
-            //         console.log('scroll',_this.query.page);
-            //         _this.getData();
-            //     }
-            // });
+            
         }
     });
 })

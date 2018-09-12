@@ -96,9 +96,8 @@ $(function() {
             tabChoose: function(item,event) {
                 var _this = this;
                 var el = event.target;
-                // this.s_choose = item.type;
                 this.s_choose = item;
-                console.log(JSON.stringify(item))
+                // console.log(JSON.stringify(item))
 
                 $('.in_ul li').removeClass('active');
                 $(el).addClass("active").siblings().removeClass("active");
@@ -131,11 +130,10 @@ $(function() {
                 })
             },
             search: function (item,event) {
-                console.log("2222search",JSON.stringify(item));
                 var _this = this;
                 var el = event.target;
                 
-                console.log(item.name,item.type);
+                // console.log(item.name,item.type);
                 if (item.name == '2000-2012') {
                     item.name = '2010'
                 }
@@ -257,10 +255,7 @@ $(function() {
                                 $grid.masonry('layout');
 
                             })
-
-
-                           console.log(222)
-
+                            
                             _this.lock = true;
                             $("#loader").fadeOut(450);
                         } else {
@@ -369,11 +364,8 @@ $(function() {
                                         _this.choose[i].type = array;
 
                                          _this.$nextTick(function() {
-                                           console.log('服务项目')
-                                            console.log($('.in_ul li').text())
                                              $('.in_ul li').each(function () {
                                                 if ($(this).text() == _this.getQueryString("programcate",true)) {
-                                                    console.log('服务项目1')
                                                     $(this).addClass("active").siblings().removeClass("active");
                                                 }
                                             })
@@ -421,7 +413,7 @@ $(function() {
                 var windowHeight = $(this).height();
                 if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
                     _this.lock = false;
-                    console.log('scroll',_this.query.page);
+                    // console.log('scroll',_this.query.page);
                     _this.getData();
                 }
             });

@@ -103,7 +103,7 @@ $(function () {
 
             },
             search: function (item,event) {
-                console.log("search",item);
+                // console.log("search",item);
                 var _this = this;
 
                 var el = event.target;
@@ -138,11 +138,9 @@ $(function () {
                     success:function(res){
                         _this.caseInfo=  res;
                         if(res.pic) {
-                            console.log(1)
                             _this.caseInfo.pic = 'http://crm.xiaoying.net/' + res.pic;
 
                         } else {
-                             console.log(2)
                             _this.caseInfo.pic = '/Public/Case/img/ramandImg/'+_this.getQueryString("r_pic")+'.jpg';
                         }
                     }
