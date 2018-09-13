@@ -86,8 +86,8 @@
         <ul class="list_Ul clearfix"> </ul>
         <ul class="model_list clearfix " id="model_list" style="display: none;">
             <li class="item_li" v-for="n in lists" >
-                <a :href="'/case/detail?id='+n.id" target="_blank">
-                    <img :src="n.head_file_path" class="faceImg">
+                <a :href="'/case/detail?id='+n.id + '&r_pic=' + n.r_pic " target="_blank">
+                    <img :src="n.pic" class="faceImg">
                     <!-- <img :src="'http://crm.xiaoying.net/'+n.head_file_path" class="faceImg"> -->
                     <h3 v-html="n.names"></h3>
                     <span><img src="__PUBLIC__/Case/img/case_school.png">{{n.receive_college}}</span>
