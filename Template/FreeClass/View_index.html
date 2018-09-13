@@ -32,8 +32,11 @@
                 </p>
             </div>
             <div class="container">
-                <div class="s_title">
-                    <img src="../../Public/Mall/img/s_xiushi.png" alt="">公开课
+                <div class="s_title clearfix">
+                     <ul class="typeul">
+                        <li class="active" @click="condit('type','hot')"><img src="__PUBLIC__/FreeClass/img/hot.png" />热门公开课</li>
+                        <li @click="condit('type','free')"><img src="__PUBLIC__/FreeClass/img/free.png" />免费公开课</li>
+                    </ul>
                     <ul class="paixu">
                         <li class="active" @click="condit('sort_by_people_num','')">最新发布</li>
                         <li @click="condit('sort_by_people_num',1)">最多报名</li>
