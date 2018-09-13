@@ -69,7 +69,7 @@
                                     <p>{{n.node}}. {{n.name}}</p>
                                     <p>时长：{{n.duration}}分钟</p>
                                 </div>
-                                <img v-if="n.video_path != null && n.is_free == 1" src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">
+                                <img v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && detail.is_open == 1)" src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">
                                 <img v-else src="../../Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
                             </li>
                         </ul>
