@@ -46,8 +46,8 @@
                 </div>
                 <ul class="ullist" data-sr="enter top hustle 50px over 1s">
                     <li class="li" v-for="n in lists">
-                        <template v-if="1 == 1">
-                            <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                        <template v-if="request.type == 'hot'">
+                            <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                 <div class="imgDv">
                                     <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
                                     <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
