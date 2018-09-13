@@ -4,7 +4,9 @@ $(function() {
         el: '#freeclasss',
         data: {
             lists:[],
-            request:{}
+            request:{
+                type: 'hot'
+            }
         },
         filters: {
             filtertime: function(val){
@@ -57,7 +59,7 @@ $(function() {
         mounted: function() {
             this.getdata();
             $(".s_nav li").eq(3).addClass('active');
-            $(".topcondit li,.paixu li").click(function(){
+            $(".topcondit li,.paixu li,.typeul li").click(function(){
                 $(this).addClass("active").siblings().removeClass("active");
             })
         }
