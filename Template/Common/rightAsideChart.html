@@ -13,13 +13,35 @@
                     
                 </ul>
                 
-                <a href="javascript:;" class="btn_measurement">测试以上学校录取率</a>
+                <a href="javascript:;" class="btn_measurement"  onclick="_MEIQIA('showPanel')">测试以上学校录取率</a>
             </div>
         </div>
     </div>
 </div>
 <script src="__PUBLIC__/plugin/echarts.js"></script>
 <script type="text/javascript">
+    //百度统计代码
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?adb97d2c5a835681418c7b2bab31618a";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+
+        //美恰插件代码
+        (function(m, ei, q, i, a, j, s) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.charset = 'UTF-8';
+            j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+            s.parentNode.insertBefore(j, s);
+        })(window, document, 'script', '_MEIQIA');
+        _MEIQIA('entId', 14353);
         // 获取数据
     function getSchoolCaseData(){
         var SchoolCaseData = '';
