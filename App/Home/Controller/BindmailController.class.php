@@ -38,7 +38,8 @@ class BindmailController extends Controller
 
         // r = randstr随机激活码 s = student用户 ac|code = 无用的混淆参数
 //        $content = '点此链接: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/Home/Bindmail/checkmail?r='.$rand_str.'&amp;c='.$ac.'&amp;s='.$stu.'&amp;code='.$code.' 激活邮箱.';
-        $content = '点此链接: http://'.$_SERVER['HTTP_HOST'].'/Home/Bindmail/checkmail?r='.$rand_str.'|'.$ac.'|'.$stu.'|'.$code.' 激活邮箱.';
+        $content = 'http://'.$_SERVER['HTTP_HOST'].'/Home/Bindmail/checkmail?r='.$rand_str.'|'.$ac.'|'.$stu.'|'.$code;
+        $content .= "<br> 复制以上链接在浏览器打开即可激活邮箱.";
 //        $content = '点此链接: '.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/bindemail/'.$rand_str.'/'.$ac.'/'.$stu.'/'.$code.' 激活邮箱.';
         
         $send_res = mailsend($email,'邮箱激活 - 小莺出国',$content);// 发送邮件
