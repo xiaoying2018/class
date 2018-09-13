@@ -713,14 +713,14 @@ class SectionCateModel extends EModel
                         if ($course_ids)
                         {
                             // 获取班级下的课程
-                            $show_course = $this->where(['id' => ['in', $course_ids],'status'=>['eq',1]])->select();
+                            $_show_course = $this->where(['id' => ['in', $course_ids],'status'=>['eq',1]])->select();
                             // 获取课程下的课时数
-                            if ($show_course) {
-                                foreach ($show_course as $k => $v) {
+                            if ($_show_course) {
+                                foreach ($_show_course as $k => $v) {
                                     $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
                                 }
                             }
-                            $show_course[$banji_k]['show_course'] = $show_course;
+                            $show_course[$banji_k]['show_course'] = $_show_course;
                             $show_course[$banji_k]['section_num'] = M('course_section')->where(['course_id'=>['in',$course_ids]])->count();
                         }else{
                             $show_course[$banji_k]['section_num'] = 0;
