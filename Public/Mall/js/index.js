@@ -151,14 +151,9 @@ $(function() {
                     ],
                     submitBtn: ".xy_submit_a",
                     beforeSendData: function(_data, cb) {
-                        var _m = utily.getStore('xy_registrt_tel');
-                        if (_m) {
-                            _data['XY_b20'] = $("#nationselect").select2("data")[0].text;
-                            _data['XY_b21'] = '该客户选择的服务是:'+$("#serviceselect").select2("data")[0].text;
-                            _data['XY_a02'] = _m;
-                            cb(_data);
-                        }else{
-                            utily.setStore('xy_registed_href',window.location.href);
+                        utily.setStore('xy_logined_href',window.location.href);
+                        var _m = utily.getStore('xy_tel');
+                        if (_m == "" || _m == null) {
                             var _t = {
                                 'XY_a01' : _data['XY_a01'],
                                 'XY_b09' : _data['XY_b09'],
@@ -168,9 +163,14 @@ $(function() {
                                 'serviceselect' : $("#serviceselect").select2("data")[0].id
                             }
                             utily.setStore('xy_banenr_form',JSON.stringify(_t));
-                            alert('尚未绑定手机号')
+                            alert('请登录或注册您的账户，方便顾问老师更加及时的跟进您的信息。')
                             location.href = '/user/#/login?a=register';
                             return false
+                        }else{
+                            _data['XY_b20'] = $("#nationselect").select2("data")[0].text;
+                            _data['XY_b21'] = '该客户选择的服务是:'+$("#serviceselect").select2("data")[0].text;
+                            _data['XY_a02'] = _m;
+                            cb(_data);
                         }
                     },
                     beforeLoadField: function(res) {
@@ -183,9 +183,11 @@ $(function() {
                             minimumResultsForSearch: -1,
                             templateResult: formatState
                         });
+
                         $("#serviceselect").select2({
                             minimumResultsForSearch: -1,
                         });
+
                         $('[name="XY_b09"],[name="XY_b19"]').select2({
                             minimumResultsForSearch: -1,
                         });
@@ -200,7 +202,7 @@ $(function() {
                                 '<span><img src="' + baseUrl + '/' + state.element.title + '.png" class="img-flag" /> ' + state.text + '</span>'
                             );
                             return $state;
-                        };
+                        }
 
                         var _temp = JSON.parse(utily.getStore('xy_banenr_form'));
                         if (_temp) {
