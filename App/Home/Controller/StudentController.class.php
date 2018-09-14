@@ -124,10 +124,17 @@ class StudentController extends BaseController
                 $schedule[date('Y.m.d',$value['stamp'])][]    =   $value;
             }
         }
-        
+
+        $res=$studentModel->getValidCourse($s_id);
         // 课程
         // 班级
         $period                 =   $periodModel->period_list(['s.id'=>['eq',$s_id]]);
+
+        foreach ($period as $key=> $p){
+            if(!in_array($p['course_id'],$res)){
+                unset($period[$key]);
+            }
+        }
         $crm_domain             =   C('CRM_DOMAIN');
         $period                 =   array_map( function($p) use($crm_domain){
             $p['course_pic']        =   $crm_domain.substr( $p['course_pic'],1 );
