@@ -98,11 +98,11 @@ class IndexController extends Controller
         $kejie_re_section_id = $current_kejie_model->where(['serial'=>['eq',$serial_number]])->find()['section_id'];
         $section_model = new SectionModel();
         $section_length = $section_model->find($kejie_re_section_id)['duration']?:100;// 课节时长缺省值为100,以防万一
-
+        
         // 如果学员在当前房间累积在线时间不小于 当前房间时长n分钟-20分钟 则请求学员签到的接口
         foreach ($stu_list as $stu_k => $stu_v) {
             // PS: 课时时长单位是分钟,学员在教室停留的时长单位是秒,所以$section_length需要*60
-            if ($stu_v['in_room_time'] > (60 * $section_length))
+            if ($stu_v['in_room_time'] > (60 * ($section_length - 20) ))
             {
                 // 请求学员签到的接口 学员学号=$stu_k 课节编号=$kejie_info['id']
                 $singIn_send_data['student_code'] = $stu_k;
