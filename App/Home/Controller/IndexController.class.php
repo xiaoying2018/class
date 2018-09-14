@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 use Common\Controller\BaseController;
+use Home\Model\ScheduleModel;
 use Home\Model\StudentModel;
 use Think\Controller;
 use Think\Controller\RpcController;

@@ -92,7 +92,7 @@ class StudentController extends BaseController
                     $value['serial'] = $send_url;
                 }
                 // 8-27 end
-		  //获取当前的时间
+		        // 获取当前的时间
                 $current_time =time();
                 $start_time=strtotime($value['start_time']);
            
