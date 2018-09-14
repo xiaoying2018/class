@@ -151,14 +151,34 @@ $(function() {
                     ],
                     submitBtn: ".xy_submit_a",
                     beforeSendData: function(_data, cb) {
-                        cb(_data);
+                        var _m = utily.getStore('xy_registrt_tel');
+                        if (_m) {
+                            _data['XY_b20'] = $("#nationselect").select2("data")[0].text;
+                            _data['XY_b21'] = '该客户选择的服务是:'+$("#serviceselect").select2("data")[0].text;
+                            _data['XY_a02'] = _m;
+                            cb(_data);
+                        }else{
+                            utily.setStore('xy_registed_href',window.location.href);
+                            var _t = {
+                                'XY_a01' : _data['XY_a01'],
+                                'XY_b09' : _data['XY_b09'],
+                                'XY_b19' : _data['XY_b19'],
+                                'XY_c01' : _data['XY_c01'],
+                                'city' : $("#nationselect").val(),
+                                'serviceselect' : $("#serviceselect").select2("data")[0].id
+                            }
+                            utily.setStore('xy_banenr_form',JSON.stringify(_t));
+                            alert('尚未绑定手机号')
+                            location.href = '/user/#/login?a=register';
+                            return false
+                        }
                     },
                     beforeLoadField: function(res) {
                         return res;
                     },
                     afterLoadField: function() {
-                        $(".xy_form_a").prepend('<div class="lineDv"><select name="" id="nationselect"><option value="">意向国家</option><option value="" title="japan">日本</option><option value="" title="korea">韩国</option><option value="" title="singapore">新加坡</option><option value="" title="aus">澳洲</option><option value="" title="canada">加拿大</option></select></div>')
-                        $(".xy_form_a").append('<div class="lineDv full"><select name="" id="serviceselect"><option value="">请选择我们的服务</option><option value="">在线评估预约</option><option value="">本科学校申请</option><option value="">硕士申请</option><option value="">签证办理服务</option><option value="">申请文书写作服务</option><option value="">海外保险服务</option></select></div>')
+                        $(".xy_form_a").prepend('<div class="lineDv"><select name="" id="nationselect"><option value="">意向国家</option><option value="japan" title="japan">日本</option><option value="korea" title="korea">韩国</option><option value="singapore" title="singapore">新加坡</option><option value="aus" title="aus">澳洲</option><option value="canada" title="canada">加拿大</option></select></div>')
+                        $(".xy_form_a").append('<div class="lineDv full"><select name="" id="serviceselect"><option value="">请选择我们的服务</option><option value="1">在线评估预约</option><option value="2">本科学校申请</option><option value="3">硕士申请</option><option value="4">签证办理服务</option><option value="5">申请文书写作服务</option><option value="6">海外保险服务</option></select></div>')
                         $("#nationselect").select2({
                             minimumResultsForSearch: -1,
                             templateResult: formatState
@@ -166,6 +186,10 @@ $(function() {
                         $("#serviceselect").select2({
                             minimumResultsForSearch: -1,
                         });
+                        $('[name="XY_b09"],[name="XY_b19"]').select2({
+                            minimumResultsForSearch: -1,
+                        });
+
 
                         function formatState(state) {
                             if (!state.title) {
@@ -177,6 +201,14 @@ $(function() {
                             );
                             return $state;
                         };
+
+                        var _temp = JSON.parse(utily.getStore('xy_banenr_form'));
+                        $("#nationselect").val(_temp['city']).trigger("change");   
+                        $("[name='XY_b09']").val(_temp['XY_b09']).trigger("change");   
+                        $("[name='XY_b19']").val(_temp['XY_b19']).trigger("change");   
+                        $("#serviceselect").val(_temp['serviceselect']).trigger("change");    
+                        $("[name='XY_a01']").val(_temp['XY_a01']);
+
                     },
                     validatorError: function(mes, node) {
                         alert(mes);
