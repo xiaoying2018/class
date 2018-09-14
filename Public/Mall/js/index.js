@@ -203,11 +203,13 @@ $(function() {
                         };
 
                         var _temp = JSON.parse(utily.getStore('xy_banenr_form'));
-                        $("#nationselect").val(_temp['city']).trigger("change");   
-                        $("[name='XY_b09']").val(_temp['XY_b09']).trigger("change");   
-                        $("[name='XY_b19']").val(_temp['XY_b19']).trigger("change");   
-                        $("#serviceselect").val(_temp['serviceselect']).trigger("change");    
-                        $("[name='XY_a01']").val(_temp['XY_a01']);
+                        if (_temp) {
+                            $("#nationselect").val(_temp['city']).trigger("change");
+                            $("[name='XY_b09']").val(_temp['XY_b09']).trigger("change");
+                            $("[name='XY_b19']").val(_temp['XY_b19']).trigger("change");
+                            $("#serviceselect").val(_temp['serviceselect']).trigger("change");
+                            $("[name='XY_a01']").val(_temp['XY_a01']);
+                        }
 
                     },
                     validatorError: function(mes, node) {
