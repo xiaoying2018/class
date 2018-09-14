@@ -40,7 +40,7 @@ return [
         'api/search_all'          =>  'Mall/Index/searchAll', // 整站搜索
 
         // 拓课云 下课回调
-        'api/stu_room_singin'          =>  'Home/Student/class_end_callback', // 拓课云下课回调 学员自动签到
+        'api/stu_room_singin'          =>  'Home/Index/class_end_callback', // 拓课云下课回调 学员自动签到
 
         'teacher'                     =>  'teacher/View/index',     //课程
         'Lessonintor'                     =>  'Lessonintor/View/index',     //课程
