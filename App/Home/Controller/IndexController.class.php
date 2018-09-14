@@ -107,7 +107,7 @@ class IndexController extends Controller
                 // 请求学员签到的接口 学员学号=$stu_k 课节编号=$kejie_info['id']
                 $singIn_send_data['student_code'] = $stu_k;
                 $singIn_send_data['schedule_id'] = $kejie_info['id'];
-                $stu_login_status = json_decode(curlPost("http://crm.com/index.php?m=signIn&a=signin_in",'Content-type:application/x-www-form-urlencoded',$singIn_send_data));
+                $stu_login_status = json_decode(curlPost("http://crm.xiaoying.net/index.php?m=signIn&a=signin_in",'Content-type:application/x-www-form-urlencoded',$singIn_send_data));
                 // todo 签到请求后,将 $stu_login_status 写入签到记录日志
                 echo "<pre> success! ";
                 var_dump($singIn_send_data);
