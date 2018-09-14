@@ -22,6 +22,7 @@ return [
         // '/'                         =>  'Open/View/index',      // 主页 公开课
         'open'                      =>  'Open/View/index',      // 主页 公开课
         'open/detail'               =>  'Open/View/detail',     //详情
+        'update'                      =>  'Update/View/index',     //课程
 
         'mall'                     	=>  'Mall/View/index',     //课程
         'mall/detail'              =>  'Mall/View/detail',     //课程
