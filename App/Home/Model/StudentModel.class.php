@@ -83,4 +83,62 @@ class StudentModel extends RelationModel
             return 'mobile';
         }
     }
+
+    // 9-14 景老板测试
+    public function getValidCourse($studentId)
+    {
+        $studentInfo = $this->field('customer_id')->where(array('id'=>array('eq',$studentId)))->find();
+        //查询学生所签的合同
+
+        $contracts=D('contract')->field('contract_id,end_date')->where(array('customer_id'=>array('eq',$studentInfo['customer_id'])))->select();
+
+
+        if(empty($contracts)) return array();
+
+        foreach($contracts as $key=>$contract){
+            //如果到期时间小于当前时间，说明合同已经到期
+            if($contract['end_date']<time()){
+                unset($contracts[$key]);
+            }
+        }
+
+        if(empty($contracts)) return array();
+
+        $sales_ids_arr=array();
+        foreach ($contracts as $key=>$contract){
+            $sql ="select sales_id from mxcrm.mx_r_contract_sales where contract_id={$contract['contract_id']}";
+            $res=M()->query($sql);
+            if(!empty($res)){
+                foreach ($res as $k=>$v){
+                    $sales_ids_arr[]=$v['sales_id'];
+                }
+            }
+            continue;
+        }
+
+
+        if(empty($sales_ids_arr)) return array();
+
+        $product_ids_arr=array();
+        foreach ($sales_ids_arr as $key=>$sale){
+            $sql = "select product_id from mxcrm.mx_sales_product where sales_id={$sale}";
+            $res = M()->query($sql);
+            if(!empty($res)){
+                foreach ($res as $k=>$v){
+                    $product_ids_arr[]=$v['product_id'];
+                }
+            }
+            continue;
+        }
+
+        if(empty($product_ids_arr)) return array();
+        //根据product_id查询course_id
+        $res =M()->table('education.course_product')->field('course_id')->where(array('product_id'=>array('in',$product_ids_arr)))->select();
+        if(empty($res)) return array();
+        $course_ids_arr=array();
+        foreach ($res as $k=>$v){
+            $course_ids_arr[]=$v['course_id'];
+        }
+        return  $course_ids_arr;
+    }
 }
