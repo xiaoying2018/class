@@ -58,7 +58,7 @@ class StudentController extends BaseController
         $letterModel            =   new LetterModel();
 
         $scheduleData           =   $studentModel->studentSchedule($s_id);
-
+        
         $now                    =   time();
 
         // 学生信息
@@ -69,7 +69,6 @@ class StudentController extends BaseController
 
         //最新的站内信
         $newestLetter = $letterModel->getNewestLetter(['student_id'=>['eq',$s_id]]);
-
 
         // 课时信息
         if ($scheduleData)
@@ -94,7 +93,7 @@ class StudentController extends BaseController
                 }
                 // 8-27 end
 		  //获取当前的时间
-                 $current_time =time();
+                $current_time =time();
                 $start_time=strtotime($value['start_time']);
            
                 if(abs($current_time-$start_time)>7200){
@@ -103,16 +102,19 @@ class StudentController extends BaseController
                     $value['is_show']=1;
                 }
 
-                
-
                 // 8-29 获取当前课时的录播视屏 TODO wait
                 //$value['video_path'] = (new SectionModel())->find($value['section_id'])['video_path']?:'';
                // $sectionInfo = $sectionModel->field('video_path')->where('id='.$value['section_id'])->find();
 //                $sql=;
                // $sectionInfo = M('course_section')->field('video_path')->where('id='.$value['section_id'])->find();
-                $sectionInfo=M()->query('Select video_path from education.course_section where id='.$value['section_id'].' limit 1');
+                if ($value['section_id'])
+                {
+                    $sectionInfo=M()->query('Select video_path from education.course_section where id='.$value['section_id'].' limit 1');
 
-                $value['video_path'] =$sectionInfo?$sectionInfo[0]['video_path']:'';
+                    $value['video_path'] =$sectionInfo?$sectionInfo[0]['video_path']:'';
+                }else{
+                    $value['video_path'] = '';
+                }
                 // 8-29 end
 //                dump( M()->getLastSql());
 //                dump( $value['video_path']);
