@@ -95,17 +95,25 @@ $(function() {
             }
             this.gettuijian();
             $(document).on('click', '.tabHeader li', function() {
+                $(this).addClass("active").siblings().removeClass("active");
                 var _flag = $(this).attr("data-flag");
                 $("body, html").animate({
-                    scrollTop: $(".tabcontent."+_flag).offset().top - 120
+                    scrollTop: $(".tabcontent."+_flag).offset().top - 150
                 }, 600)
             })
             $(document).on('click', '#video_part .close', function() {
                 $("#video_part").html("").hide();
             })
+            fixDiv($(".tabHeader"), "fixed_pc", 450);
         }
     })
-
+    function fixDiv(t, e, o) {
+        var n = 0;
+        $(window).scroll(function() {
+            n = document.documentElement.scrollTop > 0 ? document.documentElement.scrollTop : document.body.scrollTop,
+            n >= o ? t.addClass(e) : o > n && t.removeClass(e)
+        })
+    }
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
