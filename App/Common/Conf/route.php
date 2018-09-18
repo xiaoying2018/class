@@ -30,6 +30,8 @@ return [
         'mall/detail'              =>  'Mall/View/detail',     //课程
         'api/mall'                 	=>  'Mall/Index/search',   //课程数据
 
+        'api/mycourse'            =>  'Mall/Index/mycourse',   //我的课程
+
         'api/opencourse'          =>  'Mall/Index/getOpenCourse', // 公开课
         'api/zhibocourse'          =>  'Mall/Index/getZhiboCourse', // 直播课
         'api/xiaoneikaocourse'          =>  'Mall/Index/getXiaoneiCourse', // 校内考课
