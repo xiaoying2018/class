@@ -99,7 +99,6 @@ $(function() {
                 $(this).addClass("active").siblings().removeClass("active");
                 $(".tabcontent").hide();
                 $(".tabcontent."+_flag).show();
-
             })
             $(document).on('click', '#video_part .close', function() {
                 $("#video_part").html("").hide();
