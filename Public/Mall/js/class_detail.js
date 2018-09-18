@@ -96,9 +96,9 @@ $(function() {
             this.gettuijian();
             $(document).on('click', '.tabHeader li', function() {
                 var _flag = $(this).attr("data-flag");
-                $(this).addClass("active").siblings().removeClass("active");
-                $(".tabcontent").hide();
-                $(".tabcontent."+_flag).show();
+                $("body, html").animate({
+                    scrollTop: $(".tabcontent."+_flag).offset().top - 120
+                }, 600)
             })
             $(document).on('click', '#video_part .close', function() {
                 $("#video_part").html("").hide();

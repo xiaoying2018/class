@@ -59,7 +59,10 @@
                         <li class="active" data-flag="tab1">课程详情</li>
                         <li data-flag="tab2" v-if="detail.sections && detail.sections.length > 0">课程表</li>
                     </ul>
-                    <div id="desc_content" class="tabcontent tab1 active" v-html="detail.detail"></div>
+                    <div id="desc_content" class="tabcontent tab1 active">
+                        <h3 class="s_s_title">课程详情</h3>
+                        <div v-html="detail.detail"></div>
+                    </div>
                     <div class="tabcontent tab2" v-if="detail.sections && detail.sections.length > 0">
                         <h3 class="s_s_title">课程表</h3>
                         <ul class="curriculum-ul course1">
@@ -116,10 +119,7 @@
 
         $(function(){
             window.onload = function() {
-                console.log($('#desc_content img'));
                 $('#desc_content img').each(function() {
-                    console.log($('#desc_content img'));
-                    console.log("http://crm.xiaoying.net"+$(this).attr("src"));
                     $(this).attr("src","http://crm.xiaoying.net"+$(this).attr("src"));
                 })
             }
