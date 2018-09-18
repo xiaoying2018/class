@@ -17,7 +17,9 @@ return [
 
 
     'URL_MAP_RULES'         =>  [
-    	
+        'xiaoying'                         =>  'Xiaoying/View/index',     //课程
+    	'studyingabroad'       =>  'Studying/View/index', //留学申请
+
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
         'open'                      =>  'Open/View/index',      // 主页 公开课
