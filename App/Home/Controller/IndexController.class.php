@@ -102,7 +102,8 @@ class IndexController extends Controller
         // 如果学员在当前房间累积在线时间不小于 当前房间时长n分钟-20分钟 则请求学员签到的接口
         foreach ($stu_list as $stu_k => $stu_v) {
             // PS: 课时时长单位是分钟,学员在教室停留的时长单位是秒,所以$section_length需要*60
-            if ($stu_v['in_room_time'] > (60 * ($section_length - 20) ))
+            // if ($stu_v['in_room_time'] > (60 * ($section_length - 20) ))
+            if (($stu_v['in_room_time'] > 1) && !strstr($stu_k,'-'))
             {
                 // 请求学员签到的接口 学员学号=$stu_k 课节编号=$kejie_info['id']
                 $singIn_send_data['student_code'] = $stu_k;
@@ -111,7 +112,7 @@ class IndexController extends Controller
                 // todo 签到请求后,将 $stu_login_status 写入签到记录日志
                 echo "<pre> success! ";
                 var_dump($singIn_send_data);
-                var_dump($stu_login_status);
+                var_dump($stu_v['in_room_time']);
             }
         }
         

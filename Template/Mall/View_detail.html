@@ -59,7 +59,7 @@
                         <li class="active" data-flag="tab1">课程详情</li>
                         <li data-flag="tab2" v-if="detail.sections && detail.sections.length > 0">课程表</li>
                     </ul>
-                    <div class="tabcontent tab1 active" v-html="detail.detail"></div>
+                    <div id="desc_content" class="tabcontent tab1 active" v-html="detail.detail"></div>
                     <div class="tabcontent tab2" v-if="detail.sections && detail.sections.length > 0">
                         <h3 class="s_s_title">课程表</h3>
                         <ul class="curriculum-ul course1">
@@ -112,6 +112,20 @@
     <script src="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.js"></script>
     <script src="../../Public/Mall/js/scrollReveal.min.js"></script>
     <script src="__PUBLIC__/Mall/js/class_detail.js"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            window.onload = function() {
+                console.log($('#desc_content img'));
+                $('#desc_content img').each(function() {
+                    console.log($('#desc_content img'));
+                    console.log("http://crm.xiaoying.net"+$(this).attr("src"));
+                    $(this).attr("src","http://crm.xiaoying.net"+$(this).attr("src"));
+                })
+            }
+        });
+        
+    </script>
 </body>
 
 </html>
