@@ -18,7 +18,11 @@ return [
 
     'URL_MAP_RULES'         =>  [
         'xiaoying'                         =>  'Xiaoying/View/index',     //课程
-    	'studyingabroad'       =>  'Studying/View/index', //留学申请
+        'studyingabroad'       =>  'Studying/View/index', //留学申请
+        'studyingabroad/result'       =>  'Studying/View/result', //留学申请
+
+        'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
+    	'school/jp'       =>  'School/View/jp', //日本大学
 
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课

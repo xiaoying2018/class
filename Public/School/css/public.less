@@ -1,0 +1,57 @@
+@import url("../../Common/css/function.less");
+.banner{
+	background-image: url("../img/banner.jpg");
+	width: 100%;
+	height: 428px;
+	background-size: cover;
+	background-position: center;
+	.container{
+		img{
+			display: block;
+			float: right;
+		}
+	}
+	.banner_font{
+		position: absolute;
+		right: 60px;
+		top: 230px;
+	}
+	.banner_tilte_a{
+		position: absolute;
+		right: 90px;
+		top: 20px;
+	}
+	.banner_tile_b{
+		position: absolute;
+		right: 90px;
+		top: 320px;
+	}
+}
+.selectcity{
+	height: 50px;
+	margin-top: -50px;
+	font-size: 0;
+	.city_item{
+		padding: 0 20px;
+		min-width: 150px;
+		height: 50px;
+		line-height:50px;
+		display: inline-block;
+		font-size: 16px;
+		color: #3d3c3c;
+		vertical-align: top;
+		text-align: center;
+		background-color: #fff;
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+		margin-right: 15px;
+		.transition();
+		&:hover{
+			background-color: #FFD700;
+			cursor: pointer;
+		}
+		&.active{
+			background-color: #ffe14b;
+		}
+	}
+}

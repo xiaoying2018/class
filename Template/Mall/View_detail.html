@@ -69,7 +69,7 @@
                             <li class="js-show" v-for="n in detail.sections">
                                 <img src="../../Public/Mall/img/play_b.png" alt="" class="play">
                                 <div class="jm-fl">
-                                    <p>{{n.node}}. {{n.name}}</p>
+                                    <p>{{n.name}}</p>
                                     <p>时长：{{n.duration}}分钟</p>
                                 </div>
                                 <img v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && detail.is_open == 1)" src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">

@@ -1,5 +1,5 @@
 <?php
-namespace Studying\Controller;
+namespace School\Controller;
 
 use Home\Model\CourseBespeakModel;
 use Think\Controller;
@@ -10,7 +10,11 @@ class ViewController extends Controller
     {
         $this->display();
     }
-    public function result()
+    public function jp()
+    {
+        $this->display();
+    }
+    public function jpyy()
     {
         $this->display();
     }

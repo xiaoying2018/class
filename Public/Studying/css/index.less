@@ -167,6 +167,131 @@
 			    display: block;
 			    margin: 0 auto;
 			    margin-bottom: 90px;
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+    .resultDv{
+        text-align: center;
+        margin-top: 40px;
+        li{
+            background-image: url("../img/result_icon.png");
+            background-size: cover;
+            display: inline-block;
+            margin: 0 5px;
+            &.green{
+                width: 250px;
+                height: 76px;
+            }
+            &.time{
+                background-position: -253px 0px;
+                width: 230px;
+                height: 76px;
+            }
+            &.course{
+                background-position: -492px 0;
+                width: 230px;
+                height: 76px;
+            }
+            &.project{
+                background-position: -726px 0;
+                width: 264px;
+                height: 76px;
+            }
+        }
+    }
+    .result{
+        padding: 40px 50px;
+        .h3_title{
+            font-size: 26px;
+            text-align: center;
+            display: block;
+            border-bottom:1px solid #ffd900;
+            padding-bottom: 30px;
+        }
+        .list{
+            .item{
+                padding: 40px 0;
+                border-bottom:1px solid #e9e7e7;
+                &:last-child{
+                    border: medium none;
+                }
+                .imgDv{
+                    border: 1px solid #efefef;
+                    border-radius: 4px;
+                    position: relative;
+                    float: left;
+                    width: 220px;
+                    height: 166px;
+                    img{
+                        position: absolute;
+                        width: 30%;
+                        left: 0;
+                        right: 0;
+                        top: 0;
+                        bottom: 0;
+                        margin: auto;
+                        max-width: 40%;
+                    }
+                }
+                .info{
+                    width: 850px;
+                    float: right;
+                    table{
+                        width: 100%;
+                        td{
+                            width: 50%;
+                            line-height: 32px;
+                        }
+                        .td_name{
+                            line-height: 48px;
+                            span{
+                                font-size: 16px;
+                                color: #252525;
+                                background-color: #ffd900;
+                                padding: 6px 12px;
+                                border-radius: 3px;
+                                font{
+                                    font-size: 16px;
+                                    color: #727272;
+                                }
+                            }
+                        }
+                        .td_title{
+                            font-size: 16px;
+                            color: #252525;
+                            text-align: left;
+                        }
+                        .td_content{
+                            font-size: 16px;
+                            color: #5e5d5d;
+                            text-align: left;
+                            margin-left: 10px;
+                            &.ul{
+                                width: 760px;
+                                display: inline-block;
+                                vertical-align: top;
+                            }
+                            .major_list{
+                                .s_item{
+                                    display: inline-block; 
+                                    background-color: #fff8cd;
+                                    color: #5e5d5d;
+                                    padding: 0 8px;
+                                    font-size: 14px;
+                                }
+                            }
+                        }
+                        .dedtail_desc{
+                            font-size: 14px;
+                            color: #434343;
+                            background-color: #fffef6;
+                            padding: 10px 10px;
+                            margin-top: 15px;
+                        }
+                    }
+                }
             }
         }
     }

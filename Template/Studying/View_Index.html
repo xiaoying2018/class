@@ -22,11 +22,7 @@
 <body>
     <include file="./Template/Open/View_header.html"/>
     <div id="studying" class="marginTop">
-        <div class="banner">
-            <img src="../../Public/Studying/img/banner_left.jpg" alt="" class="banner_left" data-sr="enter left hustle 150px over 1s">
-            <img src="../../Public/Studying/img/banner_right.jpg" alt="" class="banner_right" data-sr="enter right hustle 150px over 1.2s">
-            <img src="../../Public/Studying/img/banner_yello.png" alt="" class="banner_yello" data-sr="enter top hustle 150px over 1.4s">
-        </div>
+        <include file="./Template/Studying/View_Banner.html" />
         <div class="main container">
             <div class="titleDv">
                 测一测你能否考入日本名校？
@@ -114,7 +110,7 @@
                         <input type="text" class="input_form">
                     </div>
                 </div>
-                <button class="xy_submit">确定</button>
+                <a class="xy_submit" href="/studyingabroad/result">确定</a>
             </div>
         </div>
     </div>

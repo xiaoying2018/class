@@ -1,0 +1,40 @@
+@import url("../../Common/css/function.less");
+.lineDv{
+	margin: 20px 0;
+	.s_title{
+		font-size: 16px;
+	    color: #252525;
+	    width: 105px;
+	    float: left;
+	    height: 40px;
+	    line-height: 40px;
+	    font-weight: 600;
+	}
+	.listul{
+		font-size: 0;
+		float: left;
+		.item{
+			font-size: 14px;
+			color: #3d3c3c;
+			background-color: #fffced;
+			display: inline-block;
+			padding: 10px 16px;
+			margin-right: 10px;
+			.transition();
+			&:hover{
+				background-color: #ffe14b;
+				cursor: pointer;
+			}
+			&.active{
+				background-color: #ffe14b;
+			}
+		}
+	}
+	.select2{
+		span{
+			height: 37px !important;
+			line-height:37px !important;
+			outline: none;
+		}
+	}
+}

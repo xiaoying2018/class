@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>日本语言学校-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/School/css/jpyy.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="http://crm.xiaoying.net/Public/js/xiaoying_form.js"></script>
+</head>
+<body>
+    <include file="./Template/Open/View_header.html"/>
+    <div id="jpyy" class="marginTop">
+        <include file="./Template/School/View_Banner.html" />
+        <div class="container choosepart">
+            <div class="lineDv clearfix">
+                <span class="s_title">热门排行：</span>
+                <ul class="listul">
+                    <li class="item" v-for="n in 5">规模较大的语言学校</li>
+                </ul>
+            </div>
+            <div class="lineDv clearfix">
+                <span class="s_title">选择地区：</span>
+                <select name="" id="area" class="select2" width="290">
+                    <option value="">北海道</option>
+                    <option value="">东北</option>
+                    <option value="">关东</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_loading.html"/>
+    <include file="./Template/Common/View_footer.html"/>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Mall/js/scrollReveal.min.js"></script>
+    <script src="../../Public/School/js/jpyy.js"></script>
+</body>
+
+</html>
