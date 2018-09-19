@@ -1,40 +1,115 @@
 @import url("../../Common/css/function.less");
-.lineDv{
-	margin: 20px 0;
-	.s_title{
-		font-size: 16px;
-	    color: #252525;
-	    width: 105px;
-	    float: left;
-	    height: 40px;
-	    line-height: 40px;
-	    font-weight: 600;
-	}
-	.listul{
-		font-size: 0;
-		float: left;
-		.item{
-			font-size: 14px;
-			color: #3d3c3c;
-			background-color: #fffced;
-			display: inline-block;
-			padding: 10px 16px;
-			margin-right: 10px;
-			.transition();
-			&:hover{
-				background-color: #ffe14b;
-				cursor: pointer;
-			}
-			&.active{
-				background-color: #ffe14b;
-			}
-		}
-	}
-	.select2{
-		span{
-			height: 37px !important;
-			line-height:37px !important;
-			outline: none;
-		}
-	}
+.lineDv {
+    margin: 20px 0;
+    .s_title {
+        font-size: 16px;
+        color: #252525;
+        width: 105px;
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        font-weight: 600;
+    }
+    .inputDv {
+        position: relative;
+        width: 500px;
+        float: left;
+        height: 37px;
+        line-height: 37px;
+        border: 1px solid #ffd900;
+        border-radius: 5px;
+        input {
+            height: 20px;
+            line-height: 20px;
+            font-size: 14px;
+            padding: 0 10px;
+            padding-right: 60px;
+            width: 100%;
+            outline: none;
+            border: medium none;
+        }
+        .search {
+            background-image: url("../img/search_icon.png");
+            width: 70px;
+            height: 35px;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+    .listul {
+        font-size: 0;
+        float: left;
+        .item {
+            font-size: 14px;
+            color: #3d3c3c;
+            background-color: #fffced;
+            display: inline-block;
+            padding: 10px 16px;
+            margin-right: 10px;
+            .transition();
+            &:hover {
+                background-color: #ffe14b;
+                cursor: pointer;
+            }
+            &.active {
+                background-color: #ffe14b;
+            }
+        }
+    }
+    .select2 {
+        float: left;
+        margin-right: 30px;
+        span {
+            height: 37px !important;
+            line-height: 37px !important;
+            outline: none;
+        }
+        .select2-selection--single {
+            border-color: #ffd900 !important;
+        }
+        .select2-selection__arrow {
+            background: #ffd900;
+            width: 60px !important;
+            top: 0 !important;
+        }
+    }
+    &.choose {
+        .listul {
+            .item {
+                background: none;
+                .transition();
+                border-radius: 5px;
+                &:hover {
+                    background-color: #ffd900;
+                    cursor: pointer;
+                }
+                &.active {
+                    background-color: #ffd900;
+                }
+            }
+        }
+    }
+}
+
+.resultPart {
+    .search_title {
+        font-size: 16px;
+        color: #3d3c3c;
+        font {
+            color: #e90101;
+            padding: 0 5px;
+        }
+    }
+    .schoolList {
+        .item_school {
+            box-shadow: 0 0px 30px 3px #ebebeb;
+            padding: 20px;
+            &:hover {
+                box-shadow: 0 0px 30px 3px #ebebeb;
+            }
+        }
+    }
 }

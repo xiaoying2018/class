@@ -30,6 +30,13 @@
                     <li class="item" v-for="n in 5">规模较大的语言学校</li>
                 </ul>
             </div>
+            <div class="lineDv choose clearfix">
+                <span class="s_title">学校名称：</span>
+                <div class="inputDv">
+                    <input type="text" placeholder="请输入学校名称">
+                    <i class="search"></i>
+                </div>
+            </div>
             <div class="lineDv clearfix">
                 <span class="s_title">选择地区：</span>
                 <select name="" id="area" class="select2" width="290">
@@ -37,7 +44,28 @@
                     <option value="">东北</option>
                     <option value="">关东</option>
                 </select>
+                <span class="s_title">选择城市：</span>
+                <select name="" id="city" class="select2" width="290">
+                    <option value="">北海道</option>
+                    <option value="">东北</option>
+                    <option value="">关东</option>
+                </select>
             </div>
+            <div class="lineDv choose clearfix">
+                <span class="s_title">学费：</span>
+                <ul class="listul">
+                    <li class="item active" @click="change('cost_fee','')">不限</li>
+                    <li class="item" v-for="n in tuition" @click="change('cost_fee',n.id)">{{n.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="resultPart container">
+            <h3 class="search_title">共找到<font>588</font>所学校</h3>
+            <ul class="schoolList">
+                <li class="item_school">
+                    123
+                </li>
+            </ul>
         </div>
     </div>
     <include file="./Template/Common/View_loading.html"/>

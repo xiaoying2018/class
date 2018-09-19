@@ -23,6 +23,7 @@ return [
 
         'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
     	'school/jp'       =>  'School/View/jp', //日本大学
+        'advantage'     =>  'Advantage/View/index',
 
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
