@@ -58,7 +58,7 @@ class StudentController extends BaseController
         $letterModel            =   new LetterModel();
 
         $scheduleData           =   $studentModel->studentSchedule($s_id);
-        
+
         $now                    =   time();
 
         // 学生信息
@@ -75,6 +75,11 @@ class StudentController extends BaseController
         {
 
             foreach ($scheduleData as $key => $value){
+
+//                重新查询学员签到情况，判断之前的条件是否正确
+//                $qd_model = M('schedule_signin');
+//                $qd_status = $qd_model->where(['schedule_id'=>['eq',$value['schedule_id']],'student_id'=>['eq',$value['stu_id']]])->find()['status']?:0;
+//                $value['signin_status'] = $qd_status;
 
                 // 8-27 如果当前课程有房间号码,添加进入房间的链接 TODO wait
                 if ($value['serial'])
