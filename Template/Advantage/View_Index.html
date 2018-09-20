@@ -15,13 +15,14 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
     <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="../../Public/plugin/swiper4/swiper.min.css">
     <link rel="stylesheet" href="__PUBLIC__/advantage/css/index.css">
     <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
     <include file="./Template/Common/View_header_class.html" />
-    <div class="marginTop">
+    <div class="marginTop" id="advantage">
         <div class="banner">
         	<div class="container clearfix">
         		<img src="../../Public/advantage/img/banner_teacher.png" alt="" class="banner_teacher" data-sr="enter left hustle 150px over 1s">
@@ -50,16 +51,133 @@
         		</div>
         	</div>
         </div>
-        <div class="main_content">
+        <div class="main_content container">
             <div class="titleDv">
                 8年耕耘丰富的案例与院校导师数据储备<br />
                 <span class="en_font">Rich case and college tutor data reserve</span>
+            </div>
+            <ul class="listDv">
+                <li class="itemli clearfix">
+                    <i></i>
+                    <p>50万<br />条案例数据</p>
+                </li>
+                <li class="itemli clearfix">
+                    <i class="b"></i>
+                    <p>100万<br />条项目与教授数据</p>
+                </li>
+                <li class="itemli clearfix">
+                    <i class="c"></i>
+                    <p>5000所<br />学校数据</p>
+                </li>
+            </ul>
+            <div class="info clearfix">
+                <div class="font_desc">
+                    <h3>小莺出国数据储备</h3>
+                    <p>基于多年的留学服务行业经验与申请数据积累，小莺将海量的日本大学申请信息，案例数据，招生要求，申请导师信息，最新录取趋势融入到申请系统中，为学员提供客观全面的申请数据支持。</p>
+                </div>
+                <div class="imgDv">
+                    <img src="../../Public/advantage/img/activity.jpg" alt="" class="activity">
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #f9f9f9; padding: 40px 0;" class="teacher">
+            <div class="container">
+                <div class="titleDv">
+                    名校顾问讲师团队<br />
+                    <span class="en_font">Famous school consultant lecturer team</span>
+                </div>
+                <div class="swiper-container gallery-top">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide clearfix" style="background-image:url('../../Public/teacher/img/sliderbg.png')" v-for="n in 14">
+                            <img src="../../Public/teacher/img/t1.png" alt="" class="t_img">
+                            <div class="info">
+                                <h4><font style="font-size: 20px; font-weight: 600">简依梦</font> 老师</h4>
+                                <p>
+                                    精英计划高级学术顾问
+                                    <br /> 御茶水女子大学社会学，私塾社会学大学院课程主讲，行业经验丰富，深受学员喜爱。
+                                    <br /> 擅长SGU英文项目/院生直考课程/研究生申请等项目，顶级院校升学辅导案例众多。
+                                </p>
+                            </div>
+                            <div class="trans">
+                                <img src="../../Public/teacher/img/trans.png" alt="">
+                                <p><font style="font-size: 22px; color: #000;">金牌讲师</font><br />Gold lecturer</p>
+                            </div>
+                            <a href="javascript:;" class="mes_now" onclick="_MEIQIA('showPanel')">立即咨询</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-container gallery-thumbs">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" v-for="n in 14">
+                            <img src="../../Public/teacher/img/t1.png" alt="" class="s_img">
+                        </div>
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                </div>
+            </div>
+        </div>
+        <div class="improve">
+            <div class="container">
+                <div class="titleDv">
+                    全面实力提升<br />
+                    <span class="en_font">Strength improvement</span>
+                </div>
+                <div class="innerDv">
+                    <img src="../../Public/advantage/img/search.png" alt="" class="search">
+                    <div class="circleDv" style="left: 150px;top: 170px;">
+                        <p>
+                            <font style="color: #f6ca53">01</font>
+                            语言能力,逻辑思维
+                        </p>
+                        <i></i>
+                    </div>
+                    <div class="circleDv" style="right: 180px;top: 170px;">
+                        <i class="green"></i>
+                        <p>
+                            <font style="color: #00c29a">02</font>
+                            实战能力,团队协作
+                        </p>
+                    </div>
+                    <div class="circleDv" style="left: 150px;top: 370px;">
+                        <p>
+                            <font style="color: #0099e5">03</font>
+                            专业知识,科研能力
+                        </p>
+                        <i class="blue"></i>
+                    </div>
+                    <div class="circleDv" style="right: 180px;top: 370px;">
+                        <i class="orange"></i>
+                        <p>
+                            <font style="color: #f87500">03</font>
+                            独立能力,融入海外
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="bt_a"></div>
+            <div class="bt_b"></div>
+            <div class="bt_c"></div>
+            <div class="bt_d"></div>
+            <div class="bt_e"></div>
+            <div class="bt_f"></div>
+        </div>
+        <div class="bottompart container">
+            <div class="innerDv">
+                <div class="border_line top"></div>
+                <div class="border_line bottom"></div>
+                <div class="border_line tleft"></div>
+                <div class="border_line tright"></div>
+                <h3>完善的海外后续服务</h3>
+                <p>申请到了没人管？海外租房怕被砍?<br />小莺海外管家服务万事无忧</p>
             </div>
         </div>
     </div>
     <include file="./Template/Common/View_footer.html" />
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
     <script src="__PUBLIC__/Mall/js/scrollReveal.min.js"></script>
+    <script src="../../Public/plugin/swiper4/swiper.min.js"></script>
     <script src="../../Public/advantage/js/index.js"></script>
 </body>
 
