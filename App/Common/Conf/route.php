@@ -22,7 +22,8 @@ return [
         'studyingabroad/result'       =>  'Studying/View/result', //留学申请
 
         'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
-    	'school/jp'       =>  'School/View/jp', //日本大学
+        'school/jp'       =>  'School/View/jp', //日本大学
+    	'school/jp/detail'       =>  'School/View/JpDetail', //日本大学
         'advantage'     =>  'Advantage/View/index',
         'onlinemall'     =>  'OnlineMall/View/index',
         'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
