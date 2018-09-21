@@ -18,4 +18,8 @@ class ViewController extends Controller
     {
         $this->display();
     }
+    public function JpDetail()
+    {
+        $this->display();
+    }
 }
