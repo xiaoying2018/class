@@ -114,8 +114,9 @@ class StudentController extends BaseController
                // $sectionInfo = M('course_section')->field('video_path')->where('id='.$value['section_id'])->find();
                 if ($value['section_id'])
                 {
-                    $sectionInfo=M()->query('Select video_path from education.course_section where id='.$value['section_id'].' limit 1');
+                    $sectionInfo=M()->query('Select video_path,course_id from education.course_section where id='.$value['section_id'].' limit 1');
 
+                    $value['kecheng_id'] =$sectionInfo?$sectionInfo[0]['course_id']:'';
                     $value['video_path'] =$sectionInfo?$sectionInfo[0]['video_path']:'';
                 }else{
                     $value['video_path'] = '';
