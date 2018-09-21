@@ -25,6 +25,7 @@ return [
     	'school/jp'       =>  'School/View/jp', //日本大学
         'advantage'     =>  'Advantage/View/index',
         'onlinemall'     =>  'OnlineMall/View/index',
+        'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
 
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
