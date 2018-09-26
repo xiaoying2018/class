@@ -613,6 +613,7 @@ class SectionCateModel extends EModel
                         $all_banji[$banji_k]['section_num'] = M('course_section')->where(['course_id'=>['in',$course_ids]])->count();
                     }else{
                         $all_banji[$banji_k]['section_num'] = 0;
+                        $all_banji[$banji_k]['show_course'] = [];
                     }
                 }
 
