@@ -105,6 +105,15 @@ $(function() {
                 $("#video_part").html("").hide();
             })
             fixDiv($(".tabHeader"), "fixed_pc", 450);
+
+            // $(window).bind("scroll", function() {
+            //     var e = $(window).scrollTop();
+            //     e < Math.floor($("#tab1").offset().top) ? ($(".tabHeader li:eq(0)").removeClass("active"),
+            //     $(".tabHeader li:eq(0)").addClass("active")) : e < Math.floor($("#tab1").offset().top) ? ($(".tabHeader li").removeClass("active"),
+            //     $(".tabHeader li:eq(1)").addClass("active")) : e < Math.floor($("#tab2").offset().top) ? ($(".tabHeader li").removeClass("active"),
+            //     $(".tabHeader li:eq(2)").addClass("active")) : e < Math.floor($("#tab3").offset().top) + 475 && ($(".tabHeader li").removeClass("active"),
+               
+            // })
         }
     })
     function fixDiv(t, e, o) {

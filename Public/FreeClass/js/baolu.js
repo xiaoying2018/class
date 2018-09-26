@@ -4,6 +4,8 @@ $(function() {
         el: '#baolu',
         data: {
             request:{
+                page:1,
+                limit:12,
                 category:"",
                 sort_by_people_num:"",
             },
@@ -42,7 +44,9 @@ $(function() {
         },
         methods: {
             condit: function(key,val){
+                this.request.page = 1;
                 this.request[key] = val;
+                this.lists = [];
                 this.getdata();
             },      
             getdata: function(){
@@ -53,16 +57,11 @@ $(function() {
                     type:"post",
                     success:function(_res){
                         if (_res.result) {
-                            _this.lists = _res.data.banji;
-
-                            
-                             _this.$nextTick(function() {
-
-                                $('.list_Ul').append($("#ullist").html());
-                               
-                            })
-
-                            _this.lock = true;
+                            _this.lists = _this.lists.concat(_res.data.banji);
+                            _this.request.page = _this.request.page + 1;
+                            if (_res.data.banji.length > 0) {
+                                _this.lock = true;
+                            }
                         } else {
                             _this.lock = false;
                         }
@@ -87,7 +86,7 @@ $(function() {
                 if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
                     _this.lock = false;
                     // console.log('scroll',_this.query.page);
-                    _this.getData();
+                    _this.getdata();
                 }
             });
 
