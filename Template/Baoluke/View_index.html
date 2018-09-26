@@ -52,8 +52,9 @@
                     </ul>
                     <!-- <a href="">更多课程></a> -->
                 </div>
-                <ul class="ullist" data-sr="enter top hustle 50px over 1s">
-                    <li class="li" v-for="n in lists">
+                <ul class="list_Ul"></ul>
+                <ul class="ullist" data-sr="enter top hustle 50px over 1s" id="ullist" style="display: block;">
+                    <li class="li item_li" v-for="n in lists">
                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                             <div class="imgDv">
                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">

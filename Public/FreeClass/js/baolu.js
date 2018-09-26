@@ -5,9 +5,11 @@ $(function() {
         data: {
             request:{
                 category:"",
-                sort_by_people_num:""
+                sort_by_people_num:"",
             },
-            lists:[]
+            lists:[],
+            lock: true
+
         },
         filters: {
             filtertime: function(val){
@@ -51,19 +53,44 @@ $(function() {
                     type:"post",
                     success:function(_res){
                         if (_res.result) {
-                            _this.lists = _res.data.banji
+                            _this.lists = _res.data.banji;
+
+                            
+                             _this.$nextTick(function() {
+
+                                $('.list_Ul').append($("#ullist").html());
+                               
+                            })
+
+                            _this.lock = true;
+                        } else {
+                            _this.lock = false;
                         }
+
                     }
                 })
             }
         },
         mounted: function() {
-            this.getdata();
+            var _this = this;
+            _this.getdata();
             $(".s_nav li").eq(6).addClass('active');
 
             $(".topcondit li,.paixu li").click(function(){
                 $(this).addClass("active").siblings().removeClass("active");
             })
+
+            $(window).scroll(function() {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
+                    _this.lock = false;
+                    // console.log('scroll',_this.query.page);
+                    _this.getData();
+                }
+            });
+
         }
     })
 });

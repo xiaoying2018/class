@@ -81,18 +81,17 @@
             </div>
             <div class="waijiao container">
                 <div class="titleDv">
-                    <span>严选日本外教</span> 认真负责，具备丰富教学经验的日本本土外教
+                    <span>严选海外名师团队</span>具备丰富教学与留留学规划经验
                 </div>
                 <div class="swiper-container gallery-top">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide clearfix" style="background-image:url('../../Public/teacher/img/sliderbg.png')" v-for="n in 14">
-                            <img src="../../Public/teacher/img/t1.png" alt="" class="t_img">
+                        <div class="swiper-slide clearfix" style="background-image:url('../../Public/teacher/img/sliderbg.png')" v-for="n in academic">
+                            <img :src="n.img" alt="" class="t_img">
                             <div class="info">
-                                <h4><font style="font-size: 20px; font-weight: 600">简依梦</font> 老师</h4>
+                                <h4><font style="font-size: 20px; font-weight: 600">{{n.name}}</font> 老师</h4>
                                 <p>
-                                    精英计划高级学术顾问
-                                    <br /> 御茶水女子大学社会学，私塾社会学大学院课程主讲，行业经验丰富，深受学员喜爱。
-                                    <br /> 擅长SGU英文项目/院生直考课程/研究生申请等项目，顶级院校升学辅导案例众多。
+                                    {{n.job}}
+                                    <br />{{n.desc}}
                                 </p>
                             </div>
                             <div class="trans">
@@ -105,8 +104,8 @@
                 </div>
                 <div class="swiper-container gallery-thumbs">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="n in 14">
-                            <img src="../../Public/teacher/img/t1.png" alt="" class="s_img">
+                        <div class="swiper-slide" v-for="n in academic">
+                            <img :src="n.img" alt="" class="s_img">
                         </div>
                     </div>
                     <!-- Add Arrows -->

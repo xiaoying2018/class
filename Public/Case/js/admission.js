@@ -310,7 +310,7 @@ $(function() {
                             // console.log(_this.pageCount);
 
                             _this.lists = res.data.list;
-                             $('.pageBox').pagination({
+                            $('.pageBox').pagination({
                                 pageCount: _this.pageCount,
                                 showData: _this.query.rows,
                                 current:  _this.query.page,

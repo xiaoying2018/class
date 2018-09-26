@@ -237,7 +237,8 @@ $(function() {
 
                             _this.$nextTick(function() {
                                 //瀑布流初始化
-                                if (_this.query.page == 2) {
+                               
+                                /*if (_this.query.page == 2) {
                                     $grid = $('.list_Ul').masonry({
                                         // columnWidth: 330,
                                         itemSelector: '.item_li',
@@ -246,16 +247,14 @@ $(function() {
                                     });
                                     $grid.masonry('reloadItems');
                                     $grid.masonry('layout');
-                                }
+                                }*/
 
                                 $('.list_Ul').append($("#model_list").html());
                                 $('.list_Ul li').addClass('show');
-                                $grid.masonry('reloadItems');
-                                $grid.masonry('layout');
+                                // $grid.masonry('reloadItems');
+                                // $grid.masonry('layout');
 
                             })
-
-
                             _this.lock = true;
                             $("#loader").fadeOut(450);
                         } else {
