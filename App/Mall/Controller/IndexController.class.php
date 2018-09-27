@@ -167,11 +167,26 @@ class IndexController extends Controller
         $current_stu_id = session('_student')['id'];// 获取当前学员ID
 
         if (!$current_stu_id) $this->ajaxReturn(['status'=>false,'msg'=>'非法请求']);
+
+        // 927 新增需求 课程课时改为两步请求
+        // 课程id
+        $course_id = intval(I('post.c_id'));
+        // 通过课程ID 获取当前课程的课时内容
+        if ($course_id)
+        {
+            $one_course_model = M('course_section_cate');
+            $one_courses = $one_course_model->where(['id'=>['eq',$course_id]])->find();
+            // 获取课程下的课时列表
+            $one_courses['sections'] = M('course_section')->where(['course_id'=>['eq',$one_courses['id']]])->order('node')->select()?:[];
+
+            $this->ajaxReturn(['status'=>true,'data'=>$one_courses]);
+        }
+        // 927 end
         
         // 获取当前学员所属班次ids $my_banci
         $stu_per_model = M('period_student');
         $my_banci = $stu_per_model->field('period_id,student_id')->where(['student_id'=>['eq',$current_stu_id]])->select();
-        
+
         if ($my_banci)
         {
             // 处理班次ids
