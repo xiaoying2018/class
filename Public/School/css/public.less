@@ -1,0 +1,284 @@
+@import url("../../Common/css/function.less");
+.banner{
+	background-image: url("../img/banner.jpg");
+	width: 100%;
+	height: 428px;
+	background-size: cover;
+	background-position: center;
+	.container{
+		img{
+			display: block;
+			float: right;
+		}
+	}
+	.banner_font{
+		position: absolute;
+		right: 60px;
+		top: 230px;
+	}
+	.banner_tilte_a{
+		position: absolute;
+		right: 90px;
+		top: 20px;
+	}
+	.banner_tile_b{
+		position: absolute;
+		right: 90px;
+		top: 320px;
+	}
+}
+.selectcity{
+	height: 50px;
+	margin-top: -50px;
+	font-size: 0;
+	.city_item{
+		padding: 0 20px;
+		min-width: 120px;
+		height: 50px;
+		line-height:50px;
+		display: inline-block;
+		font-size: 14px;
+		color: #3d3c3c;
+		vertical-align: top;
+		text-align: center;
+		background-color: #fff;
+		border-top-left-radius: 15px;
+		border-top-right-radius: 15px;
+		margin-right: 15px;
+		.transition();
+		box-shadow: 0px -4px 8px -4px #626262;
+		a{
+			display: block;
+		}
+		&:hover{
+			background-color: #FFD700;
+			cursor: pointer;
+		}
+		&.active{
+			background-color: #ffe14b;
+		}
+	}
+}
+
+.lineDv {
+    margin: 20px 0;
+    .s_title {
+        font-size: 16px;
+        color: #252525;
+        width: 105px;
+        float: left;
+        height: 40px;
+        line-height: 40px;
+        font-weight: 600;
+    }
+    .inputDv {
+        position: relative;
+        width: 500px;
+        float: left;
+        height: 37px;
+        line-height: 37px;
+        border: 1px solid #ffd900;
+        border-radius: 5px;
+        input {
+            height: 20px;
+            line-height: 20px;
+            font-size: 14px;
+            padding: 0 10px;
+            padding-right: 60px;
+            width: 100%;
+            outline: none;
+            border: medium none;
+        }
+        .search {
+            background-image: url("../img/search_icon.png");
+            width: 70px;
+            height: 35px;
+            background-size: cover;
+            position: absolute;
+            top: 0;
+            right: 0;
+            cursor: pointer;
+        }
+    }
+    .listul {
+        font-size: 0;
+        float: left;
+        .item {
+            font-size: 14px;
+            color: #3d3c3c;
+            background-color: #fffced;
+            display: inline-block;
+            padding: 10px 16px;
+            margin-right: 10px;
+            .transition();
+            &:hover {
+                background-color: #ffe14b;
+                cursor: pointer;
+            }
+            &.active {
+                background-color: #ffe14b;
+            }
+        }
+    }
+    .select2 {
+        float: left;
+        margin-right: 30px;
+        span {
+            height: 37px !important;
+            line-height: 37px !important;
+            outline: none;
+        }
+        .select2-selection--single {
+            border-color: #ffd900 !important;
+        }
+        .select2-selection__arrow {
+            background: #ffd900;
+            width: 60px !important;
+            top: 0 !important;
+        }
+    }
+    &.choose {
+        .listul {
+            .item {
+                background: none;
+                .transition();
+                border-radius: 5px;
+                &:hover {
+                    background-color: #ffd900;
+                    cursor: pointer;
+                }
+                &.active {
+                    background-color: #ffd900;
+                }
+            }
+        }
+    }
+}
+
+.resultPart {
+    .search_title {
+        font-size: 16px;
+        color: #3d3c3c;
+        font {
+            color: #e90101;
+            padding: 0 5px;
+        }
+    }
+    .schoolList {
+        margin: 40px auto;
+        margin-top: 20px;
+        .item_school {
+            border-bottom:1px solid #ebebeb;
+            padding: 30px 30px;
+            .transition();
+            &:hover {
+                box-shadow: 0 0px 30px 3px #ebebeb;
+            }
+            .imgDv{
+                width: 100px;
+                height: 140px;
+                position: relative;
+                img{
+                    width: 100px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            .info{
+                width: 800px;
+                margin-left: 50px;
+                .name{
+                    color: #2e2e2d;
+                    font-size: 16px;
+                }
+                .slistDv{
+                    font-size: 0;
+                    margin-top: 10px;
+                    .slineDv{
+                        font-size: 14px;
+                        color: #6b6b6b;
+                        width: 50%;
+                        display: inline-block;
+                        margin: 5px 0;
+                        a{
+                        	color:#5a7cff;
+                        }
+                        &.full{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            .btn-wapper{
+                padding-top: 10px;
+                a {
+                    display: block;
+                    width: 140px;
+                    height: 32px;
+                    border: none;
+                    border-radius: 4px;
+                    line-height: 32px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all .3s ease 0s;
+                    &.admissions{
+                        background: #2196f3;
+                        color: #fff;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+                    &.subscribe{
+                        color: #fff;
+                        background: #ff6136;
+                        margin-bottom: 10px;
+                        position: relative;
+                        text-indent: 35px;
+                    }
+                    &.apply{
+                        color: #ffd900;
+                        border: 1px solid #ffd900;
+                        box-sizing: border-box;
+                        background: #fff;
+                        text-align: center;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+.pageNav {
+    padding: 30px 0;
+    text-align: center;
+    li {
+        display: inline-block;
+    }
+    a {
+        .border-radius(5px);
+        padding: 11px 15px;
+        text-align: center;
+        color: #5b5a5a;
+        background-color: #fff;
+        border: 1px solid #c8c8c8;
+        display: inline-block;
+        margin-left: 5px;
+        .transition();
+        &.page {
+        }
+        &.active {
+            color: #fff;
+            background-color: #FFD900;
+            border-color: #c8c8c8;
+        }
+        &:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: #FFD900;
+            border-color: #c8c8c8;
+        }
+    }
+}

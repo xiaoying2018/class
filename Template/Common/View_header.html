@@ -71,7 +71,7 @@ var _hmt = _hmt || [];
                     <div class="searchPart">
                         <div>
                             <input type="text" name="">
-                            <select class="select2">
+                            <select class="select2" id="searchse">
                                 <option>学校</option>
                                 <option>专业</option>
                                 <option>课程</option>
@@ -203,7 +203,7 @@ var _hmt = _hmt || [];
             	}
                     this.getInfo();
 
-                $('.select2').select2({
+                $('#searchse').select2({
                     width:'80px',
     				minimumResultsForSearch: -1
                     // closeOnSelect: false

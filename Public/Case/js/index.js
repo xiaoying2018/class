@@ -97,8 +97,6 @@ $(function() {
                 var _this = this;
                 var el = event.target;
                 this.s_choose = item;
-                // console.log(JSON.stringify(item))
-
                 $('.in_ul li').removeClass('active');
                 $(el).addClass("active").siblings().removeClass("active");
 
@@ -238,7 +236,8 @@ $(function() {
 
                             _this.$nextTick(function() {
                                 //瀑布流初始化
-                                if (_this.query.page == 2) {
+                               
+                                /*if (_this.query.page == 2) {
                                     $grid = $('.list_Ul').masonry({
                                         // columnWidth: 330,
                                         itemSelector: '.item_li',
@@ -247,15 +246,14 @@ $(function() {
                                     });
                                     $grid.masonry('reloadItems');
                                     $grid.masonry('layout');
-                                }
+                                }*/
 
                                 $('.list_Ul').append($("#model_list").html());
                                 $('.list_Ul li').addClass('show');
-                                $grid.masonry('reloadItems');
-                                $grid.masonry('layout');
+                                // $grid.masonry('reloadItems');
+                                // $grid.masonry('layout');
 
                             })
-                            
                             _this.lock = true;
                             $("#loader").fadeOut(450);
                         } else {
@@ -264,28 +262,6 @@ $(function() {
                         }
                     }
                 })
-                // $.ajax({
-                //     url:"http://crm.xiaoying.net?m=case&a=search",
-                //     type:"POST",
-                //     data: _this.requet,
-                //     dataType:"json",
-                //     success:function(res){
-                //         if (res.status) {
-                            
-                //             _this.lists = res.data.list;
-
-                //             for (var i = 0; i < _this.lists.length; i++) {
-                //                 if(res.data.list[i].headfile) {
-                //                     _this.lists[i].head_file_path = res.data.list[i].headfile.file_path
-
-                //                 } else {
-                //                     _this.lists[i].head_file_path = '';
-                //                 }
-                //             }
-
-                //         }
-                //     }
-                // })
             },
             randomNum: function (minNum,maxNum) {
                 switch(arguments.length){ 

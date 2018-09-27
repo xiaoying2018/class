@@ -17,15 +17,33 @@ return [
 
 
     'URL_MAP_RULES'         =>  [
-    	
+        'xiaoying'                         =>  'Xiaoying/View/index',     //课程
+        'studyingabroad'       =>  'Studying/View/index', //留学申请
+        'studyingabroad/result'       =>  'Studying/View/result', //留学申请
+
+        'news'       =>  'Zixun/View/index', //资讯列表
+        'news/detail'       =>  'Zixun/View/detail', //资讯详情
+
+        'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
+        'school/jp'       =>  'School/View/jp', //日本大学
+        'school/kr'       =>  'School/View/kr', //韩国大学
+        'school/sg'       =>  'School/View/sg', //韩国大学
+    	'school/jp/detail'       =>  'School/View/JpDetail', //学校详情
+        'advantage'     =>  'Advantage/View/index',
+        'onlinemall'     =>  'OnlineMall/View/index',
+        'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
+
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
         'open'                      =>  'Open/View/index',      // 主页 公开课
         'open/detail'               =>  'Open/View/detail',     //详情
+        'update'                      =>  'Update/View/index',     //课程
 
         'mall'                     	=>  'Mall/View/index',     //课程
         'mall/detail'              =>  'Mall/View/detail',     //课程
         'api/mall'                 	=>  'Mall/Index/search',   //课程数据
+
+        'api/mycourse'            =>  'Mall/Index/mycourse',   //我的课程
 
         'api/opencourse'          =>  'Mall/Index/getOpenCourse', // 公开课
         'api/zhibocourse'          =>  'Mall/Index/getZhiboCourse', // 直播课
@@ -37,6 +55,9 @@ return [
         'api/matecate'          =>  'Mall/Index/getDocCate', // 资料分类
         'api/tuijian_banji'          =>  'Mall/Index/tuijianBanji', // 推荐班级
         'api/search_all'          =>  'Mall/Index/searchAll', // 整站搜索
+
+        // 拓课云 下课回调
+        'api/stu_room_singin'          =>  'Home/Index/class_end_callback', // 拓课云下课回调 学员自动签到
 
         'teacher'                     =>  'teacher/View/index',     //课程
         'Lessonintor'                     =>  'Lessonintor/View/index',     //课程

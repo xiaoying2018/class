@@ -1,4 +1,5 @@
-var utily = {}
+var utily = {};
+utily.manage_url = 'http://manage.com';
 /**
  * 存储localStorage
  */

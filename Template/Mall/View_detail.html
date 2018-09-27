@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
     <link href="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="__PUBLIC__/Mall/css/detail.css">
+    <link rel="stylesheet" href="__PUBLIC__/Mall/css/detail.css?v=201809261735">
     <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
     <script src="http://crm.xiaoying.net/Public/js/xiaoying_form.js"></script>
 </head>
@@ -56,23 +56,40 @@
             <div class="left l_part">
                 <div class="tabDv">
                     <ul class="tabHeader clearfix">
-                        <li class="active" data-flag="tab1">课程详情</li>
+                        <li class="active" data-flag="tab1">简介</li>
                         <li data-flag="tab2" v-if="detail.sections && detail.sections.length > 0">课程表</li>
+                        <li data-flag="tab3" v-if="detail.show_course && detail.show_course.length > 0">子课程</li>
                     </ul>
-                    <div class="tabcontent tab1 active" v-html="detail.detail"></div>
+                    <div id="desc_content" class="tabcontent tab1 active">
+                        <h3 class="s_s_title">简介</h3>
+                        <div v-if="detail.detail" v-html="detail.detail"></div>
+                        <p v-else class="nodate">暂无简介</p>
+                    </div>
                     <div class="tabcontent tab2" v-if="detail.sections && detail.sections.length > 0">
                         <h3 class="s_s_title">课程表</h3>
-                        <ul class="curriculum-ul course1">
+                        <ul v-if="detail.sections && detail.sections.length > 0" class="curriculum-ul course1">
                             <li class="js-show" v-for="n in detail.sections">
                                 <img src="../../Public/Mall/img/play_b.png" alt="" class="play">
                                 <div class="jm-fl">
-                                    <p>{{n.node}}. {{n.name}}</p>
+                                    <p>{{n.name}}</p>
                                     <p>时长：{{n.duration}}分钟</p>
                                 </div>
-                                <img v-if="n.video_path != null && n.is_free == 1" src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">
+                                <img v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && detail.is_open == 1)" src="../../Public/Mall/img/playback.png" alt="" class="playback" @click="play(n.video_path)">
                                 <img v-else src="../../Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
                             </li>
                         </ul>
+                        <p v-else class="nodate">暂无简介</p>
+                    </div>
+                    <div class="tabcontent tab3">
+                        <h3 class="s_s_title">子课程</h3>
+                        <ul v-if="detail.show_course && detail.show_course.length > 0" class="media">
+                            <li class="m_li" v-for="item in detail.show_course">
+                                <img v-if="!item.pic" src="../../Public/Common/img/class/class.jpg" alt="">
+                                <img v-else :src="'http://crm.xiaoying.net'+item.pic" alt="">
+                                <h3>{{item.name}}</h3>
+                            </li>
+                        </ul>
+                        <p v-else class="nodate">暂无简介</p>
                     </div>
                 </div>
             </div>
@@ -111,7 +128,18 @@
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/Swiper/2.7.6/idangerous.swiper.min.js"></script>
     <script src="../../Public/Mall/js/scrollReveal.min.js"></script>
-    <script src="__PUBLIC__/Mall/js/class_detail.js"></script>
+    <script src="__PUBLIC__/Mall/js/class_detail.js?v=201809261735"></script>
+    <script type="text/javascript">
+
+        $(function(){
+            window.onload = function() {
+                $('#desc_content img').each(function() {
+                    $(this).attr("src","http://crm.xiaoying.net"+$(this).attr("src"));
+                })
+            }
+        });
+        
+    </script>
 </body>
 
 </html>

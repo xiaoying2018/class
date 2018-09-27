@@ -201,11 +201,19 @@ $(function() {
                 $(el).addClass("active").siblings().removeClass("active");
                 _this.s_choose = item;
                 _this.query.c = $(el).text();
+<<<<<<< HEAD
+=======
+                // console.log(JSON.stringify(item))
+>>>>>>> develop
 
                 if(item.name == "全部") {
                      window.location.href = "/case/admission"
                 }
+<<<<<<< HEAD
                 //已选中的二级条件高亮
+=======
+                
+>>>>>>> develop
                 var receiveYear = _this.getQueryString("year",true) == '2010'?'2000-2012':_this.getQueryString("year",true);
                 _this.$nextTick(function() {
                     $('.in_ul li').each(function () {
@@ -225,14 +233,26 @@ $(function() {
                             $(this).addClass("active").siblings().removeClass("active");
                         }
                     })
+<<<<<<< HEAD
                 })
+=======
+>>>>>>> develop
 
+                })
             },
             search:function(item,el){
                 var _this = this;
                 var el = event.target;
                 
+<<<<<<< HEAD
                
+=======
+                // console.log("xxx",JSON.stringify(item));
+
+                // _this.$nextTick(function() {
+                //     $(el).addClass("active").siblings().removeClass("active");
+                // })
+>>>>>>> develop
                 if (item.name == '2000-2012') {
                     item.name = '2010'
                 }
@@ -305,7 +325,7 @@ $(function() {
                             // console.log(_this.pageCount);
 
                             _this.lists = res.data.list;
-                             $('.pageBox').pagination({
+                            $('.pageBox').pagination({
                                 pageCount: _this.pageCount,
                                 showData: _this.query.rows,
                                 current:  _this.query.page,

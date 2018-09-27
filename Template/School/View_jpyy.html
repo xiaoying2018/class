@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>日本语言学校-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/School/css/jpyy.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="http://crm.xiaoying.net/Public/js/xiaoying_form.js"></script>
+    <script src="/Public/Open/js/jqPaginator/jqPaginator.min.js"></script>
+</head>
+<body>
+    <include file="./Template/Common/View_header_home.html"/>
+    <div id="jpyy" class="marginTop">
+        <include file="./Template/School/View_Banner.html" />
+        <div class="container choosepart">
+            <!-- <div class="lineDv clearfix">
+                <span class="s_title">热门排行：</span>
+                <ul class="listul">
+                    <li class="item" v-for="n in 5">规模较大的语言学校</li>
+                </ul>
+            </div> -->
+            <div class="lineDv choose clearfix">
+                <span class="s_title">学校名称：</span>
+                <div class="inputDv">
+                    <input type="text" placeholder="请输入学校名称" v-model="request.schoolname" @keyup.13="change('schoolname',request.schoolname)">
+                    <i class="search" @click="change('schoolname',request.schoolname)"></i>
+                </div>
+            </div>
+            <div class="lineDv clearfix">
+                <span class="s_title">选择地区：</span>
+                <select name="" id="area" class="select2" width="290">
+                    <option value="">全部</option>
+                    <option :value="n.id" v-for="n in area">{{n.name}}</option>
+                </select>
+                <span class="s_title">选择城市：</span>
+                <select name="" id="city" class="select2" width="290">
+                    <option value="">全部</option>
+                    <option :value="n.id" v-for="n in city">{{n.name}}</option>
+                </select>
+            </div>
+            <div class="lineDv choose clearfix">
+                <span class="s_title">学费：</span>
+                <ul class="listul">
+                    <li class="item active" @click="change('cost_fee','')">不限</li>
+                    <li class="item" v-for="n in tuition" @click="change('cost_fee',n.id)">{{n.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="resultPart container">
+            <h3 class="search_title">共找到<font>{{count}}</font>所学校</h3>
+            <ul class="schoolList">
+                <li class="item_school clearfix" v-for="n in lists">
+                    <div class="imgDv left">
+                        <img :src="'http://www.xiaoying.net'+n.logo_sqr" alt="">
+                    </div>
+                    <div class="info left">
+                        <h3 class="name">{{n.name_cn}}</h3>
+                        <ul class="slistDv">
+                            <li class="slineDv">学校类型：{{n.category_school}}</li>
+                            <li class="slineDv">每年学费：{{n.cost_fee | filterfee}}万(日元)</li>
+                            <li class="slineDv">学校性质：{{n.xingzhi_name}}</li>
+                            <li class="slineDv">电话：{{n.contact}}</li>
+                            <li class="slineDv">录取比例：{{n.competition}}%</li>
+                            <li class="slineDv full">学校地址：{{n.address}}</li>
+                        </ul>
+                    </div>
+                    <div class="btn-wapper left">
+                        <a href="" class="admissions">领取官方招生手册</a>
+                        <a href="javascript:;" class="subscribe" onclick="_MEIQIA('showPanel')">招生官面试预约</a>
+                        <a href="javascript:;" class="apply" onclick="_MEIQIA('showPanel')">官方免费申请</a>
+                    </div>
+                </li>
+            </ul>
+            <div id="jqPaginator" class="pageNav" style="display: block;"></div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_loading.html"/>
+    <include file="./Template/Common/View_footer.html"/>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Mall/js/scrollReveal.min.js"></script>
+    <script src="../../Public/School/js/jpyy.js"></script>
+</body>
+
+</html>

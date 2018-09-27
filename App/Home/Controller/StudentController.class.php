@@ -16,6 +16,7 @@ class StudentController extends BaseController
 {
     public function index ()
     {
+
 //        // 获取课程类型的产品
 //        $type_of_course_product = (new CourseBespeakModel())->where(['category_id'=>['eq',1],['on_sale'=>['eq','是']]])->select();
 //        // 将产品列表转换为IDS
@@ -69,12 +70,16 @@ class StudentController extends BaseController
         //最新的站内信
         $newestLetter = $letterModel->getNewestLetter(['student_id'=>['eq',$s_id]]);
 
-
         // 课时信息
         if ($scheduleData)
         {
 
             foreach ($scheduleData as $key => $value){
+
+//                重新查询学员签到情况，判断之前的条件是否正确
+//                $qd_model = M('schedule_signin');
+//                $qd_status = $qd_model->where(['schedule_id'=>['eq',$value['schedule_id']],'student_id'=>['eq',$value['stu_id']]])->find()['status']?:0;
+//                $value['signin_status'] = $qd_status;
 
                 // 8-27 如果当前课程有房间号码,添加进入房间的链接 TODO wait
                 if ($value['serial'])
@@ -88,11 +93,12 @@ class StudentController extends BaseController
                     $send_url .= '&ts='.time();// 时间戳
                     $send_url .= '&serial='.$value['serial'];// 房间号码
                     $send_url .= '&username='.$studentInfo['realname']?:'无名';// 用户姓名
+                    $send_url .= '&pid='.$studentInfo['code']?:'0';// 用户ID  (小莺学员学号)
                     $value['serial'] = $send_url;
                 }
                 // 8-27 end
-		  //获取当前的时间
-                 $current_time =time();
+		        // 获取当前的时间
+                $current_time =time();
                 $start_time=strtotime($value['start_time']);
            
                 if(abs($current_time-$start_time)>7200){
@@ -101,16 +107,20 @@ class StudentController extends BaseController
                     $value['is_show']=1;
                 }
 
-                
-
                 // 8-29 获取当前课时的录播视屏 TODO wait
                 //$value['video_path'] = (new SectionModel())->find($value['section_id'])['video_path']?:'';
                // $sectionInfo = $sectionModel->field('video_path')->where('id='.$value['section_id'])->find();
 //                $sql=;
                // $sectionInfo = M('course_section')->field('video_path')->where('id='.$value['section_id'])->find();
-                $sectionInfo=M()->query('Select video_path from education.course_section where id='.$value['section_id'].' limit 1');
+                if ($value['section_id'])
+                {
+                    $sectionInfo=M()->query('Select video_path,course_id from education.course_section where id='.$value['section_id'].' limit 1');
 
-                $value['video_path'] =$sectionInfo?$sectionInfo[0]['video_path']:'';
+                    $value['kecheng_id'] =$sectionInfo?$sectionInfo[0]['course_id']:'';
+                    $value['video_path'] =$sectionInfo?$sectionInfo[0]['video_path']:'';
+                }else{
+                    $value['video_path'] = '';
+                }
                 // 8-29 end
 //                dump( M()->getLastSql());
 //                dump( $value['video_path']);
@@ -124,10 +134,17 @@ class StudentController extends BaseController
                 $schedule[date('Y.m.d',$value['stamp'])][]    =   $value;
             }
         }
-        
+
+        $res=$studentModel->getValidCourse($s_id);
         // 课程
         // 班级
         $period                 =   $periodModel->period_list(['s.id'=>['eq',$s_id]]);
+
+        foreach ($period as $key=> $p){
+            if(!in_array($p['course_id'],$res)){
+                unset($period[$key]);
+            }
+        }
         $crm_domain             =   C('CRM_DOMAIN');
         $period                 =   array_map( function($p) use($crm_domain){
             $p['course_pic']        =   $crm_domain.substr( $p['course_pic'],1 );

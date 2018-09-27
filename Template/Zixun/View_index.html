@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>资讯列表-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/FreeClass/css/index.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zixun/js/swiper2/idangerous.swiper.css">
+    <link rel="stylesheet" href="__PUBLIC__/Zixun/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Zixun/css/index.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+    <include file="./Template/Common/View_header_class.html" />
+    <div id="zixun">
+        <div class="marginTop">
+            <!-- <a :href="/news/detail">点击详情页</a> -->
+            <div class="bannerPart">
+                
+            </div>
+            <div class="newsNavPart">
+                <ul class="container newsNavUl">
+                    <li @click="tabNewsNav" data-cateid="newsNavAll" ><a href="javascript:;">全部</a></li>
+                    <li v-for="n in newsNav" :data-cateid="n.id" :key = "n.id" @click="tabNewsNav">
+                        <a href="javascriot:;">{{n.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container clearfix contentPart">
+                <div class="leftPart">
+                    <div class="newsContPart">
+                        <ul class="secNavList">
+                            <li @click="tabsecNav" data-cateid="secNavAll"><a href="javascript:;">全部</a></li>
+
+                            <li v-for="n in newsSecNav" @click="tabsecNav" :data-cateid="n.id" :key = "n.id"><a href="javascript:;">{{n.name}}</a></li>
+                        </ul>
+                        <ul class="newsListUl">
+                            <li v-for = "item in newsList" :key="item.id">
+                                <div class="imgDv">
+                                    <a :href="'/news/detail?id=' + item.id">
+                                        <img :src="item.picture" :alt="item.title">
+                                    </a>
+                                </div>
+                                <div class="contDv">
+                                    <h4>
+                                        <a :href="'/news/detail?id=' + item.id">{{item.title}}</a>
+                                    </h4>
+                                    <p class="time"><span></span>{{item.publishedtime}}</p>
+                                    <p class="newsDes">
+                                        <a :href="'/news/detail?id=' + item.id">{{item.des}}</a>
+                                    </p>
+                                    <div class="btnPart">
+                                        <a :href="'/news/detail?id=' + item.id">查看详情</a>
+                                        <ul class="clearfix">
+                                            <li>
+                                                <span></span>{{item.upsnum}}
+                                            </li>
+                                            <li>
+                                                <span></span>{{item.hits}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="imgDv">
+                                    <a href="javascript:;">
+                                        <img src="../../../static/images/news/img.jpg">
+                                    </a>
+                                </div>
+                                <div class="contDv">
+                                    <h4><a href="javascript:;">日本留学：金泽大学留学费用</a></h4>
+                                    <p class="time"><span></span>2018-08-11</p>
+                                    <p class="newsDes"><a href="javascript:;">位于丰岛区池袋的千代田国际学院，看就知道地理位置特别好啦。周围还有立教大学、东京音乐大学、大正...</a></p>
+                                    <div class="btnPart">
+                                        <a href="javascript:;">查看详情</a>
+                                        <ul class="clearfix">
+                                            <li>
+                                                <span class=""></span>18
+                                            </li>
+                                            <li>
+                                                <span class=""></span>18
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li> -->
+                        </ul>
+                    </div>
+                    <div class="pageBox"></div>
+                </div>
+                <div class="rightPart">
+                   <div class="hotActivitiesPart">
+                        <h4 class="title">热门活动</h4>
+                        <div class="hotActivitiesDv">
+                            <a class="arrow-left" href="#"></a> 
+                            <a class="arrow-right" href="#"></a>
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" v-for="n in hotActivities" :key="n.id">
+                                        <a :href="n.url" target="_blank">
+                                            <img :src="n.imgSrc">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pagination"></div>
+                        </div>
+                    </div> 
+                    <div class="hotFlag">
+                        <h4>热门标签</h4>
+                        <ul class="hotFlagList clearfix">
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                        </ul>
+                    </div>
+                    <div class="parentsCare">
+                        <h4>家长关心</h4>
+                        <ul class="careQuestionList clearfix">
+                            <li v-for="n in parentsCare">
+                                <a href="javascript:;">
+                                    <div class="iconDv">
+                                        <img :src="n.imgSrc">
+                                    </div>
+                                    <p>{{n.title}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>  
+                   <!--  <hot-activities></hot-activities>
+                    <hot-flag></hot-flag>
+                    <parents-care></parents-care> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_footer.html" />
+    <script type="text/javascript" src="../../Public/Zixun/js/swiper2/idangerous.swiper.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script type="text/javascript" src="../../Public/Zixun/js/jquery.pagination.js"></script>
+    <script type="text/javascript" src="../../Public/Zixun/js/index.js"></script>
+</body>
+
+</html>

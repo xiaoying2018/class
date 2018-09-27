@@ -1,6 +1,5 @@
 @import url("../../Common/css/function.less");
 .s_s_title{
-    margin-bottom: 24px;
     font-size: 24px;
     color: #020202;
     font-weight: 600;
@@ -12,7 +11,7 @@
     width: 100%;
     padding-top: 80px;
     .imgDv {
-        width: 626px;
+        width: 555px;
         float: left;
         height: 300px;
         img {
@@ -87,18 +86,19 @@
             .tabHeader {
                 position: relative;
                 z-index: 2;
+                font-size: 0;
                 li {
                     font-size: 16px;
-                    color: #333;
                     float: left;
                     padding: 13px 28px;
-                    background-color: #ffd900;
                     .transition();
                     border: 1px solid #EEEEEE;
                     border-bottom: 0;
+                    color: #333;
+                    background-color: #fff;
                     &.active {
+                        background-color: #ffd900;
                         color: #333;
-                        background-color: #fff;
                     }
                     &:nth-child(2n) {
                         margin-left: -2px;
@@ -107,10 +107,17 @@
                         cursor: pointer;
                     }
                 }
+                &.fixed_pc {
+                    display: block;
+                    position: fixed;
+                    top: 115px;
+                    width: 900px;
+                    background: #f9f9fa;
+                }
             }
             .tabcontent {
                 border: 1px solid #EEEEEE;
-                display: none;
+                // display: none;
                 padding: 18px 25px;
                 line-height: 28px;
                 font-size: 14px;
@@ -126,7 +133,7 @@
                     display: block;
                 }
                 .curriculum-ul {
-                    padding-bottom: 89px;
+                    margin-top: 24px;
                     .js-show {
                         display: flex;
                         align-items: center;
@@ -155,6 +162,29 @@
                             width: 60px;
                             position: absolute;
                             right: 71px;
+                        }
+                    }
+                }
+                .media{
+                    .m_li{
+                        padding: 16px 0;
+                        border-bottom: 1px solid #E5E5E5;
+                        vertical-align: top;
+                        img{
+                            height: 86px;
+                            width:160px;
+                            display: inline-block;
+                        }
+                        h3{
+                            width: 660px;
+                            display: inline-block;
+                            font-size: 18px;
+                            vertical-align: top;
+                            margin-left: 20px;
+                            line-height: 24px;
+                        }
+                        &:last-child{
+                            border: none;
                         }
                     }
                 }
@@ -300,7 +330,7 @@
     display: none;
     .inner{
         width: 60%;
-        height: 40%;
+        height: 60%;
         position: absolute;
         top: 0;
         left: 0;

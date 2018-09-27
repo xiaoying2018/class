@@ -36,6 +36,22 @@ class AuthController extends Controller
 				( $info=$studentModel->student_login( $params['username'], $params['password'] ) ) || E('用户名或密码不合法!',203);
                 //
 				session('_student', $info);
+
+                // 926 记录用户每次登录和退出的时间,法务需要学员的每次在线时长 dragon
+                $stu_info = session('_student');
+                $user_login_log['stu_id'] = $stu_info['id'];// 当前学员ID
+                $user_login_log['stu_ip'] = getClientIP();// 学员IP
+                $user_login_log['action_name'] = 'login';// 动作名称
+                $user_login_log['action_time'] = time();// 操作时间
+                try{
+                    $stu_action_log_model = M('stu_action_log');
+                    $stu_action_log_model->add($user_login_log);
+                }catch (\Exception $exception){
+                    // 记录异常
+                    \Think\Log::write("用户登录操作记录失败: ".$exception->getMessage(),'WARN');
+                }
+                // 926 end
+
                 //
 				$result             =   [
 					'result'            =>  true,
@@ -62,6 +78,21 @@ class AuthController extends Controller
 			'msg'       =>  '你还没有登录',
 		];
 		$this->isLoginYet() || $this->response( $result, '/' );
+
+		// 926 记录用户每次登录和退出的时间,法务需要学员的每次在线时长 dragon
+        $stu_info = session('_student');
+        $user_login_log['stu_id'] = $stu_info['id'];// 当前学员ID
+        $user_login_log['stu_ip'] = getClientIP();// 学员IP
+        $user_login_log['action_name'] = 'logout';// 动作名称
+        $user_login_log['action_time'] = time();// 操作时间
+        try{
+            $stu_action_log_model = M('stu_action_log');
+            $stu_action_log_model->add($user_login_log);
+        }catch (\Exception $exception){
+            // 记录异常
+            \Think\Log::write("用户退出操作记录失败: ".$exception->getMessage(),'WARN');
+        }
+        // 926 end
 
 		session(null);
 		$result         =   [

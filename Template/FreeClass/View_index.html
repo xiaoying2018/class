@@ -28,12 +28,16 @@
         <div class="classpart">
             <div class="titleDv" data-sr="enter top hustle 50px over 1s">
                 <p>
-                    热门公开课<br /><span>海量免费公开课寓教寓乐</span>
+                    热门公开课
+                    <br /><span>海量免费公开课寓教寓乐</span>
                 </p>
             </div>
             <div class="container">
-                <div class="s_title">
-                    <img src="../../Public/Mall/img/s_xiushi.png" alt="">公开课
+                <div class="s_title clearfix">
+                    <ul class="typeul">
+                        <li class="active" @click="condit('type','hot')"><img src="__PUBLIC__/FreeClass/img/hot.png" />内部学员公开课</li>
+                        <li @click="condit('type','free')"><img src="__PUBLIC__/FreeClass/img/free.png" />免费公开课</li>
+                    </ul>
                     <ul class="paixu">
                         <li class="active" @click="condit('sort_by_people_num','')">最新发布</li>
                         <li @click="condit('sort_by_people_num',1)">最多报名</li>
@@ -42,23 +46,44 @@
                 </div>
                 <ul class="ullist" data-sr="enter top hustle 50px over 1s">
                     <li class="li" v-for="n in lists">
-                        <a :href="'/mall/detail?id='+n.id" style="display: block;">
-                            <div class="imgDv">
-                                <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
-                                <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
-                            </div>
-                            <div class="inner">
-                                <h4 :title="n.name">{{n.name}}</h4>
-                                <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
-                                    <br />{{n.teacher_name | filtername}}</p>
-                                <div class="detailinfo clearfix">
-                                    <div class="price">
-                                        立即报名
-                                    </div>
-                                    <div class="enroll">186人报名</div>
+                        <template v-if="request.type == 'hot'">
+                            <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
+                                <div class="imgDv">
+                                    <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                    <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
                                 </div>
-                            </div>
-                        </a>
+                                <div class="inner">
+                                    <h4 :title="n.name">{{n.name}}</h4>
+                                    <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                        <br />{{n.teacher_name | filtername}}</p>
+                                    <div class="detailinfo clearfix">
+                                        <div class="price">
+                                            立即报名
+                                        </div>
+                                        <div class="enroll">{{n.people_num}}人报名</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </template>
+                        <template v-else>
+                            <a :href="'/mall/detail?id='+n.id" style="display: block;">
+                                <div class="imgDv">
+                                    <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
+                                    <img src="../../Public/Common/img/class/class.jpg" alt="" v-else>
+                                </div>
+                                <div class="inner">
+                                    <h4 :title="n.name">{{n.name}}</h4>
+                                    <p>开始时间：{{n.start_time | filtertime}} | {{n.section_num}}课时
+                                        <br />{{n.teacher_name | filtername}}</p>
+                                    <div class="detailinfo clearfix">
+                                        <div class="price">
+                                            立即报名
+                                        </div>
+                                        <div class="enroll">{{n.people_num}}人报名</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </template>
                     </li>
                 </ul>
             </div>

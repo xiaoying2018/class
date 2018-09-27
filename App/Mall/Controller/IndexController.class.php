@@ -160,5 +160,80 @@ class IndexController extends Controller
 
         $this->ajaxReturn(['result'=>true,'data'=>$res]);
     }
+
+    // 我的课程 (录播视频回顾)
+    public function mycourse()
+    {
+        $current_stu_id = session('_student')['id'];// 获取当前学员ID
+
+        if (!$current_stu_id) $this->ajaxReturn(['status'=>false,'msg'=>'非法请求']);
+
+        // 927 新增需求 课程课时改为两步请求
+        // 课程id
+        $course_id = intval(I('post.c_id'));
+        // 通过课程ID 获取当前课程的课时内容
+        if ($course_id)
+        {
+            $one_course_model = M('course_section_cate');
+            $one_courses = $one_course_model->where(['id'=>['eq',$course_id]])->find();
+            // 获取课程下的课时列表
+            $one_courses['sections'] = M('course_section')->where(['course_id'=>['eq',$one_courses['id']]])->order('node')->select()?:[];
+
+            $this->ajaxReturn(['status'=>true,'data'=>$one_courses]);
+        }
+        // 927 end
+        
+        // 获取当前学员所属班次ids $my_banci
+        $stu_per_model = M('period_student');
+        $my_banci = $stu_per_model->field('period_id,student_id')->where(['student_id'=>['eq',$current_stu_id]])->select();
+
+        if ($my_banci)
+        {
+            // 处理班次ids
+            $my_banci_ids = array_map(function ($v){
+                return $v['period_id'];
+            },$my_banci);
+            if ($my_banci_ids)
+            {
+                // 通过班次 获取班级
+                $banci_model = M('course_period');
+                $my_banji = $banci_model->field('id,name,course_id')->where(['id'=>['in',$my_banci_ids]])->select();
+                if ($my_banji)
+                {
+                    // 获取到班级的IDS 并去重
+                    $my_banji_ids = array_values(array_unique(array_map(function ($v){ return $v['course_id']; },$my_banji)));
+                    if ($my_banji_ids)
+                    {
+                        // 根据班级IDS 获取班级内所包含的课程IDS
+                        $banji_kecheng_rel_model = M('banji_kecheng');
+                        $rel_courses = $banji_kecheng_rel_model->where(['course_id'=>['in',$my_banji_ids]])->select();
+                        if ($rel_courses)
+                        {
+                            // 获取到课程的IDS 并去重
+                            $my_course_ids = array_values(array_unique(array_map(function ($v){ return $v['section_cate_id']; },$rel_courses)));
+                            if ($my_course_ids)
+                            {
+                                // 根据课程 IDS 获取课程列表
+                                $course_model = M('course_section_cate');
+                                $courses = $course_model->where(['id'=>['in',$my_course_ids]])->select();
+                                if ($courses)
+                                {
+                                    // 获取课程下的课时列表
+                                    foreach($courses as $k => $v)
+                                    {
+                                        $courses[$k]['sections'] = M('course_section')->where(['course_id'=>['eq',$v['id']]])->order('node')->select()?:[];
+                                    }
+
+                                    $this->ajaxReturn(['status'=>true,'data'=>$courses]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->ajaxReturn(['status'=>false,'msg'=>'No course.']);// 未加入任何班次
+    }
     
 }

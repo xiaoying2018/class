@@ -76,7 +76,7 @@ $(function() {
                         alert('没有视频')
                     }else{
                         n = 'http://'+n;
-                        var _html = '<div class="inner"><img src="../../public/common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
+                        var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';
                         $("#video_part").html(_html);
                         $("#video_part").show();
                     }
@@ -95,18 +95,34 @@ $(function() {
             }
             this.gettuijian();
             $(document).on('click', '.tabHeader li', function() {
-                var _flag = $(this).attr("data-flag");
                 $(this).addClass("active").siblings().removeClass("active");
-                $(".tabcontent").hide();
-                $(".tabcontent."+_flag).show();
-
+                var _flag = $(this).attr("data-flag");
+                $("body, html").animate({
+                    scrollTop: $(".tabcontent."+_flag).offset().top - 150
+                }, 600)
             })
             $(document).on('click', '#video_part .close', function() {
                 $("#video_part").html("").hide();
             })
+            fixDiv($(".tabHeader"), "fixed_pc", 450);
+
+            // $(window).bind("scroll", function() {
+            //     var e = $(window).scrollTop();
+            //     e < Math.floor($("#tab1").offset().top) ? ($(".tabHeader li:eq(0)").removeClass("active"),
+            //     $(".tabHeader li:eq(0)").addClass("active")) : e < Math.floor($("#tab1").offset().top) ? ($(".tabHeader li").removeClass("active"),
+            //     $(".tabHeader li:eq(1)").addClass("active")) : e < Math.floor($("#tab2").offset().top) ? ($(".tabHeader li").removeClass("active"),
+            //     $(".tabHeader li:eq(2)").addClass("active")) : e < Math.floor($("#tab3").offset().top) + 475 && ($(".tabHeader li").removeClass("active"),
+               
+            // })
         }
     })
-
+    function fixDiv(t, e, o) {
+        var n = 0;
+        $(window).scroll(function() {
+            n = document.documentElement.scrollTop > 0 ? document.documentElement.scrollTop : document.body.scrollTop,
+            n >= o ? t.addClass(e) : o > n && t.removeClass(e)
+        })
+    }
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);

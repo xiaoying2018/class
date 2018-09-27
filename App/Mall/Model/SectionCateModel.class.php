@@ -613,6 +613,7 @@ class SectionCateModel extends EModel
                         $all_banji[$banji_k]['section_num'] = M('course_section')->where(['course_id'=>['in',$course_ids]])->count();
                     }else{
                         $all_banji[$banji_k]['section_num'] = 0;
+                        $all_banji[$banji_k]['show_course'] = [];
                     }
                 }
 
@@ -654,10 +655,15 @@ class SectionCateModel extends EModel
 
     public function getOpenCourse()
     {
-
         $par = I('post.');
 
-        $order_by = 'create_time desc';// 默认时间倒序
+        if ($par['type'] == 'hot')
+        {
+            $order_by = 'create_at desc';// 默认时间倒序
+        }else{
+            $order_by = 'create_time desc';// 默认时间倒序
+        }
+
         
         // 如果按报名人数排序
         if ($par['sort_by_people_num'])
@@ -669,19 +675,103 @@ class SectionCateModel extends EModel
         $limit_num = $par['limit_num']?:10;// 每页显示条数
         $start = $par['page']?(($par['page']-1)*$limit_num):0;// 查询起始值
 
-        // 符合条件的课程总数
-        $all_count = $this->where(['is_open'=>['eq', 1],'status'=>['eq',1]])->count();
-        // 总页数
-        $all_page_count = ceil($all_count/$limit_num);
-
-        // 获取公开课课程
-        $show_course = $this->where(['is_open'=>['eq', 1],'status'=>['eq',1]])->order($order_by)->limit($start,$limit_num)->select();
+        // 这里要查询 免费公开课(课程) 和 热门公开课(班级)
         
-        // 获取课程下的课时数
-        if ($show_course) {
-            foreach ($show_course as $k => $v) {
-                $show_course[$k]['sections'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
-                $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
+        // 热门公开课
+        if ($par['type'] == 'hot')
+        {
+            // 符合条件的班级总数
+            $all_count = M('Course')->where(['status'=>['eq',1],'is_open'=>['eq',1]])->order($order_by)->count();
+            // 总页数
+            $all_page_count = ceil($all_count/$limit_num);
+
+            // 获取内部公开课(班)
+            $show_course = M('Course')->where(['status'=>['eq',1],'is_open'=>['eq',1]])->order($order_by)->limit($start,$limit_num)->select();
+            
+            // 获取班级下的课程数和课时数
+            if ($show_course)
+            {
+                foreach ($show_course as $banji_k => $banji_v)
+                {
+                    // 预留为0 便于前端识别
+                    $show_course[$banji_k]['start_time'] = 0;
+                    $show_course[$banji_k]['teacher_name'] = 0;
+                    // 获取班级下的课程
+                    $show_course[$banji_k]['show_course'] = [];
+                    // 班级下的课程ids
+                    $_course_ids = M('banji_kecheng')->field('section_cate_id')->where(['course_id'=>['eq',$banji_v['id']]])->select();
+                    
+                    if ($_course_ids)
+                    {
+                        // 二维转一维
+                        $course_ids = array_map(function ($v){
+                            return $v['section_cate_id'];
+                        },$_course_ids);
+
+                        // 班级下的课程数
+                        $show_course[$banji_k]['course_num'] = count($course_ids);
+                        // 班级下所有课程的总课时数
+                        if ($course_ids)
+                        {
+                            // 获取班级下的课程
+                            $_show_course = $this->where(['id' => ['in', $course_ids],'status'=>['eq',1]])->select();
+                            // 获取课程下的课时数
+                            if ($_show_course) {
+                                foreach ($_show_course as $k => $v) {
+                                    $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
+                                }
+                            }
+                            $show_course[$banji_k]['show_course'] = $_show_course;
+                            $show_course[$banji_k]['section_num'] = M('course_section')->where(['course_id'=>['in',$course_ids]])->count();
+                        }else{
+                            $show_course[$banji_k]['section_num'] = 0;
+                        }
+                    }
+
+                    // todo 班级下的班期信息 和 老师信息
+                    $banji_banci = (new PeriodModel())->field('id,headmaster_id')->where(['course_id'=>['eq',$banji_v['id']]])->select();// 班期信息
+                    if ($banji_banci)
+                    {
+                        // 班主任ids
+                        $banzhuren_ids = array_map(function ($v){
+                            return $v['headmaster_id'];
+                        },$banji_banci);
+                        // 班次 ids
+                        $banci_ids = array_map(function ($v){
+                            return $v['id'];
+                        },$banji_banci);
+                        if ($banci_ids)
+                        {
+                            $new_paike = (new ScheduleModel())->where(['period_id'=>['in',$banci_ids]])->order('start_time')->find()?:[];// 班次内最早的排课
+                            $show_course[$banji_k]['start_time'] = $new_paike['start_time']?:0;// 班次开始时间
+                            $_teacher_id = $new_paike['teacher_id']?:0;// 班次开始时间
+                            if ($_teacher_id)
+                            {
+                                // 老师名字
+                                $show_course[$banji_k]['teacher_name'] = (new TeacherModel())->where(['role_id'=>['eq',$_teacher_id]])->find()['full_name']?:0;
+                            }
+//                    $all_banji[$banji_k]['banzhuren_id'] = $banci_ids;// 班主任ids
+                        }
+                    }
+
+                }
+            }
+        }else{ // 免费公开课
+
+            // 符合条件的课程总数
+            $all_count = $this->where(['is_open'=>['eq', 1],'status'=>['eq',1]])->count();
+            // 总页数
+            $all_page_count = ceil($all_count/$limit_num);
+
+            // 获取公开课课程
+            $show_course = $this->where(['is_open'=>['eq', 1],'status'=>['eq',1]])->order($order_by)->limit($start,$limit_num)->select();
+
+            // 获取课程下的课时数
+            if ($show_course) {
+                foreach ($show_course as $k => $v) {
+                    $show_course[$k]['sections'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
+                    $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
+                }
             }
         }
 
