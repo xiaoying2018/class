@@ -84,9 +84,9 @@
             <h3 class="search_title">共找到<font>{{count}}</font>所学校</h3>
             <ul class="schoolList">
                 <li class="item_school clearfix" v-for="n in lists">
-                    <div class="imgDv left">
+                    <a class="imgDv left" :href="'/school/jp/detail?id='+n.id">
                         <img :src="'http://www.xiaoying.net'+n.logo_sqr" alt="">
-                    </div>
+                    </a>
                     <div class="info left">
                         <h3 class="name">{{n.name_cn}}</h3>
                         <ul class="slistDv">
@@ -99,7 +99,7 @@
                         </ul>
                     </div>
                     <div class="btn-wapper left">
-                        <a href="" class="admissions">领取官方招生手册</a>
+                        <a :href="'/school/jp/detail?id='+n.id" class="admissions">领取官方招生手册</a>
                         <a href="javascript:;" class="subscribe" onclick="_MEIQIA('showPanel')">招生官面试预约</a>
                         <a href="javascript:;" class="apply" onclick="_MEIQIA('showPanel')">官方免费申请</a>
                     </div>

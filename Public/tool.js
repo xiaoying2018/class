@@ -52,3 +52,16 @@ utily.random = function createRandom(num ,from ,to )
     arr.length=num;
     return arr;
 }
+/**
+ * 转义富文本
+ * @param  {[type]} str [description]
+ * @return {[type]}     [description]
+ */
+utily.escapeStringHTML = function(str) {
+    str = str.replace(/&lt;/g,'<');
+    str = str.replace(/&gt;/g,'>');
+    str = str.replace(/&amp;/g,'"');
+    str = str.replace(/&quot;/g,'"');
+    str = str.replace(/&#039;/g,"'");
+    return str;
+}

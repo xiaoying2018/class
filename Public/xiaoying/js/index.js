@@ -226,6 +226,10 @@ $(function() {
                     },
                     submitError: function() {}
                 });
+
+                new Swiper('.swiper-banner', {
+                    paginationClickable: true,
+                });
                 new Swiper('.swiper-ad', {
                     pagination: '.swiper-pagination',
                     slidesPerView: 5,
