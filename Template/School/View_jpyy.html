@@ -69,17 +69,17 @@
                         <h3 class="name">{{n.name_cn}}</h3>
                         <ul class="slistDv">
                             <li class="slineDv">学校类型：{{n.category_school}}</li>
-                            <li class="slineDv">每年学费：{{n.cost_fee}}万(日元)</li>
+                            <li class="slineDv">每年学费：{{n.cost_fee | filterfee}}万(日元)</li>
                             <li class="slineDv">学校性质：{{n.xingzhi_name}}</li>
                             <li class="slineDv">电话：{{n.contact}}</li>
-                            <li class="slineDv">录取比例：94%</li>
+                            <li class="slineDv">录取比例：{{n.competition}}%</li>
                             <li class="slineDv full">学校地址：{{n.address}}</li>
                         </ul>
                     </div>
                     <div class="btn-wapper left">
                         <a href="" class="admissions">领取官方招生手册</a>
-                        <a href="" class="subscribe">招生官面试预约</a>
-                        <a href="" class="apply">官方免费申请</a>
+                        <a href="javascript:;" class="subscribe" onclick="_MEIQIA('showPanel')">招生官面试预约</a>
+                        <a href="javascript:;" class="apply" onclick="_MEIQIA('showPanel')">官方免费申请</a>
                     </div>
                 </li>
             </ul>

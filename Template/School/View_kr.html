@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>韩国学校-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <!-- <link rel="stylesheet" href="__PUBLIC__/School/css/kr.css"> -->
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="http://crm.xiaoying.net/Public/js/xiaoying_form.js"></script>
+    <script src="/Public/Open/js/jqPaginator/jqPaginator.min.js"></script>
+</head>
+<body>
+    <include file="./Template/Common/View_header_home.html"/>
+    <div id="kr" class="marginTop">
+        <include file="./Template/School/View_Banner.html" />
+        <div class="container choosepart">
+            <!-- <div class="lineDv clearfix">
+                <span class="s_title">热门排行：</span>
+                <ul class="listul">
+                    <li class="item" v-for="n in 5">规模较大的语言学校</li>
+                </ul>
+            </div> -->
+            <div class="lineDv choose clearfix">
+                <span class="s_title">学校名称：</span>
+                <div class="inputDv">
+                    <input type="text" placeholder="请输入学校名称" v-model="request.schoolname" @keyup.13="change('schoolname',request.schoolname)">
+                    <i class="search" @click="change('schoolname',request.schoolname)"></i>
+                </div>
+            </div>
+            <div class="lineDv clearfix">
+                <span class="s_title">选择地区：</span>
+                <select name="" id="area" class="select2" width="290">
+                    <option value="">全部</option>
+                    <option value="首尔特别市">首尔特别市</option>
+                    <option value="庆尚南道">庆尚南道</option>
+                    <option value="庆尚北道">庆尚北道</option>
+                    <option value="全罗南道">全罗南道</option>
+                    <option value="全罗北道">全罗北道</option>
+                    <option value="忠清南道">忠清南道</option>
+                    <option value="忠清北道">忠清北道</option>
+                    <option value="江原道">江原道</option>
+                    <option value="京畿道">京畿道</option>
+                    <option value="蔚山广域市">蔚山广域市</option>
+                    <option value="大田广域市">大田广域市</option>
+                    <option value="光州广域市">光州广域市</option>
+                    <option value="仁川广域市">仁川广域市</option>
+                    <option value="大邱广域市">大邱广域市</option>
+                    <option value="釜山广域市">釜山广域市</option>
+                    <option value="济州特别自治道">济州特别自治道</option>
+                </select>
+            </div>
+        </div>
+        <div class="resultPart container">
+            <h3 class="search_title">共找到<font>{{count}}</font>所学校</h3>
+            <ul class="schoolList">
+                <li class="item_school clearfix" v-for="n in lists">
+                    <div class="imgDv left">
+                        <img :src="n.logo_long" alt="">
+                    </div>
+                    <div class="info left">
+                        <h3 class="name">{{n.name_cn}}</h3>
+                        <ul class="slistDv">
+                            <li class="slineDv">国内排名：{{n.rank_local}}</li>
+                            <li class="slineDv">世界排名：{{n.rank_world}}</li>
+                            <li class="slineDv">学校性质：{{n.type}}</li>
+                            <li class="slineDv">电话：{{n.mobile}}</li>
+                            <li class="slineDv full">学校网址：<a :href="n.website" target="_blank">{{n.website}}</a></li>
+                            <li class="slineDv full">学校地址：{{n.address}}</li>
+                        </ul>
+                    </div>
+                    <div class="btn-wapper left">
+                        <a href="" class="admissions">领取官方招生手册</a>
+                        <a href="javascript:;" class="subscribe" onclick="_MEIQIA('showPanel')">招生官面试预约</a>
+                        <a href="javascript:;" class="apply" onclick="_MEIQIA('showPanel')">官方免费申请</a>
+                    </div>
+                </li>
+            </ul>
+            <div id="jqPaginator" class="pageNav" style="display: block;"></div>
+        </div>
+    </div>
+    <include file="./Template/Common/View_loading.html"/>
+    <include file="./Template/Common/View_footer.html"/>
+
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="__PUBLIC__/Mall/js/scrollReveal.min.js"></script>
+    <script src="../../Public/School/js/kr.js"></script>
+</body>
+
+</html>

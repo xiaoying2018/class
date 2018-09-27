@@ -5,7 +5,6 @@ $(function() {
             area: [],
             city: [],
             request:{
-                getjapschool:"",
                 page:1,
                 limit:10,
                 school_type:1,
@@ -30,6 +29,15 @@ $(function() {
                 id: "4"
             }]
         },
+        filters:{
+            filterfee: function(val){
+                if (val) {
+                    val = parseFloat(val);
+                    val = val.toFixed(2);
+                }
+                return val;
+            }
+        },
         methods: {
             getarea: function(_id) {
                 var _data = {};
@@ -50,18 +58,24 @@ $(function() {
                             }else{
                                 _this.city = res.data;
                             }
+                            _this.$nextTick(function(){
+                                $("#city").select2({
+                                    width: "300px",
+                                })
+                            })
                         }
                     }
                 })
-                console.log("xxx", utily.manage_url);
             },
             change: function(key,val){
-                console.log(key,val);
+                this.request[key] = val;
+                this.request.page = 1;
+                this.getdata();
             },
             getdata: function(){
                 var _this = this;
                 $.ajax({
-                    url:"http://manage.com/getjapschool",
+                    url:"http://manage.com/getlangschool",
                     type:"get",
                     data: _this.request,
                     success:function(res){
@@ -69,7 +83,7 @@ $(function() {
                             _this.lists = res.data;
                             _this.count = res.count
                             $("body, html").animate({
-                                scrollTop: $(".resultPart").offset().top - 130
+                                scrollTop: $(".choosepart").offset().top - 130
                             }, 200)
                             $("#jqPaginator").html("");
                             if (res.count > 0) {
@@ -101,13 +115,20 @@ $(function() {
             var _this = this;
             this.getarea();
             this.getdata();
+            $(".choose .item ").click(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+            })
             $("#area,#city").select2({
                 width: "300px",
             })
             $(".selectcity .city_item").eq(0).addClass("active")
 
             $("#area").on("select2:select",function(e){
+                _this.change('nowcid',$("#area").val());
                 _this.getarea($("#area").val());
+            });
+            $("#city").on("select2:select",function(e){
+                _this.change('nowcid',$("#city").val());
             });
         }
     });

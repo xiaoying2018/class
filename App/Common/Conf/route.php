@@ -21,9 +21,14 @@ return [
         'studyingabroad'       =>  'Studying/View/index', //留学申请
         'studyingabroad/result'       =>  'Studying/View/result', //留学申请
 
+        'news'       =>  'Zixun/View/index', //资讯列表
+        'news/detail'       =>  'Zixun/View/detail', //资讯详情
+
         'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
         'school/jp'       =>  'School/View/jp', //日本大学
-    	'school/jp/detail'       =>  'School/View/JpDetail', //日本大学
+        'school/kr'       =>  'School/View/kr', //韩国大学
+        'school/sg'       =>  'School/View/sg', //韩国大学
+    	'school/jp/detail'       =>  'School/View/JpDetail', //学校详情
         'advantage'     =>  'Advantage/View/index',
         'onlinemall'     =>  'OnlineMall/View/index',
         'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
