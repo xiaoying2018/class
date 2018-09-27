@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/onlinemall/css/onlinemall.css">
     <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+    <script src="/Public/Open/js/jqPaginator/jqPaginator.min.js"></script>
 </head>
 
 <body data-nav="onlinemall">
@@ -35,23 +36,25 @@
             <div class="lineDv clearfix">
                 <span class="s_title">热门排行：</span>
                 <ul class="listul">
-                    <li class="item" v-for="n in 5">规模较大的语言学校</li>
+                    <li class="item">[研究生]研究生VIP帝大保录</li>
+                    <li class="item">[留学日语]N2-N1签约班</li>
+                    <li class="item">SGU英语修士2所申请(送1所=3所)</li>
                 </ul>
             </div>
             <div class="lineDv choose clearfix">
                 <span class="s_title">产品名称：</span>
                 <div class="inputDv">
-                    <input type="text" placeholder="请输入产品名称">
-                    <i class="search"></i>
+                    <input type="text" placeholder="请输入产品名称" v-model="requset.name" @keyup.13="change('name',requset.name)">
+                    <i class="search" @click="change('name',requset.name)"></i>
                 </div>
             </div>
             <div class="lineDv choose clearfix">
                 <span class="s_title">产品类别：</span>
                 <ul class="listul">
-                    <li class="item active" @click="change('cost_fee','')">不限</li>
-                    <li class="item">留学培训</li>
-                    <li class="item">留学申请</li>
-                    <li class="item">添加服务</li>
+                    <li class="item active" @click="change('cate','')">不限</li>
+                    <li class="item" @click="change('cate','')">留学培训</li>
+                    <li class="item" @click="change('cate','999')">留学申请</li>
+                    <li class="item" @click="change('cate','999')">添加服务</li>
                 </ul>
             </div>
         </div>
@@ -63,21 +66,17 @@
             </div>
         </div>
         <div class="listPart">
-            <ul class="container listDv">
-                <li class="itemli" v-for="n in 14">
-                    <p class="pro_name">[PLUS-经典申请套餐]日本、韩国、新加坡-本科、硕士</p>
-                    <p class="pro_desc">本科、硕士一站式申请服务，结果有保障</p>
-                    <p class="price">$2,0000</p>
+            <ul class="container listDv" v-if="lists.length > 0">
+                <li class="itemli" v-for="n in lists">
+                    <p class="pro_name">{{n.name}}</p>
+                    <p class="pro_desc">{{n.description | filterdesc}}</p>
+                    <p class="price">￥{{n.suggested_price}}</p>
                 </li>
             </ul>
-            <div id="jqPaginator" class="pageNav" style="display: block;">
-                <a jp-role="first" jp-data="1" class="disabled">首页</a>
-                <a jp-role="prev" jp-data="0" class="disabled">上一页</a>
-                <a class="page active" jp-role="page" jp-data="1">1</a>
-                <a class="page" jp-role="page" jp-data="2">2</a>
-                <a jp-role="next" jp-data="2">下一页</a>
-                <a jp-role="last" jp-data="2">末页</a>
+            <div class="nodate" v-else>
+                暂无数据
             </div>
+            <div id="jqPaginator" class="pageNav" style="display: block;"></div>
         </div>
     </div>
     <include file="./Template/Common/View_footer.html" />

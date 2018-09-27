@@ -58,15 +58,16 @@
                     <ul class="tabHeader clearfix">
                         <li class="active" data-flag="tab1">简介</li>
                         <li data-flag="tab2" v-if="detail.sections && detail.sections.length > 0">课程表</li>
-                        <li data-flag="tab3">子课程</li>
+                        <li data-flag="tab3" v-if="detail.show_course && detail.show_course.length > 0">子课程</li>
                     </ul>
                     <div id="desc_content" class="tabcontent tab1 active">
                         <h3 class="s_s_title">简介</h3>
-                        <div v-html="detail.detail"></div>
+                        <div v-if="detail.detail" v-html="detail.detail"></div>
+                        <p v-else class="nodate">暂无简介</p>
                     </div>
                     <div class="tabcontent tab2" v-if="detail.sections && detail.sections.length > 0">
                         <h3 class="s_s_title">课程表</h3>
-                        <ul class="curriculum-ul course1">
+                        <ul v-if="detail.sections && detail.sections.length > 0" class="curriculum-ul course1">
                             <li class="js-show" v-for="n in detail.sections">
                                 <img src="../../Public/Mall/img/play_b.png" alt="" class="play">
                                 <div class="jm-fl">
@@ -77,16 +78,18 @@
                                 <img v-else src="../../Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
                             </li>
                         </ul>
+                        <p v-else class="nodate">暂无简介</p>
                     </div>
                     <div class="tabcontent tab3">
                         <h3 class="s_s_title">子课程</h3>
-                        <ul class="media">
+                        <ul v-if="detail.show_course && detail.show_course.length > 0" class="media">
                             <li class="m_li" v-for="item in detail.show_course">
                                 <img v-if="!item.pic" src="../../Public/Common/img/class/class.jpg" alt="">
                                 <img v-else :src="'http://crm.xiaoying.net'+item.pic" alt="">
                                 <h3>{{item.name}}</h3>
                             </li>
                         </ul>
+                        <p v-else class="nodate">暂无简介</p>
                     </div>
                 </div>
             </div>

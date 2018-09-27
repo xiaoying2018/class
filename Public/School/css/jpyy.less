@@ -104,12 +104,117 @@
         }
     }
     .schoolList {
+        margin: 40px auto;
+        margin-top: 20px;
         .item_school {
-            box-shadow: 0 0px 30px 3px #ebebeb;
-            padding: 20px;
+            border-bottom:1px solid #ebebeb;
+            padding: 30px 30px;
+            .transition();
             &:hover {
                 box-shadow: 0 0px 30px 3px #ebebeb;
             }
+            .imgDv{
+                width: 100px;
+                height: 140px;
+                position: relative;
+                img{
+                    width: 100px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            .info{
+                width: 800px;
+                margin-left: 50px;
+                .name{
+                    color: #2e2e2d;
+                    font-size: 16px;
+                }
+                .slistDv{
+                    font-size: 0;
+                    margin-top: 10px;
+                    .slineDv{
+                        font-size: 14px;
+                        color: #6b6b6b;
+                        width: 50%;
+                        display: inline-block;
+                        margin: 5px 0;
+                        &.full{
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+            .btn-wapper{
+                padding-top: 10px;
+                a {
+                    display: block;
+                    width: 140px;
+                    height: 32px;
+                    border: none;
+                    border-radius: 4px;
+                    line-height: 32px;
+                    cursor: pointer;
+                    font-size: 12px;
+                    transition: all .3s ease 0s;
+                    &.admissions{
+                        background: #2196f3;
+                        color: #fff;
+                        margin-bottom: 10px;
+                        text-align: center;
+                    }
+                    &.subscribe{
+                        color: #fff;
+                        background: #ff6136;
+                        margin-bottom: 10px;
+                        position: relative;
+                        text-indent: 35px;
+                    }
+                    &.apply{
+                        color: #ffd900;
+                        border: 1px solid #ffd900;
+                        box-sizing: border-box;
+                        background: #fff;
+                        text-align: center;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+    }
+}
+.pageNav {
+    padding: 30px 0;
+    text-align: center;
+    li {
+        display: inline-block;
+    }
+    a {
+        .border-radius(5px);
+        padding: 11px 15px;
+        text-align: center;
+        color: #5b5a5a;
+        background-color: #fff;
+        border: 1px solid #c8c8c8;
+        display: inline-block;
+        margin-left: 5px;
+        .transition();
+        &.page {
+        }
+        &.active {
+            color: #fff;
+            background-color: #FFD900;
+            border-color: #c8c8c8;
+        }
+        &:hover {
+            cursor: pointer;
+            color: #fff;
+            background-color: #FFD900;
+            border-color: #c8c8c8;
         }
     }
 }
