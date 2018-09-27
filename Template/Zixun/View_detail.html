@@ -16,18 +16,158 @@
     <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
     <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
     <link rel="stylesheet" href="__PUBLIC__/FreeClass/css/index.css">
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/Zixun/js/swiper2/idangerous.swiper.css">
+
+    <link rel="stylesheet" href="__PUBLIC__/Zixun/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Zixun/css/detail.css">
+
     <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
 </head>
 
 <body>
     <include file="./Template/Common/View_header_class.html" />
     <div id="zixundetail">
-        <div class="container marginTop">
-            详情
+        <div class=" marginTop">
+            <div class="bannerPart">
+                
+            </div>
+            <div class="newsNavPart">
+                <ul class="container newsNavUl">
+                    <li @click="clickNewsNav" data-cateid="newsNavAll"><a href="javascript:;">全部</a></li>
+                    <li v-for="n in newsNav" @click="clickNewsNav" :data-cateid="n.id" :key = "n.id">
+                        <a href="/zixun">{{n.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container clearfix contentPart">
+                <div class="leftPart">
+                    <div class="newsContPart">
+                        <div class="newsdetailsContPart">
+                            <h4 class="currentAddress">您当前的位置：
+                                <a href="/zixun">留学资讯</a>
+                                <!-- <router-link to="/News">留学资讯</router-link> -->
+                                >>
+                                <a href="/zixun">全部</a>
+                                <!-- <router-link to="/News">全部</router-link> -->
+                                >><span>正文详情</span></h4>
+                            <div class="detailsTitlePart">
+                                <h3 class="detailsTitle">{{newsDetailInfo.title}}</h3>
+                            </div>
+                            <div class="newsSourcePart clearfix">
+                                <ul class="sourceUl clearfix">
+                                    <li class="sourse">{{newsDetailInfo.source}}</li>
+                                    <li class="editor">xiaoying</li>
+                                    <li class="time">{{newsDetailInfo.publishedtime}}</li>
+                                </ul>
+                                <ul class="eyeUl clearfix">
+                                    <li class="thumb" @click="clickThumb">
+                                        <span></span>{{vote}}
+                                    </li>
+                                    <li class="eye">
+                                        <span></span>{{reads}}
+                                    </li>
+                                    <!-- <li class="share">
+                                        <span></span>18
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div class="detailsContPart">
+                                <p v-html="newsDetailInfo.body"></p>
+                                <div class="thumbPart"  @click="clickThumb">
+                                    <div>
+                                        <img src="../../Public/Zixun/img/thumb.png">
+                                        <p>赞</p>
+                                    </div>
+                                </div>
+                                <p class="likeNum">{{vote}}人赞过</p>
+                            </div>
+                            <div class="labelPart">
+                                <div class="labelItem clearfix">
+                                    <div class="labelTitle">你关心的标签: </div>
+                                    <div class="labelUl">
+                                        <ul class="clearfix">
+                                            <li><a href="javascript:;">日本留学面试问题</a></li>
+                                            <li><a href="javascript:;">东京大学</a></li>
+                                            <li><a href="javascript:;">早稻田大学</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="labelItem clearfix">
+                                    <div class="labelTitle">我关心的标签: </div>
+                                    <div class="labelUl">
+                                        <ul class="clearfix">
+                                            <li><a href="javascript:;">日本留学面试问题</a></li>
+                                            <li><a href="javascript:;">东京大学</a></li>
+                                            <li><a href="javascript:;">早稻田大学</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                            <li><a href="javascript:;">日本大学排名</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="notice">声明：本站文章标明 [原创] 系本站原创内容，如需转载请注明 [来源于小莺出国 www.xiao ying.net] 。任何单位或个人认为本站内容涉嫌侵犯其合法权益，请及时向本站书面反馈并提供证明，本站将会尽快移除被控侵权内容。</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="rightPart">
+                    <div class="hotActivitiesPart">
+                        <h4 class="title">热门活动</h4>
+                        <div class="hotActivitiesDv">
+                            <a class="arrow-left" href="#"></a> 
+                            <a class="arrow-right" href="#"></a>
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" v-for="n in hotActivities" :key="n.id">
+                                        <a :href="n.url" target="_blank">
+                                            <img :src="n.imgSrc">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pagination"></div>
+                        </div>
+                    </div> 
+                    <div class="hotFlag">
+                        <h4>热门标签</h4>
+                        <ul class="hotFlagList clearfix">
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                            <li><a href="javascript:;">研究生申请</a></li>
+                            <li><a href="javascript:;">研究生</a></li>
+                        </ul>
+                    </div>
+                    <div class="parentsCare">
+                        <h4>家长关心</h4>
+                        <ul class="careQuestionList clearfix">
+                            <li v-for="n in parentsCare">
+                                <a href="javascript:;">
+                                    <div class="iconDv">
+                                        <img :src="n.imgSrc">
+                                    </div>
+                                    <p>{{n.title}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>  
+                    <!-- <hot-activities></hot-activities>
+                    <hot-flag></hot-flag>
+                    <parents-care></parents-care> -->
+                </div>
+            </div>
         </div>
     </div>
     <include file="./Template/Common/View_footer.html" />
+    <script type="text/javascript" src="../../Public/Zixun/js/swiper2/idangerous.swiper.min.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+    <script type="text/javascript" src="../../Public/Zixun/js/detail.js"></script>
 </body>
 
 </html>
