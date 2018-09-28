@@ -268,16 +268,23 @@ var _hmt = _hmt || [];
                 //点击城市
                 $(".areaBtn #tiyan").click(function(){
                     $(".overlay_city").fadeIn();
-                    $("#a.areaPart").addClass("in");
+                    $("#a.areaPart").show();
+                    window.setTimeout(function(){
+                        $("#a.areaPart").addClass("in")
+                    },100)
                 });
 
                 $(".areaBtn #guojia").click(function(){
                     $(".overlay_city").fadeIn();
-                    $("#b.areaPart").addClass("in");
+                    $("#b.areaPart").show();
+
+                    window.setTimeout(function(){
+                        $("#b.areaPart").addClass("in")
+                    },100)
                 }); 
                 $(".closeImg").click(function(){
                     $(".overlay_city").hide();
-                    $(".areaPart").removeClass("in");
+                    $(".areaPart").hide().removeClass("in");
                 });
 
                 $('body [data-nav="'+ $('body').attr('data-nav')+'"]').addClass('active').siblings().removeClass('active');
