@@ -136,7 +136,7 @@
 						url:"/api/profile",
 						success:function(res){
 							_self_p.profile = res
-							if(res.info.profile.headpic != null && res.info.profile.headpic.toString()[0] =="."){
+							if(res.info && res.info.profile.headpic != null && res.info.profile.headpic.toString()[0] =="."){
 								res.info.profile.headpic = res.info.profile.headpic.toString().substring(1)
 							}
 							_self_p.pro_profile = res.info
