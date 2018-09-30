@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="ie lt-ie9 lt-ie8 lt-ie7" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if IE 7]>
+<html class="ie lt-ie9 lt-ie8" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<!--[if lt IE 10]>
+<html class="ie ltie10" lang="zh-CN" itemscope itemtype="http://schema.org/WebPage"> <![endif]-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>顾问认证-小莺出国</title>
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/reset.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/Common/css/common.css">
+    <link rel="stylesheet" href="__PUBLIC__/Open/css/animate.min.css">
+    <link rel="stylesheet" href="__PUBLIC__/ConsultantCertification/css/index.css">
+    <script type="text/javascript" src="__PUBLIC__/Open/js/jquery-1.9.1.min.js"></script>
+</head>
+
+<body>
+    <include file="./Template/Common/View_header_class.html" />
+    <div id="aboutUs" class="marginTop">
+        <div class="container">
+            <h4 class="title">小莺顾问查询系统——查一查，验明正身免受骗</h4>
+            <div class="searchPart">
+                <input id="seaechInput" type="" name="" placeholder="输入小莺顾问手机号/QQ号/微信">
+                <a  id="searchBtn" class="searchBtn" href="javascript:;"><span></span>搜索</a>
+                <div class="waitDv">
+                    <img class="logo" src="../../Public/ConsultantCertification/img/logo.png">
+                </div>
+            </div>
+            <div class="animatePart">
+                <!-- start -->
+                <div class="startPart">
+                    <div class="start"><img src="../../Public/ConsultantCertification/img/xiaoying.png"></div>
+                </div>
+                <!-- loading -->
+                <div class="loadingPart">
+                    <div class="loading">
+                        <!-- <div class="logoDv">
+                            <div>
+                                <img class="logo" src="../../Public/ConsultantCertification/img/logo.png">
+                            </div>  
+                            <div class="poiterDv">
+                                <div class="poiter poiter1"></div>
+                                <div class="poiter poiter2"></div>
+                                <div class="poiter poiter3"></div>
+                                <div class="poiter poiter4"></div>
+                                <div class="poiter poiter5"></div>
+                            </div>
+                        </div> -->
+                        <div class="xiaoying">
+                            <img class="" src="../../Public/ConsultantCertification/img/xiaoying.png">
+                        </div>
+                    </div>
+                </div>
+                <!-- success -->
+                <div class="successPart">
+                    <div class="success">
+                        <img class="star star1"  src="../../Public/ConsultantCertification/img/star1.png">
+                        <img class="star star2" src="../../Public/ConsultantCertification/img/star2.png">
+                        <img class="star star3" src="../../Public/ConsultantCertification/img/star3.png">
+                        <img class="star star4" src="../../Public/ConsultantCertification/img/star4.png">
+                        <div class="xiaoying">
+                            <img src="../../Public/ConsultantCertification/img/xiaoying.png">
+                        </div>
+                    </div>
+                    <p class="tip">您所搜索的课程顾问是 <span class="address"></span>：<span class="department"></span><span class="full_name"></span>，请放心咨询</p>
+                </div>
+                
+                <!-- error -->
+                <div class="errorPart">
+                    <div class="error">
+                        <div class="circle circle1"></div>
+                        <div class="circle circle2"></div>
+                        <div class="circle circle3"></div>
+                        <div class="circle circle4"></div>
+                        <div class="circle circle5"></div>
+                        <img class="xiaoying_error" src="../../Public/ConsultantCertification/img/xiaoying_error.png">
+                    </div>
+                    <p class="tip">您所搜索的课程顾问不存在，<span class="red">请谨慎交流，防止上当受骗。</span></p>
+                </div>
+
+            </div>
+            <a class="feedBackBtn" onclick="_MEIQIA('showPanel')">点击反馈虚假课程顾问信息</a>
+        </div>
+
+    </div>
+    <include file="./Template/Common/View_footer.html" />
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="../../Public/ConsultantCertification/js/index.js"></script>
+</body>
+
+</html>

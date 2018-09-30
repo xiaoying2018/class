@@ -24,6 +24,9 @@ return [
         'news'       =>  'Zixun/View/index', //资讯列表
         'news/detail'       =>  'Zixun/View/detail', //资讯详情
 
+        'about'       =>  'About/View/index', //资讯详情
+
+
         'school/jpyy'       =>  'School/View/jpyy', //日本语言学校
         'school/jp'       =>  'School/View/jp', //日本大学
         'school/kr'       =>  'School/View/kr', //韩国大学
