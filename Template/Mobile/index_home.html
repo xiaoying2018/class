@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>个人中心</title>
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/index_home.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/vue.min.js"></script>
+		
+	</head>
+
+	<body>
+		<div id="indexhome">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>个人中心</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<img src="../../Public/Mobile/img/home_banner.jpg" alt="" class="home_banner">
+			<ul class="listul">
+				<li class="itemli">
+					<img src="../../Public/Mobile/img/kxyy.jpg" alt="">
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var indexhome = new Vue({
+			el: "#indexhome",
+			data: {
+				data: {}
+			},
+			methods: {
+			}
+		})
+
+	</script>
+
+</html>	

@@ -122,6 +122,7 @@ return [
         'm/user'                    =>  'Mobile/Index/index', // 个人中心
         'm/login'					=>	'Mobile/Index/login',//登陆页面
         'm/register'				=>	'Mobile/Index/register',//登陆页面
+        'm/home'                    =>  'Mobile/Index/home', // 个人中心
         'm/course'			        =>	'Mobile/Index/course',//我的班级
         'm/course/hour'		        =>	'Mobile/Index/hour',//查看课节
         'm/apply'				    =>	'Mobile/Index/apply',//我的申请
