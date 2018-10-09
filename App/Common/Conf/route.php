@@ -122,7 +122,6 @@ return [
         'm/user'                    =>  'Mobile/Index/index', // 个人中心
         'm/login'					=>	'Mobile/Index/login',//登陆页面
         'm/register'				=>	'Mobile/Index/register',//登陆页面
-        'm/home'                    =>  'Mobile/Index/home', // 个人中心
         'm/course'			        =>	'Mobile/Index/course',//我的班级
         'm/course/hour'		        =>	'Mobile/Index/hour',//查看课节
         'm/apply'				    =>	'Mobile/Index/apply',//我的申请
@@ -132,6 +131,10 @@ return [
         'm/message'			        =>	'Mobile/Index/message',//消息列表
         'm/message/details'	        =>	'Mobile/Index/messageDetails',//消息详情
         'm/set'	                    =>	'Mobile/Index/set',//个人信息
+
+
+        'm/home'                    =>  'Mobile/Index/home', // 个人中心 改版
+        'm/mycourse'                =>  'Mobile/Index/myclass', // 我的课程 改版
 
 
         /* 公开课接口路由 */

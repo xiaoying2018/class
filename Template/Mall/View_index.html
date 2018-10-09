@@ -479,7 +479,7 @@
             <div class="swiper-container container" id="swiper-case">
                 <ul class="model_list clearfix container swiper-wrapper" id="model_list">
                     <li class="item_li swiper-slide" v-for="(n,index) in cases">
-                        <a href="/case/detail?id=" target="_blank">
+                        <a :href="'/case/detail?id='+n.id" target="_blank">
                             <img :src="n.headfile == null ? '/Public/random/student/'+_arr[index]+'.jpg' : n.headfile" class="faceImg">
                             <h3>{{n.names}}</h3>
                             <span>成功录取{{n.receive_college}} {{n.receive_major}}</span>

@@ -22,5 +22,8 @@ class IndexController extends Controller
         $this->display();
     }
 
+    public function mycourse (){
+        $this->display();
+    }
 
 }

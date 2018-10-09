@@ -24,7 +24,7 @@ body {
 
 .header {
 	width: 100%;
-	background: #23c25f;
+	background: #ffd900;
 }
 
 .header>div {
@@ -172,8 +172,8 @@ body {
 	outline: none;
 	border: none;
 	margin-left: 2rem;
-	border: 0.026667rem solid #23c25f;
-	color: #23c25f;
+	border: 0.026667rem solid #ffd900;
+	color: #ffd900;
 }
 
 ._sub>button:nth-of-type(2) {
@@ -215,7 +215,7 @@ padding: 0.4rem 0;
 	padding: 0.4rem 0;
 }
 .security>ul>li>p>i:nth-of-type(1){
-	color: #23c25f;
+	color: #ffd900;
 	vertical-align: middle;
 	margin: 0 0.2rem;
 }
@@ -317,7 +317,7 @@ padding: 0.4rem 0;
 	padding: 0.4rem 0;
 }
 .email_fixed>div>p>i{
-	color:#23c25f;
+	color:#ffd900;
 	margin-right: 0.2rem;
 }
 .email_fixed>div>a{

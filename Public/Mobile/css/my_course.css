@@ -24,7 +24,7 @@ body {
 
 .header {
   width: 100%;
-  background: #23c25f;
+  background: #ffd900;
 }
 
 .header > div {
@@ -146,7 +146,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  background: #23c25f;
+  background: #ffd900;
   border-radius: 0.106667rem;
 }
 
@@ -163,8 +163,8 @@ body {
   height: 0.666667rem;
   width: 1.6rem;
   border-radius: 0.053333rem;
-  border: 0.026667rem solid #23c25f;
-  color: #23c25f;
+  border: 0.026667rem solid #ffd900;
+  color: #ffd900;
   text-align: center;
   line-height: 0.666667rem;
   display: inline-block;
@@ -174,7 +174,7 @@ body {
 		margin-right: 5px;
 	}
 	.course_text>span{
-		color:#23c25f ;
+		color:#ffd900 ;
 		display: block;
 		margin: 2px 0;
 	}
