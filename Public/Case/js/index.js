@@ -289,6 +289,8 @@ $(function() {
         },
 
         mounted: function() {
+            
+            
             $("#loader").show();
             var _this = this;
             _this.query.c =  _this.getQueryString("cat",true);
