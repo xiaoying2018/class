@@ -23,7 +23,7 @@ body {
 
 .header {
   width: 100%;
-  background: #23c25f;
+  background: #ffd900;
 }
 
 .header > div {
@@ -68,7 +68,7 @@ body {
 }
 
 .green {
-  color: #23c25f;
+  color: #ffd900;
 }
 
 .course_list {
@@ -95,7 +95,7 @@ body {
 }
 
 .course_list .list_tab .active_tab {
-  border-color: #23c25f !important;
+  border-color: #ffd900 !important;
   color: #000000 !important;
 }
 
@@ -174,9 +174,9 @@ body {
   height: 0.666667rem;
   text-align: center;
   line-height: 0.666667rem;
-  border: 0.026667rem solid #23C25F;
+  border: 0.026667rem solid #ffd900;
   border-radius: 0.04rem;
-  color: #23C25F;
+  color: #ffd900;
 }
 
 .course_list .course_item .course_but > ul {

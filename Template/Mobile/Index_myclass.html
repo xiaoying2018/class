@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<title>我的课程</title>
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<script src="/Public/vue.min.js"></script>
+		<script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
+		
+	</head>
+
+	<body>
+		<div id="indexmyclass">
+			<header class="header">
+				<div>
+					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<span>我的课程</span>
+					<a href="#"></a>
+				</div>
+			</header>
+			<ul class="tabhead">
+				<li class="active">
+					<a href="">我的班级</a>
+				</li>
+				<li>
+					<a href="">视频回顾</a>
+				</li>
+				<li>
+					<a href="">我的预约</a>
+				</li>
+			</ul>
+
+			<input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
+	
+			<ul class="biaozhu">
+				<li class="clearfix">
+					<span class="point"></span>已办理
+				</li>
+				<li class="clearfix">
+					<span class="point"></span>未办理
+				</li>
+			</ul>
+
+			<div class="footer">
+				版权所有：小莺教育科技有限公司  苏ICP备17069390号 
+			</div>
+		</div>
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script>
+		var indexmyclass = new Vue({
+			el: "#indexmyclass",
+			data: {
+				data: {}
+			},
+			methods: {
+			},
+			mounted: function(){
+				flatpickr("#schedule", {
+	        		inline: true,
+	        		static: true,
+	        		ariaDateFormat:"Y.m.d",
+	        		onReady:function(){
+	        		},
+	        		onChange:function(z,o,current){
+	        		},
+	        		onMonthChange:function(){
+	        		},
+	        		onYearChange:function(){
+	        		}
+	        	});
+			}
+		})
+
+	</script>
+
+</html>	

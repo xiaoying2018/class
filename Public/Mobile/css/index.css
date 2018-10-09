@@ -23,7 +23,7 @@ body {
 
 .header {
   width: 100%;
-  background: #23c25f;
+  background: #ffd900;
 }
 
 .header > div {
@@ -108,7 +108,7 @@ body {
 }
 
 .class_hour > div > p > i {
-  color: #23c25f;
+  color: #ffd900;
   margin-right: 0.266667rem;
   vertical-align: middle;
 }
@@ -156,7 +156,7 @@ body {
 }
 
 .class_hour .class_item .class_content .video {
-  color: #23c25f;
+  color: #ffd900;
   vertical-align: middle;
   margin-right: 0.306667rem;
 }
@@ -177,8 +177,8 @@ body {
   line-height: 0.666667rem;
   text-align: center;
   font-size: 0.28rem;
-  color: #23C25F;
-  border: 0.026667rem solid #23c25f;
+  color: #ffd900;
+  border: 0.026667rem solid #ffd900;
   border-radius: 0.333333rem;
   padding: 0 0.133333rem;
   float: right;
@@ -219,7 +219,7 @@ body {
 }
 
 .conter_list > li > a ._book {
-  color: #23c25f;
+  color: #ffd900;
   margin-right: 0.266667rem;
 }
 
