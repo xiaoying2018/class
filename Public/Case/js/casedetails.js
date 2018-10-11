@@ -213,26 +213,7 @@ $(function () {
                 // alert("当前浏览器不是Webkit内核！");
                 $('.item_li a h2').addClass('ie');
             }
-            //热门活动轮播初始化
-            var mySwiper = new Swiper('.swiper-container',{
-                pagination: '.pagination',
-                loop:true,
-                // autoplay: 3000,
-                autoplayDisableOnInteraction: false,
-                grabCursor: true,
-                paginationClickable: true
-            })
-            $('.arrow-left').on('click', function(e){
-                e.preventDefault()
-                mySwiper.swipePrev()
-            });
-            $('.arrow-right').on('click', function(e){
-                e.preventDefault()
-                mySwiper.swipeNext()
-            });
-
-
-
+           
         }
     });
 })
