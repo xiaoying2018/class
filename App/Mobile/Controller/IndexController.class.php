@@ -26,4 +26,7 @@ class IndexController extends Controller
         $this->display();
     }
 
+    public function mycoursehour (){
+        $this->display();
+    }
 }

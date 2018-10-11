@@ -134,7 +134,9 @@ return [
 
 
         'm/home'                    =>  'Mobile/Index/home', // 个人中心 改版
-        'm/mycourse'                =>  'Mobile/Index/myclass', // 我的课程 改版
+        'm/myclass'                =>  'Mobile/Index/myclass', // 我的课程 改版
+        'm/myclass/hour'           =>  'Mobile/Index/myclasshour', // 我的课程 改版
+
 
 
         /* 公开课接口路由 */
