@@ -38,56 +38,114 @@
                 <div class="right r_part">
                     <p class="p_name">{{n.section_name}}</p>
                     <div class="p_time">
-                        {{n.start_time}} - {{n.end_time}} <br />
-                        <img src="../../Public/Mobile/img/icon_clock.png" alt="">时长：{{n.duration}}分钟
-                        <div class="btn_group">
-                            <a>视频回顾</a>
-                            <a>课件预览</a>
-                            <a>查看往期录播</a>
-                            <a href="javascript:;">课后练习</a>
-                            <a href="javascript:;" v-if="n.signin_status == 1" class="active">已签到</a>
-                            <a href="javascript:;" v-else>未签到</a>
+                        {{n.start_time}} - {{n.end_time}}
+                        <div style="margin:5px 0;">
+                            <img src="../../Public/Mobile/img/icon_clock.png" alt="">
+                            时长：{{n.duration}}分钟
+                        </div>
+                            <div class="btn_group">
+                                <a v-if="n.status != 1">视频回顾</a>
+                                <a @click="getKeJianById(n)">课件预览</a>
+                                <a @click="checkVideo(n)">往期录播</a>
+                                <a href="javascript:;" v-if="n.shomework != ''" :href="'http://crm.xiaoying.net/'+n.shomework">课后练习</a>
+                                <a href="javascript:;" v-if="n.status != 1 && n.signin_status == 1" class="active">已签到</a>
+                                <a href="javascript:;" v-if="n.status != 1 && n.signin_status != 1" >未签到</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="footer">
+                版权所有：小莺教育科技有限公司 苏ICP备17069390号
+            </div>
+            <!-- 课件dv -->
+            <div class="videopart" id="record_schedule" style="display: none;">
+                <div class="coverbg" @click="close_v()"></div>
+                <div class="innerInfo">
+                    <div class="h3Dv">
+                        <h3>点击查看课件：</h3>
+                        <i class="fa fa-close" @click="close_v()"></i>
+                    </div>
+                    <ul class="videolist" v-if="c_kejian.length > 0">
+                        <li class="lii_item" v-for="(n,index) in c_kejian">
+                            <a :href="'http://crm.xiaoying.net/'+n.file" target="_blank">{{index+1}}. {{n.title}}</a>
+                        </li>
+                    </ul>
+                    <ul class="videolist" v-else>
+                        <li class="lii_item">
+                            <a href="javascript:;">暂无课件</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 录播Dv -->
+            <div class="videopart" id="record_video" style="display: none;">
+                <div class="coverbg" @click="close_v()"></div>
+            </div>
         </div>
-        <div class="footer">
-            版权所有：小莺教育科技有限公司 苏ICP备17069390号
-        </div>
-    </div>
 </body>
 <script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 <script>
-
 function getQueryString(name, needdecoed) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var lh = window.location.search;
-    if(needdecoed) {
+    if (needdecoed) {
         lh = decodeURI(window.location.search)
     }
     var r = lh.substr(1).match(reg);
-    if(r != null) return unescape(r[2]);
+    if (r != null) return unescape(r[2]);
     return "";
 }
 
 var indexmyclass = new Vue({
     el: "#indexmyclass",
     data: {
-        event:[],
-        weixuexi:[],
-        yixuexi:[],
-        all:[],
-        current:[]
+        event: [],
+        weixuexi: [],
+        yixuexi: [],
+        all: [],
+        current: [],
+        c_kejian: [],
     },
-	filters: {
-	},
+    filters: {},
     methods: {
-        changestate:function(name){
+        close_v: function() {
+            $(".videopart").fadeOut();
+            $("#record_video video").remove();
+        },
+        // 课件预览
+        getKeJianById: function(_id) {
+            var _this = this;
+            $.ajax({
+                url: "http://crm.xiaoying.net/index.php?m=courseDocument&a=getDocumentByScheduleId",
+                type: "post",
+                data: {
+                    schedule_id: _id.schedule_id
+                },
+                success: function(res) {
+                    if (res.status) {
+                        _this.c_kejian = res.data;
+                        $("#record_schedule").show()
+                    }
+                }
+            })
+        },
+        // 往期视频
+        checkVideo: function(n) {
+            if (n.video_path == null || n.video_path == '') {
+                alert('视频尚未上传')
+                return false;
+            }
+            $("#record_video video").remove();
+            $("#record_video").append('<video id="player1" preload="none" controls poster="http://i.xiaoying.net/Public/Common/video_poster.jpg"><source src="http://' + n.video_path + '" type="video/mp4"></video>');
+
+            $("#record_video").fadeIn();
+        },
+        changestate: function(name) {
             this.current = this[name];
         },
         get_data: function() {
-        	var _this = this;
+            var _this = this;
             $.ajax({
                 type: "post",
                 url: "/api/student/info",
@@ -96,20 +154,25 @@ var indexmyclass = new Vue({
                         alert(res.msg)
                         window.location.href = "/m/login"
                     } else {
-                    	for(var key in res.schedule){
-                    		_this.event = _this.event.concat(res.schedule[key])
-                    	}
-                    	for(var i = 0; i < _this.event.length; i++){
-                    		if (_this.event[i].period_id == getQueryString('period_id')) {
+                        for (var key in res.schedule) {
+                            _this.event = _this.event.concat(res.schedule[key])
+                        }
+                        for (var i = 0; i < _this.event.length; i++) {
+                            if (_this.event[i].period_id == getQueryString('period_id')) {
                                 if (_this.event[i].status == -1) {
                                     _this.yixuexi.push(_this.event[i]);
-                                }else{
+                                } else {
                                     _this.weixuexi.push(_this.event[i]);
                                 }
+                                if (_this.event[i].homework != null) {
+                                    _this.event[i].shomework = (_this.event[i].homework.split('./'))[1]
+                                } else {
+                                    _this.event[i].shomework = ''
+                                }
                             }
-                    	}
+                        }
                         _this.current = _this.event;
-                    	_this.period = res.period;
+                        _this.period = res.period;
                     }
                 }
             });

@@ -20,11 +20,26 @@
 			<header class="header">
 				<div>
 					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
-					<span>COE申请</span>
+					<span>申请进度</span>
 					<a href="javascript:void(0)"></a>
 				</div>
 
 			</header>
+
+	        <ul class="tabhead">
+	            <li>
+	                <a href="/m/apply">我的申请</a>
+	            </li>
+	            <li class="active">
+	                <a href="/m/seo">COE申请</a>
+	            </li>
+	            <li>
+	                <a href="/m/visa">签证办理</a>
+	            </li>
+	            <li>
+	                <a href="/m/material">我的材料</a>
+	            </li>
+	        </ul>
 			<ul v-for="(project,key) in datas.data">
 				<li class="apply_list">
 					<p>

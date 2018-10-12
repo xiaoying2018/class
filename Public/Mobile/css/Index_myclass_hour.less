@@ -98,6 +98,7 @@ body {
     padding: 0 1rem;
     position: relative;
     margin: 0.5rem 0;
+
     .s_content {
         margin: 0 auto;
     }
@@ -118,16 +119,16 @@ body {
     }
 
     .r_part {
-        padding:15px 0;
-        font-size: 0.45rem;
+        padding: 15px 0;
+        font-size: .3rem;
         padding-left: 1.2rem;
         border-left: 0.1rem dotted #ccc;
         margin-left: 0.5rem;
 
         .p_name {
             background-color: #ffd900;
-            font-size: 0.5rem;
-            padding: 0.2rem 0.4rem;
+            font-size: 0.3rem;
+            padding: .2rem .4rem;
             position: relative;
 
             &:before {
@@ -146,27 +147,31 @@ body {
         .p_time {
             color: #5e5e5e;
             background-color: #fff;
-            padding: 0.2rem 0.4rem;
-            box-shadow: 0px 0px 2px 0px #ccc;
+            padding: .2rem .4rem;
+            box-shadow: 0 0 2px 0 #ccc;
+
             img {
-                width: 0.45rem;
-                margin-right: 0.3rem;
+                width: .3rem;
+                margin-right: .3rem;
                 vertical-align: middle;
             }
-            .btn_group{
+
+            .btn_group {
                 font-size: 0;
-                a{
-                    margin: 0.1rem 0;
+
+                a {
+                    margin: .1rem 0;
                     display: inline-block;
                     vertical-align: top;
                     border: 1px solid #eeede9;
                     color: #1c1c1c;
-                    font-size: 0.4rem;
-                    padding: 0.1rem 0.3rem;
-                    margin-right: 0.2rem;
+                    font-size: .2rem;
+                    padding: .1rem .3rem;
+                    margin-right: .2rem;
                     border-radius: 15px;
                     background-color: #fffbe6;
-                    &.active{
+
+                    &.active {
                         background-color: #ffd900;
                     }
                 }
@@ -181,4 +186,75 @@ body {
     text-align: center;
     padding: 1rem 0;
     background-color: #434343;
+}
+.videopart {
+    position: fixed;
+    z-index: 22222;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .coverbg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    video{
+        width: 80%;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-60%);
+        display: block;
+    }
+
+    .innerInfo {
+        background-color: #fff;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        padding: 0 20px;
+        top: 50%;
+        transform: translateY(-60%);
+        border-radius: 2px;
+        .h3Dv {
+            padding: 15px 0px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+
+            h3 {
+                padding: 0;
+                margin: 0;
+            }
+
+            .fa-close {
+                cursor: pointer;
+                position: absolute;
+                right: 5px;
+                top: 15px;
+                font-size: 20px;
+            }
+        }
+
+        .videolist {
+            position: relative;
+            padding: 0;
+            margin: 0 auto;
+            padding-top: 10px;
+            .lii_item {
+                display: block;
+                padding-bottom: 10px;
+
+                a {
+                    color: #36c5ff;
+                }
+            }
+        }
+    }
 }

@@ -1,3 +1,31 @@
+
+.tabhead {
+    font-size: 0;
+    text-align: center;
+    padding: .3rem 0;
+    border-bottom: 1px solid #e1e0e0;
+    background-color: #fff
+    width: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tabhead li {
+    display: inline-block;
+    border-radius: 20px;
+    margin: 0 .3rem
+}
+
+.tabhead li a {
+    font-size: .4rem;
+    padding: .2rem .3rem;
+    display: block;
+    color: #323232
+}
+
+.tabhead li.active {
+    background-color: #ffd900
+}
 * {
   margin: 0;
   padding: 0;
