@@ -367,8 +367,18 @@ class StudentController extends BaseController
      */
     public function getBanciByBanjiId()
     {
+        $banji_id = I('post.id');// 班级编号
 
+        // 获取当前班级下的班次列表
+
+        // 处理结果集
+
+        // 返回数据
     }
+
+    /**
+     * 根据班次列表获取
+     */
 
     public function profile()
     {
