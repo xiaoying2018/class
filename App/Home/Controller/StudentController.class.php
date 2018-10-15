@@ -90,6 +90,20 @@ class StudentController extends BaseController
                     $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
                     $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
                     $value['serial'] = $send_url;
+
+
+                    // 1015 希望在首次请求获取到房间的往期直播视频资源
+                    $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+                    $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+                    $tk_send_data['serial'] = $value['serial'];// 房间号码
+
+                    // 发起请求
+                    $current_room_video_list = json_decode(curlPost($_tk_send_url . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+
+                    // 返码正常(0为正常)
+                    if (!$current_room_video_list->result) $value['serial_has_videos'] = $current_room_video_list->recordlist;
+                    // 1015 end
+                    
                 }
                 // 8-27 end
                 // 获取当前的时间
