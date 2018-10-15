@@ -350,6 +350,7 @@ class StudentController extends BaseController
         exit();
     }
 
+    // 1015 新增 暂未使用
     /**
      * 获取所有班级
      */
@@ -375,10 +376,7 @@ class StudentController extends BaseController
 
         // 返回数据
     }
-
-    /**
-     * 根据班次列表获取
-     */
+    // 1015 end
 
     public function profile()
     {
