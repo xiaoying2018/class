@@ -4,6 +4,7 @@ namespace Home\Controller;
 
 use Common\Controller\BaseController;
 use Home\Model\CourseBespeakModel;
+use Home\Model\CourseModel;
 use Home\Model\LetterModel;
 use Home\Model\PeriodModel;
 use Home\Model\ProfileModel;
@@ -347,6 +348,26 @@ class StudentController extends BaseController
         echo "<pre>";
         var_dump($res);
         exit();
+    }
+
+    /**
+     * 获取所有班级
+     */
+    public function getAllBanji()
+    {
+        $banji_model = new CourseModel();
+
+        $all_banji = $banji_model->where(['status'=>['eq',1]])->select();
+
+        $this->ajaxReturn(['data'=>$all_banji]);
+    }
+
+    /**
+     * 根据班级ID获取班次列表
+     */
+    public function getBanciByBanjiId()
+    {
+
     }
 
     public function profile()
