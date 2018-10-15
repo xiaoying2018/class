@@ -36,6 +36,8 @@ return [
         'onlinemall'     =>  'OnlineMall/View/index',
         'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
 
+        'api/current_sch_video'            =>  'Home/Student/getPastLiveVideo',   // 指定课节的往期直播视频资源
+
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
         'open'                      =>  'Open/View/index',      // 主页 公开课
