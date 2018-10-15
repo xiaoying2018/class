@@ -78,6 +78,8 @@ body {
 	height: 1.6rem;
 	border-radius: 50%;
 	vertical-align: middle;
+    margin: 0 auto;
+    display: block;
 }
 
 .title_name>div>span>span {
@@ -471,5 +473,12 @@ padding: 0.4rem 0;
 }
 .item_phone{
 	padding: 0.3rem 0 !important;
+}
+#picker{
+	left: 0;
+	right: 0;
+	margin: auto;
+    width: 1.6rem;
+    opacity: 0;
 }
 /*# sourceMappingURL=set.css.map */
