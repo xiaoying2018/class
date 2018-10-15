@@ -26,9 +26,9 @@
             </div>
         </header>
         <div class="tabheader">
-            <span @click="changestate('event')" class="active">全部<font class="num">({{weixuexi.length+yixuexi.length}})</font></span>
-            <span @click="changestate('weixuexi')">未学习<font class="num">({{weixuexi.length}})</font></span>
-            <span @click="changestate('yixuexi')">已学习<font class="num">({{yixuexi.length}})</font></span>
+            <span @click="changestate('event')" class="active">全部<font class="num" style="background-color: #2bba8f;">{{weixuexi.length+yixuexi.length}}</font></span>
+            <span @click="changestate('weixuexi')">未学习<font class="num">{{weixuexi.length}}</font></span>
+            <span @click="changestate('yixuexi')">已学习<font class="num" style="background-color: #2bba8f;">{{yixuexi.length}}</font></span>
         </div>
         <div class="tabcontent a">
             <div class="clearfix s_content" v-for="(n,index) in current">

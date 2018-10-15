@@ -27,13 +27,16 @@
         </header>
         <ul class="tabhead">
             <li class="active">
-                <a href="">我的班级</a>
+                <a href="/m/myclass">我的班级</a>
             </li>
             <li>
-                <a href="">视频回顾</a>
+                <a href="/m/myclass/videoreview">视频回顾</a>
             </li>
             <li>
-                <a href="">我的预约</a>
+                <a href="/m/myclass/videocourse">我的课程</a>
+            </li>
+            <li>
+                <a href="javascript:;">我的预约</a>
             </li>
         </ul>
         <input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
@@ -76,7 +79,7 @@
                     <h3>{{n.period_name}}</h3>
                     <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
                     <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">班主任老师:<span>{{n.headmaster | filterteacher}}</span></div>
-                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;">课程简介:<span v-html="$options.filters.course_detail(n.course_detail)"></span></div>
+                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div>
                 </div>
                 <div class="btn_group">
                     <a :href="'/m/myclass/hour?period_id='+n.period_id">查看课节</a>
@@ -126,7 +129,7 @@ var indexmyclass = new Vue({
                 str = str.replace(/&amp;/g,'&');
                 str = str.replace(/&quot;/g,'"');
                 str = str.replace(/&#039;/g,"'");
-                return str
+                return '课程简介:'+str
         },
         filterteacher: function(name){
             if (!name) return ''

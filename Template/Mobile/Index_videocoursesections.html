@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>我的课程</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="indexmyclass">
+        <header class="header">
+            <div>
+                <a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+                <span>我的课程</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <ul class="tabhead">
+            <li>
+                <a href="/m/myclass">我的班级</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videoreview">视频回顾</a>
+            </li>
+            <li class="active">
+                <a href="/m/myclass/videocourse">我的课程</a>
+            </li>
+            <li>
+                <a href="javascript:;">我的预约</a>
+            </li>
+        </ul>
+        <table class="m_videopart">
+            <thead>
+                <tr>
+                    <td>名称</td>
+                    <td>点击播放</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="n in lists">
+                    <td width="75%">
+                        <span class="m_name">{{n.name}}</span>
+                    </td>
+                    <td>
+                        <span class="btn_play" @click="playvideo(n)" :class="n.video_path == null || n.video_path == '' ? 'disabled':''">播放</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 录播Dv -->
+        <div class="videopart" id="record_video" style="display: none;">
+            <div class="coverbg" @click="close_v()"></div>
+        </div>
+    </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+function getQueryString(name, needdecoed) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var lh = window.location.search;
+    if (needdecoed) {
+        lh = decodeURI(window.location.search)
+    }
+    var r = lh.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+
+var indexmyclass = new Vue({
+    el: "#indexmyclass",
+    data: {
+    	lists:[]
+    },
+    filters: {
+        
+    },
+    methods: {
+        close_v: function() {
+            $(".videopart").fadeOut();
+            $("#record_video video").remove();
+        },
+        // 往期视频
+        checkVideo: function(n) {
+            if (n.video_path == null || n.video_path == '') {
+                alert('视频尚未上传')
+                return false;
+            }
+            $("#record_video video").remove();
+            $("#record_video").append('<video id="player1" preload="none" controls poster="http://i.xiaoying.net/Public/Common/video_poster.jpg"><source src="http://' + n.video_path + '" type="video/mp4"></video>');
+
+            $("#record_video").fadeIn();
+        },
+        playvideo:function(n){
+            if (n.video_path == null || n.video_path == '') {
+                alert('暂无视频');
+            }else{
+
+                $("#record_video video").remove();
+                $("#record_video").append('<video id="player1" preload="none" controls poster="http://i.xiaoying.net/Public/Common/video_poster.jpg"><source src="http://' + n.video_path + '" type="video/mp4"></video>');
+
+                $("#record_video").fadeIn();
+            }
+        },
+        getData:function(_id){
+        	var _this = this;
+    		$.ajax({
+    			type:"post",
+    			url:"/api/mycourse",
+                data:{c_id:_id},
+    			success:function(res){
+    				_this.lists = [];
+    				if (res.status) {
+    					_this.lists = res.data.sections;
+    				}
+    				console.log("xxx",res);
+    			}
+    		})
+        }
+    },
+    mounted: function() {
+    	this.getData(getQueryString('id'));
+    }
+})
+</script>
+
+</html>

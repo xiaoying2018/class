@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>视频回顾</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+</head>
+
+<body>
+    <div id="indexmyclass">
+        <header class="header">
+            <div>
+                <a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+                <span>视频回顾</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <ul class="tabhead">
+            <li>
+                <a href="/m/myclass">我的班级</a>
+            </li>
+            <li class="active">
+                <a href="/m/myclass/videoreview">视频回顾</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videocourse">我的课程</a>
+            </li>
+            <li>
+                <a href="javascript:;">我的预约</a>
+            </li>
+        </ul>
+        <ul class="chooseUl">
+        	<li class="itemLi active">全部</li>
+        	<li class="itemLi" v-for="n in allcate" @click="change('cate',n.id)">{{n.name}}</li>
+        </ul>
+        <table class="m_videopart">
+            <thead>
+                <tr>
+                    <td width="40%">标题</td>
+                    <td width="30%">上课时间</td>
+                    <!-- <td width="20%">任课老师</td> -->
+                    <td width="20%">看回顾</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="n in lists">
+                    <td>
+                        <span class="m_name">{{n.section_name}}</span>
+                    </td>
+                    <td>
+                        <span class="m_name">{{n.start_time}}</span>
+                    </td>
+                    <!-- <td>
+                        <span class="m_name">{{n.teacher_name}}</span>
+                    </td> -->
+                    <td>
+                        <span class="btn_play" @click="playvideo(n)" v-if="n.has_videos && n.has_videos.length > 0">播放</span>
+                        <span class="btn_play disabled" @click="playvideo(n)" v-else>制作中</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 课件dv -->
+        <div class="videopart" id="record_schedule" style="display: none;">
+            <div class="coverbg" @click="close_v()"></div>
+            <div class="innerInfo">
+                <div class="h3Dv">
+                    <h3>点击查看视频：</h3>
+                    <i class="fa fa-close" @click="close_v()"></i>
+                </div>
+                <ul class="videolist" v-if="currentLists.length > 0">
+                    <li class="lii_item" v-for="(n,index) in currentLists">
+                        <a :href="n.playpath" target="_blank">{{index+1}}. 视频{{index+1}}</a>
+                    </li>
+                </ul>
+                <ul class="videolist" v-else>
+                    <li class="lii_item">
+                        <a href="javascript:;">暂无课件</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+function getQueryString(name, needdecoed) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var lh = window.location.search;
+    if (needdecoed) {
+        lh = decodeURI(window.location.search)
+    }
+    var r = lh.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+
+var indexmyclass = new Vue({
+    el: "#indexmyclass",
+    data: {
+        request:{
+            cate:"",
+            start:"",
+            end:""
+        },
+        allcate:[],
+        lists: [],
+        currentLists: []
+    },
+    filters: {
+
+    },
+    methods: {
+    	change:function(key,value){
+			this.request[key] = value;
+			this.getData();
+    	},
+        close_v: function() {
+            $(".videopart").fadeOut();
+            $("#record_video video").remove();
+        },
+        playvideo: function(n) {
+            if (n.has_videos && n.has_videos.length > 0) {
+                this.currentLists = n.has_videos;
+                $("#record_schedule").show();
+            } else {
+                alert('暂无视频');
+            }
+        },
+        getData: function(_id) {
+            var _this = this;
+            $.ajax({
+                type: "get",
+                data:_this.request,
+                url: "/api/course/review",
+                success: function(res) {
+                    _this.lists = [];
+                    if (res.result) {
+                        _this.lists = res.course_review;
+                        if (_this.allcate.length == 0) {
+                        	_this.allcate = res.cate_tag;
+                        }
+                    }
+                }
+            })
+        }
+    },
+    mounted: function() {
+        this.getData(getQueryString('id'));
+        
+        $(document).on('click','.chooseUl .itemLi',function(){
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+
+    }
+})
+</script>
+
+</html>

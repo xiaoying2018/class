@@ -136,6 +136,10 @@ return [
         'm/home'                    =>  'Mobile/Index/home', // 个人中心 改版
         'm/myclass'                =>  'Mobile/Index/myclass', // 我的课程 改版
         'm/myclass/hour'           =>  'Mobile/Index/myclasshour', // 我的课程 改版
+        'm/myclass/videocourse'    =>  'Mobile/Index/videocourse', // 我的课程 改版
+        'm/myclass/videocourse/sections'    =>  'Mobile/Index/videocoursesections', // 我的课程 改版
+        'm/myclass/videoreview'    =>  'Mobile/Index/videoreview', // 我的课程 改版
+
 
 
 

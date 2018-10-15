@@ -29,31 +29,24 @@
 				</div>
 
 			</header>
+			<div class="m_tot" style="margin-top: 10px;">
+				<h3 class="ss_title">个人信息</h3>
+			</div>
+			<div class="set_content">
+				<ul class="content">
 			<div class="title_name">
 				<div id="uploader" class="wu-example">
 
 					<span>
-						<img   v-if="data.info.profile.headpic" :src="['/'+data.info.profile.headpic]"/>
+						<img v-if="data.info.profile.headpic" :src="['/'+data.info.profile.headpic]"/>
 						<img class="header_img" v-else src="/Public/Mobile/img/head_img.png"  />
 						
-						<span v-if="data.info.profile.nickname == '网站注册用户'">{{data.info.code}}</span>
-					<span v-else-if="!data.info.profile.nickname">{{data.info.code}}</span>
-					<span v-else>{{data.info.profile.nickname}}</span>
 					</span>
 					<a href="javascript:void(0)" class="fa fa-pencil-square-o fa-lg" id="picker"></a>
-					<!--<div id="uploader" class="wu-example">
-						<div id="thelist" class="uploader-list"></div>
-						<div class="btns">
-							<div id="picker">选择文件</div>
-							<button id="ctlBtn" class="btn btn-default">开始上传</button>
-						</div>
-					</div>-->
 
 				</div>
 
 			</div>
-			<div class="set_content">
-				<ul class="content">
 					<li class="_title">基本信息</li>
 					<li><span>学号</span><input type="text" readonly="readonly" v-model="data.info.code" /></li>
 					<li v-if="data.info.realname == '网站注册用户'"><span>真实姓名</span><input type="text" id="realname" value="" /></li>

@@ -18,8 +18,8 @@ body {
 	width: 10rem;
 	margin: 0 auto;
 	overflow-x: hidden;
-	  background: white;
 	  font-size: 0.32rem !important;
+	  background-color: #f9f9f9;
 }
 
 .header {
@@ -63,7 +63,7 @@ body {
 
 .title_name {
 	width: 100%;
-	border-bottom: 0.16rem solid #ededed;
+	border-bottom: 0.16rem solid #f9f9f9;
 	padding: 0.466667rem 0;
 }
 
@@ -103,11 +103,25 @@ body {
 }
 
 .set_content {
-	width: 100%;
+	width: 94%;
+	margin: 0 auto;
+	  background: white;
+}
+.m_tot{
+    background-color: #e8e8e8;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 94%;
+    margin: 0 auto;
+}
+.ss_title{
+    font-size: 0.4rem;
+    padding: 10px 15px;
 }
 
 .set_content>ul {
-	border-bottom: 0.16rem solid #ededed;
+	border-bottom: 0.16rem solid #f9f9f9;
+	  padding: 0 15px;
 }
 
 .set_content>ul>li {
@@ -146,7 +160,7 @@ body {
 	width: 100%;
 	padding: 0.4rem 0;
 	text-align: center;
-	border-bottom: 0.16rem solid #ededed;
+	border-bottom: 0.16rem solid #f9f9f9;
 	cursor: pointer;
 }
 
@@ -177,16 +191,20 @@ body {
 }
 
 ._sub>button:nth-of-type(2) {
-	background: url(../../Mobile/img/13.png) no-repeat;
+	/*background: url(../../Mobile/img/13.png) no-repeat;*/
 	background-size: 100% 100%;
 	color: white;
 	border: none;
+    color: #dc1015;
+    border:1px solid #dc1015;
+    background-color: #fff;
+	border-radius: 3px;
 }
 
 .security {
 	width: 10rem;
 	margin: 0 auto;
-	border-bottom: 0.16rem solid #ededed;
+	border-bottom: 0.16rem solid #f9f9f9;
 	cursor: pointer;
 }
 
@@ -238,7 +256,7 @@ padding: 0.4rem 0;
 	height: 0.733333rem;
 	outline: none;
 	border: none;
-	border: 0.026667rem solid #ededed;
+	border: 0.026667rem solid #f9f9f9;
 	border-radius: 0.08rem;
 	text-indent: 1em;
 	appearance: none;
@@ -257,7 +275,7 @@ padding: 0.4rem 0;
 .email{
 	width: 10rem;
 	margin: 0 auto;
-	border-bottom: 0.16rem solid #ededed;
+	border-bottom: 0.16rem solid #f9f9f9;
 }
 .email>p {
 	display: flex;
@@ -281,7 +299,7 @@ padding: 0.4rem 0;
 .email>p>button{
 	display: none;
 	width: 1.6rem;
-	background: url(../../Mobile/img/13.png) no-repeat;
+	/*background: url(../../Mobile/img/13.png) no-repeat;*/
     background-size: 100% 100%;
     color: white;
     border: none;
@@ -290,6 +308,10 @@ padding: 0.4rem 0;
     outline: none;
     cursor: pointer;
     margin-left: 0.2rem;
+    color: #dc1015;
+    border:1px solid #dc1015;
+    background-color: #fff;
+	border-radius: 3px;
 }
 .email_fixed{
 	position: fixed;
@@ -346,7 +368,7 @@ padding: 0.4rem 0;
 ._phones{
 	width: 7rem !important;
     height: 0.733333rem;
-    border: 0.026667rem solid #ededed;
+    border: 0.026667rem solid #f9f9f9;
     border-radius: 0.08rem;
     display: flex !important;
     justify-content: space-between;
@@ -437,12 +459,15 @@ padding: 0.4rem 0;
 	width: 2.5rem;
 	height: 0.7rem;
 	line-height: 0.7rem;
-	border-radius: 0.03rem;
-	background: url(../../Mobile/img/13.png) no-repeat;
+	/*background: url(../../Mobile/img/13.png) no-repeat;*/
     background-size: 100% 100%;
     color: white;
     border: none;
     outline: none;
+    color: #dc1015;
+    border:1px solid #dc1015;
+    background-color: #fff;
+	border-radius: 3px;
 }
 .item_phone{
 	padding: 0.3rem 0 !important;

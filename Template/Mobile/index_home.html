@@ -47,17 +47,19 @@
 					</a>
 				</li>
 				<li class="itemli">
-					<img src="../../Public/Mobile/img/grzx.jpg" alt="">
+					<a href="/m/set">
+						<img src="../../Public/Mobile/img/grzx.jpg" alt="">
+					</a>
 				</li>
 			</ul>
 			<div class="message">
 				<img src="../../Public/Mobile/img/xttz.png" alt="" class="xttz">
 				<ul class="mesul">
-					<li class="itemli" v-for="n in 5">
-						<a href="" target="_blank">小莺出国日本读研社会学考学三部曲，你想知道的</a>
+					<li class="itemli">
+						<a :href="'/m/message/details?id='+newestLetter.id" target="_blank">{{newestLetter.title}}</a>
 					</li>
 				</ul>
-				<a href="" class="more_btn">更多</a>
+				<a href="/m/message" class="more_btn">更多</a>
 			</div>
 			<div class="recent_course">
 				<img src="../../Public/Mobile/img/wdjqkc.png" alt="" class="stitle">
@@ -72,7 +74,7 @@
 						<td>查看</td>
 					</thead>
 					<tbody>
-						<tr v-for="n in 4">
+						<tr v-for="n in 2">
 							<td>外教课</td>
 							<td>李老师</td>
 							<td>星期</td>
@@ -82,7 +84,7 @@
 						</tr>
 					</tbody>
 				</table>
-				<a href="" class="more_btn">预约课程</a>
+				<a href="javascript:;" class="more_btn">预约课程</a>
 			</div>
 			<div class="allsay">
 				<img src="../../Public/Mobile/img/djdzs.png" alt="" class="s_title">
@@ -181,9 +183,28 @@
 		var indexhome = new Vue({
 			el: "#indexhome",
 			data: {
-				data: {}
+				newestLetter: {}
 			},
 			methods: {
+				get_data: function() {
+					var _this = this;
+					$.ajax({
+						type: "post",
+						url: "/api/student/info",
+						success: function(res) {
+							if(res.result == false){
+								alert(res.msg)
+								window.location.href = "/m/login"
+							}else{
+								_this.newestLetter = res.newestLetter;
+							}	
+						
+						}
+					});
+				}
+			},
+			mounted:function(){
+				this.get_data();
 			}
 		})
 
