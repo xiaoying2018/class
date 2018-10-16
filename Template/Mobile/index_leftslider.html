@@ -1,14 +1,14 @@
-<link rel="stylesheet" href="../../Public/Mobile/css/htmleaf-content.css">
+<link rel="stylesheet" href="/Public/Mobile/css/htmleaf-content.css">
 <div class="htmleaf-content">
     <ul class="grid">
         <li class="four">
             <ul class="sidenav">
                 <li><a href="/m/home"><i class="fa fa-list-ul"></i><b>首页</b></a></li>
-                <li><a href="/m/home"><i class="fa fa-bell-o"></i><b>公开课预约</b></a></li>
-                <li><a href="/m/myclass"><i class="fa fa-book"></i><b>直播课</b></a></li>
+                <li><a href="/m/myclass/opencourse"><i class="fa fa-bell-o"></i><b>公开课预约</b></a></li>
+                <li><a href="/m/myclass"><i class="fa fa-book"></i><b>我的课程</b></a></li>
                 <li><a href="/m/set"><i class="fa fa-cog"></i><b>个人中心</b></a></li>
                 <li><a href="/m/apply"><i class="fa fa-street-view"></i><b>申请进度</b></a></li>
-                <li><a href="/m/apply"><i class="fa fa-inbox"></i><b>站内信</b></a></li>
+                <li><a href="/m/message"><i class="fa fa-inbox"></i><b>站内信</b></a></li>
                 <li><a href="javascript:;"><i class="fa fa-power-off"></i><b>退出</b></a></li>
             </ul>
         </li>
@@ -19,9 +19,11 @@
     $(document).on('click', '.background-bg', function() {
         $(".htmleaf-content").removeClass("open");
         $(".background-bg").hide();
+        $("html").removeClass("noScroll");
     });
     $(document).on('click', '#openleft', function() {
         $(".htmleaf-content").addClass("open");
         $(".background-bg").show();
+        $("html").addClass("noScroll");
     });
 </script>

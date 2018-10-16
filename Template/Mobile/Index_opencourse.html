@@ -7,7 +7,7 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>录播课程</title>
+    <title>预约公开课</title>
     <script src="/Public/Mobile/js/flexible.js"></script>
     <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
     <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
@@ -21,7 +21,7 @@
         <header class="header">
             <div>
                 <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-                <span>录播课程</span>
+                <span>预约公开课</span>
                 <a href="#"></a>
             </div>
         </header>
@@ -32,15 +32,15 @@
             <li>
                 <a href="/m/myclass/videoreview">录播课程回顾</a>
             </li>
-            <li class="active">
+            <li>
                 <a href="/m/myclass/videocourse">录播课程</a>
             </li>
-            <li>
+            <li class="active">
                 <a href="/m/myclass/opencourse">公开课预约</a>
             </li>
         </ul>
         <div class="lubo">
-        	<h3>录播课</h3>
+        	<!-- <h3>录播课</h3> -->
         	<ul class="ulList">
         		<li class="li_item" v-for="n in lists">
         			<div class="imgDv">
@@ -52,8 +52,8 @@
         			<div class="info">
         				<p class="name">{{n.name}}</p>
         				<div class="clearfix btn-group">
-        					<a :href="'/m/myclass/videocourse/sections?id='+n.id" class="a">立即观看</a>
-        					<a href="javascript:;" class="num">{{n.sections.length}}个视频</a>
+        					<a href="javascript:;" class="a">立即观看</a>
+        					<a href="javascript:;" class="num">{{n.sections.length}}课节</a>
         				</div>
         			</div>
         		</li>
@@ -76,13 +76,12 @@ var indexmyclass = new Vue({
         	var _this = this;
     		$.ajax({
     			type:"get",
-    			url:"/api/mycourse",
+    			url:"/api/opencourse",
     			success:function(res){
     				_this.lists = [];
-    				if (res.status) {
-    					_this.lists = res.data;
+    				if (res.result) {
+    					_this.lists = res.data.open_course;
     				}
-    				console.log("xxx",res);
     			}
     		})
         }
