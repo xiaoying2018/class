@@ -98,6 +98,23 @@ class StudentController extends BaseController
                     // 1015 end
 
 
+                    // 1016 课节文档一次性查出
+                    $has_doc_list = [];// 存放课节文档
+
+                    $has_doc_res = M('schedule_document')->where(['schedule_id'=>['eq',$value['schedule_id']]])->select();
+
+                    if ($has_doc_res)
+                    {
+                        $has_doc_ids = array_map(function ($v){
+                            return $v['document_id'];
+                        },$has_doc_res);
+
+                        $has_doc_list = M('course_document')->where(['id'=>['in',$has_doc_ids]])->select();
+                    }
+                    $value['has_doc'] = $has_doc_list;
+                    // 1016 end
+
+
                     $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
                     $send_url = $_tk_send_url . 'entry';// 接口请求地址
                     $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
