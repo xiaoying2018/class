@@ -135,16 +135,16 @@ class StudentController extends BaseController
             }
         }
 
-        $res=$studentModel->getValidCourse($s_id);
+        //$res=$studentModel->getValidCourse($s_id);
         // 课程
         // 班级
         $period                 =   $periodModel->period_list(['s.id'=>['eq',$s_id]]);
 
-        foreach ($period as $key=> $p){
-            if(!in_array($p['course_id'],$res)){
-                unset($period[$key]);
-            }
-        }
+//        foreach ($period as $key=> $p){
+//            if(!in_array($p['course_id'],$res)){
+//                unset($period[$key]);
+//            }
+//        }
         $crm_domain             =   C('CRM_DOMAIN');
         $period                 =   array_map( function($p) use($crm_domain){
             $p['course_pic']        =   $crm_domain.substr( $p['course_pic'],1 );
@@ -281,15 +281,7 @@ class StudentController extends BaseController
                     $_tk_send_url = C('TK_ROOM_URL')?:'http://global.talk-cloud.net/WebAPI/';
                     $tk_send_data['key'] = C('TK_ROOM_KEY')?:'PGxzTqaSNL0WEWTL';// key
                     $tk_send_data['serial'] = $v['serial'];// 房间号码
-//                    var_dump(curlPost($_tk_send_url.'getrecordlist','Content-type:application/x-www-form-urlencoded',$tk_send_data));exit();
-
                     $current_room_video_list = json_decode(curlPost($_tk_send_url.'getrecordlist','Content-type:application/x-www-form-urlencoded',$tk_send_data)['msg']);
-
-//                    var_dump($current_room_video_list);
-//                    var_dump($current_room_video_list->result);
-
-//                    echo "<pre>";
-//                    var_dump(curlPost($_tk_send_url.'getrecordlist','Content-type:application/x-www-form-urlencoded',$tk_send_data));exit();
 
                     if(!$current_room_video_list->result)
                     {
