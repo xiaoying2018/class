@@ -104,7 +104,7 @@ body {
   display: inline-block;
   font-size: 0.426667rem;
   color: #333333;
-  border-left: 0.053333rem solid #46C37B;
+  border-left: 0.053333rem solid #FFD900;
   text-indent: 0.266667rem;
 }
 
@@ -114,7 +114,7 @@ body {
 }
 
 .apply_list .success {
-  color: #46C37B;
+  color: #FFD900;
 }
 
 .apply_list .applying {

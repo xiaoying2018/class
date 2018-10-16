@@ -87,7 +87,7 @@ select:-webkit-autofill {
 }
 
 .sign_in_form .active_focus {
-	border-bottom: 0.026667rem solid #19D289 !important;
+	border-bottom: 0.026667rem solid #FFD900 !important;
 }
 
 .fa-check-square-o {
@@ -261,7 +261,7 @@ select:-webkit-autofill {
 }
 
 .sign_in_form2 .active_focus {
-	border-bottom: 0.026667rem solid #19D289 !important;
+	border-bottom: 0.026667rem solid #FFD900 !important;
 }
 
 ._sel {

@@ -44,11 +44,11 @@ body {
 }
 
 .header>div>a {
-	color: white;
+	color: #313131;
 }
 
 .header>div>a>i {
-	color: white;
+	color: #313131;
 	padding-right: 0.5rem;
 }
 
@@ -58,7 +58,7 @@ body {
 
 .header>div>span {
 	font-size: 0.48rem;
-	color: white;
+	color: #313131;
 }
 
 .title_name {

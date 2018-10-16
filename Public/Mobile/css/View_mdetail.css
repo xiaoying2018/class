@@ -131,7 +131,7 @@ body {
 .detail_text .de_number > span {
   display: inline-block;
   width: 4rem;
-  color: #46C37B;
+  color: #FFD900;
 }
 
 .de_content {
@@ -174,11 +174,11 @@ body {
 }
 
 .de_content .de_tab .active_tab {
-  color: #46C37B !important;
+  color: #FFD900 !important;
 }
 
 .de_content .de_tab .active_tab > i {
-  background: #46C37B !important;
+  background: #FFD900 !important;
 }
 
 .de_content .content_text {
@@ -218,7 +218,7 @@ body {
 }
 
 .footer > a:nth-of-type(2) {
-  background: #46C37B;
+  background: #FFD900;
   color: white;
   float: right;
 }

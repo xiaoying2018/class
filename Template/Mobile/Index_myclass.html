@@ -7,7 +7,7 @@
     <meta content="yes" name="apple-touch-fullscreen">
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
     <meta content="telephone=no,email=no" name="format-detection">
-    <title>我的课程</title>
+    <title>录播课程</title>
     <script src="/Public/Mobile/js/flexible.js"></script>
     <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
     <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
@@ -20,23 +20,23 @@
     <div id="indexmyclass">
         <header class="header">
             <div>
-                <a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
-                <span>我的课程</span>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                <span>录播课程</span>
                 <a href="#"></a>
             </div>
         </header>
         <ul class="tabhead">
             <li class="active">
-                <a href="/m/myclass">我的班级</a>
+                <a href="/m/myclass">直播班</a>
             </li>
             <li>
-                <a href="/m/myclass/videoreview">视频回顾</a>
+                <a href="/m/myclass/videoreview">录播课程回顾</a>
             </li>
             <li>
-                <a href="/m/myclass/videocourse">我的课程</a>
+                <a href="/m/myclass/videocourse">录播课程</a>
             </li>
             <li>
-                <a href="javascript:;">我的预约</a>
+                <a href="javascript:;">公开课预约</a>
             </li>
         </ul>
         <input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
@@ -70,7 +70,7 @@
     	</div>
     <div class="courseLists">
         <p class="s_title">
-            我的班级
+            直播班
         </p>
         <ul class="s_classLists">
             <li class="s_item" v-for="n in period">
@@ -205,4 +205,5 @@ var indexmyclass = new Vue({
 })
 </script>
 
+	<include file="./Template/Mobile/index_leftslider.html" />
 </html>

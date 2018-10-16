@@ -19,7 +19,7 @@
 		<div id="indexhome">
 			<header class="header">
 				<div>
-					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
 					<span>个人中心</span>
 					<a href="#"></a>
 				</div>
@@ -28,27 +28,32 @@
 			<ul class="listul">
 				<li class="itemli">
 					<a href="javascript:;">
-						<img src="../../Public/Mobile/img/kxyy.jpg" alt="">
+						<img src="../../Public/Mobile/img/kxyy.png" alt="">
+						<p>公开课预约</p>
 					</a>
 				</li>
 				<li class="itemli">
 					<a href="/m/myclass">
-						<img src="../../Public/Mobile/img/wdkc.jpg" alt="">
+						<img src="../../Public/Mobile/img/wdkc.png" alt="">
+						<p>直播班</p>
 					</a>
 				</li>
 				<li class="itemli">
 					<a href="javascript:;">
-						<img src="../../Public/Mobile/img/gkk.jpg" alt="">
+						<img src="../../Public/Mobile/img/gkk.png" alt="">
+						<p>公开课</p>
 					</a>
 				</li>
 				<li class="itemli">
 					<a href="/m/apply">
-						<img src="../../Public/Mobile/img/gmtc.jpg" alt="">
+						<img src="../../Public/Mobile/img/gmtc.png" alt="">
+						<p>申请进度</p>
 					</a>
 				</li>
 				<li class="itemli">
 					<a href="/m/set">
-						<img src="../../Public/Mobile/img/grzx.jpg" alt="">
+						<img src="../../Public/Mobile/img/grzx.png" alt="">
+						<p>个人中心</p>
 					</a>
 				</li>
 			</ul>
@@ -56,15 +61,15 @@
 				<img src="../../Public/Mobile/img/xttz.png" alt="" class="xttz">
 				<ul class="mesul">
 					<li class="itemli">
-						<a :href="'/m/message/details?id='+newestLetter.id" target="_blank">{{newestLetter.title}}</a>
+						<a :href="'/m/message/details?id='+newestLetter.id">{{newestLetter.title}}</a>
 					</li>
 				</ul>
 				<a href="/m/message" class="more_btn">更多</a>
 			</div>
 			<div class="recent_course">
 				<img src="../../Public/Mobile/img/wdjqkc.png" alt="" class="stitle">
-				<h3 class="ss_title">您有<span class="redfont">两条</span>预约课程哦！</h3>
-				<table class="t_table" cellpadding="0" cellspacing="0">
+				<h3 class="ss_title">您有<span class="redfont">0条</span>预约课程哦！</h3>
+<!-- 				<table class="t_table" cellpadding="0" cellspacing="0">
 					<thead>
 						<td>课程名称</td>
 						<td>老师</td>
@@ -83,7 +88,8 @@
 							<td>查看</td>
 						</tr>
 					</tbody>
-				</table>
+				</table> -->
+				<!-- <p style="font-size: 0.35rem; display: block; margin: 5px auto; text-align: center;">你还没有预约课程哦~ 快去预约吧~</p> -->
 				<a href="javascript:;" class="more_btn">预约课程</a>
 			</div>
 			<div class="allsay">
@@ -210,4 +216,5 @@
 
 	</script>
 
+	<include file="./Template/Mobile/index_leftslider.html" />
 </html>	

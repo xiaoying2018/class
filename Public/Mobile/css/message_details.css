@@ -68,10 +68,10 @@ body {
 .message .message_title > span:nth-of-type(1) {
   display: inline-block;
   font-size: 0.426667rem;
-  color: #46C37B;
+  color: #FFD900;
   width: 5rem;
   padding-left: 0.32rem;
-  border-left: 0.053333rem solid #46C37B;
+  border-left: 0.053333rem solid #FFD900;
   white-space: nowrap;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;

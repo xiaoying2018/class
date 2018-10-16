@@ -47,7 +47,7 @@ body {
   width: 2.506667rem;
 }
 .header>div>a:nth-of-type(1){
-	color: #333333;
+	color: #313131;
 	
 }
 .profile{
@@ -136,16 +136,16 @@ color: #999999;
 }
 
 .content .con_tab .active_tab {
-  color: #46C37B;
+  color: #FFD900;
 }
 
 .content .con_tab .active_tab > i {
-  background: #46C37B !important;
+  background: #FFD900 !important;
 }
 
 .active_condition {
       color: white !important;
-    background: #46C37B;
+    background: #FFD900;
     border-radius: 50px;
 }
 
@@ -256,7 +256,7 @@ color: #999999;
 
 ._swiper .class_list > li .item_deta > span {
   font-size: 0.373333rem;
-  color: #46C37B;
+  color: #FFD900;
 }
 
 ._swiper .class_list > li:nth-of-type(2n) {

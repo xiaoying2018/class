@@ -20,7 +20,7 @@
     <div id="indexmyclass">
         <header class="header">
             <div>
-                <a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
                 <span>我的课节</span>
                 <a href="#"></a>
             </div>
@@ -44,9 +44,15 @@
                             时长：{{n.duration}}分钟
                         </div>
                             <div class="btn_group">
-                                <a v-if="n.status != 1">视频回顾</a>
-                                <a @click="getKeJianById(n)">课件预览</a>
-                                <a @click="checkVideo(n)">往期录播</a>
+                                <template v-if="n.serial_has_videos && n.serial_has_videos.length > 0">
+                                    <a v-if="n.serial_has_videos.length != 1" @click="checkVideo(n)">视频回顾</a>
+                                    <a v-else :href="n.serial_has_videos[0].playpath" target="_blank">视频回顾</a>
+                                </template>
+                                <template v-if="n.has_doc && n.has_doc.length > 0">
+                                    <a v-if="n.has_doc.length != 1" href="javascript:;" @click="getKeJianById(n)">课件预览</a>
+                                    <a href="javascript:;" v-else  @click="showiframe('http://crm.xiaoying.net/'+n.has_doc[0].file)">课件预览</a>
+                                </template>
+                                <!-- <a @click="checkVideo(n)">往期录播</a> -->
                                 <a href="javascript:;" v-if="n.shomework != ''" :href="'http://crm.xiaoying.net/'+n.shomework">课后练习</a>
                                 <a href="javascript:;" v-if="n.status != 1 && n.signin_status == 1" class="active">已签到</a>
                                 <a href="javascript:;" v-if="n.status != 1 && n.signin_status != 1" >未签到</a>
@@ -58,6 +64,11 @@
             <div class="footer">
                 版权所有：小莺教育科技有限公司 苏ICP备17069390号
             </div>
+            <div id="iframeDv">
+                <iframe src='http://crm.xiaoying.net/Uploads/201809/16/5b9df2dd7967c1098.pdf' width='100%' height='100%' frameborder='0'></iframe>
+                <div class="shui">小莺出国</div>
+                <img src="../../Public/Mobile/img/red_close.png" alt="" class="layer_close">
+            </div>
             <!-- 课件dv -->
             <div class="videopart" id="record_schedule" style="display: none;">
                 <div class="coverbg" @click="close_v()"></div>
@@ -68,7 +79,7 @@
                     </div>
                     <ul class="videolist" v-if="c_kejian.length > 0">
                         <li class="lii_item" v-for="(n,index) in c_kejian">
-                            <a :href="'http://crm.xiaoying.net/'+n.file" target="_blank">{{index+1}}. {{n.title}}</a>
+                            <a href="javascript:;" @click="showiframe('http://crm.xiaoying.net/'+n.file)" >{{index+1}}. {{n.title}}</a>
                         </li>
                     </ul>
                     <ul class="videolist" v-else>
@@ -81,6 +92,22 @@
             <!-- 录播Dv -->
             <div class="videopart" id="record_video" style="display: none;">
                 <div class="coverbg" @click="close_v()"></div>
+                <div class="innerInfo">
+                    <div class="h3Dv">
+                        <h3>点击查看视频：</h3>
+                        <i class="fa fa-close" @click="close_v()"></i>
+                    </div>
+                    <ul class="videolist" v-if="currentLists.length > 0">
+                        <li class="lii_item" v-for="(n,index) in currentLists">
+                            <a :href="n.playpath" target="_blank">{{index+1}}. 视频{{index+1}}</a>
+                        </li>
+                    </ul>
+                    <ul class="videolist" v-else>
+                        <li class="lii_item">
+                            <a href="javascript:;">暂无课件</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 </body>
@@ -106,9 +133,14 @@ var indexmyclass = new Vue({
         all: [],
         current: [],
         c_kejian: [],
+        currentLists:[]
     },
     filters: {},
     methods: {
+        showiframe:function(_url){
+            $("#iframeDv iframe").attr("src",_url)
+            $("#iframeDv").show()
+        },
         close_v: function() {
             $(".videopart").fadeOut();
             $("#record_video video").remove();
@@ -132,14 +164,12 @@ var indexmyclass = new Vue({
         },
         // 往期视频
         checkVideo: function(n) {
-            if (n.video_path == null || n.video_path == '') {
-                alert('视频尚未上传')
-                return false;
+            if (n.serial_has_videos && n.serial_has_videos.length > 0) {
+                this.currentLists = n.serial_has_videos;
+                $("#record_video").show();
+            } else {
+                alert('暂无视频');
             }
-            $("#record_video video").remove();
-            $("#record_video").append('<video id="player1" preload="none" controls poster="http://i.xiaoying.net/Public/Common/video_poster.jpg"><source src="http://' + n.video_path + '" type="video/mp4"></video>');
-
-            $("#record_video").fadeIn();
         },
         changestate: function(name) {
             this.current = this[name];
@@ -158,12 +188,14 @@ var indexmyclass = new Vue({
                             _this.event = _this.event.concat(res.schedule[key])
                         }
                         for (var i = 0; i < _this.event.length; i++) {
+                            console.log("xxx",_this.event[i].period_id , getQueryString('period_id'));
                             if (_this.event[i].period_id == getQueryString('period_id')) {
                                 if (_this.event[i].status == -1) {
                                     _this.yixuexi.push(_this.event[i]);
                                 } else {
                                     _this.weixuexi.push(_this.event[i]);
                                 }
+
                                 if (_this.event[i].homework != null) {
                                     _this.event[i].shomework = (_this.event[i].homework.split('./'))[1]
                                 } else {
@@ -171,7 +203,7 @@ var indexmyclass = new Vue({
                                 }
                             }
                         }
-                        _this.current = _this.event;
+                        _this.current = _this.event = _this.weixuexi.concat(_this.yixuexi);
                         _this.period = res.period;
                     }
                 }
@@ -183,8 +215,14 @@ var indexmyclass = new Vue({
         $(document).on('click', '.tabheader span', function() {
             $(this).addClass("active").siblings().removeClass("active");
         })
+
+        $(document).on('click', '.layer_close', function() {
+            $("#iframeDv").hide();
+        })
+
     }
 })
 </script>
 
+	<include file="./Template/Mobile/index_leftslider.html" />
 </html>
