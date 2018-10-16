@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta charset="UTF-8">
+        <meta content="yes" name="apple-mobile-web-app-capable">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+        <meta content="telephone=no,email=no" name="format-detection">
+        <title>公开课</title>
+        <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/opencoursedetail.css" />
+        <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+        <script src="/Public/Mobile/js/flexible.js"></script>
+        <script src="/Public/vue.min.js"></script>
+    </head>
+
+    <body>
+        <div id="_detail">
+        <header class="header">
+            <div>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                <span>预约公开课</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <ul class="tabhead">
+            <li>
+                <a href="/m/myclass">直播班</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videoreview">录播课程回顾</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videocourse">录播课程</a>
+            </li>
+            <li class="active">
+                <a href="/m/myclass/opencourse">公开课预约</a>
+            </li>
+        </ul>
+            <div class="video_box">
+                <img v-if ="info.pic" :src="'http://crm.xiaoying.net/'+info.pic">
+                <img v-else src="/Public/Common/img/class/class.jpg" />
+                <!-- <a v-if="info.playback_addr =='NEED_AUTH'" href="/m/login" class="menban"><img src="/Public/Mobile/img/menban.png" /></a>
+                <a v-else :href="info.playback_addr" class="menban"><img src="/Public/Mobile/img/menban.png" /></a> -->
+                <!-- <p class="video_title">{{info.names}}</p> -->
+            </div>
+            <div class="detail_text">
+                <p class="de_name">{{info.name}}</p>
+                <!-- <p class="de_time">时间: {{info.start_time}}</p>
+                <p class="de_teacher">讲师: {{info.teacher}}</p> -->
+                <p class="de_number"><span>课时: {{info.section_num}}课</span><span>学习人数: {{info.people_num}}</span></p>
+            </div>
+            <div class="de_content">
+                <div class="de_tab">
+                    <span class="active_tab">课程简介<i></i></span>
+                    <span>课程表<i></i></span>
+                </div>
+                <div class="content_text">
+                    <div v-html="info.detail" id="desc_content">
+                        <div>{{info.detail}}</div>
+                    </div>
+                    <div>
+                        <ul class="curriculum-ul course1">
+                            <li class="js-show" v-for="n in info.sections">
+                                <img src="/Public/Mall/img/play_b.png" alt="" class="play">
+                                <div class="jm-fl">
+                                    <p>{{n.name}}</p>
+                                    <p>时长：{{n.duration}}分钟</p>
+                                </div>
+                                <img v-if="(n.video_path != null && n.is_free == 1)"  src="/Public/Mall/img/playback.png" alt="" class="playback" @click="play(n)">
+                                <img v-else src="/Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <a href="javascript:;" onclick="_MEIQIA('showPanel')" style="width: 100%;">在线咨询</a>
+                <!-- <a href="/m/login">查看回放</a> -->
+            </div>
+            <input type="hidden" id="playback_addr" v-model="info.playback_addr" value=""/>
+            <!-- 录播Dv -->
+            <div class="videopart" id="record_video" style="display: none;">
+                <div class="coverbg" @click="close_v()"></div>
+            </div>
+        </div>
+        
+    </body>
+    <script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+    <include file="./Template/Mobile/index_leftslider.html" />
+    <script>
+        var _detail = new Vue({
+            el: "#_detail",
+            data: {
+                data: {},
+                info: {}
+            },
+            methods: {
+                close_v: function() {
+                    $("#record_video").fadeOut();
+                    $("#record_video video").remove();
+                },
+                // 往期视频
+                play: function(n) {
+                    if (n.video_path == null || n.video_path == '') {
+                        alert('视频尚未上传')
+                        return false;
+                    }
+                    $("#record_video video").remove();
+                    $("#record_video").append('<video id="player1" preload="none" controls poster="http://i.xiaoying.net/Public/Common/video_poster.jpg"><source src="http://' + n.video_path + '" type="video/mp4"></video>');
+
+                    $("#record_video").fadeIn();
+                },
+                get_data: function() {
+                    var _self = this;
+                    var _id = getQueryString("id")
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            id: _id
+                        },
+                        url: "/api/course_detail",
+                        success: function(res) {
+                            if (res.result) {
+                                res.data.detail = escapeStringHTML(res.data.detail);
+
+                                _self.info = res.data
+
+                                _self.$nextTick(function(){
+                                    $('#desc_content img').each(function() {
+                                        $(this).attr("src","http://crm.xiaoying.net"+$(this).attr("src"));
+                                    })
+                                })
+                            }
+                        }
+                    });
+                },
+                get_snumIncre:function(){
+                    if($("#playback_addr").val() != "NEED_AUTH"){
+                        var _id = getQueryString("id")
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                            id: _id
+                        },
+                        url: "/api/open/snumIncre",
+                        success: function(res) {
+                        
+                        }
+                    });
+                    }
+                }
+                
+            },
+            updated() {
+                $(".de_tab>span").click(function() {
+                    if(!$(this).hasClass("active_tab")) {
+                        $(".de_tab>span").removeClass("active_tab")
+                        $(this).addClass("active_tab")
+                        $(".content_text>div").hide()
+                        $(".content_text>div").eq($(this).index()).fadeIn("fast")
+                    }
+                })
+            }
+        })
+
+        _detail.get_data()
+        _detail.get_snumIncre()
+        function getQueryString(name, needdecoed) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var lh = window.location.search;
+            if(needdecoed) {
+                lh = decodeURI(window.location.search)
+            }
+            var r = lh.substr(1).match(reg);
+            if(r != null) return unescape(r[2]);
+            return "";
+        }
+
+        function escapeStringHTML(str) {
+            str = str.replace(/&lt;/g, '<');
+            str = str.replace(/&gt;/g, '>');
+            str = str.replace(/&amp;/g, '"');
+            str = str.replace(/&quot;/g, '"');
+            str = str.replace(/&#039;/g, "'");
+            return str;
+        }
+        
+                //客服
+        (function(m, ei, q, i, a, j, s) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.charset = 'UTF-8';
+            j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+            s.parentNode.insertBefore(j, s);
+        })(window, document, 'script', '_MEIQIA');
+        _MEIQIA('entId', 14353);
+        _MEIQIA('withoutBtn');
+    </script>
+
+</html>

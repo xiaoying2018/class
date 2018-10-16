@@ -44,7 +44,7 @@
         	<ul class="ulList">
         		<li class="li_item" v-for="n in lists">
         			<div class="imgDv">
-                        <a :href="'/m/myclass/videocourse/sections?id='+n.id" style="display: block;">
+                        <a :href="'/m/myclass/opencourse/detail?id='+n.id" style="display: block;">
                       		<img v-if="n.pic" :src="'http://crm.xiaoying.net/'+n.pic" alt="" >
                             <img v-else src="http://class.xiaoying.net/Public/User/img/class_default.jpg" alt="">
                         </a>
@@ -52,8 +52,8 @@
         			<div class="info">
         				<p class="name">{{n.name}}</p>
         				<div class="clearfix btn-group">
-        					<a href="javascript:;" class="a">立即观看</a>
-        					<a href="javascript:;" class="num">{{n.sections.length}}课节</a>
+        					<a :href="'/m/myclass/opencourse/detail?id='+n.id" class="a">立即观看</a>
+        					<a :href="'/m/myclass/opencourse/detail?id='+n.id" class="num">{{n.sections.length}}课节</a>
         				</div>
         			</div>
         		</li>

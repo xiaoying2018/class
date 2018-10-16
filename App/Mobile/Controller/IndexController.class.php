@@ -42,5 +42,11 @@ class IndexController extends Controller
     public function videocoursesections (){
         $this->display();
     }
+
+    public function checkkejian (){
+        $this->display();
+    }
+
+    
     
 }

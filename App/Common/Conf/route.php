@@ -143,6 +143,8 @@ return [
         'm/myclass/videocourse/sections'    =>  'Mobile/Index/videocoursesections', // 我的课程 改版
         'm/myclass/videoreview'    =>  'Mobile/Index/videoreview', // 我的课程 改版
         'm/myclass/opencourse'    =>  'Mobile/Index/opencourse', // 我的课程 改版
+        'm/myclass/opencourse/detail'    =>  'Mobile/Index/opencoursedetail', // 我的课程 改版
+        'm/checkkejian'    =>  'Mobile/Index/checkkejian', // 我的课程 改版
 
 
 

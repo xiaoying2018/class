@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>课件预览</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/kejian.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+    <script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
+</head>
+
+<body>
+    <div class="scroll-wrapper">
+        <iframe src='http://crm.xiaoying.net/Uploads/201809/16/5b9df2dd7967c1098.pdf' id="iframe" frameborder="0" scrolling="no"></iframe>
+        <div class="shui">小莺出国</div>
+    </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+function getQueryString(name, needdecoed) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var lh = window.location.search;
+    if (needdecoed) {
+        lh = decodeURI(window.location.search)
+    }
+    var r = lh.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+</script>
+</html>
