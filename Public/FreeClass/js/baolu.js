@@ -80,12 +80,12 @@ $(function() {
             })
 
             $(window).scroll(function() {
-                var scrollTop = $(this).scrollTop();
+                var scrollTop = parseInt($(this).scrollTop());
                 var scrollHeight = $(document).height();
-                var windowHeight = $(this).height();
-                if (parseInt(scrollTop + windowHeight) == scrollHeight && _this.lock) {
+                var windowHeight = parseInt($(this).height());
+                console.log("xxx",parseInt(scrollTop + windowHeight));
+                if (parseInt(scrollTop + windowHeight) >= parseInt(scrollHeight-200) && _this.lock) {
                     _this.lock = false;
-                    // console.log('scroll',_this.query.page);
                     _this.getdata();
                 }
             });

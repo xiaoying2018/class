@@ -5,7 +5,7 @@ $(function() {
         data: {
             lists:[],
             request:{
-                type: 'hot'
+                type: 'free'
             }
         },
         filters: {

@@ -7,7 +7,7 @@
 		<meta content="yes" name="apple-touch-fullscreen">
 		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 		<meta content="telephone=no,email=no" name="format-detection">
-		<title>我的班级</title>
+		<title>直播班</title>
 		<script src="/Public/Mobile/js/flexible.js"></script>
 		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/my_course.css" />
 		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
@@ -19,8 +19,8 @@
 		<div id="course">
 			<header class="header">
 				<div>
-					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
-					<span>我的班级</span>
+					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+					<span>直播班</span>
 					<a href="#"></a>
 				</div>
 			</header>
@@ -100,4 +100,5 @@
 		course.get_data()
 	</script>
 
+	<include file="./Template/Mobile/index_leftslider.html" />
 </html>

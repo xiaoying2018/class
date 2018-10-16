@@ -44,17 +44,17 @@ body {
 
 .header>div>a {
     padding-right: 0.5rem;
-    color: white;
+    color: #313131;
     font-size: 0.386667rem;
 }
 
 .header>div>a>i {
-    color: white;
+    color: #313131;
 }
 
 .header>div>span {
     font-size: 0.48rem;
-    color: white;
+    color: #313131;
 }
 
 .home_banner {
@@ -63,19 +63,33 @@ body {
     vertical-align: top;
 }
 
-.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
 
 .listul {
     font-size: 0;
+
     .itemli {
         display: inline-block;
         width: 16%;
         text-align: center;
         margin: 0.6rem 0.2rem;
+        vertical-align: top;
 
         img {
             vertical-align: top;
             width: 100%;
+        }
+
+        p {
+            font-size: 0.35rem;
+            color: #333;
+            margin-top: 5px;
         }
     }
 }
@@ -162,7 +176,8 @@ body {
         margin: 0 auto;
         margin-top: 0.5rem;
         border-collapse: collapse;
-        border: none; 
+        border: none;
+
         thead {
             font-size: 16px;
             background-color: #ffd900;
@@ -171,10 +186,12 @@ body {
                 padding: 0.3rem 0.2rem;
             }
         }
-        tbody{
+
+        tbody {
             text-align: center;
-            td{
-                border:1px solid #e0e0e0;
+
+            td {
+                border: 1px solid #e0e0e0;
                 color: #737373;
                 font-size: 14px;
                 padding: 0.4rem 0.1rem;
@@ -195,103 +212,123 @@ body {
         margin: 0.6rem auto;
     }
 }
-.allsay{
-    .s_title{
+
+.allsay {
+    .s_title {
         width: 42%;
         display: block;
         margin: 1rem auto;
         margin-top: 1rem;
         margin-bottom: 0.5rem;
     }
-    .sayul{
+
+    .sayul {
         width: 96%;
         margin: 0 auto;
-        .liitem{
+
+        .liitem {
             padding: 0.3rem 0.3rem;
             background-color: #ffd900;
             box-shadow: 0px 0px 2px 2px #dcdbdb;
             margin: 0.4rem 0;
-            .imgDv{
+
+            .imgDv {
                 float: left;
                 width: 30%;
-                img{
+
+                img {
                     width: 100%;
                     vertical-align: top;
                 }
             }
-            .info{
+
+            .info {
                 width: 65%;
                 float: right;
-                .name{
+
+                .name {
                     font-size: 18px;
                     line-height: 20px;
                 }
-                .desc{
+
+                .desc {
                     margin-top: 5px;
                     color: #3b3b3b;
                     font-size: 14px;
                     line-height: 18px;
                 }
             }
-            &:nth-of-type(even){
+
+            &:nth-of-type(even) {
                 background-color: #fff;
-                .imgDv{
+
+                .imgDv {
                     float: right;
                 }
-                .info{
+
+                .info {
                     float: left;
                 }
             }
         }
     }
 }
-.teacher_com{
+
+.teacher_com {
     margin-bottom: 1rem;
-    .s_title{
+
+    .s_title {
         width: 42%;
         display: block;
         margin: 1rem auto;
         margin-top: 1rem;
         margin-bottom: 0.5rem;
     }
-    .teacherlist{
+
+    .teacherlist {
         text-align: center;
         font-size: 0;
         width: 96%;
         margin: 0 auto;
-        .liitem{
+
+        .liitem {
             width: 46%;
             text-align: center;
             box-shadow: 0px 0px 2px 2px #e4dcdc;
             padding: 0.8rem 0;
             display: inline-block;
             margin: 2%;
-            border-bottom:2px solid #ffd900;
-            .imgDv{
+            border-bottom: 2px solid #ffd900;
+
+            .imgDv {
                 width: 55%;
                 margin: 0 auto;
                 display: block;
-                img{
+
+                img {
                     width: 100%;
-                    border:2px solid #bababc;
+                    border: 2px solid #bababc;
                     border-radius: 50%;
                     vertical-align: top;
                 }
             }
-            .desc{
-                span{
+
+            .desc {
+                span {
                     font-size: 16px;
                     color: #000000;
                     display: block;
                     margin: 0.2rem 0;
                 }
-                p{
+
+                p {
                     color: #32363b;
                     font-size: 14px;
                 }
             }
         }
     }
+
     .more_btn {
         background-color: #dc1015;
         color: #ffffff;
@@ -305,7 +342,8 @@ body {
         margin: 0.3rem auto;
     }
 }
-.footer{
+
+.footer {
     color: #6f6f6f;
     font-size: 12px;
     text-align: center;

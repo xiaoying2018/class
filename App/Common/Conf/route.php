@@ -36,6 +36,9 @@ return [
         'onlinemall'     =>  'OnlineMall/View/index',
         'api/getgoods'     =>  'OnlineMall/Index/getProduct',// 获取商品
 
+        'api/current_sch_video'            =>  'Home/Student/getPastLiveVideo',   // 指定课节的往期直播视频资源
+        'api/banji_select'            =>  'Home/Student/banjiSelect',   // 班级选择 - 所有班级->班次->排课->房间资源
+
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课
         'open'                      =>  'Open/View/index',      // 主页 公开课
@@ -134,7 +137,14 @@ return [
 
 
         'm/home'                    =>  'Mobile/Index/home', // 个人中心 改版
-        'm/mycourse'                =>  'Mobile/Index/myclass', // 我的课程 改版
+        'm/myclass'                =>  'Mobile/Index/myclass', // 我的课程 改版
+        'm/myclass/hour'           =>  'Mobile/Index/myclasshour', // 我的课程 改版
+        'm/myclass/videocourse'    =>  'Mobile/Index/videocourse', // 我的课程 改版
+        'm/myclass/videocourse/sections'    =>  'Mobile/Index/videocoursesections', // 我的课程 改版
+        'm/myclass/videoreview'    =>  'Mobile/Index/videoreview', // 我的课程 改版
+        'm/myclass/opencourse'    =>  'Mobile/Index/opencourse', // 我的课程 改版
+
+
 
 
         /* 公开课接口路由 */

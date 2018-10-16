@@ -1,3 +1,31 @@
+
+.tabhead {
+    font-size: 0;
+    text-align: center;
+    padding: .3rem 0;
+    border-bottom: 1px solid #e1e0e0;
+    background-color: #fff
+    width: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tabhead li {
+    display: inline-block;
+    border-radius: 20px;
+    margin: 0 .3rem
+}
+
+.tabhead li a {
+    font-size: .4rem;
+    padding: .2rem .3rem;
+    display: block;
+    color: #323232
+}
+
+.tabhead li.active {
+    background-color: #ffd900
+}
 * {
   margin: 0;
   padding: 0;
@@ -94,7 +122,7 @@ body {
 }
 
 .material_list .material_title {
-  border-left: 0.053333rem solid #46C37B;
+  border-left: 0.053333rem solid #FFD900;
   margin-bottom: 0.266667rem;
   position: relative;
 }
@@ -113,16 +141,16 @@ body {
 
 .material_list .material_title > span:nth-of-type(2) {
   font-size: 0.373333rem;
-  color: #46C37B;
+  color: #FFD900;
   float: right;
 }
 
 .material_list .material_title .download {
   font-size: 0.373333rem;
-  color: #46C37B;
+  color: #FFD900;
   float: right;
   padding: 0.2rem 0.266667rem;
-  border: 0.026667rem solid #46C37B;
+  border: 0.026667rem solid #FFD900;
   border-radius: 0.106667rem;
   position: absolute;
   right: 0;
@@ -130,7 +158,7 @@ body {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  color: #46C37B;
+  color: #FFD900;
 }
 
 .material_list .material_text {

@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+i,
+a,
+li {
+    font-style: normal;
+    text-decoration: none;
+    list-style: none;
+}
+
+body {
+    width: 10rem;
+    margin: 0 auto;
+    overflow-x: hidden;
+    background: white;
+    background-color: #f9f9f9;
+}
+
+.header {
+    width: 100%;
+    background: #ffd900;
+}
+
+.header>div {
+    width: 92%;
+    margin: 0 auto;
+    height: 1.093333rem;
+    padding: 0.2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.header>div>a {
+    padding-right: 0.5rem;
+    color: #313131;
+    font-size: 0.386667rem;
+}
+
+.header>div>a>i {
+    color: #313131;
+}
+
+.header>div>span {
+    font-size: 0.48rem;
+    color: #313131;
+}
+
+.tabheader {
+    font-size: 0;
+    text-align: center;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #e1e0e0;
+    background-color: #fff;
+
+    span {
+        display: inline-block;
+        border-radius: 20px;
+        margin: 0 0.3rem;
+        background-color: #fff;
+        color: #313131;
+        border: 1px solid #ffd900;
+        font-size: .38rem;
+        padding: 0.1rem 0.3rem;
+        position: relative;
+        padding-right: 1rem;
+
+        &.active {
+            background-color: #ffd900;
+        }
+
+        .num {
+            font-size: .35rem;
+            position: absolute;
+            width: 0.5rem;
+            height: 0.5rem;
+            line-height: 0.5rem;
+            text-align: center;
+            background-color: #ea4026;
+            color: #fff;
+            border-radius: 50%;
+            right: 0.3rem;
+        }
+    }
+}
+
+.tabcontent {
+    padding: 0 1rem;
+    position: relative;
+    margin: 0.5rem 0;
+
+    .s_content {
+        margin: 0 auto;
+    }
+
+    .l_part {
+        width: 0.6rem;
+        position: absolute;
+
+        .numDv {
+            font-size: 0.45rem;
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            text-align: center;
+            background-color: #ffd900;
+            border: 0.2rem solid #fcf3be;
+        }
+    }
+
+    .r_part {
+        padding: 15px 0;
+        font-size: .35rem;
+        padding-left: 1.2rem;
+        border-left: 0.1rem dotted #ccc;
+        margin-left: 0.5rem;
+
+        .p_name {
+            background-color: #ffd900;
+            font-size: 0.35rem;
+            padding: .2rem .4rem;
+            position: relative;
+
+            &:before {
+                background: url(../img/jiao.png);
+                width: 0.5rem;
+                height: 0.6rem;
+                background-size: cover;
+                content: "";
+                left: -0.5rem;
+                top: 0;
+                display: block;
+                position: absolute;
+            }
+        }
+
+        .p_time {
+            color: #5e5e5e;
+            background-color: #fff;
+            padding: .2rem .4rem;
+            box-shadow: 0 0 2px 0 #ccc;
+
+            img {
+                width: .35rem;
+                margin-right: .3rem;
+                vertical-align: middle;
+            }
+
+            .btn_group {
+                font-size: 0;
+
+                a {
+                    margin: .1rem 0;
+                    display: inline-block;
+                    vertical-align: top;
+                    border: 1px solid #eeede9;
+                    color: #1c1c1c;
+                    font-size: .35rem;
+                    padding: .1rem .3rem;
+                    margin-right: .2rem;
+                    border-radius: 15px;
+                    background-color: #fffbe6;
+
+                    &.active {
+                        background-color: #ffd900;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.footer {
+    color: #6f6f6f;
+    font-size: 12px;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #434343;
+}
+
+.videopart {
+    position: fixed;
+    z-index: 22222;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .coverbg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    video {
+        width: 80%;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-60%);
+        display: block;
+    }
+
+    .innerInfo {
+        background-color: #fff;
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        padding: 0 20px;
+        top: 50%;
+        transform: translateY(-60%);
+        border-radius: 2px;
+
+        .h3Dv {
+            padding: 15px 0px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+
+            h3 {
+                padding: 0;
+                margin: 0;
+            }
+
+            .fa-close {
+                cursor: pointer;
+                position: absolute;
+                right: 5px;
+                top: 15px;
+                font-size: 20px;
+            }
+        }
+
+        .videolist {
+            position: relative;
+            padding: 0;
+            margin: 0 auto;
+            padding-top: 10px;
+
+            .lii_item {
+                display: block;
+                padding-bottom: 10px;
+
+                a {
+                    color: #36c5ff;
+                }
+            }
+        }
+    }
+}
+
+#iframeDv {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 22223;
+    display: none;
+    iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    .shui {
+        position: absolute;
+        font-size: 3.5rem;
+        color: #000;
+        opacity: .1;
+        /* font-style: italic; */
+        /* transform: rotate(-20deg); */
+        right: 0;
+        left: 0;
+        top: 10%;
+        margin: auto;
+        z-index: 2;
+        text-align: center;
+        width: 70%;
+    }
+    .layer_close{
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+}

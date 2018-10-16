@@ -1,85 +1,211 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta content="yes" name="apple-mobile-web-app-capable">
-		<meta content="yes" name="apple-touch-fullscreen">
-		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-		<meta content="telephone=no,email=no" name="format-detection">
-		<title>我的课程</title>
-		<script src="/Public/Mobile/js/flexible.js"></script>
-		<link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
-		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
-		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
-		<script src="/Public/vue.min.js"></script>
-		<script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
-		
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>我的课程</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+    <script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
+</head>
 
-	<body>
-		<div id="indexmyclass">
-			<header class="header">
-				<div>
-					<a href="javascript:;" onClick="javascript :history.back(-1);"><i class="fa fa-angle-left fa-2x"></i></a>
-					<span>我的课程</span>
-					<a href="#"></a>
-				</div>
-			</header>
-			<ul class="tabhead">
-				<li class="active">
-					<a href="">我的班级</a>
-				</li>
-				<li>
-					<a href="">视频回顾</a>
-				</li>
-				<li>
-					<a href="">我的预约</a>
-				</li>
-			</ul>
+<body>
+    <div id="indexmyclass">
+        <header class="header">
+            <div>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                <span>我的课程</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <ul class="tabhead">
+            <li class="active">
+                <a href="/m/myclass">直播班</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videoreview">录播课程回顾</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videocourse">录播课程</a>
+            </li>
+            <li>
+                <a href="/m/myclass/opencourse">公开课预约</a>
+            </li>
+        </ul>
+        <input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
+        <ul class="biaozhu">
+            <li class="clearfix">
+                <span class="point"></span>
+                <span class="p_font">已办理</span>
+            </li>
+            <li class="clearfix">
+                <span class="point" style="background-color: #dc1015;"></span>
+                <span class="p_font">未办理</span>
+            </li>
+        </ul>
+        <div class="eventUl">
+            <li class="itemLi clearfix" v-for="n in event" @click="toclassroom(n)" v-if="n.status == 1">
+                <span class="greenPart left">
+					<p class="week">{{n.week | week}}</p>
+					<div>
+						<p class="d_day">{{n.date}}</p>
+						<p class="m_month">{{n.month}}月</p>
+					</div>
+				</span>
+           		 <span class="infoPart left">
+					<div class="class_name">{{n.period_name}}</div>
+					<div class="m_dv clearfix">
+						<span class="t_name">{{n.start_date}}</span>
+		                <span class="t_time">{{n.start_time}} - {{n.end_time}}</span>
+			        </div>
+        		</span>
+        	</li>
+    	</div>
+    <div class="courseLists">
+        <p class="s_title">
+            直播班
+        </p>
+        <ul class="s_classLists">
+            <li class="s_item" v-for="n in period">
+                <div class="imgDv">
+                    <img :src="n.course_pic" alt="">
+                </div>
+                <div class="infoDv">
+                    <h3>{{n.period_name}}</h3>
+                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
+                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">班主任老师:<span>{{n.headmaster | filterteacher}}</span></div>
+                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div>
+                </div>
+                <div class="btn_group">
+                    <a :href="'/m/myclass/hour?period_id='+n.period_id">查看课节</a>
+                    <a :href="'/m/myclass/hour?period_id='+n.period_id" style="background-color: #dc1015; color: #fff; margin-left: 10px;">进入教室</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="footer">
+        版权所有：小莺教育科技有限公司 苏ICP备17069390号
+    </div>
+    </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+var indexmyclass = new Vue({
+    el: "#indexmyclass",
+    data: {
+        event: [],
+        period: [],
+        schedule:[]
+    },
+	filters: {
+		week: function (w) {
+			if (!w) return ''
+			if (w == '1')
+				w = '星期一'
+			else if (w == '2')
+				w = '星期二.'
+			else if (w == '3')
+				w = '星期三'
+			else if (w == '4')
+				w = '星期四'
+			else if (w == '5')
+				w = '星期五'
+			else if (w == '6')
+				w = '星期六'
+			else if (w == '0')
+				w = '星期日'
+			return w
+		},
+        course_detail: function(str){
+            if (!str) return ''
+            else
+                str = str.replace(/&lt;/g,'<');
+                str = str.replace(/&gt;/g,'>');
+                str = str.replace(/&amp;/g,'&');
+                str = str.replace(/&quot;/g,'"');
+                str = str.replace(/&#039;/g,"'");
+                return '课程简介:'+str
+        },
+        filterteacher: function(name){
+            if (!name) return ''
+            else
+                return name.substring(0,1)+"老师"
+        }
+	},
+    methods: {
+        toclassroom: function(item){
+            if (item.is_show == 1) {
+                window.location.href=item.serial;
+            }
+        },
+        get_data: function() {
+        	var _this = this;
+            $.ajax({
+                type: "post",
+                url: "/api/student/info",
+                success: function(res) {
+                    if (res.result == false) {
+                        alert(res.msg)
+                        window.location.href = "/m/login"
+                    } else {
+                        _this.schedule = res.schedule;
+                    	for(var key in res.schedule){
+                    		_this.event = _this.event.concat(res.schedule[key])
+                    	}
+                    	for(var i = 0; i < _this.event.length; i++){
+                    		if (_this.event[i].start_time) {
+                    			_this.event[i].start_date = _this.event[i].start_time.split(' ')[0];
+                    			_this.event[i].start_time = _this.event[i].start_time.split(' ')[1];
 
-			<input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
-	
-			<ul class="biaozhu">
-				<li class="clearfix">
-					<span class="point"></span>已办理
-				</li>
-				<li class="clearfix">
-					<span class="point"></span>未办理
-				</li>
-			</ul>
+                    			_this.event[i].month = _this.event[i].start_date.split('-')[1];
+                    			_this.event[i].date = _this.event[i].start_date.split('-')[2];
+                    		}
+                    		if (_this.event[i].end_time) {
+                    			_this.event[i].end_time = _this.event[i].end_time.split(' ')[1];
+                    		}
+                    	}
 
-			<div class="footer">
-				版权所有：小莺教育科技有限公司  苏ICP备17069390号 
-			</div>
-		</div>
-	</body>
-	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
-	<script>
-		var indexmyclass = new Vue({
-			el: "#indexmyclass",
-			data: {
-				data: {}
-			},
-			methods: {
-			},
-			mounted: function(){
-				flatpickr("#schedule", {
-	        		inline: true,
-	        		static: true,
-	        		ariaDateFormat:"Y.m.d",
-	        		onReady:function(){
-	        		},
-	        		onChange:function(z,o,current){
-	        		},
-	        		onMonthChange:function(){
-	        		},
-	        		onYearChange:function(){
-	        		}
-	        	});
-			}
-		})
+                    	_this.period = res.period;
+                    }
+                    flatpickr("#schedule", {
+                        inline: true,
+                        static: true,
+                        ariaDateFormat: "Y.m.d",
+                        onReady: function() {
+                            _this.addStyle();
+                        },
+                        onChange: function(z, o, current) {
+                        },
+                        onMonthChange: function() {
+                            _this.addStyle();
+                        },
+                        onYearChange: function() {}
+                    });
+                }
+            });
+        },
+        addStyle:function(){
+            for(var key in this.schedule){
+                if (this.schedule[key][0].status == -1) {
+                    $("[aria-label='"+key+"']").addClass("outdate");
+                }else{
+                    $("[aria-label='"+key+"']").addClass("indate");
+                }
+            }
+        }
+    },
+    mounted: function() {
+        this.get_data();
+    }
+})
+</script>
 
-	</script>
-
-</html>	
+	<include file="./Template/Mobile/index_leftslider.html" />
+</html>

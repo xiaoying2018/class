@@ -456,10 +456,10 @@ span.flatpickr-weekday {
   color: #393939;
   cursor: pointer;
   font-weight: 400;
-  width: 14.2857143%;
+/*  width: 14.2857143%;
   -webkit-flex-basis: 14.2857143%;
       -ms-flex-preferred-size: 14.2857143%;
-          flex-basis: 14.2857143%;
+          flex-basis: 14.2857143%;*/
   /*max-width: 39px;*/
   height: 39px;
   line-height: 39px;

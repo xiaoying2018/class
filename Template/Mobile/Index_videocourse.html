@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>录播课程</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+    <script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
+</head>
+
+<body>
+    <div id="indexmyclass">
+        <header class="header">
+            <div>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                <span>录播课程</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <ul class="tabhead">
+            <li>
+                <a href="/m/myclass">直播班</a>
+            </li>
+            <li>
+                <a href="/m/myclass/videoreview">录播课程回顾</a>
+            </li>
+            <li class="active">
+                <a href="/m/myclass/videocourse">录播课程</a>
+            </li>
+            <li>
+                <a href="/m/myclass/opencourse">公开课预约</a>
+            </li>
+        </ul>
+        <div class="lubo">
+        	<h3>录播课</h3>
+        	<ul class="ulList">
+        		<li class="li_item" v-for="n in lists">
+        			<div class="imgDv">
+                        <a :href="'/m/myclass/videocourse/sections?id='+n.id" style="display: block;">
+                      		<img v-if="n.pic" :src="'http://crm.xiaoying.net/'+n.pic" alt="" >
+                            <img v-else src="http://class.xiaoying.net/Public/User/img/class_default.jpg" alt="">
+                        </a>
+        			</div>
+        			<div class="info">
+        				<p class="name">{{n.name}}</p>
+        				<div class="clearfix btn-group">
+        					<a :href="'/m/myclass/videocourse/sections?id='+n.id" class="a">立即观看</a>
+        					<a href="javascript:;" class="num">{{n.sections.length}}个视频</a>
+        				</div>
+        			</div>
+        		</li>
+        	</ul>
+        </div>
+    </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+var indexmyclass = new Vue({
+    el: "#indexmyclass",
+    data: {
+    	lists:[]
+    },
+    filters: {
+        
+    },
+    methods: {
+        getData:function(){
+        	var _this = this;
+    		$.ajax({
+    			type:"get",
+    			url:"/api/mycourse",
+    			success:function(res){
+    				_this.lists = [];
+    				if (res.status) {
+    					_this.lists = res.data;
+    				}
+    				console.log("xxx",res);
+    			}
+    		})
+        }
+    },
+    mounted: function() {
+    	this.getData();
+    }
+})
+</script>
+
+	<include file="./Template/Mobile/index_leftslider.html" />
+</html>

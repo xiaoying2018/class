@@ -26,4 +26,21 @@ class IndexController extends Controller
         $this->display();
     }
 
+
+    public function videocourse (){
+        $this->display();
+    }
+
+    public function opencourse (){
+        $this->display();
+    }
+
+    public function mycoursehour (){
+        $this->display();
+    }
+
+    public function videocoursesections (){
+        $this->display();
+    }
+    
 }

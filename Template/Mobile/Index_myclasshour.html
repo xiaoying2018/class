@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>我的课节</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/Index_myclass_hour.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+    <script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
+</head>
+
+<body>
+    <div id="indexmyclass">
+        <header class="header">
+            <div>
+                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                <span>我的课节</span>
+                <a href="#"></a>
+            </div>
+        </header>
+        <div class="tabheader">
+            <span @click="changestate('event')" class="active">全部<font class="num" style="background-color: #2bba8f;">{{weixuexi.length+yixuexi.length}}</font></span>
+            <span @click="changestate('weixuexi')">未学习<font class="num">{{weixuexi.length}}</font></span>
+            <span @click="changestate('yixuexi')">已学习<font class="num" style="background-color: #2bba8f;">{{yixuexi.length}}</font></span>
+        </div>
+        <div class="tabcontent a">
+            <div class="clearfix s_content" v-for="(n,index) in current">
+                <div class="left l_part">
+                    <div class="numDv">{{index+1}}</div>
+                </div>
+                <div class="right r_part">
+                    <p class="p_name">{{n.section_name}}</p>
+                    <div class="p_time">
+                        {{n.start_time}} - {{n.end_time}}
+                        <div style="margin:5px 0;">
+                            <img src="../../Public/Mobile/img/icon_clock.png" alt="">
+                            时长：{{n.duration}}分钟
+                        </div>
+                            <div class="btn_group">
+                                <template v-if="n.serial_has_videos && n.serial_has_videos.length > 0">
+                                    <a v-if="n.serial_has_videos.length != 1" @click="checkVideo(n)">视频回顾</a>
+                                    <a v-else :href="n.serial_has_videos[0].playpath" target="_blank">视频回顾</a>
+                                </template>
+                                <template v-if="n.has_doc && n.has_doc.length > 0">
+                                    <a v-if="n.has_doc.length != 1" href="javascript:;" @click="getKeJianById(n)">课件预览</a>
+                                    <a href="javascript:;" v-else  @click="showiframe('http://crm.xiaoying.net/'+n.has_doc[0].file)">课件预览</a>
+                                </template>
+                                <!-- <a @click="checkVideo(n)">往期录播</a> -->
+                                <a href="javascript:;" v-if="n.shomework != ''" :href="'http://crm.xiaoying.net/'+n.shomework">课后练习</a>
+                                <a href="javascript:;" v-if="n.status != 1 && n.signin_status == 1" class="active">已签到</a>
+                                <a href="javascript:;" v-if="n.status != 1 && n.signin_status != 1" >未签到</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                版权所有：小莺教育科技有限公司 苏ICP备17069390号
+            </div>
+            <div id="iframeDv">
+                <iframe src='http://crm.xiaoying.net/Uploads/201809/16/5b9df2dd7967c1098.pdf' width='100%' height='100%' frameborder='0'></iframe>
+                <div class="shui">小莺出国</div>
+                <img src="../../Public/Mobile/img/red_close.png" alt="" class="layer_close">
+            </div>
+            <!-- 课件dv -->
+            <div class="videopart" id="record_schedule" style="display: none;">
+                <div class="coverbg" @click="close_v()"></div>
+                <div class="innerInfo">
+                    <div class="h3Dv">
+                        <h3>点击查看课件：</h3>
+                        <i class="fa fa-close" @click="close_v()"></i>
+                    </div>
+                    <ul class="videolist" v-if="c_kejian.length > 0">
+                        <li class="lii_item" v-for="(n,index) in c_kejian">
+                            <a href="javascript:;" @click="showiframe('http://crm.xiaoying.net/'+n.file)" >{{index+1}}. {{n.title}}</a>
+                        </li>
+                    </ul>
+                    <ul class="videolist" v-else>
+                        <li class="lii_item">
+                            <a href="javascript:;">暂无课件</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 录播Dv -->
+            <div class="videopart" id="record_video" style="display: none;">
+                <div class="coverbg" @click="close_v()"></div>
+                <div class="innerInfo">
+                    <div class="h3Dv">
+                        <h3>点击查看视频：</h3>
+                        <i class="fa fa-close" @click="close_v()"></i>
+                    </div>
+                    <ul class="videolist" v-if="currentLists.length > 0">
+                        <li class="lii_item" v-for="(n,index) in currentLists">
+                            <a :href="n.playpath" target="_blank">{{index+1}}. 视频{{index+1}}</a>
+                        </li>
+                    </ul>
+                    <ul class="videolist" v-else>
+                        <li class="lii_item">
+                            <a href="javascript:;">暂无课件</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+function getQueryString(name, needdecoed) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var lh = window.location.search;
+    if (needdecoed) {
+        lh = decodeURI(window.location.search)
+    }
+    var r = lh.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+
+var indexmyclass = new Vue({
+    el: "#indexmyclass",
+    data: {
+        event: [],
+        weixuexi: [],
+        yixuexi: [],
+        all: [],
+        current: [],
+        c_kejian: [],
+        currentLists:[]
+    },
+    filters: {},
+    methods: {
+        showiframe:function(_url){
+            $("#iframeDv iframe").attr("src",_url)
+            $("#iframeDv").show()
+        },
+        close_v: function() {
+            $(".videopart").fadeOut();
+            $("#record_video video").remove();
+        },
+        // 课件预览
+        getKeJianById: function(_id) {
+            var _this = this;
+            $.ajax({
+                url: "http://crm.xiaoying.net/index.php?m=courseDocument&a=getDocumentByScheduleId",
+                type: "post",
+                data: {
+                    schedule_id: _id.schedule_id
+                },
+                success: function(res) {
+                    if (res.status) {
+                        _this.c_kejian = res.data;
+                        $("#record_schedule").show()
+                    }
+                }
+            })
+        },
+        // 往期视频
+        checkVideo: function(n) {
+            if (n.serial_has_videos && n.serial_has_videos.length > 0) {
+                this.currentLists = n.serial_has_videos;
+                $("#record_video").show();
+            } else {
+                alert('暂无视频');
+            }
+        },
+        changestate: function(name) {
+            this.current = this[name];
+        },
+        get_data: function() {
+            var _this = this;
+            $.ajax({
+                type: "post",
+                url: "/api/student/info",
+                success: function(res) {
+                    if (res.result == false) {
+                        alert(res.msg)
+                        window.location.href = "/m/login"
+                    } else {
+                        for (var key in res.schedule) {
+                            _this.event = _this.event.concat(res.schedule[key])
+                        }
+                        for (var i = 0; i < _this.event.length; i++) {
+                            console.log("xxx",_this.event[i].period_id , getQueryString('period_id'));
+                            if (_this.event[i].period_id == getQueryString('period_id')) {
+                                if (_this.event[i].status == -1) {
+                                    _this.yixuexi.push(_this.event[i]);
+                                } else {
+                                    _this.weixuexi.push(_this.event[i]);
+                                }
+
+                                if (_this.event[i].homework != null) {
+                                    _this.event[i].shomework = (_this.event[i].homework.split('./'))[1]
+                                } else {
+                                    _this.event[i].shomework = ''
+                                }
+                            }
+                        }
+                        _this.current = _this.event = _this.weixuexi.concat(_this.yixuexi);
+                        _this.period = res.period;
+                    }
+                }
+            });
+        }
+    },
+    mounted: function() {
+        this.get_data();
+        $(document).on('click', '.tabheader span', function() {
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+
+        $(document).on('click', '.layer_close', function() {
+            $("#iframeDv").hide();
+        })
+
+    }
+})
+</script>
+
+	<include file="./Template/Mobile/index_leftslider.html" />
+</html>
