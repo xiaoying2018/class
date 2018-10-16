@@ -16,6 +16,9 @@ use Think\Exception;
 
 class StudentController extends BaseController
 {
+    /**
+     * 学员个人中心 我的课程/班级
+     */
     public function index()
     {
 
@@ -77,8 +80,24 @@ class StudentController extends BaseController
 //                $qd_status = $qd_model->where(['schedule_id'=>['eq',$value['schedule_id']],'student_id'=>['eq',$value['stu_id']]])->find()['status']?:0;
 //                $value['signin_status'] = $qd_status;
 
-                // 8-27 如果当前课程有房间号码,添加进入房间的链接 TODO wait
+                // 8-27 如果当前课程有房间号码,添加进入房间的链接
                 if ($value['serial']) {
+
+                    // 1015 希望往期直播视频一次性查出,无畏卡慢顿...
+                    $value['serial_has_videos'] = [];// 存放往期直播视频资源
+
+                    $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+                    $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+                    $tk_send_data['serial'] = $value['serial'];// 房间号码
+
+                    // 发起请求
+                    $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+
+                    // 返码正常(0为正常) 成功存储视频资源列表
+                    if (!$current_room_video_list->result) $value['serial_has_videos'] = $current_room_video_list->recordlist;
+                    // 1015 end
+
+
                     $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
                     $send_url = $_tk_send_url . 'entry';// 接口请求地址
                     $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
@@ -157,6 +176,90 @@ class StudentController extends BaseController
                 'status:本节课是否已经上过 已结束（-1） 即将开始（1），signin:是否签到 请假（-7） 未签到（0，null） 已签到（1）'
             ],
         ]);
+    }
+
+    /**
+     * 特殊需求: 班级选择
+     *
+     * DESC: 希望有个特殊的账号登录后可以有个按钮,按钮功能: 点击可见所有班级 -> 点击班级可见当前班级下所有班次 -> 点击班次可见班次内所有排课
+     *
+     * 需求原文:
+     *      1.加一个切换班级按钮，切换到不同签约班级的同学界面
+     *      2.这个是自己看的，和学生没有关系的
+     */
+    public function banjiSelect()
+    {
+        header('content-type:text/html;charset=utf-8');
+
+        // 学员信息
+        $s_id = session('_student')['id'];
+        $studentModel = new StudentModel();
+        $studentInfo = $studentModel->field('password,remark', true)->relation('profile')->find($s_id);
+
+        // 班级
+        $banji_model = new CourseModel();
+        $banji_list = $banji_model->getAllBanji();
+
+        // 班次
+        if ($banji_list)
+        {
+            $banci_model = new PeriodModel();
+            // 当前班级下的班次列表
+            foreach ($banji_list as $bj_k => $bj_v)
+            {
+                $banci_list = $banci_model->where(['status'=>['eq',1],'course_id'=>['eq',$bj_v['id']]])->order('create_at DESC')->select();
+
+                // 排课
+                if ($banci_list)
+                {
+                    $paike_model = new ScheduleModel();
+                    // 当前班次下的排课信息
+                    foreach ($banci_list as $bc_k => $bc_v)
+                    {
+                        $paike_list = $paike_model->where(['period_id'=>['eq',$bc_v['id']]])->order('start_time')->select();
+
+                        // 拓课云
+                        if ($paike_list)
+                        {
+                            foreach ($paike_list as $pk_k => $pk_v)
+                            {
+                                // 获取当前排课/房间的登入链接
+                                $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
+                                $send_url = $_tk_send_url . 'entry';// 接口请求地址
+                                $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
+                                // auth 值为 MD5(key + ts + serial + usertype)
+                                $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $pk_v['serial'] . 2);// 令牌
+                                $send_url .= '&usertype=2';// 用户类型 2=学员
+                                $send_url .= '&ts=' . time();// 时间戳
+                                $send_url .= '&serial=' . $pk_v['serial'];// 房间号码
+                                $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
+                                $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
+                                $paike_list[$pk_k]['serial_link'] = $send_url;
+                                // 获取当前排课/房间的课件
+
+                                // 获取当前排课/房间的往期直播视频
+                                $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+                                $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+                                $tk_send_data['serial'] = $pk_v['serial'];// 房间号码
+
+                                // 发起请求
+                                $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+
+                                // 返码正常(0为正常) 成功存储视频资源列表
+                                if (!$current_room_video_list->result) $paike_list[$pk_k]['serial_has_videos'] = $current_room_video_list->recordlist;
+
+                            }
+                        }
+
+                        $banci_list[$bc_k]['has_paike'] = $paike_list;
+                    }
+                }
+
+                $banji_list[$bj_k]['has_banci'] = $banci_list;
+            }
+        }
+        
+        $this->ajaxReturn(['status'=>true,'data'=>$banji_list]);
     }
 
     /**
