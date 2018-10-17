@@ -22,30 +22,6 @@ class StudentController extends BaseController
     public function index()
     {
 
-//        // 获取课程类型的产品
-//        $type_of_course_product = (new CourseBespeakModel())->where(['category_id'=>['eq',1],['on_sale'=>['eq','是']]])->select();
-//        // 将产品列表转换为IDS
-//        $type_of_course_product_ids = array_map(function($v){
-//            return $v['product_id'];
-//        },$type_of_course_product);
-//        // 获取产品和课程的关联关系
-//        $product_has_courses = M('CourseProduct')->where(['product_id'=>['in',$type_of_course_product_ids]])->group('course_id')->select();
-//        // 获取课程IDS
-//        $product_has_courses_ids = array_map(function($v){
-//            return $v['course_id'];
-//        },$product_has_courses);
-//        // 获取课程列表
-//        $courses = M('Course')->where(['id'=>['in',$product_has_courses_ids]])->select();
-//        // 获取课程中包含的课时
-//        foreach ($courses as $k => $v)
-//        {
-//            $courses[$k]['has_section'] = (new SectionModel())->where(['course_id'=>['eq',$v['id']]])->select();
-//        }
-//
-//        echo "<pre>";
-//        var_dump($courses);exit();
-
-
         $s_id = session('_student')['id'];
 
         // TODO 购买产品、课程列表、课表信息
@@ -82,38 +58,6 @@ class StudentController extends BaseController
 
                 // 8-27 如果当前课程有房间号码,添加进入房间的链接
                 if ($value['serial']) {
-
-                    // 1015 希望往期直播视频一次性查出,无畏卡慢顿...
-                    $value['serial_has_videos'] = [];// 存放往期直播视频资源
-
-                    $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
-                    $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
-                    $tk_send_data['serial'] = $value['serial'];// 房间号码
-
-                    // 发起请求
-                    $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
-
-                    // 返码正常(0为正常) 成功存储视频资源列表
-                    if (!$current_room_video_list->result) $value['serial_has_videos'] = $current_room_video_list->recordlist;
-                    // 1015 end
-
-
-                    // 1016 课节文档一次性查出
-                    $has_doc_list = [];// 存放课节文档
-
-                    $has_doc_res = M('schedule_document')->where(['schedule_id'=>['eq',$value['schedule_id']]])->select();
-
-                    if ($has_doc_res)
-                    {
-                        $has_doc_ids = array_map(function ($v){
-                            return $v['document_id'];
-                        },$has_doc_res);
-
-                        $has_doc_list = M('course_document')->where(['id'=>['in',$has_doc_ids]])->select();
-                    }
-                    $value['has_doc'] = $has_doc_list;
-                    // 1016 end
-
 
                     $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
                     $send_url = $_tk_send_url . 'entry';// 接口请求地址
@@ -197,6 +141,26 @@ class StudentController extends BaseController
             ],
         ]);
     }
+
+    /**
+     * 获取当前班次的排课信息
+     * par: per_id 班次编号
+     * res: 当前班次排课信息以及TK-Cloud的相关资源
+     * aut: Dragon
+     */
+    public function getCurrentBanciPaike()
+    {
+        // 获取班次ID 并检测是否合法
+
+        // 获取班次内所有排课信息 和 课时名称+课时时长
+
+        // 获取当前排课的课后作业
+
+        // 获取当前排课在TK-Cloud的课件
+
+        // 获取当前排课在TK-Cloud的往期直播视频
+    }
+
 
     /**
      * 特殊需求: 班级选择
