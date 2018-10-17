@@ -48,7 +48,8 @@
                                     <a v-if="n.serial_has_videos.length != 1" @click="checkVideo(n)">视频回顾</a>
                                     <a v-else :href="n.serial_has_videos[0].playpath" target="_blank">视频回顾</a>
                                 </template>
-                                <template v-if="n.has_doc && n.has_doc.length > 0">
+                                 <!-- v-if="n.has_doc && n.has_doc.length > 0" -->
+                                <template v-if="1 == 2">
                                     <a v-if="n.has_doc.length != 1" href="javascript:;" @click="getKeJianById(n)">课件预览</a>
                                     <!-- <a href="javascript:;" v-else  @click="showiframe('http://crm.xiaoying.net/'+n.has_doc[0].file)">课件预览</a> -->
                                     <a :href="'http://crm.xiaoying.net/'+n.has_doc[0].file" v-else target="_blank">课件预览</a>
@@ -181,14 +182,14 @@ var indexmyclass = new Vue({
             var _this = this;
             $.ajax({
                 type: "post",
-                url: "/api/student/info",
+                url: "/api/current_per_sch",
                 success: function(res) {
                     if (res.result == false) {
                         alert(res.msg)
                         window.location.href = "/m/login"
                     } else {
-                        for (var key in res.schedule) {
-                            _this.event = _this.event.concat(res.schedule[key])
+                        for (var key in res.data) {
+                            _this.event = _this.event.concat(res.data[key])
                         }
                         for (var i = 0; i < _this.event.length; i++) {
                             if (_this.event[i].period_id == getQueryString('period_id')) {
