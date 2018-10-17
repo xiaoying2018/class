@@ -38,6 +38,8 @@ return [
 
         'api/current_sch_video'            =>  'Home/Student/getPastLiveVideo',   // 指定课节的往期直播视频资源
         'api/banji_select'            =>  'Home/Student/banjiSelect',   // 班级选择 - 所有班级->班次->排课->房间资源
+        'api/current_per_sch'            =>  'Home/Student/getCurrentBanciPaike',   // 当前班次的排课信息
+
 
         '/'                    	 	=>  'Mall/View/index',     //课程
         // '/'                         =>  'Open/View/index',      // 主页 公开课

@@ -21,7 +21,6 @@ class StudentController extends BaseController
      */
     public function index()
     {
-
         $s_id = session('_student')['id'];
 
         // TODO 购买产品、课程列表、课表信息
@@ -150,6 +149,112 @@ class StudentController extends BaseController
      */
     public function getCurrentBanciPaike()
     {
+        $s_id = session('_student')['id'];
+
+        // 课程列表
+        $schedule = [];
+
+        $studentModel = new StudentModel();
+
+        $scheduleData = $studentModel->studentSchedule($s_id);
+
+        $now = time();
+
+        // 学生信息
+        $studentInfo = $studentModel->field('password,remark', true)->relation('profile')->find($s_id);
+
+        // 课时信息
+        if ($scheduleData) {
+
+            foreach ($scheduleData as $key => $value) {
+
+                // 1015 希望往期直播视频一次性查出,无畏卡慢顿...
+                $value['serial_has_videos'] = [];// 存放往期直播视频资源
+
+                $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+                $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+                $tk_send_data['serial'] = $value['serial'];// 房间号码
+
+                // 发起请求
+                $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+
+                // 返码正常(0为正常) 成功存储视频资源列表
+                if (!$current_room_video_list->result) $value['serial_has_videos'] = $current_room_video_list->recordlist;
+                // 1015 end
+
+
+                // 1016 课节文档一次性查出
+                $has_doc_list = [];// 存放课节文档
+
+                $has_doc_res = M('schedule_document')->where(['schedule_id'=>['eq',$value['schedule_id']]])->select();
+
+                if ($has_doc_res)
+                {
+                    $has_doc_ids = array_map(function ($v){
+                        return $v['document_id'];
+                    },$has_doc_res);
+
+                    $has_doc_list = M('course_document')->where(['id'=>['in',$has_doc_ids]])->select();
+                }
+                $value['has_doc'] = $has_doc_list;
+                // 1016 end
+
+                // 8-27 如果当前课程有房间号码,添加进入房间的链接
+                if ($value['serial']) {
+
+                    $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
+                    $send_url = $_tk_send_url . 'entry';// 接口请求地址
+                    $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
+                    // auth 值为 MD5(key + ts + serial + usertype)
+                    $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $value['serial'] . 2);// 令牌
+                    $send_url .= '&usertype=2';// 用户类型 2=学员
+                    $send_url .= '&ts=' . time();// 时间戳
+                    $send_url .= '&serial=' . $value['serial'];// 房间号码
+                    $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
+                    $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
+                    $value['serial'] = $send_url;
+                }
+                // 8-27 end
+
+                // 获取当前的时间
+                $current_time = time();
+                $start_time = strtotime($value['start_time']);
+
+                if (abs($current_time - $start_time) > 7200) {
+                    $value['is_show'] = 0;
+                } else {
+                    $value['is_show'] = 1;
+                }
+
+                if ($value['section_id']) {
+                    $sectionInfo = M()->query('Select video_path,course_id from education.course_section where id=' . $value['section_id'] . ' limit 1');
+
+                    $value['kecheng_id'] = $sectionInfo ? $sectionInfo[0]['course_id'] : '';
+                    $value['video_path'] = $sectionInfo ? $sectionInfo[0]['video_path'] : '';
+                } else {
+                    $value['video_path'] = '';
+                }
+                // 8-29 end
+
+                $value['week'] = date("w", strtotime($value['start_time']));
+
+                // 排课状态  是否已经结束
+                $value['status'] = ($now > strtotime($value['end_time'])) ? -1 : 1;
+
+                $schedule[date('Y.m.d', $value['stamp'])][] = $value;
+            }
+        }
+
+
+        header("Content-type: text/html; charset=utf-8");
+        echo "<pre>";
+        var_dump($schedule);exit();
+
+        $this->ajaxReturn([
+            'result' => true,
+            'data' => $schedule
+        ]);
+
         // 获取班次ID 并检测是否合法
 
         // 获取班次内所有排课信息 和 课时名称+课时时长
