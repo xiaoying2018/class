@@ -246,9 +246,9 @@ class StudentController extends BaseController
         }
 
 
-        header("Content-type: text/html; charset=utf-8");
-        echo "<pre>";
-        var_dump($schedule);exit();
+//        header("Content-type: text/html; charset=utf-8");
+//        echo "<pre>";
+//        var_dump($schedule);exit();
 
         $this->ajaxReturn([
             'result' => true,
