@@ -9,20 +9,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>课件预览</title>
     <script src="/Public/Mobile/js/flexible.js"></script>
-    <link rel="stylesheet" href="../../Public/Mobile/js/flatpickr/flatpickr.css">
     <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/kejian.css" />
-    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
     <script src="/Public/vue.min.js"></script>
-    <script src="../../Public/Mobile/js/flatpickr/flatpickr.js"></script>
 </head>
 
 <body>
-    <div class="scroll-wrapper">
-        <iframe src='http://crm.xiaoying.net/Uploads/201809/16/5b9df2dd7967c1098.pdf' id="iframe" frameborder="0" scrolling="no"></iframe>
-        <div class="shui">小莺出国</div>
-    </div>
+    http://crm.xiaoying.net/./Uploads/201810/12/5bc0701ea04105209.pptx
+    <div class="shui">小莺出国</div>
 </body>
 <script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/Public/plugin/pdf.js"></script>
 <script>
 function getQueryString(name, needdecoed) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -34,5 +30,34 @@ function getQueryString(name, needdecoed) {
     if (r != null) return unescape(r[2]);
     return "";
 }
+pdfjsLib.getDocument("http://crm.xiaoying.net/Uploads/201809/16/5b9df2dd7967c1098.pdf").then(function getPdfHelloWorld(pdf) {
+
+        for (var i = 0; i < pdf.numPages; i++) {
+            //
+            // 获取第i页
+            //
+            pdf.getPage(i).then(function getPageHelloWorld(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport(scale);
+
+                //
+                // Prepare canvas using PDF page dimensions
+                //
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                // 这里拿body当pdf容器
+                document.body.appendChild(canvas);
+
+                //
+                // Render PDF page into canvas context
+                //
+                page.render({ canvasContext: context, viewport: viewport });
+            });
+        }
+
+    });
 </script>
 </html>
