@@ -20,12 +20,12 @@
     $(document).on('click', '.background-bg', function() {
         $(".htmleaf-content").removeClass("open");
         $(".background-bg").hide();
-        $("html").removeClass("noScroll");
+        $("html,body").removeClass("noScroll");
     });
     $(document).on('click', '#openleft', function() {
         $(".htmleaf-content").addClass("open");
         $(".background-bg").show();
-        $("html").addClass("noScroll");
+        $("html,body").addClass("noScroll");
     });
     $(document).on('click', '#logoout', function() {
         $.ajax({
@@ -51,5 +51,4 @@
             expires: -1
         });
     }
-
 </script>

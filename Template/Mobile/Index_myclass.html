@@ -80,8 +80,8 @@
                 <div class="infoDv">
                     <h3>{{n.period_name}}</h3>
                     <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
-                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">班主任老师:<span>{{n.headmaster | filterteacher}}</span></div>
-                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div>
+                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">教务老师:<span>{{n.headmaster | filterteacher}}</span></div>
+                    <!-- <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div> -->
                 </div>
                 <div class="btn_group">
                     <a :href="'/m/myclass/hour?period_id='+n.period_id">查看课节</a>

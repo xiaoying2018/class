@@ -72,7 +72,8 @@
 							},
 							url: "/api/login",
 							success: function(data) {
-								window.location.href = "/m/open"
+								// window.location.href = "/m/open"
+								window.location.href = "/m/home"
 							}
 
 						});
@@ -118,7 +119,8 @@
 					url: "/api/login",
 					success: function(data) {
 						if(data.result) {
-							window.location.href = "/m"
+							window.location.href = "/m/home"
+							// window.location.href = "/m"
 						} else {
 							forget()
 							alert(data.msg)

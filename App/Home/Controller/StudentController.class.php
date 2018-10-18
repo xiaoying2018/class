@@ -305,7 +305,12 @@ class StudentController extends BaseController
                     // 当前班次下的排课信息
                     foreach ($banci_list as $bc_k => $bc_v)
                     {
-                        $paike_list = $paike_model->where(['period_id'=>['eq',$bc_v['id']]])->order('start_time')->select();
+                        $paike_list = $paike_model 
+                            ->field('p.*,cs.name section_name')
+                            ->join("p LEFT JOIN education.course_section cs ON cs.id = p.section_id")
+                            ->where(['period_id'=>['eq',$bc_v['id']]])
+                            ->order('start_time')
+                            ->select();
 
                         // 拓课云
                         if ($paike_list)
