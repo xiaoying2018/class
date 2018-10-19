@@ -198,7 +198,7 @@ class StudentController extends BaseController
                 // 获取课节时长
                 $paike_list[$k]['duration'] = $section_info['duration']?:0;
                 // 课节结束时间
-                $paike_list[$k]['end_time'] = date('Y-m-d H:i:s',strtotime($v['start_time']) + $section_info['duration']);
+                $paike_list[$k]['end_time'] = date('Y-m-d H:i:s',strtotime($v['start_time']) + 60*$section_info['duration']);
                 // 课节名称
                 $paike_list[$k]['section_name'] = $section_info['name']?:0;
                 // 课节标题
@@ -244,11 +244,15 @@ class StudentController extends BaseController
                 $send_url .= '&serial=' . $v['serial'];// 房间号码
                 $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
                 $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
-                $value['serial'] = $send_url;
+                $paike_list[$k]['serial'] = $send_url;
 
                 // 排课状态  是否已经结束
-                $paike_list[$k]['status'] = ($now > strtotime($value['end_time'])) ? -1 : 1;
+                $paike_list[$k]['status'] = ($now > strtotime($v['end_time'])) ? -1 : 1;
 
+                $paike_list[$k]['is_show'] = 0;
+                // 提前两小时
+                if ($now > (strtotime($paike_list[$k]['start_time']) - 60*120) && $now < strtotime($paike_list[$k]['end_time'])) $paike_list[$k]['is_show'] = 1;
+                
             }
 
 
