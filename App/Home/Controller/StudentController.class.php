@@ -184,6 +184,9 @@ class StudentController extends BaseController
             $paike_list[$k]['homework'] = '';
             $paike_list[$k]['has_doc'] = [];
             $paike_list[$k]['serial_has_videos'] = [];
+            $paike_list[$k]['signin_status'] = 0;
+            $paike_list[$k]['is_show'] = 0;
+            $paike_list[$k]['status'] = -1;
 
             // 获取当前排课的课后作业
             if ($v['homework'])
@@ -205,7 +208,7 @@ class StudentController extends BaseController
                 $paike_list[$k]['title'] = $section_info['title']?:0;
             }
             
-            if ($v['serial'])
+            if ($v['serial'] && ($now > (strtotime($paike_list[$k]['start_time']) - 60*120)))
             {
                 // 学员是否签到
                 $paike_list[$k]['signin_status'] = M('schedule_signin')->where(['schedule_id'=>['eq',$v['id']],['student_id'=>['eq',$studentInfo['id']]]])->select()?1:0;
@@ -249,7 +252,7 @@ class StudentController extends BaseController
                 // 排课状态  是否已经结束
                 $paike_list[$k]['status'] = ($now > strtotime($paike_list[$k]['end_time'])) ? -1 : 1;
 
-                $paike_list[$k]['is_show'] = 0;
+
                 // 提前两小时
                 if ($now > (strtotime($paike_list[$k]['start_time']) - 60*120) && $now < strtotime($paike_list[$k]['end_time'])) $paike_list[$k]['is_show'] = 1;
 
