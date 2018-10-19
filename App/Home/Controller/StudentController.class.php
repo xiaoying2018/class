@@ -247,7 +247,7 @@ class StudentController extends BaseController
                 $value['serial'] = $send_url;
 
                 // 排课状态  是否已经结束
-                $value['status'] = ($now > strtotime($value['end_time'])) ? -1 : 1;
+                $paike_list[$k]['status'] = ($now > strtotime($value['end_time'])) ? -1 : 1;
 
             }
 
