@@ -247,12 +247,12 @@ class StudentController extends BaseController
                 $paike_list[$k]['serial'] = $send_url;
 
                 // 排课状态  是否已经结束
-                $paike_list[$k]['status'] = ($now > strtotime($v['end_time'])) ? -1 : 1;
+                $paike_list[$k]['status'] = ($now > strtotime($paike_list[$k]['end_time'])) ? -1 : 1;
 
                 $paike_list[$k]['is_show'] = 0;
                 // 提前两小时
                 if ($now > (strtotime($paike_list[$k]['start_time']) - 60*120) && $now < strtotime($paike_list[$k]['end_time'])) $paike_list[$k]['is_show'] = 1;
-                
+
             }
 
 
