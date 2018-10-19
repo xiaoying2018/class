@@ -191,7 +191,7 @@ class StudentController extends BaseController
             // 获取当前排课的课后作业
             if ($v['homework'])
             {
-                $paike_list[$k]['homework'] = M('material')->where(['id'=>['eq'=>$v['homework']]])->find()['path']?:'';
+                $paike_list[$k]['homework'] = M('material')->where(['id'=>['eq',$v['homework']]])->find()['path']?:'';
             }
 
             if ($v['section_id'])
