@@ -120,11 +120,12 @@ return [
 
 
         /* 手机端路由 */
-        'm'                         =>  'Open/View/mindex', // 主页公开课
+        // 'm'                         =>  'Open/View/mindex', // 主页公开课
+        'm'                         =>  'Mobile/Index/classindex', // 主页公开课
         'm/open'                    =>  'Open/View/mindex', // 主页公开课
         'm/open/detail'             =>  'Open/View/mdetail', // 公开课详情
 
-        'm/class/index'                    =>  'Mobile/Index/classindex', // 主页公开课
+        'm/class'                    =>  'Mobile/Index/classindex', // 主页公开课
         'm/user'                    =>  'Mobile/Index/index', // 个人中心
         'm/login'					=>	'Mobile/Index/login',//登陆页面
         'm/register'				=>	'Mobile/Index/register',//登陆页面

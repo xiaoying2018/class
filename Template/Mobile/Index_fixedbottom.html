@@ -1,0 +1,78 @@
+<style>
+	
+.fixedbottom {
+    position: fixed;
+    bottom: 0;
+    height: 55px;
+    width: 100%;
+    z-index: 2000;
+    border-top: 1px solid #d8d8d8
+}
+
+.fixedbottom .ul {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #fff;
+    height: 100%
+}
+
+.fixedbottom .ul>li {
+    font-size: 16px;
+    padding: 5px 5px;
+    width: 25%;
+    text-align: center
+}
+
+.fixedbottom .ul>li.active a{
+    color: #FFD900;
+}
+
+.fixedbottom .ul>li a {
+    color: #6a6a6a;
+    text-align: center;
+    display: block;
+    margin: 10px 0
+}
+
+.fixedbottom .ul>li i {
+    display: block;
+    margin: 0 auto;
+    font-size: 20px
+}
+
+</style>
+<div class="fixedbottom">
+	<ul class="ul">
+		<li class="">
+			<a href="/m/class">
+				<i class="fa fa-home fa-fw"></i>
+				<span>首页</span>
+			</a>
+		</li>
+		<li class="">
+			<a href="/m/myclass">
+				<i class="fa fa-book fa-fw"></i>
+				<span>直播班</span>
+			</a>
+		</li>
+		<li class="">
+			<a href="/m/myclass/opencourse">
+				<i class="fa fa-bell-o fa-fw"></i>
+				<span>公开课</span>
+			</a>
+		</li>
+		<li class="">
+			<a href="/m/set">
+				<i class="fa fa-cog fa-fw"></i>
+				<span>学员中心</span>
+			</a>
+		</li>
+	</ul>
+</div>

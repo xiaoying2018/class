@@ -16,95 +16,97 @@
 	</head>
 
 	<body>
-		<div id="apply">
-			<header class="header">
-				<div>
-					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-					<span>申请进度</span>
-					<a href="javascript:void(0)"></a>
-				</div>
-
-			</header>
-	        <ul class="tabhead">
-	            <li>
-	                <a href="/m/apply">我的申请</a>
-	            </li>
-	            <li>
-	                <a href="/m/seo">COE申请</a>
-	            </li>
-	            <li class="active">
-	                <a href="/m/visa">签证办理</a>
-	            </li>
-	            <li>
-	                <a href="/m/material">我的材料</a>
-	            </li>
-	        </ul>
-			<ul v-for="(project,key) in datas.data">
-				<li class="apply_list">
-					<p>
-						<span class="_list_title">{{project.project_name}}</span>
-						<span v-if="project.status =='未提交'" class="apply_state fail">{{project.status}}</span>
-						<span v-else-if="project.status =='初审中'" class="apply_state applying">{{project.status}}</span>
-						<span v-else-if="project.status =='初审失败'" class="apply_state fail">{{project.status}}</span>
-						<span v-else-if="project.status =='邮寄中'" class="apply_state applying">{{project.status}}</span>
-						<span v-else-if="project.status =='邮寄异常'" class="apply_state fail">{{project.status}}</span>
-						<span v-else class="apply_state success">{{project.status}}</span>
-
-					</p>
-					<div class="apply_details">
-						<p>
-							<span>申请日期:</span>
-							<span>{{project.create_time}}</span>
-						</p>
-						<p>
-							<span>通过日期:</span>
-							<span>{{project.offer_time}}</span>
-						</p>
+		<div style="margin-bottom: 55px;">
+			<div id="apply">
+				<header class="header">
+					<div>
+						<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+						<span>申请进度</span>
+						<a href="javascript:void(0)"></a>
 					</div>
-					<div class="apply_but">
-						<span class="apply_check" :data_num="key">查看所需材料</span>
-						<div class="apply_sub">
-							<div class="uploader" class="wu-example">
-								<!--用来存放文件信息-->
-								<div class="btns">
-									<div :create_time ="project.create_time" :cate_id="project.cate_id" :program_id = "project.id" :student_id = "project.student_id"class="picker">提交材料</div>
+
+				</header>
+		        <ul class="tabhead">
+		            <li>
+		                <a href="/m/apply">我的申请</a>
+		            </li>
+		            <li>
+		                <a href="/m/seo">COE申请</a>
+		            </li>
+		            <li class="active">
+		                <a href="/m/visa">签证办理</a>
+		            </li>
+		            <li>
+		                <a href="/m/material">我的材料</a>
+		            </li>
+		        </ul>
+				<ul v-for="(project,key) in datas.data">
+					<li class="apply_list">
+						<p>
+							<span class="_list_title">{{project.project_name}}</span>
+							<span v-if="project.status =='未提交'" class="apply_state fail">{{project.status}}</span>
+							<span v-else-if="project.status =='初审中'" class="apply_state applying">{{project.status}}</span>
+							<span v-else-if="project.status =='初审失败'" class="apply_state fail">{{project.status}}</span>
+							<span v-else-if="project.status =='邮寄中'" class="apply_state applying">{{project.status}}</span>
+							<span v-else-if="project.status =='邮寄异常'" class="apply_state fail">{{project.status}}</span>
+							<span v-else class="apply_state success">{{project.status}}</span>
+
+						</p>
+						<div class="apply_details">
+							<p>
+								<span>申请日期:</span>
+								<span>{{project.create_time}}</span>
+							</p>
+							<p>
+								<span>通过日期:</span>
+								<span>{{project.offer_time}}</span>
+							</p>
+						</div>
+						<div class="apply_but">
+							<span class="apply_check" :data_num="key">查看所需材料</span>
+							<div class="apply_sub">
+								<div class="uploader" class="wu-example">
+									<!--用来存放文件信息-->
+									<div class="btns">
+										<div :create_time ="project.create_time" :cate_id="project.cate_id" :program_id = "project.id" :student_id = "project.student_id"class="picker">提交材料</div>
+									</div>
 								</div>
 							</div>
+							<!--<span class="apply_sub">提交材料</span>-->
 						</div>
-						<!--<span class="apply_sub">提交材料</span>-->
-					</div>
-				</li>
-			</ul>
-			<div class="required_materials">
-				<div v-for="project in datas.data">
-					<p>
-						<span class="back">返回</span>
-						<span class="">请提交所需材料</span>
-						<span></span>
-					</p>
-					<ul>
-						<li v-for="material in project.materials">{{material.name}}</li>
+					</li>
+				</ul>
+				<div class="required_materials">
+					<div v-for="project in datas.data">
+						<p>
+							<span class="back">返回</span>
+							<span class="">请提交所需材料</span>
+							<span></span>
+						</p>
+						<ul>
+							<li v-for="material in project.materials">{{material.name}}</li>
 
-					</ul>
-					<div class="check_but">
-						<a href="material.html">查看样本</a>
+						</ul>
+						<div class="check_but">
+							<a href="material.html">查看样本</a>
+						</div>
 					</div>
+
 				</div>
-
+			</div>
+			<div class="apply_uploader-list">
+				<div class="list_item">
+					<div id="thelist" class="uploader-list"></div>
+					<div class="uploader_but">确认</div>
+				</div>
+				<input id = "program_id" type="hidden" value="" />
+				<input id = "cate_id" type="hidden" value="" />
+				<input id="student_id" type="hidden" value="" />
+				<input id="create_time" type="hidden" value="" />
+				<input id="files" type="hidden" value="" />
 			</div>
 		</div>
-		<div class="apply_uploader-list">
-			<div class="list_item">
-				<div id="thelist" class="uploader-list"></div>
-				<div class="uploader_but">确认</div>
-			</div>
-			<input id = "program_id" type="hidden" value="" />
-			<input id = "cate_id" type="hidden" value="" />
-			<input id="student_id" type="hidden" value="" />
-			<input id="create_time" type="hidden" value="" />
-			<input id="files" type="hidden" value="" />
-		</div>
-
+    <include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script src="/Public/Mobile/js/webuploader.js"></script>

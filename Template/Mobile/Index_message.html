@@ -15,26 +15,27 @@
 	</head>
 
 	<body>
-		<div id ="message">
-		<header class="header">
-			<div>
-				<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-				<span>站内信息</span>
-				<a href="javascript:void(0)"></a>
-			</div>
-		</header>
-		<ul>
-			<li class="message_list" v-for="item in data" :data_id="item.id">
-				<a href="javascript:void(0)">
-					<div class="list_img"><img src="/Public/Mobile/img/logo.png" /><i v-show="item.status=='0'"></i></div>
-					<div class="message_content">
-						<p class="list_title"><span>{{item.title}}</span><span>{{item.create_at}}</span></p>
-						<p class="list_text">{{item.message}}</p>
-					</div>
-				</a>
-			</li>
-		</ul>
+		<div style="margin-bottom: 55px;" id ="message">
+			<header class="header">
+				<div>
+					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+					<span>站内信息</span>
+					<a href="javascript:void(0)"></a>
+				</div>
+			</header>
+			<ul>
+				<li class="message_list" v-for="item in data" :data_id="item.id">
+					<a href="javascript:void(0)">
+						<div class="list_img"><img src="/Public/Mobile/img/logo.png" /><i v-show="item.status=='0'"></i></div>
+						<div class="message_content">
+							<p class="list_title"><span>{{item.title}}</span><span>{{item.create_at}}</span></p>
+							<p class="list_text">{{item.message}}</p>
+						</div>
+					</a>
+				</li>
+			</ul>
 		</div>
+		<include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script>

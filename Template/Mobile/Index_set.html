@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-		<div id="setting">
+		<div id="setting" style="margin-bottom: 55px;">
 
 			<header class="header">
 				<div>
@@ -38,7 +38,7 @@
 				<div id="uploader" class="wu-example">
 
 					<span>
-						<img v-if="data.info.profile.headpic" :src="['/'+data.info.profile.headpic]"/>
+						<img v-if="data.info && data.info.profile.headpic" :src="['/'+data.info.profile.headpic]"/>
 						<img class="header_img" v-else src="/Public/Mobile/img/head_img.png"  />
 						
 					</span>
@@ -48,10 +48,10 @@
 
 			</div>
 					<li class="_title">基本信息</li>
-					<li><span>学号</span><input type="text" readonly="readonly" v-model="data.info.code" /></li>
-					<li v-if="data.info.realname == '网站注册用户'"><span>真实姓名</span><input type="text" id="realname" value="" /></li>
+					<li v-if="data.info"><span>学号</span><input type="text" readonly="readonly" v-model="data.info.code" /></li>
+					<li v-if="data.info && data.info.realname == '网站注册用户'"><span>真实姓名</span><input type="text" id="realname" value="" /></li>
 					<li v-else><span>真实姓名</span><input type="text" id="realname" v-model="data.info.realname" /></li>
-					<li v-if="data.info.profile.nickname == '网站注册用户'"><span>昵称</span><input class="focus" type="text" id="nickname" value="" /></li>
+					<li v-if="data.info && data.info.profile.nickname == '网站注册用户'"><span>昵称</span><input class="focus" type="text" id="nickname" value="" /></li>
 					<li v-else><span>昵称</span><input class="focus" type="text" id="nickname" v-model="data.info.profile.nickname" /></li>
 					<!--					<li><span>手机号</span><input class="focus" type="text" id="bind_mobile" v-model="data.info.bind_mobile" /></li>-->
 					<li><span>联系地址</span><input class="focus" type="text" id="address" v-model="data.info.profile.address" /></li>
@@ -147,6 +147,8 @@
 			</div>
 
 		</div>
+		
+    <include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script src="/Public/Mobile/js/webuploader.js"></script>
@@ -398,7 +400,7 @@
 				$(document).on("click", ".get_code2", function() {
 					get_code($("#_phones2"), "/api/sendallmessagecode ",$("#interCode2"), $(this))
 				})
-
+				$(".fixedbottom li").eq(3).addClass("active").siblings().removeClass("active");;
 			},
 			updated() {
 				//图片上传

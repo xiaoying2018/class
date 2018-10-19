@@ -16,47 +16,50 @@
 	</head>
 
 	<body>
-		<div id="course">
-			<header class="header">
-				<div>
-					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-					<span>直播班</span>
-					<a href="#"></a>
-				</div>
-			</header>
-			<ul class="my_course">
+		<div style="margin-bottom: 55px;">
+			<div id="course">
+				<header class="header">
+					<div>
+						<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+						<span>直播班</span>
+						<a href="#"></a>
+					</div>
+				</header>
+				<ul class="my_course">
 
-				<li v-for="item in data">
-					<div class="course_content">
-						<div class="details">
-							<img class="course_img" :src="item.course_pic" />
-							<div>
-								<p class="course_title">{{item.course_name}}</p>
-								<p class="course_text"><span><i class="fa fa-clock-o"></i>上课时间：</span>{{item.start_day}}-{{item.end_day}}</p>
-								<p class="course_text"><span><i class="fa fa-weixin"></i>班主任老师：</span>{{item.headmaster}}</p>
+					<li v-for="item in data">
+						<div class="course_content">
+							<div class="details">
+								<img class="course_img" :src="item.course_pic" />
+								<div>
+									<p class="course_title">{{item.course_name}}</p>
+									<p class="course_text"><span><i class="fa fa-clock-o"></i>上课时间：</span>{{item.start_day}}-{{item.end_day}}</p>
+									<p class="course_text"><span><i class="fa fa-weixin"></i>班主任老师：</span>{{item.headmaster}}</p>
+
+								</div>
+							</div>
+							<div class="synopsis">
+								<p class="course_text"><span><i class="fa fa-th"></i>课程简介：</span>{{item.course_detail}}</p>
 
 							</div>
 						</div>
-						<div class="synopsis">
-							<p class="course_text"><span><i class="fa fa-th"></i>课程简介：</span>{{item.course_detail}}</p>
+						<div class="progress">
+							<div class="progress_">
+								<p class="progress_bar"><i></i></p>
+								<span class="progress_num">{{parseInt((item.finished/item.section_total)*100)}}%</span>
+							</div>
+							<div class="course_but">
+								<!--['http://192.168.0.152/crm/'+item.file]-->
+								<a :href="['/m/course/hour?id='+item.period_id]" class="course_see">查看课节</a>
+								<a :href="['/m/course/hour?id='+item.period_id]" class="course_">进入教室</a>
+							</div>
+						</div>
+					</li>
 
-						</div>
-					</div>
-					<div class="progress">
-						<div class="progress_">
-							<p class="progress_bar"><i></i></p>
-							<span class="progress_num">{{parseInt((item.finished/item.section_total)*100)}}%</span>
-						</div>
-						<div class="course_but">
-							<!--['http://192.168.0.152/crm/'+item.file]-->
-							<a :href="['/m/course/hour?id='+item.period_id]" class="course_see">查看课节</a>
-							<a :href="['/m/course/hour?id='+item.period_id]" class="course_">进入教室</a>
-						</div>
-					</div>
-				</li>
-
-			</ul>
+				</ul>
+			</div>
 		</div>
+		<include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script>

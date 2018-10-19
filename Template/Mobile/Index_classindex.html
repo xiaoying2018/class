@@ -18,249 +18,306 @@
 	</head>
 
 	<body>
-		<div id="_class">
-			<div class="header">
-				<a href="#" class="a_logo">
-					<img class="logo" src="/Public/Mobile/img/logo2.png" />
-				</a>
-				<div v-if="profile.result" class="profile">
-					<a  href="/m/home" class="headpic">
-					<img v-if="pro_profile.profile.headpic" :src="pro_profile.profile.headpic"/>
-					<img v-else src="/Public/Mobile/img/head_img.png" />
+		<div style="margin-bottom: 55px;">
+			<div id="_class">
+				<div class="header">
+					<a href="#" class="a_logo">
+						<img class="logo" src="/Public/Mobile/img/logo2.png" />
 					</a>
-					<a href="javascript:;" class="h_out">退出</a>
+					<div v-if="profile.result" class="profile">
+						<a  href="/m/home" class="headpic">
+						<img v-if="pro_profile.profile.headpic" :src="pro_profile.profile.headpic"/>
+						<img v-else src="/Public/Mobile/img/head_img.png" />
+						</a>
+						<a href="javascript:;" class="h_out">退出</a>
+					</div>
+					<div  v-else>
+						<a href="/m/login">登录</a><i>|</i>
+						<a href="/m/register">注册</a>
+					</div>
 				</div>
-				<div  v-else>
-					<a href="/m/login">登录</a><i>|</i>
-					<a href="/m/register">注册</a>
+				<div class="banner">
+					<img src="/Public/Mobile/img/banner.jpg" />
 				</div>
-			</div>
-			<div class="banner">
-				<img src="/Public/Mobile/img/banner.jpg" />
-			</div>
-			<div class="titleDv">
-				<span class="span">
-					原汁原味的 日本名校教学团队
-				</span>
-			</div>
-			<ul class="teamul">
-				<li class="itemli">
-					<img src="/Public/Mobile/img/team_a.png" alt="">
-					<p class="a_p">专属教学团队</p>
-					<p class="b_p">小莺具备近百名专业教学研究团队，针对留学日语，日本大学考试面试进行深入研究提供专业课程</p>
-				</li>
-				<li class="itemli">
-					<img src="/Public/Mobile/img/team_b.png" alt="">
-					<p class="a_p">严选日本外教</p>
-					<p class="b_p">从不妥协成本，坚持选择认真负责，具备丰富教学经验的日本本土外教</p>
-				</li>
-				<li class="itemli">
-					<img src="/Public/Mobile/img/team_c.png" alt="">
-					<p class="a_p">自主研发教材</p>
-					<p class="b_p">历经十年开发，形成一套融合留学日语，日语外教口语能力的一套完善教学体系</p>
-				</li>
-				<li class="itemli">
-					<img src="/Public/Mobile/img/team_d.png" alt="">
-					<p class="a_p">签约保证承诺</p>
-					<p class="b_p">签约保证，未能达到效果，持续辅导，提高能力</p>
-				</li>
-			</ul>
-			<div class="titleDv" style="border-top: 8px solid #fdfbfb;">
-				<span class="span">
-					专属小莺出国 热门课程
-				</span>
-			</div>
-			<!-- 修士考试课程 -->
-			<div class="content modular xiushi-wapper">
-				<div class="_swiper">
-					<h3 class="s_titleDv">修士考试课程</h3>
-					<ul class="groupDv">
-						<li class="js-change active" data-num="0">最新发布</li>
-						<li class="js-change" data-num="1">最多报名</li>
-					</ul>
+				<div class="titleDv">
+					<span class="span">
+						原汁原味的 日本名校教学团队
+					</span>
+				</div>
+				<ul class="teamul">
+					<li class="itemli">
+						<img src="/Public/Mobile/img/team_a.png" alt="">
+						<p class="a_p">专属教学团队</p>
+						<p class="b_p">小莺具备近百名专业教学研究团队，针对留学日语，日本大学考试面试进行深入研究提供专业课程</p>
+					</li>
+					<li class="itemli">
+						<img src="/Public/Mobile/img/team_b.png" alt="">
+						<p class="a_p">严选日本外教</p>
+						<p class="b_p">从不妥协成本，坚持选择认真负责，具备丰富教学经验的日本本土外教</p>
+					</li>
+					<li class="itemli">
+						<img src="/Public/Mobile/img/team_c.png" alt="">
+						<p class="a_p">自主研发教材</p>
+						<p class="b_p">历经十年开发，形成一套融合留学日语，日语外教口语能力的一套完善教学体系</p>
+					</li>
+					<li class="itemli">
+						<img src="/Public/Mobile/img/team_d.png" alt="">
+						<p class="a_p">签约保证承诺</p>
+						<p class="b_p">签约保证，未能达到效果，持续辅导，提高能力</p>
+					</li>
+				</ul>
+				<div class="titleDv" style="border-top: 8px solid #fdfbfb;">
+					<span class="span">
+						专属小莺出国 热门课程
+					</span>
+				</div>
+				<!-- 修士考试课程 -->
+				<div class="content modular xiushi-wapper">
+					<div class="_swiper">
+						<h3 class="s_titleDv">修士考试课程</h3>
+						<ul class="groupDv">
+							<li class="js-change active" data-num="0">最新发布</li>
+							<li class="js-change" data-num="1">最多报名</li>
+						</ul>
 
-                    <div class="swiper-container-xiushi home_index_swiper_container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in xiushi.by_new">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
+	                    <div class="swiper-container-xiushi home_index_swiper_container">
+	                        <div class="swiper-wrapper">
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in xiushi.by_new">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in xiushi.by_people">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in xiushi.by_people">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
+						</div>
+					</div>
+					<!-- <div class="spinner"><i class="fa fa-spinner fa-pulse"></i>加载更多...</div> -->
+				</div>
+				<!-- 签约保送课程 -->
+				<div class="content modular qianyue-wapper">
+					<div class="_swiper">
+						<h3 class="s_titleDv">签约保送课程</h3>
+						<ul class="groupDv">
+							<li class="js-change active" data-num="0">最新发布</li>
+							<li class="js-change" data-num="1">最多报名</li>
+						</ul>
+	                    <div class="swiper-container-qianyue home_index_swiper_container">
+	                        <div class="swiper-wrapper">
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in qianyue.by_new">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in qianyue.by_people">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- <div class="spinner"><i class="fa fa-spinner fa-pulse"></i>加载更多...</div> -->
+				<!-- 留考校内考课程 -->
+				<div class="content modular liukao-wapper">
+					<div class="_swiper">
+						<h3 class="s_titleDv">留考校内考课程</h3>
+						<ul class="groupDv">
+							<li class="js-change active" data-num="0">最新发布</li>
+							<li class="js-change" data-num="1">最多报名</li>
+						</ul>
+	                    <div class="swiper-container-liukao home_index_swiper_container">
+	                        <div class="swiper-wrapper">
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in liukao.by_new">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in liukao.by_people">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 热门公开课 -->
+				<div class="content modular gongkai-wapper">
+					<div class="_swiper">
+						<h3 class="s_titleDv">热门公开课</h3>
+						<ul class="groupDv">
+							<li class="js-change active" data-num="0">最新发布</li>
+							<li class="js-change" data-num="1">最多报名</li>
+						</ul>
+	                    <div class="swiper-container-gongkai home_index_swiper_container">
+	                        <div class="swiper-wrapper">
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in gongkai.by_new">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+	                            <div class="swiper-slide swiper-no-swiping">
+									<ul class="class_list">
+										<li v-for="item in gongkai.by_people">
+											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
+												<p class="item_img">
+													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+				                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+												</p>
+												<p class="item_title">{{item.name}}</p>
+												<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+												<p class="item_time">课节: {{item.section_num}}课节</p>
+												<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+												<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="titleDv">
+					<span class="span">
+						如何免费体验 小莺出国课程
+					</span>
+				</div>
+				<ul class="tiyanul">
+					<li class="item">
+						<p class="num">1</p>
+						<p class="a_p">在线注册</p>
+						<p class="b_p">注册成功免费领取 300元试听课</p>
+					</li>
+					<li class="item">
+						<p class="num">2</p>
+						<p class="a_p">顾问预约</p>
+						<p class="b_p">与您确定试听时间</p>
+					</li>
+					<li class="item">
+						<p class="num">3</p>
+						<p class="a_p">进入教室</p>
+						<p class="b_p">无需下载一键进入教室，与老师实时沟通</p>
+					</li>
+				</ul>
+				<ul class="stepul">
+					<li class="itemli">
+						<img src="/Public/Mobile/img/class_before.jpg" alt="">
+	                    <span>课前</span>
+	                    <p>预习视频
+	                        <br>预览课件
+	                        <br>提前准备</p>
+					</li>
+					<li class="itemli">
+						<img src="/Public/Mobile/img/class_ing.jpg" alt="">
+	                    <span>课中</span>
+	                    <p>小班授课
+	                        <br>出勤率统计
+	                        <br>家长实时监控</p>
+					</li>
+					<li class="itemli">
+						<img src="/Public/Mobile/img/class_after.jpg" alt="">
+	                    <span>课后</span>
+	                    <p>讲师点评
+	                        <br>阶段评测
+	                        <br>回看录像</p>
+					</li>
+				</ul>
 			</div>
-			<!-- 签约保送课程 -->
-			<div class="content modular qianyue-wapper">
-				<div class="_swiper">
-					<h3 class="s_titleDv">签约保送课程</h3>
-					<ul class="groupDv">
-						<li class="js-change active" data-num="0">最新发布</li>
-						<li class="js-change" data-num="1">最多报名</li>
-					</ul>
-                    <div class="swiper-container-qianyue home_index_swiper_container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in qianyue.by_new">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in qianyue.by_people">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 留考校内考课程 -->
-			<div class="content modular liukao-wapper">
-				<div class="_swiper">
-					<h3 class="s_titleDv">留考校内考课程</h3>
-					<ul class="groupDv">
-						<li class="js-change active" data-num="0">最新发布</li>
-						<li class="js-change" data-num="1">最多报名</li>
-					</ul>
-                    <div class="swiper-container-liukao home_index_swiper_container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in liukao.by_new">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in liukao.by_people">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- 热门公开课 -->
-			<div class="content modular gongkai-wapper">
-				<div class="_swiper">
-					<h3 class="s_titleDv">热门公开课</h3>
-					<ul class="groupDv">
-						<li class="js-change active" data-num="0">最新发布</li>
-						<li class="js-change" data-num="1">最多报名</li>
-					</ul>
-                    <div class="swiper-container-gongkai home_index_swiper_container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in gongkai.by_new">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-                            <div class="swiper-slide swiper-no-swiping">
-								<ul class="class_list">
-									<li v-for="item in gongkai.by_people">
-										<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
-											<p class="item_img">
-												<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
-			                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
-											</p>
-											<p class="item_title">{{item.name}}</p>
-											<p class="item_time">时间: {{item.start_time | filtertime}} | {{item.section_num}}课节</p>
-											<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
-											<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="footer">
+				<p>
+					<a href="tel:4000-150-170">热线电话：4000-150-170</a><br />小莺教育科技有限公司 苏ICP备17069390号</p>
 			</div>
 		</div>
-		<div class="footer">
-			<p>
-				<a href="tel:4000-150-170">热线电话：4000-150-170</a><br />小莺教育科技有限公司 苏ICP备17069390号</p>
-		</div>
+		<include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script src="/Public/Mobile/js/swiper.min.js"></script>
@@ -422,6 +479,7 @@
 						}
 					});
 				})
+        		$(".fixedbottom li").eq(0).addClass("active").siblings().removeClass("active");;
 			},
 
 			updated() {

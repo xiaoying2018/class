@@ -17,83 +17,86 @@
 </head>
 
 <body>
-    <div id="indexmyclass">
-        <header class="header">
-            <div>
-                <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-                <span>我的课程</span>
-                <a href="#"></a>
-            </div>
-        </header>
-        <ul class="tabhead">
-            <li class="active">
-                <a href="/m/myclass">直播班</a>
-            </li>
-            <li>
-                <a href="/m/myclass/videoreview">录播课程回顾</a>
-            </li>
-            <li>
-                <a href="/m/myclass/videocourse">录播课程</a>
-            </li>
-            <li>
-                <a href="/m/myclass/opencourse">公开课预约</a>
-            </li>
-        </ul>
-        <input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
-        <ul class="biaozhu">
-            <li class="clearfix">
-                <span class="point"></span>
-                <span class="p_font">已办理</span>
-            </li>
-            <li class="clearfix">
-                <span class="point" style="background-color: #dc1015;"></span>
-                <span class="p_font">未办理</span>
-            </li>
-        </ul>
-        <div class="eventUl">
-            <li class="itemLi clearfix" v-for="n in event" @click="toclassroom(n)" v-if="n.status == 1">
-                <span class="greenPart left">
-					<p class="week">{{n.week | week}}</p>
-					<div>
-						<p class="d_day">{{n.date}}</p>
-						<p class="m_month">{{n.month}}月</p>
-					</div>
-				</span>
-           		 <span class="infoPart left">
-					<div class="class_name">{{n.period_name}}</div>
-					<div class="m_dv clearfix">
-						<span class="t_name">{{n.start_date}}</span>
-		                <span class="t_time">{{n.start_time}} - {{n.end_time}}</span>
-			        </div>
-        		</span>
-        	</li>
-    	</div>
-    <div class="courseLists">
-        <p class="s_title">
-            直播班
-        </p>
-        <ul class="s_classLists">
-            <li class="s_item" v-for="n in period">
-                <a :href="'/m/myclass/hour?period_id='+n.period_id" class="imgDv">
-                    <img :src="n.course_pic" alt="">
-                </a>
-                <div class="infoDv">
-                    <h3>{{n.period_name}}</h3>
-                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
-                    <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">教务老师:<span>{{n.headmaster | filterteacher}}</span></div>
-                    <!-- <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div> -->
+    <div style="margin-bottom: 55px;">
+        <div id="indexmyclass" >
+            <header class="header">
+                <div>
+                    <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                    <span>我的课程</span>
+                    <a href="#"></a>
                 </div>
-                <div class="btn_group">
-                    <a :href="'/m/myclass/hour?period_id='+n.period_id">查看课节</a>
-                    <a :href="'/m/myclass/hour?period_id='+n.period_id" style="background-color: #dc1015; color: #fff; margin-left: 10px;">进入教室</a>
-                </div>
-            </li>
-        </ul>
+            </header>
+            <ul class="tabhead">
+                <li class="active">
+                    <a href="/m/myclass">直播班</a>
+                </li>
+                <li>
+                    <a href="/m/myclass/videoreview">录播课程回顾</a>
+                </li>
+                <li>
+                    <a href="/m/myclass/videocourse">录播课程</a>
+                </li>
+                <li>
+                    <a href="/m/myclass/opencourse">公开课预约</a>
+                </li>
+            </ul>
+            <input class="flatpickr flatpickr-input" type="text" placeholder="Select Date.." readonly="readonly" id="schedule" style="display: none;">
+            <ul class="biaozhu">
+                <li class="clearfix">
+                    <span class="point"></span>
+                    <span class="p_font">已办理</span>
+                </li>
+                <li class="clearfix">
+                    <span class="point" style="background-color: #dc1015;"></span>
+                    <span class="p_font">未办理</span>
+                </li>
+            </ul>
+            <div class="eventUl">
+                <li class="itemLi clearfix" v-for="n in event" @click="toclassroom(n)" v-if="n.status == 1">
+                    <span class="greenPart left">
+    					<p class="week">{{n.week | week}}</p>
+    					<div>
+    						<p class="d_day">{{n.date}}</p>
+    						<p class="m_month">{{n.month}}月</p>
+    					</div>
+    				</span>
+               		 <span class="infoPart left">
+    					<div class="class_name">{{n.period_name}}</div>
+    					<div class="m_dv clearfix">
+    						<span class="t_name">{{n.start_date}}</span>
+    		                <span class="t_time">{{n.start_time}} - {{n.end_time}}</span>
+    			        </div>
+            		</span>
+            	</li>
+        	</div>
+        <div class="courseLists">
+            <p class="s_title">
+                直播班
+            </p>
+            <ul class="s_classLists">
+                <li class="s_item" v-for="n in period">
+                    <a :href="'/m/myclass/hour?period_id='+n.period_id" class="imgDv">
+                        <img :src="n.course_pic" alt="">
+                    </a>
+                    <div class="infoDv">
+                        <h3>{{n.period_name}}</h3>
+                        <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
+                        <div class="lineDv"><img src="../../Public/Mobile/img/icon_teacher.png" alt="">教务老师:<span>{{n.headmaster | filterteacher}}</span></div>
+                        <!-- <div class="lineDv"><img src="../../Public/Mobile/img/icon_book.png" alt="" style="width: 0.35rem;"><span v-html="$options.filters.course_detail(n.course_detail)"></span></div> -->
+                    </div>
+                    <div class="btn_group">
+                        <a :href="'/m/myclass/hour?period_id='+n.period_id">查看课节</a>
+                        <a :href="'/m/myclass/hour?period_id='+n.period_id" style="background-color: #dc1015; color: #fff; margin-left: 10px;">进入教室</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="footer">
+            版权所有：小莺教育科技有限公司 苏ICP备17069390号
+        </div>
+        </div>
     </div>
-    <div class="footer">
-        版权所有：小莺教育科技有限公司 苏ICP备17069390号
-    </div>
-    </div>
+    <include file="./Template/Mobile/index_fixedbottom.html" />
 </body>
 <script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 <script>
@@ -203,6 +206,7 @@ var indexmyclass = new Vue({
     },
     mounted: function() {
         this.get_data();
+        $(".fixedbottom li").eq(1).addClass("active").siblings().removeClass("active");;
     }
 })
 </script>

@@ -15,20 +15,21 @@
 	</head>
 
 	<body>
-		<div id="messagedetails">
-		<header class="header">
-			<div>
-				<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-				<span>消息详情</span>
-				<a href="javascript:void(0)"></a>
-			</div>
+		<div style="margin-bottom: 55px;"  id="messagedetails">
+			<header class="header">
+				<div>
+					<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+					<span>消息详情</span>
+					<a href="javascript:void(0)"></a>
+				</div>
 
-		</header>
-		<div class="message">
-			<p class="message_title"><span>{{data.title}}</span><span>{{data.create_at}}</span></p>
-			<div class="message_text">{{data.message}}</div>
+			</header>
+			<div class="message">
+				<p class="message_title"><span>{{data.title}}</span><span>{{data.create_at}}</span></p>
+				<div class="message_text">{{data.message}}</div>
+			</div>
 		</div>
-		</div>
+		<include file="./Template/Mobile/index_fixedbottom.html" />
 	</body>
 	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
 	<script>
