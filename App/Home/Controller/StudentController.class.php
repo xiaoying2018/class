@@ -208,7 +208,7 @@ class StudentController extends BaseController
             if ($v['serial'])
             {
                 // 学员是否签到
-                $paike_list[$k]['signin_status'] = M('schedule_signin')->where(['schedule_id'=>['eq'=>$v['id']],['student_id'=>['eq',$studentInfo['id']]]])->select()?1:0;
+                $paike_list[$k]['signin_status'] = M('schedule_signin')->where(['schedule_id'=>['eq',$v['id']],['student_id'=>['eq',$studentInfo['id']]]])->select()?1:0;
 
                 // 获取当前排课在TK-Cloud的课件
                 $has_doc_res = M('schedule_document')->where(['schedule_id'=>['eq',$v['id']]])->select();
