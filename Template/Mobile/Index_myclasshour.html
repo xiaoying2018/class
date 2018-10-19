@@ -59,6 +59,9 @@
                                 <a href="javascript:;" v-if="n.shomework != ''" :href="'http://crm.xiaoying.net/'+n.shomework">课后练习</a>
                                 <a href="javascript:;" v-if="n.status != 1 && n.signin_status == 1" class="active">已签到</a>
                                 <a href="javascript:;" v-if="n.status != 1 && n.signin_status != 1" >未签到</a>
+                                <template v-if="n.is_show == 1">
+                                    <a :href="n.serial" class="active">进入教室</a>
+                                </template>
                             </div>
                         </div>
                     </div>
