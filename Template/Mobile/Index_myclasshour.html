@@ -180,13 +180,16 @@ var indexmyclass = new Vue({
         },
         get_data: function() {
             var _this = this;
+            var _data = {};
+            _data.period_id = getQueryString('period_id')
             $.ajax({
                 type: "post",
                 url: "/api/current_per_sch",
+                data:_data,
                 success: function(res) {
                     if (res.result == false) {
                         alert(res.msg)
-                        window.location.href = "/m/login"
+                        // window.location.href = "/m/login"
                     } else {
                         for (var key in res.data) {
                             _this.event = _this.event.concat(res.data[key])
@@ -199,7 +202,7 @@ var indexmyclass = new Vue({
                                     _this.weixuexi.push(_this.event[i]);
                                 }
 
-                                if (_this.event[i].homework != null) {
+                                if (_this.event[i].homework != null && _this.event[i].homework != '') {
                                     _this.event[i].shomework = (_this.event[i].homework.split('./'))[1]
                                 } else {
                                     _this.event[i].shomework = ''
@@ -225,6 +228,12 @@ var indexmyclass = new Vue({
 
     }
 })
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
 </script>
 
 	<include file="./Template/Mobile/index_leftslider.html" />

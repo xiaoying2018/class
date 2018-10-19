@@ -20,11 +20,11 @@
         <header class="header">
             <div>
                 <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-                <span>预约公开课</span>
+                <span>课程详情</span>
                 <a href="#"></a>
             </div>
         </header>
-        <ul class="tabhead">
+        <!-- <ul class="tabhead">
             <li>
                 <a href="/m/myclass">直播班</a>
             </li>
@@ -37,7 +37,7 @@
             <li class="active">
                 <a href="/m/myclass/opencourse">公开课预约</a>
             </li>
-        </ul>
+        </ul> -->
             <div class="video_box">
                 <img v-if ="info.pic" :src="'http://crm.xiaoying.net/'+info.pic">
                 <img v-else src="/Public/Common/img/class/class.jpg" />
@@ -55,10 +55,12 @@
                 <div class="de_tab">
                     <span class="active_tab">课程简介<i></i></span>
                     <span>课程表<i></i></span>
+                    <span v-if="info.show_course && info.show_course.length > 0">子课程<i></i></span>
                 </div>
                 <div class="content_text">
-                    <div v-html="info.detail" id="desc_content">
-                        <div>{{info.detail}}</div>
+                    <div id="desc_content">
+                        <div v-if="info.detail" v-html="info.detail"></div>
+                        <div v-else>暂无简介</div>
                     </div>
                     <div>
                         <ul class="curriculum-ul course1">
@@ -73,12 +75,21 @@
                             </li>
                         </ul>
                     </div>
+                    <div v-if="info.show_course && info.show_course.length > 0">
+                        <ul v-if="info.show_course && info.show_course.length > 0" class="show_course">
+                            <li class="m_li clearfix" v-for="item in info.show_course">
+                                <img v-if="!item.pic" src="/Public/Common/img/class/class.jpg" alt="">
+                                <img v-else :src="'http://crm.xiaoying.net'+item.pic" alt="">
+                                <h3>{{item.name}}</h3>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="footer">
+            <!-- <div class="footer">
                 <a href="javascript:;" onclick="_MEIQIA('showPanel')" style="width: 100%;">在线咨询</a>
-                <!-- <a href="/m/login">查看回放</a> -->
-            </div>
+                <a href="/m/login">查看回放</a>
+            </div> -->
             <input type="hidden" id="playback_addr" v-model="info.playback_addr" value=""/>
             <!-- 录播Dv -->
             <div class="videopart" id="record_video" style="display: none;">
@@ -94,7 +105,8 @@
             el: "#_detail",
             data: {
                 data: {},
-                info: {}
+                info: {},
+                type:""
             },
             methods: {
                 close_v: function() {
@@ -112,7 +124,7 @@
 
                     $("#record_video").fadeIn();
                 },
-                get_data: function() {
+                get_data: function(_url) {
                     var _self = this;
                     var _id = getQueryString("id")
                     $.ajax({
@@ -121,10 +133,12 @@
                         data: {
                             id: _id
                         },
-                        url: "/api/course_detail",
+                        url: _url,
                         success: function(res) {
                             if (res.result) {
-                                res.data.detail = escapeStringHTML(res.data.detail);
+                                if (res.data.detail) {
+                                    res.data.detail = escapeStringHTML(res.data.detail);
+                                }
 
                                 _self.info = res.data
 
@@ -164,10 +178,25 @@
                         $(".content_text>div").eq($(this).index()).fadeIn("fast")
                     }
                 })
+            },
+            mounted(){
+                this.type = getQueryString('type');
+                if (this.type == 'class') {
+                    this.get_data('/api/banji_detail',getQueryString('id'));
+                }else{
+                    this.get_data('/api/course_detail',getQueryString('id'));
+                }
+
             }
         })
 
-        _detail.get_data()
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+        // _detail.get_data()
         _detail.get_snumIncre()
         function getQueryString(name, needdecoed) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
@@ -183,7 +212,7 @@
         function escapeStringHTML(str) {
             str = str.replace(/&lt;/g, '<');
             str = str.replace(/&gt;/g, '>');
-            str = str.replace(/&amp;/g, '"');
+            str = str.replace(/&amp;/g, '&');
             str = str.replace(/&quot;/g, '"');
             str = str.replace(/&#039;/g, "'");
             return str;

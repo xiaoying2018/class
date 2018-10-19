@@ -74,9 +74,9 @@
         </p>
         <ul class="s_classLists">
             <li class="s_item" v-for="n in period">
-                <div class="imgDv">
+                <a :href="'/m/myclass/hour?period_id='+n.period_id" class="imgDv">
                     <img :src="n.course_pic" alt="">
-                </div>
+                </a>
                 <div class="infoDv">
                     <h3>{{n.period_name}}</h3>
                     <div class="lineDv"><img src="../../Public/Mobile/img/icon_clock.png" alt="">上课时长:<span>{{n.time_long}}分钟</span></div>
