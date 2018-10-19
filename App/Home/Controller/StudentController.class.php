@@ -207,11 +207,16 @@ class StudentController extends BaseController
                 // 课节标题
                 $paike_list[$k]['title'] = $section_info['title']?:0;
             }
-            
+
+            // 排课状态  是否已经结束
+            $paike_list[$k]['status'] = ($now > strtotime($paike_list[$k]['end_time'])) ? -1 : 1;
+
+            // 学员是否签到
+            $paike_list[$k]['signin_status'] = M('schedule_signin')->where(['schedule_id'=>['eq',$v['id']],['student_id'=>['eq',$studentInfo['id']]]])->select()?1:0;
+
             if ($v['serial'] && ($now > (strtotime($paike_list[$k]['start_time']) - 60*120)))
             {
-                // 学员是否签到
-                $paike_list[$k]['signin_status'] = M('schedule_signin')->where(['schedule_id'=>['eq',$v['id']],['student_id'=>['eq',$studentInfo['id']]]])->select()?1:0;
+
 
                 // 获取当前排课在TK-Cloud的课件
                 $has_doc_res = M('schedule_document')->where(['schedule_id'=>['eq',$v['id']]])->select();
@@ -248,9 +253,6 @@ class StudentController extends BaseController
                 $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
                 $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
                 $paike_list[$k]['serial'] = $send_url;
-
-                // 排课状态  是否已经结束
-                $paike_list[$k]['status'] = ($now > strtotime($paike_list[$k]['end_time'])) ? -1 : 1;
 
 
                 // 提前两小时
