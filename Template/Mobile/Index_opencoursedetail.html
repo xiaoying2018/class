@@ -70,7 +70,7 @@
                                     <p>{{n.name}}</p>
                                     <p>时长：{{n.duration}}分钟</p>
                                 </div>
-                                <img v-if="(n.video_path != null && n.is_free == 1)"  src="/Public/Mall/img/playback.png" alt="" class="playback" @click="play(n)">
+                                <img v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && info.is_open == 1)"  src="/Public/Mall/img/playback.png" alt="" class="playback" @click="play(n)">
                                 <img v-else src="/Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
                             </li>
                         </ul>
@@ -106,7 +106,8 @@
             data: {
                 data: {},
                 info: {},
-                type:""
+                type:"",
+                islogin:false
             },
             methods: {
                 close_v: function() {
@@ -115,6 +116,11 @@
                 },
                 // 往期视频
                 play: function(n) {
+                    if (!this.islogin) {
+                        alert('请先登录')
+                        window.location.href = "/m/login"
+                        return false;
+                    }
                     if (n.video_path == null || n.video_path == '') {
                         alert('视频尚未上传')
                         return false;
@@ -166,10 +172,25 @@
                         }
                     });
                     }
+                },
+                is_login:function(){
+                    var _this = this;
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: "/api/student/info",
+                        success: function(res) {
+                            if(res.result == false){
+                                _this.islogin = false;
+                            }else{
+                                _this.islogin = true;
+                            }
+                        }
+                    });
                 }
                 
             },
-            updated() {
+            updated:function(){
                 $(".de_tab>span").click(function() {
                     if(!$(this).hasClass("active_tab")) {
                         $(".de_tab>span").removeClass("active_tab")
@@ -179,14 +200,14 @@
                     }
                 })
             },
-            mounted(){
+            mounted:function(){
                 this.type = getQueryString('type');
                 if (this.type == 'class') {
                     this.get_data('/api/banji_detail',getQueryString('id'));
                 }else{
                     this.get_data('/api/course_detail',getQueryString('id'));
                 }
-
+                this.is_login();
             }
         })
 
@@ -197,7 +218,7 @@
             return null;
         }
         // _detail.get_data()
-        _detail.get_snumIncre()
+        // _detail.get_snumIncre()
         function getQueryString(name, needdecoed) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
             var lh = window.location.search;
