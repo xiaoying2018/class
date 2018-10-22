@@ -136,7 +136,7 @@ return [
         'm/seo'				        =>	'Mobile/Index/seo',//SEO申请
         'm/material'			    =>	'Mobile/Index/material',//我的材料
         'm/message'			        =>	'Mobile/Index/message',//消息列表
-        'm/message/details'	        =>	'Mobile/Index/messageDetails',//消息详情
+        'm/message/details'	        =>	'Mobile/Index/messagedetails',//消息详情
         'm/set'	                    =>	'Mobile/Index/set',//个人信息
 
 
