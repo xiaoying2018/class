@@ -439,30 +439,48 @@ class StudentController extends BaseController
                         {
                             foreach ($paike_list as $pk_k => $pk_v)
                             {
-                                // 获取当前排课/房间的登入链接
-                                $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
-                                $send_url = $_tk_send_url . 'entry';// 接口请求地址
-                                $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
-                                // auth 值为 MD5(key + ts + serial + usertype)
-                                $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $pk_v['serial'] . 2);// 令牌
-                                $send_url .= '&usertype=2';// 用户类型 2=学员
-                                $send_url .= '&ts=' . time();// 时间戳
-                                $send_url .= '&serial=' . $pk_v['serial'];// 房间号码
-                                $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
-                                $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
-                                $paike_list[$pk_k]['serial_link'] = $send_url;
-                                // 获取当前排课/房间的课件
+                                // 获取当前排课的课时时长
+                                if ($pk_v['section_id'])
+                                {
+                                    $section_model = new SectionModel();
+                                    $section_info = $section_model->find($pk_v['section_id']);
+                                    // 获取课节时长
+                                    $paike_list[$pk_k]['duration'] = $section_info['duration']?:0;
+                                    // 课节结束时间
+                                    $paike_list[$pk_k]['end_time'] = date('Y-m-d H:i:s',strtotime($pk_v['start_time']) + 60*$section_info['duration']);
+                                    // 课节名称
+                                    $paike_list[$pk_k]['section_name'] = $section_info['name']?:0;
+                                    // 课节标题
+                                    $paike_list[$pk_k]['title'] = $section_info['title']?:0;
+                                }
 
-                                // 获取当前排课/房间的往期直播视频
-                                $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
-                                $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
-                                $tk_send_data['serial'] = $pk_v['serial'];// 房间号码
+                                // 排课状态  是否已经结束
+                                $paike_list[$pk_k]['status'] = (time() > strtotime($paike_list[$pk_k]['end_time'])) ? -1 : 1;
 
-                                // 发起请求
-                                $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
-
-                                // 返码正常(0为正常) 成功存储视频资源列表
-                                if (!$current_room_video_list->result) $paike_list[$pk_k]['serial_has_videos'] = $current_room_video_list->recordlist;
+//                                // 获取当前排课/房间的登入链接
+//                                $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
+//                                $send_url = $_tk_send_url . 'entry';// 接口请求地址
+//                                $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
+//                                // auth 值为 MD5(key + ts + serial + usertype)
+//                                $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $pk_v['serial'] . 2);// 令牌
+//                                $send_url .= '&usertype=2';// 用户类型 2=学员
+//                                $send_url .= '&ts=' . time();// 时间戳
+//                                $send_url .= '&serial=' . $pk_v['serial'];// 房间号码
+//                                $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
+//                                $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
+//                                $paike_list[$pk_k]['serial_link'] = $send_url;
+//                                // 获取当前排课/房间的课件
+//
+//                                // 获取当前排课/房间的往期直播视频
+//                                $_tk_send_url_for_video = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+//                                $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+//                                $tk_send_data['serial'] = $pk_v['serial'];// 房间号码
+//
+//                                // 发起请求
+//                                $current_room_video_list = json_decode(curlPost($_tk_send_url_for_video . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+//
+//                                // 返码正常(0为正常) 成功存储视频资源列表
+//                                if (!$current_room_video_list->result) $paike_list[$pk_k]['serial_has_videos'] = $current_room_video_list->recordlist;
 
                             }
                         }
