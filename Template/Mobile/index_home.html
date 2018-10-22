@@ -1,76 +1,75 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta content="yes" name="apple-mobile-web-app-capable">
-		<meta content="yes" name="apple-touch-fullscreen">
-		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
-		<meta content="telephone=no,email=no" name="format-detection">
-		<title>个人中心</title>
-		<script src="/Public/Mobile/js/flexible.js"></script>
-		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/index_home.css" />
-		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
-		<script src="/Public/vue.min.js"></script>
-		
-	</head>
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title>个人中心</title>
+    <script src="/Public/Mobile/js/flexible.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/css/index_home.css" />
+    <link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <script src="/Public/vue.min.js"></script>
+</head>
 
-	<body>
-		<div style="margin-bottom: 55px;">
-			<div id="indexhome">
-				<header class="header">
-					<div>
-						<a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
-						<span>个人中心</span>
-						<a href="#"></a>
-					</div>
-				</header>
-				<img src="../../Public/Mobile/img/home_banner.jpg" alt="" class="home_banner">
-				<ul class="listul">
-					<li class="itemli">
-						<a href="/m/myclass/opencourse">
-							<img src="../../Public/Mobile/img/kxyy.png" alt="">
-							<p>公开课预约</p>
-						</a>
-					</li>
-					<li class="itemli">
-						<a href="/m/myclass">
-							<img src="../../Public/Mobile/img/wdkc.png" alt="">
-							<p>直播班</p>
-						</a>
-					</li>
-					<li class="itemli">
-						<a href="javascript:;">
-							<img src="../../Public/Mobile/img/gkk.png" alt="">
-							<p>公开课</p>
-						</a>
-					</li>
-					<li class="itemli">
-						<a href="/m/apply">
-							<img src="../../Public/Mobile/img/gmtc.png" alt="">
-							<p>申请进度</p>
-						</a>
-					</li>
-					<li class="itemli">
-						<a href="/m/set">
-							<img src="../../Public/Mobile/img/grzx.png" alt="">
-							<p>个人中心</p>
-						</a>
-					</li>
-				</ul>
-				<div class="message">
-					<img src="../../Public/Mobile/img/xttz.png" alt="" class="xttz">
-					<ul class="mesul">
-						<li class="itemli">
-							<a :href="'/m/message/details?id='+newestLetter.id">{{newestLetter.title}}</a>
-						</li>
-					</ul>
-					<a href="/m/message" class="more_btn">更多</a>
-				</div>
-				<div class="recent_course">
-					<img src="../../Public/Mobile/img/wdjqkc.png" alt="" class="stitle">
-					<h3 class="ss_title">您有<span class="redfont">0条</span>预约课程哦！</h3>
-	<!-- 				<table class="t_table" cellpadding="0" cellspacing="0">
+<body>
+    <div style="margin-bottom: 55px;">
+        <div id="indexhome">
+            <header class="header">
+                <div>
+                    <a href="javascript:;" id="openleft"><i class="fa fa-bars fa-2x"></i></a>
+                    <span>个人中心</span>
+                    <a href="#"></a>
+                </div>
+            </header>
+            <img src="../../Public/Mobile/img/home_banner.jpg" alt="" class="home_banner">
+            <ul class="listul">
+                <li class="itemli">
+                    <a href="/m/myclass/opencourse">
+                        <img src="../../Public/Mobile/img/kxyy.png" alt="">
+                        <p>公开课预约</p>
+                    </a>
+                </li>
+                <li class="itemli">
+                    <a href="/m/myclass">
+                        <img src="../../Public/Mobile/img/wdkc.png" alt="">
+                        <p>直播班</p>
+                    </a>
+                </li>
+                <li class="itemli">
+                    <a href="javascript:;">
+                        <img src="../../Public/Mobile/img/gkk.png" alt="">
+                        <p>公开课</p>
+                    </a>
+                </li>
+                <li class="itemli">
+                    <a href="/m/apply">
+                        <img src="../../Public/Mobile/img/gmtc.png" alt="">
+                        <p>申请进度</p>
+                    </a>
+                </li>
+                <li class="itemli">
+                    <a href="/m/set">
+                        <img src="../../Public/Mobile/img/grzx.png" alt="">
+                        <p>个人中心</p>
+                    </a>
+                </li>
+            </ul>
+            <div class="message">
+                <img src="../../Public/Mobile/img/xttz.png" alt="" class="xttz">
+                <ul class="mesul">
+                    <li class="itemli">
+                        <a :href="'/m/message/details?id='+newestLetter.id">{{newestLetter.title}}</a>
+                    </li>
+                </ul>
+                <a href="/m/message" class="more_btn">更多</a>
+            </div>
+            <div class="recent_course">
+                <img src="../../Public/Mobile/img/wdjqkc.png" alt="" class="stitle">
+                <h3 class="ss_title">您有<span class="redfont">0条</span>预约课程哦！</h3>
+                <!-- 				<table class="t_table" cellpadding="0" cellspacing="0">
 						<thead>
 							<td>课程名称</td>
 							<td>老师</td>
@@ -90,134 +89,133 @@
 							</tr>
 						</tbody>
 					</table> -->
-					<!-- <p style="font-size: 0.35rem; display: block; margin: 5px auto; text-align: center;">你还没有预约课程哦~ 快去预约吧~</p> -->
-					<a href="javascript:;" class="more_btn">预约课程</a>
-				</div>
-				<div class="allsay">
-					<img src="../../Public/Mobile/img/djdzs.png" alt="" class="s_title">
-					<ul class="sayul">
-						<li class="liitem clearfix">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/stu1.png" alt="">
-							</div>
-							<div class="info">
-								<p class="name">大金</p>
-								<p class="desc">王小明 ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
-							</div>
-						</li>
-						<li class="liitem clearfix">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/stu2.png" alt="">
-							</div>
-							<div class="info">
-								<p class="name">Make</p>
-								<p class="desc">Make ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
-							</div>
-						</li>
-						<li class="liitem clearfix">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/stu3.png" alt="">
-							</div>
-							<div class="info">
-								<p class="name">ViVi</p>
-								<p class="desc">ViVi ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
-							</div>
-						</li>
-						<li class="liitem clearfix">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/stu4.png" alt="">
-							</div>
-							<div class="info">
-								<p class="name">吴大卫</p>
-								<p class="desc">吴大卫 ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="teacher_com" style="display: none;">
-					<img src="../../Public/Mobile/img/wjtj.png" alt="" class="s_title">
-					<ul class="teacherlist">
-						<li class="liitem">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/jian.png" alt="">
-							</div>
-							<div class="desc">
-								<span>简依梦</span>
-								<p>社会传媒主任<br />
-								御茶水女子修士</p>
-							</div>
-						</li>
-						<li class="liitem">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/jian.png" alt="">
-							</div>
-							<div class="desc">
-								<span>简依梦</span>
-								<p>社会传媒主任<br />
-								御茶水女子修士</p>
-							</div>
-						</li>
-						<li class="liitem">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/jian.png" alt="">
-							</div>
-							<div class="desc">
-								<span>简依梦</span>
-								<p>社会传媒主任<br />
-								御茶水女子修士</p>
-							</div>
-						</li>
-						<li class="liitem">
-							<div class="imgDv">
-								<img src="../../Public/Mobile/img/jian.png" alt="">
-							</div>
-							<div class="desc">
-								<span>简依梦</span>
-								<p>社会传媒主任<br />
-								御茶水女子修士</p>
-							</div>
-						</li>
-					</ul>
-					<a href="" class="more_btn">更多</a>
-				</div>
-				<div class="footer">
-					版权所有：小莺教育科技有限公司  苏ICP备17069390号 
-				</div>
-			</div>
-		</div>
-		<include file="./Template/Mobile/Index_fixedbottom.html" />
-	</body>
-	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
-	<script>
-		var indexhome = new Vue({
-			el: "#indexhome",
-			data: {
-				newestLetter: {}
-			},
-			methods: {
-				get_data: function() {
-					var _this = this;
-					$.ajax({
-						type: "post",
-						url: "/api/student/info",
-						success: function(res) {
-							if(res.result == false){
-								alert(res.msg)
-								window.location.href = "/m/login"
-							}else{
-								_this.newestLetter = res.newestLetter;
-							}	
-						
-						}
-					});
-				}
-			},
-			mounted:function(){
-				this.get_data();
-			}
-		})
+                <!-- <p style="font-size: 0.35rem; display: block; margin: 5px auto; text-align: center;">你还没有预约课程哦~ 快去预约吧~</p> -->
+                <a href="javascript:;" class="more_btn">预约课程</a>
+            </div>
+            <div class="allsay">
+                <img src="../../Public/Mobile/img/djdzs.png" alt="" class="s_title">
+                <ul class="sayul">
+                    <li class="liitem clearfix">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/stu1.png" alt="">
+                        </div>
+                        <div class="info">
+                            <p class="name">大金</p>
+                            <p class="desc">王小明 ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
+                        </div>
+                    </li>
+                    <li class="liitem clearfix">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/stu2.png" alt="">
+                        </div>
+                        <div class="info">
+                            <p class="name">Make</p>
+                            <p class="desc">Make ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
+                        </div>
+                    </li>
+                    <li class="liitem clearfix">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/stu3.png" alt="">
+                        </div>
+                        <div class="info">
+                            <p class="name">ViVi</p>
+                            <p class="desc">ViVi ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
+                        </div>
+                    </li>
+                    <li class="liitem clearfix">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/stu4.png" alt="">
+                        </div>
+                        <div class="info">
+                            <p class="name">吴大卫</p>
+                            <p class="desc">吴大卫 ：很高興又約到了李老師的課。李老師總是非常有熱情，很有感染力、親和力。上課的氣氛會感覺很輕...</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="teacher_com" style="display: none;">
+                <img src="../../Public/Mobile/img/wjtj.png" alt="" class="s_title">
+                <ul class="teacherlist">
+                    <li class="liitem">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/jian.png" alt="">
+                        </div>
+                        <div class="desc">
+                            <span>简依梦</span>
+                            <p>社会传媒主任<br />
+                                御茶水女子修士</p>
+                        </div>
+                    </li>
+                    <li class="liitem">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/jian.png" alt="">
+                        </div>
+                        <div class="desc">
+                            <span>简依梦</span>
+                            <p>社会传媒主任<br />
+                                御茶水女子修士</p>
+                        </div>
+                    </li>
+                    <li class="liitem">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/jian.png" alt="">
+                        </div>
+                        <div class="desc">
+                            <span>简依梦</span>
+                            <p>社会传媒主任<br />
+                                御茶水女子修士</p>
+                        </div>
+                    </li>
+                    <li class="liitem">
+                        <div class="imgDv">
+                            <img src="../../Public/Mobile/img/jian.png" alt="">
+                        </div>
+                        <div class="desc">
+                            <span>简依梦</span>
+                            <p>社会传媒主任<br />
+                                御茶水女子修士</p>
+                        </div>
+                    </li>
+                </ul>
+                <a href="" class="more_btn">更多</a>
+            </div>
+            <div class="footer">
+                版权所有：小莺教育科技有限公司 苏ICP备17069390号
+            </div>
+        </div>
+    </div>
+    <include file="./Template/Mobile/Index_fixedbottom.html" />
+</body>
+<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+<script>
+var indexhome = new Vue({
+    el: "#indexhome",
+    data: {
+        newestLetter: {}
+    },
+    methods: {
+        get_data: function() {
+            var _this = this;
+            $.ajax({
+                type: "post",
+                url: "/api/student/info",
+                success: function(res) {
+                    if (res.result == false) {
+                        alert(res.msg)
+                        window.location.href = "/m/login"
+                    } else {
+                        _this.newestLetter = res.newestLetter;
+                    }
 
-	</script>
+                }
+            });
+        }
+    },
+    mounted: function() {
+        this.get_data();
+    }
+})
+</script>
+<include file="./Template/Mobile/index_leftslider.html" />
 
-	<include file="./Template/Mobile/index_leftslider.html" />
-</html>	
+</html>
