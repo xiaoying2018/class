@@ -232,7 +232,8 @@ class SectionCateModel extends EModel
         $banji['gongkai'] = [];// 热门公开
 
         // 获取首页展示的所有班
-        $all_banji = M('Course')->where(['is_show'=>['eq',1],'status'=>['eq',1]])->order('create_at desc')->limit(8)->select();
+        $all_banji = M('Course')->where(['is_show'=>['eq',1],'status'=>['eq',1]])->order('create_at desc')->select();
+
         // 获取班级下的课程数和课时数
         if ($all_banji)
         {
@@ -341,7 +342,7 @@ class SectionCateModel extends EModel
         }
 
         // 获取首页展示的所有班
-        $all_banji = M('Course')->where(['is_show'=>['eq',1],'status'=>['eq',1]])->order('people_num desc')->limit(8)->select();
+        $all_banji = M('Course')->where(['is_show'=>['eq',1],'status'=>['eq',1]])->order('people_num desc')->select();
         // 获取班级下的课程数和课时数
         if ($all_banji)
         {
