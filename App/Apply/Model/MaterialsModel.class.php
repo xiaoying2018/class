@@ -25,7 +25,7 @@ class MaterialsModel extends CRMBaseModel
 
     public function addMaterials($data)
     {
-        return $this->db(1,"DB_CONFIG_EDU")->execute('insert into `mx_materials` (`name`,`cate_id`,`program_id`,`student_id`,`create_time`,`file`) values ("'.$data['name'].'",'.$data['cate_id'].','.$data['program_id'].','.$data['student_id'].','.$data['create_time'].',"'.$data['file'].'")');
+        return $this->db(1,"DB_CONFIG_EDU")->execute('insert into `mx_materials` (`name`,`cate_id`,`program_id`,`student_id`,`create_time`,`file`,`sname`,`program_name`) values ("'.$data['name'].'",'.$data['cate_id'].','.$data['program_id'].','.$data['student_id'].','.$data['create_time'].',"'.$data['file'].'","'.$data['sname'].'","'.$data['program_name'].'")');
     }
 
 }

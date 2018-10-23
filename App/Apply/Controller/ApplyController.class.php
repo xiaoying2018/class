@@ -36,16 +36,48 @@ class ApplyController extends BaseController
         if ($list)
         {
             foreach ($list as $key => $val) { // 获取每个申请项目中的所需材料
-                $_materials_ids = json_decode($list[$key]['materials']); // 转换样本id
-                $materials_ids = implode(',',$_materials_ids); // 拼接样本 id
-                if ($materials_ids)
+
+                $list[$key]['materials'] = [];
+
+                $current_apply_want_sample = D('ApplySample')->where(['apply_id'=>['eq',$val['id']]])->select();
+
+                $current_apply_want_sample_num = D('ApplySample')->where(['apply_id'=>['eq',$val['id']]])->count();
+
+                $current_apply_has_get_sample_num = D('ApplySample')->where(['apply_id'=>['eq',$val['id']],'status'=>['eq',1]])->count();
+
+                $list[$key]['status'] = round( $current_apply_has_get_sample_num/$current_apply_want_sample_num * 100 , 2) . "％";
+
+                if (!empty($current_apply_want_sample))
                 {
-                    $list[$key]['materials'] = D('MaterialsSample')->getMySample('id in ('.$materials_ids.')'); // 获取样本
-                }else{
-                    $list[$key]['materials'] = [];
+                    // 获取样本IDS
+                    $sample_ids = array_map(function ($v){
+                        return $v['sample_id'];
+                    },$current_apply_want_sample);
+
+                    $materials_ids = implode(',',$sample_ids); // 拼接样本 id
+
+                    if ($materials_ids) {
+                        $current_apply_sample_list = D('MaterialsSample')->getMySample('id in (' . $materials_ids . ')'); // 获取样本
+
+                        // 为每个样本添加是否提交过的标识
+                        if (!empty($current_apply_sample_list))
+                        {
+                            foreach ($current_apply_sample_list as $k => $v)
+                            {
+                                $current_apply_sample_list[$k]['is_submit'] = D('ApplySample')->where(['apply_id'=>['eq',$val['id']],'sample_id'=>['eq',$v['id']]])->find()['status']?1:0;
+                            }
+                        }
+
+                        $list[$key]['materials'] = $current_apply_sample_list;
+                    }
+
                 }
+
             }
         }
+//
+//        echo "<pre>";
+//        var_dump($list);exit();
 
         // 返回数据
         $this->ajaxReturn(['status'=>true,'data'=>$list]);
@@ -150,6 +182,8 @@ class ApplyController extends BaseController
         // 生成时间
         $data['create_time'] = time();
         $data['program_id'] = $id;
+        $data['sname'] = session('_student.realname')?:'无名';
+        $data['program_name'] = $data['program_name']?:'未知';
 
         // 过滤数据
         foreach ($data['files'] as $k => $v)
