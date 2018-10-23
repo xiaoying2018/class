@@ -4,30 +4,25 @@
     position: fixed;
     bottom: 0;
     height: 55px;
-    width: 100%;
+    width: 10rem;
     z-index: 2000;
     border-top: 1px solid #d8d8d8
 }
 
 .fixedbottom .ul {
     position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
     background-color: #fff;
-    height: 100%
+    height: 100%;
+    width: 100%;
+    font-size: 0;
 }
 
 .fixedbottom .ul>li {
     font-size: 16px;
-    padding: 5px 5px;
     width: 25%;
-    text-align: center
+    text-align: center;
+    display: inline-block;
+    height: 55px;
 }
 
 .fixedbottom .ul>li.active a{
@@ -38,7 +33,9 @@
     color: #6a6a6a;
     text-align: center;
     display: block;
-    margin: 10px 0
+    /*margin: 10px 0;*/
+    padding: 5px 5px;
+    margin-top: 5px;
 }
 
 .fixedbottom .ul>li i {
