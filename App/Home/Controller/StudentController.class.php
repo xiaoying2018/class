@@ -173,7 +173,7 @@ class StudentController extends BaseController
         // 获取班次内所有排课信息 和 课时名称+课时时长
         $paike_model = new ScheduleModel();
 
-        $paike_list = $paike_model->where(['period_id'=>['eq',$per_id]])->select();
+        $paike_list = $paike_model->where(['period_id'=>['eq',$per_id]])->order('start_time')->select();
 
         if (!$paike_list) $this->ajaxReturn(['result' => true, 'data' => $banci_info]);
 
