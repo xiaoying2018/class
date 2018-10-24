@@ -56,20 +56,20 @@
 					<div class="apply_details">
 						<p>
 							<span>申请日期:</span>
-							<span>{{project.create_time}}</span>
+							<span>{{project.create_time | filtertime}}</span>
 						</p>
 						<p>
 							<span>通过日期:</span>
-							<span>{{project.offer_time}}</span>
+							<span>{{project.offer_time | filtertime}}</span>
 						</p>
 					</div>
 					<div class="apply_but">
-						<span class="apply_check" :data_num="key">查看所需材料</span>
+						<span class="apply_check" :data_num="key">下载所需材料</span>
 						<div class="apply_sub">
 							<div class="uploader" class="wu-example">
 								<!--用来存放文件信息-->
 								<div class="btns">
-									<div :create_time ="project.create_time" :cate_id="project.cate_id" :program_id = "project.id" :student_id = "project.student_id"class="picker">提交材料</div>
+									<div :create_time ="project.create_time" :project_name="project.project_name" :cate_id="project.cate_id" :program_id = "project.id" :student_id = "project.student_id"class="picker">提交材料</div>
 								</div>
 							</div>
 						</div>
@@ -85,7 +85,9 @@
 						<span></span>
 					</p>
 					<ul>
-						<li v-for="material in project.materials">{{material.name}}</li>
+						<li v-for="material in project.materials">
+							<a :href="material | dowmloadurl" target="_blank">{{material.name}}</a>
+						</li>
 
 					</ul>
 					<div class="check_but">
@@ -102,6 +104,7 @@
 			</div>
 			<input id = "program_id" type="hidden" value="" />
 			<input id = "cate_id" type="hidden" value="" />
+			<input id = "project_name" type="hidden" value="" />
 			<input id="student_id" type="hidden" value="" />
 			<input id="create_time" type="hidden" value="" />
 			<input id="files" type="hidden" value="" />
@@ -142,6 +145,23 @@
 
 		var apply = new Vue({
 			el: "#apply",
+			filters:{
+			    filtertime(_val) {
+			      if (_val != '' && _val != '0') {
+			        return _time(_val, 'yyyy-MM-dd hh:mm');
+			      } else {
+			        return '暂无信息'
+			      }
+			    },
+				dowmloadurl(_item){
+			        if (!_item) {return ''}
+			        else{
+			            var _arr = _item.file.split('.');
+			            _item = 'http://crm.xiaoying.net/index.php?m=course_document&a=downLoadDocumentByFilePath&file_path='+_item.file+'&file_name='+_item.name+"."+_arr[_arr.length-1]+''
+			            return _item;
+			        }
+			    }
+			},
 			data: {
 				datas: {}
 			},
@@ -162,31 +182,12 @@
 								alert(res.msg)
 								window.location.href = "/m/login"
 							}else{
-							//							_self.datas = res
-							for(var i = 0; i < res.data.length; i++) {
-								res.data[i].create_time = _self._time(res.data[i].create_time)
-								res.data[i].offer_time = _self._time(res.data[i].offer_time)
-							}
-							_self.datas = res
+								_self.datas = res
 							}
 						}
 					});
 
-				},
-				_time: function(unixTime) {
-					var time = new Date(unixTime * 1000);
-					var ymdhis = "";
-					ymdhis += time.getUTCFullYear() + "-";
-
-					if(time.getUTCMonth() + 1 < 10) {
-						ymdhis += ("0" + (time.getUTCMonth() + 1)) + "-"
-					} else {
-						ymdhis += (time.getUTCMonth() + 1) + "-";
-					}
-
-					ymdhis += time.getUTCDate();
-					return ymdhis;
-				},
+				}
 
 			},
 			updated() {
@@ -194,6 +195,7 @@
 					files = []
 					$("#cate_id").val($(this).attr("cate_id"))
 					$("#program_id").val($(this).attr("program_id"))
+					$("#project_name").val($(this).attr("project_name"))
 					$("#student_id").val($(this).attr("student_id"))
 				})
 				uploader()
@@ -202,6 +204,29 @@
 		})
 		apply.get_data()
 
+		function _time(date, fmt) {
+		    date = new Date(date * 1000)
+		    if (/(y+)/.test(fmt)) {
+		        fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+		    }
+		    var o = {
+		        'M+': date.getMonth() + 1,
+		        'd+': date.getDate(),
+		        'h+': date.getHours(),
+		        'm+': date.getMinutes(),
+		        's+': date.getSeconds()
+		    };
+		    for (var k in o) {
+		        if (new RegExp(`(${k})`).test(fmt)) {
+		            var str = o[k] + '';
+		            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? str : padLeftZero(str));
+		        }
+		    }
+		    function padLeftZero (str) {
+		        return ('00' + str).substr(str.length);
+		    }
+		    return fmt;
+		}
 		function uploader() {
 			
 			// 初始化Web Uploader
@@ -312,6 +337,7 @@
 				data:{
 					files:files,
 					cate_id:$("#cate_id").val(),
+					project_name:$("#project_name").val(),
 					program_id:$("#program_id").val(),
 					student_id:$("#student_id").val()
 				},

@@ -230,9 +230,20 @@ body {
 .required_materials > div > ul > li {
   font-size: 0.373333rem;
   color: #666666;
-  margin-bottom: 0.266667rem;
+  /*margin-bottom: 0.266667rem;*/
   width: 50%;
-  float: left;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.required_materials > div > ul > li a{
+  color: #666666;
+  padding: 5px;
+  display: block;
+  vertical-align: top;
+
+  display:block;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+
 }
 
 .required_materials > div > ul > li:nth-last-of-type(1) {

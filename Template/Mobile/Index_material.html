@@ -54,7 +54,7 @@
 					<li v-for="item  in item_datas" class="material_list" >
 						<p class="material_title">
 							<span>{{item.name}}</span>
-							<a :href="['http://crm.xiaoying.net/'+item.file]" class="download">下载样本</a>
+							<a :href="item.d_url" target="_blank" class="download">下载样本</a>
 							
 						</p>
 					</li>
@@ -138,8 +138,13 @@
 								alert(res.msg)
 								window.location.href = "/m/login"
 							}else{
-							
-							_self.item_datas = res.data
+								for(var i = 0; i < res.data.length; i++){
+									var _item = res.data[i];
+									var _arr = _item.file.split('.');
+	                    			_item = 'http://crm.xiaoying.net/index.php?m=course_document&a=downLoadDocumentByFilePath&file_path='+_item.file+'&file_name='+_item.name+"."+_arr[_arr.length-1]+''
+									res.data[i].d_url = _item
+								}
+								_self.item_datas = res.data
 							}
 						}
 					});
