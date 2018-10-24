@@ -183,7 +183,7 @@ class ApplyController extends BaseController
         $data['create_time'] = time();
         $data['program_id'] = $id;
         $data['sname'] = session('_student.realname')?:'无名';
-        $data['program_name'] = $data['program_name']?:'未知';
+        $data['project_name'] = $data['project_name']?:'未知';
 
         // 过滤数据
         foreach ($data['files'] as $k => $v)
