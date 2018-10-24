@@ -153,13 +153,11 @@ body {
   text-align: center;
   font-size: 0.426667rem;
   float: left;
-  color: #3FD4A5;
+  color: #FFD900;
 }
 
 .apply_list .apply_but .apply_sub {
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#59C4B1), to(#26E499));
-  background-image: -o-linear-gradient(bottom, #59C4B1 0%, #26E499 100%);
-  background-image: linear-gradient(0deg, #59C4B1 0%, #26E499 100%);
+  background-color:#FFD900;
   border-radius: 0 0 0.106667rem 0;
   color: #FFFFFF;
   float: right;
@@ -247,9 +245,7 @@ body {
   line-height: 1.173333rem;
   text-align: center;
   font-size: 0.426667rem;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#59C4B1), to(#26E499));
-  background-image: -o-linear-gradient(bottom, #59C4B1 0%, #26E499 100%);
-  background-image: linear-gradient(0deg, #59C4B1 0%, #26E499 100%);
+  background-color:#FFD900;
   border-radius: 0.106667rem;
   margin: 0 auto;
 }
@@ -317,9 +313,7 @@ body {
   height: 0.8rem;
   text-align: center;
   line-height: 0.8rem;
-  background-image: -webkit-gradient(linear, left bottom, left top, from(#59C4B1), to(#26E499));
-  background-image: -o-linear-gradient(bottom, #59C4B1 0%, #26E499 100%);
-  background-image: linear-gradient(0deg, #59C4B1 0%, #26E499 100%);
+  background-color:#FFD900;
   border-radius: 0.106667rem;
   color: #FFFFFF;
   font-size: 0.32rem;
