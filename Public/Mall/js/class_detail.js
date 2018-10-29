@@ -67,9 +67,8 @@ $(function() {
                     data: { id: _id },
                     success: function(res) {
                         if (res.result) {
-
                             if (res.data && res.data.live_path && res.data.live_path.length > 0 && res.data.live_path[0].length > 0) {
-                                var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><iframe frameborder="0" width="100%;" height="100%" src="'+res.data.live_path[0][0].playpath+'" ></iframe></div><div class="coverBg"></div>';
+                                var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><iframe frameborder="0" width="100%;" height="100%" src="'+res.data.live_path[0][0].playpath+'" ></iframe><div class="ss_cover" style="position: absolute;right: 0;top: 0;height: 100%;width: 20%;background: #202C4A;"></div></div><div class="coverBg"></div>';
                                 $("#video_part").html(_html);
                                 $("#video_part").show();
                             }else{
