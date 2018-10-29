@@ -60,6 +60,25 @@ $(function() {
                     }
                 })
             },
+            checkres: function(_id){
+                $.ajax({
+                    url: "/api/live_video",
+                    type: "post",
+                    data: { id: _id },
+                    success: function(res) {
+                        if (res.result) {
+
+                            if (res.data && res.data.live_path && res.data.live_path.length > 0 && res.data.live_path[0].length > 0) {
+                                var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><iframe frameborder="0" width="100%;" height="100%" src="'+res.data.live_path[0][0].playpath+'" ></iframe></div><div class="coverBg"></div>';
+                                $("#video_part").html(_html);
+                                $("#video_part").show();
+                            }else{
+                                alert('暂无视频')
+                            }
+                        }
+                    }
+                })
+            },
             caseData: function(_url,_id) {
                 var _this = this;
                 $.ajax({

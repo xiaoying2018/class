@@ -491,7 +491,7 @@ class SectionCateModel extends EModel
                 if ($show_course) {
                     foreach ($show_course as $k => $v) {
                         $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
-                        $_tmp_sections = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
+                        $_tmp_sections = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->order('node asc')->select();
 
                        
                         if ($_tmp_sections) $banji['sections'] = array_merge($banji['sections'],$_tmp_sections);
