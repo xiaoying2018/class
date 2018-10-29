@@ -72,7 +72,7 @@ $(function() {
                         		res.data.detail = escapeStringHTML(res.data.detail);
                                 for(var i = 0; i < res.data.sections.length; i++){
                                     res.data.sections[i].zhibo_path = '';
-                                    if (res.data.sections[i].hasOwnProperty('live_path') && res.data.sections[i].live_path.length > 0) {
+                                    if (res.data.sections[i].hasOwnProperty('live_path') && res.data.sections[i].live_path.length > 0 && res.data.sections[i].live_path[0][0].length > 0) {
                                         res.data.sections[i].zhibo_path = res.data.sections[i].live_path[0][0].playpath;
                                     }
                                 }
