@@ -5,7 +5,8 @@ $(function() {
             detail: {},
             temp:[],
             tuijian:[],
-            type:""
+            type:"",
+            hotindex:0
         },
         filters: {
             filtertime: function(val){
@@ -37,7 +38,16 @@ $(function() {
                 $("[data-flag='tab2']").click();
             },
             huanyihuan: function(){
-                this.tuijian = getRandomArrayElements(this.temp, 2);
+                this.tuijian = [];
+                if (this.hotindex > 9) {
+                    this.hotindex = 0;
+                }
+                var _t = this.hotindex + 2; 
+                for(var i = this.hotindex; i < _t; i++){
+                    this.tuijian.push(this.temp[i])
+                }
+                this.hotindex = _t;
+                // this.tuijian = getRandomArrayElements(this.temp, 2);
             },
             gettuijian: function(){
                 var _this = this;
@@ -60,6 +70,12 @@ $(function() {
                         if (res.result) {
                         	if (res.data.detail) {
                         		res.data.detail = escapeStringHTML(res.data.detail);
+                                for(var i = 0; i < res.data.sections.length; i++){
+                                    res.data.sections[i].zhibo_path = '';
+                                    if (res.data.sections[i].hasOwnProperty('live_path') && res.data.sections[i].live_path.length > 0) {
+                                        res.data.sections[i].zhibo_path = res.data.sections[i].live_path[0][0].playpath;
+                                    }
+                                }
                         	}
                             _this.detail = res.data;
                         } else {
@@ -70,10 +86,14 @@ $(function() {
             },
             play: function(n){
                 if (utily.getStore('xy_nickname')) {
-                    var _path = $(this).attr("data-file");
                     if (n == null) {
                         $("#video_part").hide();
                         alert('没有视频')
+                    }
+                    else if(n.indexOf('http://') > -1){
+                        var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><iframe frameborder="0" width="100%;" height="100%" src="'+n+'" ></iframe></div><div class="coverBg"></div>';
+                        $("#video_part").html(_html);
+                        $("#video_part").show();
                     }else{
                         n = 'http://'+n;
                         var _html = '<div class="inner"><img src="../../Public/Common/map/close.png" class="close"><video width="100%;" controls height="100%" src="'+n+'" autoplay="autoplay"></video></div><div class="coverBg"></div>';

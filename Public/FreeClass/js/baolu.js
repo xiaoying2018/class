@@ -7,7 +7,7 @@ $(function() {
                 page:1,
                 limit:12,
                 category:"",
-                sort_by_people_num:"",
+                sort_by_people_num:"1",
             },
             lists:[],
             lock: true
@@ -83,7 +83,6 @@ $(function() {
                 var scrollTop = parseInt($(this).scrollTop());
                 var scrollHeight = $(document).height();
                 var windowHeight = parseInt($(this).height());
-                console.log("xxx",parseInt(scrollTop + windowHeight));
                 if (parseInt(scrollTop + windowHeight) >= parseInt(scrollHeight-200) && _this.lock) {
                     _this.lock = false;
                     _this.getdata();

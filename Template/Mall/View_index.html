@@ -119,15 +119,15 @@
                     <div class="s_title">
                         <img src="__PUBLIC__/Mall/img/s_xiushi.png" alt="">修士考试课程
                         <ul class="paixu">
-                            <li class="active js-change" data-num="0">最新发布</li>
-                            <li class="js-change" data-num="1">最多报名</li>
+                            <li class="js-change" data-num="1">最新发布</li>
+                            <li class="active js-change" data-num="0">最多报名</li>
                         </ul>
                     </div>
                     <div class="swiper-container-xiushi home_index_swiper_container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" v-if="xiushi.by_new">
-                                    <li class="li" v-for="n in xiushi.by_new.slice(0, 8)">
+                                <ul class="ullist" v-if="xiushi.by_people">
+                                    <li class="li" v-for="n in xiushi.by_people.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -148,10 +148,9 @@
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" v-if="xiushi.by_people">
-                                    <li class="li" v-for="n in xiushi.by_people.slice(0, 8)">
+                                <ul class="ullist" v-if="xiushi.by_new">
+                                    <li class="li" v-for="n in xiushi.by_new.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -181,15 +180,15 @@
                     <div class="s_title">
                         <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">签约保送课程
                         <ul class="paixu">
-                            <li class="active js-change" data-num="0">最新发布</li>
-                            <li class="js-change" data-num="1">最多报名</li>
+                            <li class="js-change" data-num="1">最新发布</li>
+                            <li class="active js-change" data-num="0">最多报名</li>
                         </ul>
                     </div>
                     <div class="swiper-container-qianyue home_index_swiper_container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="qianyue.by_new">
-                                    <li class="li" v-for="n in qianyue.by_new.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="qianyue.by_people">
+                                    <li class="li" v-for="n in qianyue.by_people.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -211,8 +210,8 @@
                                 </ul>
                             </div>
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="qianyue.by_people">
-                                    <li class="li" v-for="n in qianyue.by_people.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="qianyue.by_new">
+                                    <li class="li" v-for="n in qianyue.by_new.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -242,15 +241,15 @@
                     <div class="s_title">
                         <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">留考校内考课程
                         <ul class="paixu">
-                            <li class="active js-change" data-num="0">最新发布</li>
-                            <li class="js-change" data-num="1">最多报名</li>
+                            <li class="js-change" data-num="1">最新发布</li>
+                            <li class="active js-change" data-num="0">最多报名</li>
                         </ul>
                     </div>
                     <div class="swiper-container-liukao home_index_swiper_container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="liukao.by_new">
-                                    <li class="li" v-for="n in liukao.by_new.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="liukao.by_people">
+                                    <li class="li" v-for="n in liukao.by_people.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -272,8 +271,8 @@
                                 </ul>
                             </div>
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="liukao.by_people">
-                                    <li class="li" v-for="n in liukao.by_people.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="liukao.by_new">
+                                    <li class="li" v-for="n in liukao.by_new.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -304,15 +303,15 @@
                     <div class="s_title">
                         <img src="__PUBLIC__/Mall/img/s_xiaonei.png" alt="">热门公开课
                         <ul class="paixu">
-                            <li class="active js-change" data-num="0">最新发布</li>
-                            <li class="js-change" data-num="1">最多报名</li>
+                            <li class="js-change" data-num="1">最新发布</li>
+                            <li class="active js-change" data-num="0">最多报名</li>
                         </ul>
                     </div>
                     <div class="swiper-container-gongkai home_index_swiper_container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="gongkai.by_new">
-                                    <li class="li" v-for="n in gongkai.by_new.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="gongkai.by_people">
+                                    <li class="li" v-for="n in gongkai.by_people.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
@@ -334,8 +333,8 @@
                                 </ul>
                             </div>
                             <div class="swiper-slide swiper-no-swiping">
-                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="gongkai.by_people">
-                                    <li class="li" v-for="n in gongkai.by_people.slice(0, 8)">
+                                <ul class="ullist" data-sr="enter top hustle 50px over 1s" v-if="gongkai.by_new">
+                                    <li class="li" v-for="n in gongkai.by_new.slice(0, 8)">
                                         <a :href="'/mall/detail?id='+n.id+'&type=class'" style="display: block;">
                                             <div class="imgDv">
                                                 <img :src="'http://crm.xiaoying.net'+n.pic" alt="" v-if="n.pic">
