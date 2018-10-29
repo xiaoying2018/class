@@ -59,6 +59,7 @@ return [
         'api/baoluban'          =>  'Mall/Index/getBaoluBan', // 保录班
         'api/banji_detail'      =>  'Mall/Index/banjiDetail', // 班级详情页
         'api/course_detail'     =>  'Mall/Index/courseDetail', // 课程详情页
+        'api/live_video'     =>  'Mall/Index/getLiveVideo', // 课程详情页
         'api/mate'               =>  'Mall/Index/getDocList', // 资料
         'api/matecate'          =>  'Mall/Index/getDocCate', // 资料分类
         'api/tuijian_banji'          =>  'Mall/Index/tuijianBanji', // 推荐班级
