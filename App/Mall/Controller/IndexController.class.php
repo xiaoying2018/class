@@ -5,6 +5,7 @@ use Home\Model\CourseBespeakModel;
 use Home\Model\CourseModel;
 use Home\Model\DocCateModel;
 use Home\Model\DocModel;
+use Home\Model\ScheduleModel;
 use Mall\Model\SectionCateModel;
 use Think\Controller;
 
@@ -40,6 +41,37 @@ class IndexController extends Controller
 
         $this->ajaxReturn(['result'=>true,'data'=>$res,'i_think_type'=>$i_think_type,'_par'=>['type'=>$type,'search_name'=>$search_name]]);
 
+    }
+
+
+    public function getLiveVideo()
+    {
+        $id=I('id');
+        $schedus=(new ScheduleModel())->where(['section_id'=>['eq',$id]])->order('start_time desc')->select();
+        $_tmp_sections=[];
+        if(empty($schedus)){
+            $this->ajaxReturn(['result'=>false,'msg'=>'没有直播课记录']);
+        }else{
+            foreach ($schedus as $k=> $v) {
+                $serial=$v['serial'];
+                if ($serial) {
+                    $has_videos = [];// 存放课节视频
+
+                    $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
+                    $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
+                    $tk_send_data['serial'] = $serial;// 房间号码
+
+                    // 发起请求
+                    $current_room_video_list = json_decode(curlPost($_tk_send_url . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
+                    // 返码正常(0为正常)
+                    if (!$current_room_video_list->result) $has_videos = $current_room_video_list->recordlist;
+                    $_tmp_sections['live_path'][$k]=$has_videos;
+                }else{
+                    continue;
+                }
+            }
+        }
+        $this->ajaxReturn(['result'=>true,'data'=>$_tmp_sections]);
     }
 
     // mall 所有班级/课程 列表页数据 (目前是首页)

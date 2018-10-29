@@ -492,30 +492,7 @@ class SectionCateModel extends EModel
                     foreach ($show_course as $k => $v) {
                         $show_course[$k]['section_num'] = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->count();
                         $_tmp_sections = (new SectionModel())->where(['course_id' => ['eq', $v['id']]])->select();
-                        foreach ($_tmp_sections as $key => $value) {
-                            $schedus=(new ScheduleModel())->where(['section_id'=>['eq',$value['id']]])->order('start_time desc')->select();
-                            if(empty($schedus)){
-                                continue;
-                            }
-                             foreach ($schedus as $k=> $v) {
-                                    $serial=$v['serial'];
-                                     if ($serial) {
-                                        $has_videos = [];// 存放课节视频
 
-                                        $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';// 接口路径
-                                        $tk_send_data['key'] = C('TK_ROOM_KEY') ?: 'PGxzTqaSNL0WEWTL';// key
-                                        $tk_send_data['serial'] = $serial;// 房间号码
-
-                                        // 发起请求
-                                        $current_room_video_list = json_decode(curlPost($_tk_send_url . 'getrecordlist', 'Content-type:application/x-www-form-urlencoded', $tk_send_data)['msg']);
-                                        // 返码正常(0为正常)
-                                        if (!$current_room_video_list->result) $has_videos = $current_room_video_list->recordlist;
-                                        $_tmp_sections[$key]['live_path'][$k]=$has_videos;
-                                    }
-                            }   
-                            
-
-                        }
                        
                         if ($_tmp_sections) $banji['sections'] = array_merge($banji['sections'],$_tmp_sections);
                     }
