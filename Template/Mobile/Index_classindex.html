@@ -76,15 +76,15 @@
 					<div class="_swiper">
 						<h3 class="s_titleDv">修士考试课程</h3>
 						<ul class="groupDv">
-							<li class="js-change active" data-num="0">最新发布</li>
-							<li class="js-change" data-num="1">最多报名</li>
+							<li class="js-change " data-num="1">最新发布</li>
+							<li class="js-change active" data-num="0">最多报名</li>
 						</ul>
 
 	                    <div class="swiper-container-xiushi home_index_swiper_container">
 	                        <div class="swiper-wrapper">
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="xiushi.by_new">
-										<li v-for="item in xiushi.by_new.slice(0,6)">
+									<ul class="class_list" v-if="xiushi.by_people">
+										<li v-for="item in xiushi.by_people.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -100,8 +100,8 @@
 									</ul>
 								</div>
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="xiushi.by_people">
-										<li v-for="item in xiushi.by_people.slice(0,6)">
+									<ul class="class_list" v-if="xiushi.by_new">
+										<li v-for="item in xiushi.by_new.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -126,14 +126,14 @@
 					<div class="_swiper">
 						<h3 class="s_titleDv">签约保送课程</h3>
 						<ul class="groupDv">
-							<li class="js-change active" data-num="0">最新发布</li>
-							<li class="js-change" data-num="1">最多报名</li>
+							<li class="js-change" data-num="1">最新发布</li>
+							<li class="js-change active" data-num="0">最多报名</li>
 						</ul>
 	                    <div class="swiper-container-qianyue home_index_swiper_container">
 	                        <div class="swiper-wrapper">
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="qianyue.by_new">
-										<li v-for="item in qianyue.by_new.slice(0,6)">
+									<ul class="class_list" v-if="qianyue.by_people">
+										<li v-for="item in qianyue.by_people.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -149,8 +149,8 @@
 									</ul>
 								</div>
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="qianyue.by_people">
-										<li v-for="item in qianyue.by_people.slice(0,6)">
+									<ul class="class_list" v-if="qianyue.by_new">
+										<li v-for="item in qianyue.by_new.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -174,14 +174,14 @@
 					<div class="_swiper">
 						<h3 class="s_titleDv">留考校内考课程</h3>
 						<ul class="groupDv">
-							<li class="js-change active" data-num="0">最新发布</li>
-							<li class="js-change" data-num="1">最多报名</li>
+							<li class="js-change" data-num="1">最新发布</li>
+							<li class="js-change active" data-num="0">最多报名</li>
 						</ul>
 	                    <div class="swiper-container-liukao home_index_swiper_container">
 	                        <div class="swiper-wrapper">
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="liukao.by_new">
-										<li v-for="item in liukao.by_new.slice(0,6)">
+									<ul class="class_list" v-if="liukao.by_people">
+										<li v-for="item in liukao.by_people.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -197,8 +197,8 @@
 									</ul>
 								</div>
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="liukao.by_people">
-										<li v-for="item in liukao.by_people.slice(0,6)">
+									<ul class="class_list" v-if="liukao.by_new">
+										<li v-for="item in liukao.by_new.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -222,14 +222,14 @@
 					<div class="_swiper">
 						<h3 class="s_titleDv">热门公开课</h3>
 						<ul class="groupDv">
-							<li class="js-change active" data-num="0">最新发布</li>
-							<li class="js-change" data-num="1">最多报名</li>
+							<li class="js-change" data-num="1">最新发布</li>
+							<li class="js-change active" data-num="0">最多报名</li>
 						</ul>
 	                    <div class="swiper-container-gongkai home_index_swiper_container">
 	                        <div class="swiper-wrapper">
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="gongkai.by_new">
-										<li v-for="item in gongkai.by_new.slice(0,6)">
+									<ul class="class_list" v-if="gongkai.by_people">
+										<li v-for="item in gongkai.by_people.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
@@ -245,8 +245,8 @@
 									</ul>
 								</div>
 	                            <div class="swiper-slide swiper-no-swiping">
-									<ul class="class_list" v-if="gongkai.by_people">
-										<li v-for="item in gongkai.by_people.slice(0,6)">
+									<ul class="class_list" v-if="gongkai.by_new">
+										<li v-for="item in gongkai.by_new.slice(0,6)">
 											<a :href="'/m/myclass/opencourse/detail?id='+item.id+'&type=class'">
 												<p class="item_img">
 													<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">

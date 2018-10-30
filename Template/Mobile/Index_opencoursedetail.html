@@ -71,8 +71,13 @@
                                     <p>{{n.name}}</p>
                                     <p>时长：{{n.duration}}分钟</p>
                                 </div>
-                                <img v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && info.is_open == 1)"  src="/Public/Mall/img/playback.png" alt="" class="playback" @click="play(n)">
-                                <img v-else src="/Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
+                                <template v-if="(n.video_path != null && n.is_free == 1) || (type != 'class' && info.is_open == 1)" >
+                                    <img src="/Public/Mall/img/playback.png" alt="" class="playback" @click="play(n)">
+                                </template>
+                                <template v-else>
+                                    <img v-if="n.is_free == 1" src="/Public/Mall/img/playback.png" alt="" class="playback" @click="checkres(n.id)">
+                                    <img v-else src="/Public/Mall/img/g_playback.png" alt="" class="playback" style="cursor: default;">
+                                </template>
                             </li>
                         </ul>
                     </div>
@@ -113,6 +118,22 @@
                 islogin:false
             },
             methods: {
+                checkres: function(_id){
+                    $.ajax({
+                        url: "/api/live_video",
+                        type: "post",
+                        data: { id: _id },
+                        success: function(res) {
+                            if (res.result) {
+                                if (res.data && res.data.live_path && res.data.live_path.length > 0 && res.data.live_path[0].length > 0) {
+                                    window.location.href = res.data.live_path[0][0].playpath;
+                                }else{
+                                    alert('暂无视频')
+                                }
+                            }
+                        }
+                    })
+                },
                 close_v: function() {
                     $("#record_video").fadeOut();
                     $("#record_video video").remove();
