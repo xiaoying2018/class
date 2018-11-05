@@ -457,18 +457,29 @@ class StudentController extends BaseController
                                 // 排课状态  是否已经结束
                                 $paike_list[$pk_k]['status'] = (time() > strtotime($paike_list[$pk_k]['end_time'])) ? -1 : 1;
 
-//                                // 获取当前排课/房间的登入链接
-//                                $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
-//                                $send_url = $_tk_send_url . 'entry';// 接口请求地址
-//                                $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
-//                                // auth 值为 MD5(key + ts + serial + usertype)
-//                                $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $pk_v['serial'] . 2);// 令牌
-//                                $send_url .= '&usertype=2';// 用户类型 2=学员
-//                                $send_url .= '&ts=' . time();// 时间戳
-//                                $send_url .= '&serial=' . $pk_v['serial'];// 房间号码
-//                                $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
-//                                $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
-//                                $paike_list[$pk_k]['serial_link'] = $send_url;
+                                // todo 新增是否显示 进入教室 按钮的状态 is_show
+                                // 获取当前的时间
+				                $current_time = time();
+				                $start_time = strtotime($pk_v['start_time']);
+
+				                if (abs($current_time - $start_time) > 7200) {
+				                    $paike_list[$pk_k]['is_show'] = 0;
+				                } else {
+				                    $paike_list[$pk_k]['is_show'] = 1;
+				                }
+
+                               // 获取当前排课/房间的登入链接
+                               $_tk_send_url = C('TK_ROOM_URL') ?: 'http://global.talk-cloud.net/WebAPI/';
+                               $send_url = $_tk_send_url . 'entry';// 接口请求地址
+                               $send_url .= '?domain=' . C('TK_ROOM_DOMAIN');// 公司域名
+                               // auth 值为 MD5(key + ts + serial + usertype)
+                               $send_url .= '&auth=' . md5(C('TK_ROOM_KEY') . time() . $pk_v['serial'] . 2);// 令牌
+                               $send_url .= '&usertype=2';// 用户类型 2=学员
+                               $send_url .= '&ts=' . time();// 时间戳
+                               $send_url .= '&serial=' . $pk_v['serial'];// 房间号码
+                               $send_url .= '&username=' . $studentInfo['realname'] ?: '无名';// 用户姓名
+                               $send_url .= '&pid=' . $studentInfo['code'] ?: '0';// 用户ID  (小莺学员学号)
+                               $paike_list[$pk_k]['serial_link'] = $send_url;
 //                                // 获取当前排课/房间的课件
 //
 //                                // 获取当前排课/房间的往期直播视频
