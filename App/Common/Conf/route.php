@@ -150,6 +150,10 @@ return [
         'm/myclass/opencourse'    =>  'Mobile/Index/opencourse', // 我的课程 改版
         'm/myclass/opencourse/detail'    =>  'Mobile/Index/opencoursedetail', // 我的课程 改版
         'm/checkkejian'    =>  'Mobile/Index/checkkejian', // 我的课程 改版
+        'm/class/open'    =>  'Mobile/Index/openclass', // 公开课
+        'm/class/zhibo'    =>  'Mobile/Index/zhiboclass', // 公开课
+        'm/class/xiaonei'    =>  'Mobile/Index/xiaoneiclass', // 公开课
+        'm/class/baolu'    =>  'Mobile/Index/baoluclass', // 公开课
 
 
 

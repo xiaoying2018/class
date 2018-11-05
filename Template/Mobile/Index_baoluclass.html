@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>套餐班-小莺出国</title>
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="yes" name="apple-touch-fullscreen">
+		<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+		<meta content="telephone=no,email=no" name="format-detection">
+		<!-- flexible.js 建议做内联处理，请勿移动位置 -->
+		<script src="/Public/Mobile/js/flexible.js"></script>
+		<link rel="icon" href="__PUBLIC__/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/class_index.css?v=201810191430" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/font-awesome-4.7.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="/Public/Mobile/css/swiper.min.css" />
+		<script src="/Public/vue.min.js"></script>
+		<style>
+			.topcondit{
+				padding:0 0.4rem;
+			}
+			.topcondit .dv_title{
+				display: inline-block;
+			    font-size: .426667rem;
+			    padding-bottom: 10px;
+			    width: 2.2rem;
+			    vertical-align: top;
+			}
+			.topcondit .list{
+			    display: inline-block;
+			    width: 7.2rem;
+			}
+
+			.topcondit .list li{
+			    display: inline-block;
+			    font-size: .426667rem;
+			    position: relative;
+			    padding: 0 0.05rem;
+			    padding-bottom: 10px;
+			    vertical-align: top;
+			}
+			.topcondit .list li.active{
+				color: #ffd900;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div style="margin-bottom: 55px;">
+			<div id="_class">
+				<div class="titleDv" style="border-top: 8px solid #fdfbfb; margin-top:0;">
+					<span class="span">
+						热门套餐班
+					</span>
+				</div>
+				<!-- 修士考试课程 -->
+				<div class="content modular">
+					<div class="_swiper">
+						<h3 class="s_titleDv">套餐班</h3>
+						<div class="container topcondit">
+		                    <div class="listDv clearfix">
+		                        <span class="dv_title">热门标签:</span>
+		                        <ul class="list">
+		                            <li class="item active" @click="condit('category','')">全部</li>
+		                            <li class="item" data-val="1" @click="condit('category',1)">修士考</li>
+		                            <li class="item" data-val="2" @click="condit('category',2)">留考校内考</li>
+		                            <li class="item" data-val="3" @click="condit('category',3)">日语</li>
+		                            <li class="item" data-val="4" @click="condit('category',4)">艺术</li>
+		                        </ul>
+		                    </div>
+		                </div>
+						<ul class="groupDv">
+	                        <li @click="condit('sort_by_people_num','')">最新发布</li>
+	                        <li class="active" @click="condit('sort_by_people_num',1)">最多报名</li>
+						</ul>
+						<ul class="class_list">
+							<li v-for="item in lists">
+								<a :href="'/m/myclass/opencourse/detail?id='+item.id">
+									<p class="item_img">
+										<img :src="'http://crm.xiaoying.net'+item.pic" alt="" v-if="item.pic">
+	                                    <img src="__PUBLIC__/Common/img/class/class.jpg" alt="" v-else>
+									</p>
+									<p class="item_title">{{item.name}}</p>
+									<p class="item_time">时间: {{item.start_time | filtertime}}</p>
+									<p class="item_time">课节: {{item.section_num}}课节</p>
+									<p class="item_teacher">讲师: {{item.teacher_name | filtername}}</p>
+									<p class="item_deta"><span>立即报名</span><span>{{item.people_num}}人</span></p>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="spinner" v-if="lock"><i class="fa fa-spinner fa-pulse"></i>加载更多...</div>
+				</div>
+			</div>
+		</div>
+		<include file="./Template/Mobile/Index_fixedbottom.html" />
+	</body>
+	<script src="/Public/Mobile/js/jquery-3.1.1.min.js"></script>
+	<script src="/Public/Mobile/js/swiper.min.js"></script>
+	<script src="/Public/Mobile/js/jquery.cookie.js"></script>
+	<script>
+		var _class = new Vue({
+			el: "#_class",
+			filters: {
+	            filtertime: function(val){
+	                if (val) {
+	                    val = val.substring(0,10)
+	                    return val;
+	                }else{
+	                    return '2018-09-01';
+	                }
+	            },
+	            filtername: function(val){
+	                if (val) {
+	                    var s = val.split('@')[0];
+	                    return s;
+	                }else{
+	                    return '小莺出国官方教务';
+	                }
+	            },
+	            filterprice: function(val) {
+	                var s = val.split('.')[0];
+	                return s;
+	            },
+	            filterFace: function(val) {
+	                if (val != null) {
+	                    return val
+	                } else {
+	                    return '/Public/random/student/' + Math.floor(Math.random() * 10 + 1) + '.jpg'
+	                }
+	            }
+	        },
+			data: {
+				lists:[],
+	            request:{
+	                page:1,
+	                limit_num:6,
+	                type: 'free',
+	                sort_by_people_num:'1'
+	            },
+            	lock: true
+			},
+			methods: {
+				condit: function(key,val){
+	                this.request.page = 1;
+	                this.lists = [];
+	                this.request[key] = val;
+	                this.getdata();
+	            },  
+	            getdata: function(){
+	                var _this = this;
+	                $.ajax({
+	                    url:"/api/baoluban",
+	                    type:"post",
+	                    data:_this.request,
+	                    success:function(_res){
+	                        if (_res.result) {
+	                            if (_this.request.page > _res.data.page_count) {
+	                                return false
+	                            }
+	                            _this.lists = _this.lists.concat(_res.data.banji);
+	                            _this.request.page = _this.request.page + 1;
+	                            if (_res.data.banji.length > 0) {
+	                                _this.lock = true;
+	                            }
+	                        	if (_res.data.count == _this.lists.length) {
+	                            	_this.lock = false;
+	                            	return false;
+	                        	}
+	                        } else {
+	                            _this.lock = false;
+	                        }
+	                    }
+	                })
+	            }
+				
+			},
+			mounted() {
+				var _this = this;
+	            this.getdata();
+	            $(".groupDv li ,.topcondit li").click(function(){
+	                $(this).addClass("active").siblings().removeClass("active");
+	            })
+	            $(window).scroll(function() {
+	                var scrollTop = parseInt($(this).scrollTop());
+	                var scrollHeight = $(document).height();
+	                var windowHeight = parseInt($(this).height());
+	                if (parseInt(scrollTop + windowHeight) >= parseInt(scrollHeight-200) && _this.lock) {
+	                    _this.lock = false;
+	                    _this.getdata();
+	                }
+	            });
+			}
+
+		})
+		
+	</script>
+
+</html>

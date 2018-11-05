@@ -51,5 +51,17 @@ class IndexController extends Controller
         $this->display();
     }
     
+    public function openclass(){
+        $this->display();
+    }
+    public function zhiboclass (){
+        $this->display();
+    }
+    public function xiaoneiclass (){
+        $this->display();
+    }
+    public function baoluclass (){
+        $this->display();
+    }
     
 }
